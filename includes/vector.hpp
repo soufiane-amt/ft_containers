@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/13 15:02:22 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/13 15:14:09 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ namespace ft
         
         explicit vector (const allocator_type& alloc = allocator_type());
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
-        // template <class InputIterator>         
-        // vector (InputIterator first, InputIterator last,    const allocator_type& alloc = allocator_type());
-        // vector (const vector& x);
+        template <class InputIterator>         
+        vector (InputIterator first, InputIterator last,    const allocator_type& alloc = allocator_type());
+        vector (const vector& x);
         // ~vector();
 
         // vector& operator= (const vector& x);
@@ -75,4 +75,17 @@ ft::vector <T, Allocator>::vector (size_type n, const value_type& val = value_ty
         alloc.construct(this->elements + i, val);
 }
 
+// template <class T, class Allocator  >
+// ft::vector <T, Allocator>::vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+
+template <class T, class Allocator >
+ft::vector<T, Allocator>::vector (const vector& x)
+{
+    size_t  size;
+
+    size = x.size();
+    this->elements = alloc.allocate (size);
+    for (size_t i = 0; i < size; i++)
+        alloc.construct(this->elements + i, x[i]);
+}
 #endif
