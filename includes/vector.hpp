@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/13 15:14:09 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/13 17:14:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 #define VECTOR_HPP
 
 #include <memory>
-/*ft::vector implementation*/
+
+
+/*/////////////////////////////////////////////////////////////////
+                
+                    /*ft::vector prototype*/
+
+/////////////////////////////////////////////////////////////////*/
 
 namespace ft
 {
@@ -33,6 +39,8 @@ namespace ft
         typedef typename allocator_type::difference_type difference_type;
         typedef typename allocator_type::pointer         pointer;
         typedef typename allocator_type::const_pointer   const_pointer;
+        typedef implementation-defined                   iterator;
+        typedef implementation-defined                   const_iterator;
         /*Iterators*/
         
         
@@ -43,7 +51,6 @@ namespace ft
         vector (InputIterator first, InputIterator last,    const allocator_type& alloc = allocator_type());
         vector (const vector& x);
         // ~vector();
-
         // vector& operator= (const vector& x);
     private:
         pointer                                                elements
@@ -56,7 +63,7 @@ namespace ft
 
 /*/////////////////////////////////////////////////////////////////
                 
-                    ft::vector Implementation
+                    /*ft::vector Implementation*/
 
 /////////////////////////////////////////////////////////////////*/
 

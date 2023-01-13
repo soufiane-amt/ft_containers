@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   random_access_iterator.hpp                         :+:      :+:    :+:   */
+/*   iterator.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/13 16:29:30 by samajat          ###   ########.fr       */
+/*   Created: 2023/01/13 15:22:56 by samajat           #+#    #+#             */
+/*   Updated: 2023/01/13 15:45:21 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RANDOM_ACCESS_ITERATOR_HPP
-#define RANDOM_ACCESS_ITERATOR_HPP
+#include <iostream>
+#include <iterator>
 
-namespace ft {
-
-    template< class Iter >
-    struct iterator_traits
-    {
-        
-    };
-
-    template< class T >
-    struct iterator_traits<T*>
-    {
-        
-    };
-
-    template< class T >
-    struct iterator_traits<const T*>
-    {
-        
-    };
+int main ()
+{
+    iterator_traits iter;
 }
-
-#endif
