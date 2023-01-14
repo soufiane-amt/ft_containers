@@ -5,21 +5,11 @@
 
 int main ()
 {
-    // int *arr;
-    std::allocator <int> alloc;
-    // arr = alloc.allocate (5);
-    // for (size_t i = 0; i < 5; i++)
-    // {
+    int a[] = {1,23 ,1 ,44};
+    std::vector<int> v(a, a  + 1);
+    for (size_t i = 0; i < 4; i++)
+    {
+        std::cout << v[i] << std::endl;
+    }
     
-    //     /* code */
-
-    // }
-    
-    // alloc.construct(arr, 1337);
-    // std::vector <int > arr2 (0, 1337,alloc);
-    // for (size_t i = 0; i < 0; i++)
-    // {
-    //     std::cout << arr[i] << std::endl;
-    // }
-    // std::allocator <int>::
 }

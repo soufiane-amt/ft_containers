@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/13 17:14:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:13:35 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ namespace ft
         typedef typename allocator_type::difference_type difference_type;
         typedef typename allocator_type::pointer         pointer;
         typedef typename allocator_type::const_pointer   const_pointer;
-        typedef implementation-defined                   iterator;
-        typedef implementation-defined                   const_iterator;
         /*Iterators*/
+        // typedef implementation-defined                   iterator;
+        // typedef implementation-defined                   const_iterator;
         
         
         
@@ -50,7 +50,7 @@ namespace ft
         template <class InputIterator>         
         vector (InputIterator first, InputIterator last,    const allocator_type& alloc = allocator_type());
         vector (const vector& x);
-        // ~vector();
+        ~vector();
         // vector& operator= (const vector& x);
     private:
         pointer                                                elements
@@ -82,8 +82,13 @@ ft::vector <T, Allocator>::vector (size_type n, const value_type& val = value_ty
         alloc.construct(this->elements + i, val);
 }
 
-// template <class T, class Allocator  >
-// ft::vector <T, Allocator>::vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+template <class T, class Allocator >
+template <class InputIterator>
+ft::vector <T, Allocator >::vector (InputIterator first, InputIterator last,
+    const allocator_type& alloc = allocator_type())
+{
+    
+}
 
 template <class T, class Allocator >
 ft::vector<T, Allocator>::vector (const vector& x)
@@ -95,4 +100,13 @@ ft::vector<T, Allocator>::vector (const vector& x)
     for (size_t i = 0; i < size; i++)
         alloc.construct(this->elements + i, x[i]);
 }
+
+// template <class T, class Allocator >
+// ~vector()
+// {
+//     const allocator_type& dealloc = allocator_type();
+
+//     dealloc.dealloc
+// }
+
 #endif
