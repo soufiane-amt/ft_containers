@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/14 16:29:21 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/14 17:04:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ namespace ft
         size_type max_size() const;
         void      resize(size_type n, value_type val = value_type());
         bool      empty() const;
+        void      reserve (size_type n);
+        void      shrink_to_fit();
 
     private:
         pointer                   elements;
@@ -122,9 +124,9 @@ ft::vector<T, Allocator>::vector (const vector& x)
 // template <class T, class Allocator >
 // ~vector()
 // {
-//     const allocator_type& dealloc = allocator_type();
+//     std::allocator <T>  dealloc;
 
-//     dealloc.dealloc
+//     dealloc.destroy();
 // }
 
 
@@ -158,24 +160,63 @@ typename ft::vector<T, Allocator>::size_type ft::vector<T, Allocator>::  max_siz
     return (Allocator::ma);
 }
 
-template <class T, class Allocator >
-void ft::vector<T, Allocator>::resize (size_type n, value_type val = value_type())
-{
-    vector temp     (*this);
-    std::allocator<T>  alloc;
+// template <class T, class Allocator >
+// void ft::vector<T, Allocator>::resize (size_type n, value_type val = value_type())
+// {
+//     vector temp     (*this);
+//     std::allocator<T>  alloc;
 
-    alloc.destroy(this->elements);
-    alloc.deallocate(this->elements, size_e);
-    this->elements = alloc.allocate(n);
-    for (size_t i = 0; i < temp.size(); i++)
-        this->elements[i] = temp[]
-}
+//     this->size_e = n;
+//     alloc.destroy(this->elements);
+//     alloc.deallocate(this->elements, capacity_e);
+//     this->elements = alloc.allocate(n);
+//     for (size_t i = 0; i < this->size(); i++)
+//         alloc.construct(this->elements + i, temp[i]);
+//     for (size_t i = 0; i < temp.size(); i++)
+//         alloc.construct(this->elements + i, val);
+// }
 
 
 template <class T, class Allocator >
 bool ft::vector<T, Allocator>::empty() const
 {
     return (size_e == 0);
+}
+
+/*If n is greater than the current vector capacity, the function causes the container to reallocate its storage increasing its capacity to n (or greater).
+
+In all other cases, the function call does not cause a reallocation and the vector capacity is not affected.
+
+This function has no effect on the vector size and cannot alter its elements.
+*/
+
+template <class T, class Allocator >
+void      ft::vector<T, Allocator>::reserve (size_type n)
+{
+    vector              temp(*this);
+    std::allocator <T>  alloc;
+
+    n <= capacity_e ? return : NULL;
+    alloc.destroy(this->elements);
+    alloc.deallocate(this->elements, capacity_e);
+    this->elements = alloc.allocate(n);
+    for (size_t i = 0; i < temp.size(); i++)
+        alloc.construct(this->elements + i, temp[i]);
+}
+
+
+template <class T, class Allocator >
+void      ft::vector<T, Allocator>::shrink_to_fit()
+{
+    vector              temp(*this);
+    std::allocator <T>  alloc;
+
+    capacity_e == size_e ? return : NULL;
+    alloc.destroy(this->elements);
+    alloc.deallocate(this->elements, capacity_e);
+    this->elements = alloc.allocate(size_e);
+    for (size_t i = 0; i < temp.size(); i++)
+        alloc.construct(this->elements + i, temp[i]);
 }
 
 #endif
