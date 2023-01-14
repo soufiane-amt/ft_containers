@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/14 17:35:44 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/14 17:44:16 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,20 @@ namespace ft
         reference       operator[] (size_type n);
         const_reference operator[] (size_type n) const;
 
-        //
+        //Element access:
+
+        reference               at (size_type n);
+        const_reference         at (size_type n) const;
         
-        reference       at (size_type n);
-        const_reference at (size_type n) const;
+        reference               front();
+        const_reference         front() const;
+        
+        reference               back();
+        const_reference         back() const;
+        
+        value_type*             data() noexcept;
+        const value_type*       data() const noexcept;
+
     private:
         pointer                   elements;
         size_type                 capacity_e;
@@ -269,5 +279,35 @@ ft::vector<T, Allocator>::at (size_type n) const
     return (this->elements[i]);
 }
 
+
+// I don't need that these following methods need to be protected as calling them on an empty vector causes an undefined behavior
+template <class T, class Allocator >
+typename ft::vector<T, Allocator>::reference    
+ft::vector<T, Allocator>::front()
+{
+    return (this->elements[0]);
+}
+
+template <class T, class Allocator >
+typename ft::vector<T, Allocator>::const_reference
+ft::vector<T, Allocator>::front() const
+{
+    return (this->elements[0]);
+}
+
+
+template <class T, class Allocator >
+typename ft::vector<T, Allocator>::reference    
+ft::vector<T, Allocator>::back()
+{
+    return (this->elements[this->size() - 1]);
+}
+
+template <class T, class Allocator >
+typename ft::vector<T, Allocator>::const_reference
+ft::vector<T, Allocator>::back() const
+{
+    return (this->elements[this->size() - 1]);
+}
 
 #endif
