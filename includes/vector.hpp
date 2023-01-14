@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/14 18:26:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/14 18:35:00 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ namespace ft
         size_type                 capacity_e;
         size_type                 size_e;
         
+        //utils
         value_type                *_double_capacity(size_type    acctual_capacity);
         value_type                *_copy_elements  (value_type* src, value_type* dst, size_t    n);
     };
@@ -256,6 +257,7 @@ void      ft::vector<T, Allocator>::shrink_to_fit()
 //                   /*function overloading*/                      //
 /*/////////////////////////////////////////////////////////////////*/
 
+
 template <class T, class Allocator >
 typename ft::vector<T, Allocator>::reference       
 ft::vector<T, Allocator>::operator[] (size_type i)
@@ -369,7 +371,36 @@ void ft::vector<T, Allocator>::assign (InputIterator first, InputIterator last)
 template <class T, class Allocator> 
 void ft::vector<T, Allocator>::push_back (const value_type& val)
 {
-    
+    if (this->capacity_e == this->size_e)
+        
 }
+
+
+
+
+
+/*/////////////////////////////////////////////////////////////////*/
+//                   /*utils*/                                   //
+/*/////////////////////////////////////////////////////////////////*/
+
+template <class T, class Allocator> 
+ft::vector<T, Allocator>::value_type  
+*ft::vector<T, Allocator>::_double_capacity(size_type    acctual_capacity)
+{
+    Allocator alloc;
+
+    alloc.destroy(this->elements);
+    alloc.deallocate(this->elements, capacity_e);
+    return (alloc.allocate(acctual_capacity * 2));
+}
+
+template <class T, class Allocator> 
+ft::vector<T, Allocator>::value_type
+*ft::vector<T, Allocator>::_copy_elements  (value_type* src, value_type* dst, size_t    n)
+{
+    for (size_t i = 0; i < n; i++)
+        dst[i] = src[i];
+}
+
 
 #endif
