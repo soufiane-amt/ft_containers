@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/14 17:44:16 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/14 17:52:23 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ namespace ft
         
         explicit vector (const allocator_type& alloc = allocator_type());
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+        
         template <class InputIterator>         
         vector (InputIterator first, InputIterator last,    const allocator_type& alloc = allocator_type());
+        
         vector (const vector& x);
         ~vector();
         vector& operator= (const vector& x);
@@ -81,6 +83,13 @@ namespace ft
         value_type*             data() noexcept;
         const value_type*       data() const noexcept;
 
+        //Modifiers
+        void assign (size_type n, const value_type& val);
+       
+        template <class InputIterator>  
+        void assign (InputIterator first, InputIterator last);
+        
+        
     private:
         pointer                   elements;
         size_type                 capacity_e;
@@ -309,5 +318,23 @@ ft::vector<T, Allocator>::back() const
 {
     return (this->elements[this->size() - 1]);
 }
+
+template <class T, class Allocator >
+typename ft::vector<T, Allocator>::value_type*
+ft::vector<T, Allocator>::data() noexcept
+{
+    return (this->elements);
+}
+
+
+template <class T, class Allocator >
+const typename ft::vector<T, Allocator>::value_type*
+ft::vector<T, Allocator>::data() const noexcept
+{
+    return (this->elements);
+}
+
+
+//Modifiers:
 
 #endif
