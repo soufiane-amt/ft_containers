@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/14 18:13:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/14 18:26:19 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,15 @@ namespace ft
         template <class InputIterator>  
         void assign (InputIterator first, InputIterator last);
         
-        
+        void push_back (const value_type& val);
+
     private:
         pointer                   elements;
         size_type                 capacity_e;
         size_type                 size_e;
+        
+        value_type                *_double_capacity(size_type    acctual_capacity);
+        value_type                *_copy_elements  (value_type* src, value_type* dst, size_t    n);
     };
         
         
@@ -351,6 +355,21 @@ void ft::vector<T, Allocator>::assign (size_type n, const value_type& val)
     }
     for (size_t i = 0; i < n; i++)
         alloc.construct(this->elements + i, val);
+}
+
+
+template <class T, class Allocator> 
+template <class InputIterator>
+void ft::vector<T, Allocator>::assign (InputIterator first, InputIterator last)
+{
+    
+}
+
+
+template <class T, class Allocator> 
+void ft::vector<T, Allocator>::push_back (const value_type& val)
+{
+    
 }
 
 #endif
