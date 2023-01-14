@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/14 17:04:29 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/14 17:35:44 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,14 @@ namespace ft
         void      reserve (size_type n);
         void      shrink_to_fit();
 
+        //Function overloading
+        reference       operator[] (size_type n);
+        const_reference operator[] (size_type n) const;
+
+        //
+        
+        reference       at (size_type n);
+        const_reference at (size_type n) const;
     private:
         pointer                   elements;
         size_type                 capacity_e;
@@ -218,5 +226,48 @@ void      ft::vector<T, Allocator>::shrink_to_fit()
     for (size_t i = 0; i < temp.size(); i++)
         alloc.construct(this->elements + i, temp[i]);
 }
+
+
+
+/*/////////////////////////////////////////////////////////////////*/
+//                   /*function overloading*/                      //
+/*/////////////////////////////////////////////////////////////////*/
+
+template <class T, class Allocator >
+typename ft::vector<T, Allocator>::reference       
+ft::vector<T, Allocator>::operator[] (size_type i)
+{
+    if (this->size_e <= i)
+        throw std::out_of_range ();
+    return (this->elements[i]);
+}
+
+template <class T, class Allocator >
+typename ft::vector<T, Allocator>::const_reference 
+ft::vector<T, Allocator>::operator[] (size_type i) const
+{
+    if (this->size_e <= i)
+        throw std::out_of_range ();
+    return (this->elements[i]);
+}
+
+template <class T, class Allocator >
+typename ft::vector<T, Allocator>::reference    
+ft::vector<T, Allocator>::at (size_type n)
+{
+    if (this->size_e <= i)
+        throw std::out_of_range ();
+    return (this->elements[i]);
+}
+
+template <class T, class Allocator >
+typename ft::vector<T, Allocator>::const_reference
+ft::vector<T, Allocator>::at (size_type n) const
+{
+    if (this->size_e <= i)
+        throw std::out_of_range ();
+    return (this->elements[i]);
+}
+
 
 #endif
