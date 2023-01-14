@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/14 17:52:23 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/14 18:13:04 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -336,5 +336,21 @@ ft::vector<T, Allocator>::data() const noexcept
 
 
 //Modifiers:
+
+template <class T, class Allocator> 
+void ft::vector<T, Allocator>::assign (size_type n, const value_type& val)
+{
+    this->size_e = n;
+    if (n > this->capacity_e)
+    {
+        std::allocator <T>  alloc;
+    
+        alloc.destroy(this->elements);
+        alloc.deallocate(this->elements, capacity_e);
+        this->elements = alloc.allocate(n);
+    }
+    for (size_t i = 0; i < n; i++)
+        alloc.construct(this->elements + i, val);
+}
 
 #endif
