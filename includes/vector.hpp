@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/14 18:54:28 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/14 18:58:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ namespace ft
         void assign (InputIterator first, InputIterator last);
         
         void push_back (const value_type& val);
+
+        void pop_back();
 
     private:
         pointer                   elements;
@@ -414,5 +416,12 @@ void ft::vector<T, Allocator>::_copy_elements  (value_type* dst, value_type* src
         alloc.construct(dst + i, src + i );
 }
 
+template <class T, class Allocator> 
+void ft::vector<T, Allocator>::pop_back()
+{
+    alloc.destroy   (this->elements + size_e - 1);
+    alloc.deallocate(this->elements+ size_e - 1, 1);
+    this->size_e--;
+}
 
 #endif
