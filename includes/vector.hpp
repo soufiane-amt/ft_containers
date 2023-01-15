@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/15 18:34:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/15 18:53:51 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,13 @@ namespace ft
 
         allocator_type get_allocator() const;
 
+        //iterators
+        iterator begin();
+        const_iterator begin() const;
+
+        iterator end();
+        const_iterator end() const;
+        
     private:
         pointer                   elements;
         size_type                 capacity_e;
@@ -546,6 +553,34 @@ bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, Input
       ++first1; ++first2;
     }
     return (first2!=last2);
+}
+
+
+
+/*/////////////////////////////////////////////////////////////////*/
+//                   /*iteraors*/                                  //
+/*/////////////////////////////////////////////////////////////////*/
+
+template <class T, class Allocator> 
+typename vector<T, Allocator>::iterator vector<T, Allocator>::begin()
+{
+    
+}
+template <class T, class Allocator> 
+typename vector<T, Allocator>::const_iterator vector<T, Allocator>::begin() const
+{
+    
+}
+
+template <class T, class Allocator> 
+typename vector<T, Allocator>::iterator vector<T, Allocator>::end()
+{
+    
+}
+template <class T, class Allocator> 
+typename vector<T, Allocator>::const_iterator vector<T, Allocator>::end() const
+{
+    
 }
 
 
