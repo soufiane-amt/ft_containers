@@ -10,5 +10,6 @@ int main ()
     // std::cout << v.capacity() << std::endl;
     // std::cout << v.size() << std::endl;
     int *arr;
-    std::allocator alloc;
+    std::allocator<int> alloc;
+    alloc.deallocate (arr);
 }

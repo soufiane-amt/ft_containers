@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/15 12:35:29 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/15 12:46:11 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -389,11 +389,14 @@ void ft::vector<T, Allocator>::push_back (const value_type& val)
         pointer temp;
         temp = this->_alloc_double_capacity(this->capacity_e);
         this->_copy_elements(temp, this->elements,this->size_e);
-        for (size_t i = 0; i < capacity_e; i++)        
-            alloc.destroy(this->elements + i);
-        alloc.deallocate(this->elements, capacity_e);
+        if (this->size_e)
+        {
+            for (size_t i = 0; i < capacity_e; i++)        
+                alloc.destroy(this->elements + i);
+            alloc.deallocate(this->elements, capacity_e);
+        }
         this->elements = temp;
-        this->capacity_e *= 2;
+        this->capacity_e = this->capacity_e > 0 ? (this->capacity_e * 2) : 1;
     }
     this->elements[new_element_index] = val;
     this->size_e++;
