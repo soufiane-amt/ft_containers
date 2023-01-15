@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/15 15:46:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/15 15:50:15 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ namespace ft
     };
         
         
-}
+
 
 
 
@@ -132,13 +132,13 @@ namespace ft
 /*/////////////////////////////////////////////////////////////////*/
 
 template <class T, class Allocator  >
-ft::vector <T, Allocator>::vector (const allocator_type& MyAllocator):capacity_e(0), size_t(0)
+vector <T, Allocator>::vector (const allocator_type& MyAllocator):capacity_e(0), size_t(0)
 {
     this->elements = MyAllocator.allocate(0);
 }
 
 template <class T, class Allocator  >
-ft::vector <T, Allocator>::vector (size_type n, const value_type& val = value_type(),
+vector <T, Allocator>::vector (size_type n, const value_type& val = value_type(),
     const allocator_type& alloc = allocator_type()):capacity_e(n), size_t(n)
 {
     this->elements = alloc.allocate (n);
@@ -148,14 +148,14 @@ ft::vector <T, Allocator>::vector (size_type n, const value_type& val = value_ty
 
 template <class T, class Allocator >
 template <class InputIterator>
-ft::vector <T, Allocator >::vector (InputIterator first, InputIterator last,
+vector <T, Allocator >::vector (InputIterator first, InputIterator last,
     const allocator_type& alloc = allocator_type())
 {
     //push_back
 }
 
 template <class T, class Allocator >
-ft::vector<T, Allocator>::vector (const vector& x)
+vector<T, Allocator>::vector (const vector& x)
 {
     this->size_e = x.size();
     this->capacity_e = x.size();
@@ -174,7 +174,7 @@ ft::vector<T, Allocator>::vector (const vector& x)
 
 
 template <class T, class Allocator >
-ft::vector<T, Allocator>& ft::vector<T, Allocator>::operator=(const vector& x)
+vector<T, Allocator>& vector<T, Allocator>::operator=(const vector& x)
 {
     
 }
@@ -186,25 +186,25 @@ ft::vector<T, Allocator>& ft::vector<T, Allocator>::operator=(const vector& x)
 
 
 template <class T, class Allocator >
-typename ft::vector<T, Allocator>::size_type ft::vector<T, Allocator>::size() const
+typename vector<T, Allocator>::size_type vector<T, Allocator>::size() const
 {
     return (this->size_e);
 }
 
 template <class T, class Allocator >
-typename ft::vector<T, Allocator>::size_type ft::vector<T, Allocator>:: capacity() const
+typename vector<T, Allocator>::size_type vector<T, Allocator>:: capacity() const
 {
     return  (this->capacity_e);
 }
 
 template <class T, class Allocator >
-typename ft::vector<T, Allocator>::size_type ft::vector<T, Allocator>::  max_size() const
+typename vector<T, Allocator>::size_type vector<T, Allocator>::  max_size() const
 {
     return (alloc.max_size());
 }
 
 // template <class T, class Allocator >
-// void ft::vector<T, Allocator>::resize (size_type n, value_type val = value_type())
+// void vector<T, Allocator>::resize (size_type n, value_type val = value_type())
 // {
 //     vector temp     (*this);
 //     std::allocator<T>  alloc;
@@ -221,7 +221,7 @@ typename ft::vector<T, Allocator>::size_type ft::vector<T, Allocator>::  max_siz
 
 
 template <class T, class Allocator >
-bool ft::vector<T, Allocator>::empty() const
+bool vector<T, Allocator>::empty() const
 {
     return (size_e == 0);
 }
@@ -234,7 +234,7 @@ This function has no effect on the vector size and cannot alter its elements.
 */
 
 template <class T, class Allocator >
-void      ft::vector<T, Allocator>::reserve (size_type n)
+void      vector<T, Allocator>::reserve (size_type n)
 {
     vector              temp(*this);
 
@@ -256,8 +256,8 @@ void      ft::vector<T, Allocator>::reserve (size_type n)
 
 
 template <class T, class Allocator >
-typename ft::vector<T, Allocator>::reference       
-ft::vector<T, Allocator>::operator[] (size_type i)
+typename vector<T, Allocator>::reference       
+vector<T, Allocator>::operator[] (size_type i)
 {
     if (this->size_e <= i)
         throw std::out_of_range ();
@@ -265,8 +265,8 @@ ft::vector<T, Allocator>::operator[] (size_type i)
 }
 
 template <class T, class Allocator >
-typename ft::vector<T, Allocator>::const_reference 
-ft::vector<T, Allocator>::operator[] (size_type i) const
+typename vector<T, Allocator>::const_reference 
+vector<T, Allocator>::operator[] (size_type i) const
 {
     if (this->size_e <= i)
         throw std::out_of_range ();
@@ -274,8 +274,8 @@ ft::vector<T, Allocator>::operator[] (size_type i) const
 }
 
 template <class T, class Allocator >
-typename ft::vector<T, Allocator>::reference    
-ft::vector<T, Allocator>::at (size_type n)
+typename vector<T, Allocator>::reference    
+vector<T, Allocator>::at (size_type n)
 {
     if (this->size_e <= i)
         throw std::out_of_range ();
@@ -283,8 +283,8 @@ ft::vector<T, Allocator>::at (size_type n)
 }
 
 template <class T, class Allocator >
-typename ft::vector<T, Allocator>::const_reference
-ft::vector<T, Allocator>::at (size_type n) const
+typename vector<T, Allocator>::const_reference
+vector<T, Allocator>::at (size_type n) const
 {
     if (this->size_e <= i)
         throw std::out_of_range ();
@@ -294,30 +294,30 @@ ft::vector<T, Allocator>::at (size_type n) const
 
 // I don't need that these following methods need to be protected as calling them on an empty vector causes an undefined behavior
 template <class T, class Allocator >
-typename ft::vector<T, Allocator>::reference    
-ft::vector<T, Allocator>::front()
+typename vector<T, Allocator>::reference    
+vector<T, Allocator>::front()
 {
     return (this->elements[0]);
 }
 
 template <class T, class Allocator >
-typename ft::vector<T, Allocator>::const_reference
-ft::vector<T, Allocator>::front() const
+typename vector<T, Allocator>::const_reference
+vector<T, Allocator>::front() const
 {
     return (this->elements[0]);
 }
 
 
 template <class T, class Allocator >
-typename ft::vector<T, Allocator>::reference    
-ft::vector<T, Allocator>::back()
+typename vector<T, Allocator>::reference    
+vector<T, Allocator>::back()
 {
     return (this->elements[this->size() - 1]);
 }
 
 template <class T, class Allocator >
-typename ft::vector<T, Allocator>::const_reference
-ft::vector<T, Allocator>::back() const
+typename vector<T, Allocator>::const_reference
+vector<T, Allocator>::back() const
 {
     return (this->elements[this->size() - 1]);
 }
@@ -327,7 +327,7 @@ ft::vector<T, Allocator>::back() const
 //Modifiers:
 
 template <class T, class Allocator> 
-void ft::vector<T, Allocator>::assign (size_type n, const value_type& val)
+void vector<T, Allocator>::assign (size_type n, const value_type& val)
 {
     this->size_e = n;
     if (n > this->capacity_e)
@@ -344,14 +344,14 @@ void ft::vector<T, Allocator>::assign (size_type n, const value_type& val)
 
 template <class T, class Allocator> 
 template <class InputIterator>
-void ft::vector<T, Allocator>::assign (InputIterator first, InputIterator last)
+void vector<T, Allocator>::assign (InputIterator first, InputIterator last)
 {
     
 }
 
 
 template <class T, class Allocator> 
-void ft::vector<T, Allocator>::push_back (const value_type& val)
+void vector<T, Allocator>::push_back (const value_type& val)
 {
     size_t  new_element_index;
 
@@ -378,7 +378,7 @@ void ft::vector<T, Allocator>::push_back (const value_type& val)
 
 
 template <class T, class Allocator> 
-void ft::vector<T, Allocator>::pop_back()
+void vector<T, Allocator>::pop_back()
 {
     alloc.destroy   (this->elements + size_e - 1);
     this->size_e--;
@@ -409,7 +409,7 @@ void ft::vector<T, Allocator>::pop_back()
 
 
 template <class T, class Allocator> 
-void ft::vector<T, Allocator>::swap (vector& x)
+void vector<T, Allocator>::swap (vector& x)
 {
     vector tmp (x);
 
@@ -419,7 +419,7 @@ void ft::vector<T, Allocator>::swap (vector& x)
 
 
 template <class T, class Allocator> 
-void ft::vector<T, Allocator>::clear()
+void vector<T, Allocator>::clear()
 {
     for (size_t i = 0; i < size_e; i++)
         alloc.destroy(this->elements + i);
@@ -429,8 +429,8 @@ void ft::vector<T, Allocator>::clear()
 
 
 template <class T, class Allocator> 
-typename ft::vector<T, Allocator>::allocator_type 
-ft::vector<T, Allocator>::get_allocator() const
+typename vector<T, Allocator>::allocator_type 
+vector<T, Allocator>::get_allocator() const
 {
     return (alloc);
 }
@@ -448,7 +448,7 @@ ft::vector<T, Allocator>::get_allocator() const
 template <class T, class Alloc>
 bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 {
-    if ()
+    if (equal(lhs.begin()))
 }
 
 template <class T, class Alloc>
@@ -554,8 +554,8 @@ bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, Input
 /*/////////////////////////////////////////////////////////////////*/
 
 template <class T, class Allocator> 
-ft::vector<T, Allocator>::value_type  
-*ft::vector<T, Allocator>::_alloc_double_capacity(size_type    acctual_capacity)
+vector<T, Allocator>::value_type  
+*vector<T, Allocator>::_alloc_double_capacity(size_type    acctual_capacity)
 {
     Allocator alloc;
     
@@ -563,7 +563,7 @@ ft::vector<T, Allocator>::value_type
 }
 
 template <class T, class Allocator> 
-void ft::vector<T, Allocator>::_copy_elements  (value_type* dst, value_type* src, size_t    n)
+void vector<T, Allocator>::_copy_elements  (value_type* dst, value_type* src, size_t    n)
 {
     Allocator alloc;
 
@@ -571,5 +571,5 @@ void ft::vector<T, Allocator>::_copy_elements  (value_type* dst, value_type* src
         alloc.construct(dst + i, src + i );
 }
 
-
+}
 #endif
