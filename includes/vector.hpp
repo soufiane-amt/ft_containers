@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/15 12:46:11 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/15 13:19:57 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define VECTOR_HPP
 
 #include <memory>
+#include <iostream>
 
 
 /*/////////////////////////////////////////////////////////////////
@@ -96,7 +97,12 @@ namespace ft
         template <class InputIterator>
         void                    insert (iterator position, InputIterator first, InputIterator last);
 
+        iterator erase (iterator position);
+        iterator erase (iterator first, iterator last);
         
+        void swap (vector& x);
+
+        void clear();
     private:
         pointer                   elements;
         size_type                 capacity_e;
@@ -413,14 +419,47 @@ void ft::vector<T, Allocator>::pop_back()
 }
 
 
+// template <class T, class Allocator> 
+// iterator                insert (iterator position, const value_type& val)
+// {
+    
+// }
+// template <class T, class Allocator> 
+// void                    insert (iterator position, size_type n, const value_type& val)
+// {
+    
+// }   
+//  template <class T, class Allocator> 
+
+// template <class InputIterator>
+// void                    insert (iterator position, InputIterator first, InputIterator last)
+// {
+    
+// }
+
+
+//*-*//
 
 
 
+template <class T, class Allocator> 
+void ft::vector<T, Allocator>::swap (vector& x)
+{
+    vector tmp (x);
 
+    x = *this;
+    *this = tmp;
+}
 
+template <class T, class Allocator> 
+void ft::vector<T, Allocator>::clear()
+{
+    std::allocator <T> destroyer;
 
-
-
+    for (size_t i = 0; i < size_e; i++)
+        destroyer.destroy(this->elements + i);
+    this->size_e = 0;       
+}
 
 
 
