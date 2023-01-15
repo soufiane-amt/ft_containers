@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/14 18:58:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/15 12:35:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ namespace ft
         typedef typename allocator_type::const_pointer   const_pointer;
 
         /*Iterators*/
-        // typedef implementation-defined                   iterator;
-        // typedef implementation-defined                   const_iterator;
+        typedef std::vector <int>::iterator              iterator;
+        typedef std::vector <int>::const_iterator        const_iterator;
         
         
         
@@ -84,15 +84,19 @@ namespace ft
         const value_type*       data() const noexcept;
 
         //Modifiers
-        void assign (size_type n, const value_type& val);
-       
+        void                    assign (size_type n, const value_type& val);
         template <class InputIterator>  
-        void assign (InputIterator first, InputIterator last);
+        void                    assign (InputIterator first, InputIterator last);
         
-        void push_back (const value_type& val);
+        void                    push_back (const value_type& val);
+        void                    pop_back();
 
-        void pop_back();
+        iterator                insert (iterator position, const value_type& val);
+        void                    insert (iterator position, size_type n, const value_type& val);    
+        template <class InputIterator>
+        void                    insert (iterator position, InputIterator first, InputIterator last);
 
+        
     private:
         pointer                   elements;
         size_type                 capacity_e;
@@ -191,7 +195,8 @@ typename ft::vector<T, Allocator>::size_type ft::vector<T, Allocator>:: capacity
 template <class T, class Allocator >
 typename ft::vector<T, Allocator>::size_type ft::vector<T, Allocator>::  max_size() const
 {
-    return (Allocator::ma);
+    std::allocator alloc;
+    return (alloc.max_size());
 }
 
 // template <class T, class Allocator >
@@ -231,7 +236,8 @@ void      ft::vector<T, Allocator>::reserve (size_type n)
     std::allocator <T>  alloc;
 
     n <= capacity_e ? return : NULL;
-    alloc.destroy(this->elements);
+    for (size_t i = 0; i < capacity_e; i++)        
+        alloc.destroy(this->elements + i);
     alloc.deallocate(this->elements, capacity_e);
     this->elements = alloc.allocate(n);
     for (size_t i = 0; i < temp.size(); i++)
@@ -246,7 +252,8 @@ void      ft::vector<T, Allocator>::shrink_to_fit()
     std::allocator <T>  alloc;
 
     capacity_e == size_e ? return : NULL;
-    alloc.destroy(this->elements);
+    for (size_t i = 0; i < capacity_e; i++)        
+        alloc.destroy(this->elements + i);
     alloc.deallocate(this->elements, capacity_e);
     this->elements = alloc.allocate(size_e);
     for (size_t i = 0; i < temp.size(); i++)
@@ -353,7 +360,8 @@ void ft::vector<T, Allocator>::assign (size_type n, const value_type& val)
     {
         std::allocator <T>  alloc;
     
-        alloc.destroy(this->elements);
+        for (size_t i = 0; i < capacity_e; i++)        
+            alloc.destroy(this->elements + i);
         alloc.deallocate(this->elements, capacity_e);
         this->elements = alloc.allocate(n);
     }
@@ -376,12 +384,13 @@ void ft::vector<T, Allocator>::push_back (const value_type& val)
     size_t  new_element_index;
 
     new_element_index = this->size_e;
-    if (this->capacity_e == this->size_e)
+    if (this->capacity_e == size_e)
     {
         pointer temp;
         temp = this->_alloc_double_capacity(this->capacity_e);
         this->_copy_elements(temp, this->elements,this->size_e);
-        alloc.destroy(this->elements);
+        for (size_t i = 0; i < capacity_e; i++)        
+            alloc.destroy(this->elements + i);
         alloc.deallocate(this->elements, capacity_e);
         this->elements = temp;
         this->capacity_e *= 2;
@@ -389,6 +398,24 @@ void ft::vector<T, Allocator>::push_back (const value_type& val)
     this->elements[new_element_index] = val;
     this->size_e++;
 }
+
+
+
+
+template <class T, class Allocator> 
+void ft::vector<T, Allocator>::pop_back()
+{
+    alloc.destroy   (this->elements + size_e - 1);
+    this->size_e--;
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -403,8 +430,8 @@ ft::vector<T, Allocator>::value_type
 *ft::vector<T, Allocator>::_alloc_double_capacity(size_type    acctual_capacity)
 {
     Allocator alloc;
-
-    return (alloc.allocate(acctual_capacity * 2));
+    
+    acctual_capacity > 0 ? return (alloc.allocate(acctual_capacity * 2)) : return (alloc.allocate(1));
 }
 
 template <class T, class Allocator> 
@@ -416,12 +443,5 @@ void ft::vector<T, Allocator>::_copy_elements  (value_type* dst, value_type* src
         alloc.construct(dst + i, src + i );
 }
 
-template <class T, class Allocator> 
-void ft::vector<T, Allocator>::pop_back()
-{
-    alloc.destroy   (this->elements + size_e - 1);
-    alloc.deallocate(this->elements+ size_e - 1, 1);
-    this->size_e--;
-}
 
 #endif
