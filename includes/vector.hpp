@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/15 15:50:15 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/15 18:34:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <memory>
 #include <iostream>
-
+#include "iterator.hpp"
 
 /*/////////////////////////////////////////////////////////////////
                 
@@ -42,8 +42,8 @@ namespace ft
         typedef typename allocator_type::const_pointer   const_pointer;
 
         /*Iterators*/
-        typedef std::vector <int>::iterator              iterator;
-        typedef std::vector <int>::const_iterator        const_iterator;
+        typedef ft::iterator<ft::random_access_iterator_tag, T>              iterator;
+        typedef ft::const_iterator<ft::random_access_iterator_tag, T>        const_iterator;
         
         
         
