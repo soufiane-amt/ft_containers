@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/15 13:19:57 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/15 14:43:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ namespace ft
         void      resize(size_type n, value_type val = value_type());
         bool      empty() const;
         void      reserve (size_type n);
-        void      shrink_to_fit();
 
         //Function overloading
         reference       operator[] (size_type n);
@@ -81,9 +80,6 @@ namespace ft
         reference               back();
         const_reference         back() const;
         
-        value_type*             data() noexcept;
-        const value_type*       data() const noexcept;
-
         //Modifiers
         void                    assign (size_type n, const value_type& val);
         template <class InputIterator>  
@@ -103,11 +99,14 @@ namespace ft
         void swap (vector& x);
 
         void clear();
+
+        allocator_type get_allocator() const;
+
     private:
         pointer                   elements;
         size_type                 capacity_e;
         size_type                 size_e;
-        
+        allocator_type            alloc;
         //utils
         value_type                *_alloc_double_capacity(size_type    acctual_capacity);
         void                      _copy_elements  (value_type* dst, value_type* src, size_t    n);
@@ -135,7 +134,7 @@ namespace ft
 template <class T, class Allocator  >
 ft::vector <T, Allocator>::vector (const allocator_type& MyAllocator):capacity_e(0), size_t(0)
 {
-    this->elements = alloc.allocate(0);
+    this->elements = MyAllocator.allocate(0);
 }
 
 template <class T, class Allocator  >
@@ -201,7 +200,6 @@ typename ft::vector<T, Allocator>::size_type ft::vector<T, Allocator>:: capacity
 template <class T, class Allocator >
 typename ft::vector<T, Allocator>::size_type ft::vector<T, Allocator>::  max_size() const
 {
-    std::allocator alloc;
     return (alloc.max_size());
 }
 
@@ -239,7 +237,6 @@ template <class T, class Allocator >
 void      ft::vector<T, Allocator>::reserve (size_type n)
 {
     vector              temp(*this);
-    std::allocator <T>  alloc;
 
     n <= capacity_e ? return : NULL;
     for (size_t i = 0; i < capacity_e; i++)        
@@ -250,21 +247,6 @@ void      ft::vector<T, Allocator>::reserve (size_type n)
         alloc.construct(this->elements + i, temp[i]);
 }
 
-
-template <class T, class Allocator >
-void      ft::vector<T, Allocator>::shrink_to_fit()
-{
-    vector              temp(*this);
-    std::allocator <T>  alloc;
-
-    capacity_e == size_e ? return : NULL;
-    for (size_t i = 0; i < capacity_e; i++)        
-        alloc.destroy(this->elements + i);
-    alloc.deallocate(this->elements, capacity_e);
-    this->elements = alloc.allocate(size_e);
-    for (size_t i = 0; i < temp.size(); i++)
-        alloc.construct(this->elements + i, temp[i]);
-}
 
 
 
@@ -340,20 +322,6 @@ ft::vector<T, Allocator>::back() const
     return (this->elements[this->size() - 1]);
 }
 
-template <class T, class Allocator >
-typename ft::vector<T, Allocator>::value_type*
-ft::vector<T, Allocator>::data() noexcept
-{
-    return (this->elements);
-}
-
-
-template <class T, class Allocator >
-const typename ft::vector<T, Allocator>::value_type*
-ft::vector<T, Allocator>::data() const noexcept
-{
-    return (this->elements);
-}
 
 
 //Modifiers:
@@ -364,8 +332,6 @@ void ft::vector<T, Allocator>::assign (size_type n, const value_type& val)
     this->size_e = n;
     if (n > this->capacity_e)
     {
-        std::allocator <T>  alloc;
-    
         for (size_t i = 0; i < capacity_e; i++)        
             alloc.destroy(this->elements + i);
         alloc.deallocate(this->elements, capacity_e);
@@ -451,14 +417,108 @@ void ft::vector<T, Allocator>::swap (vector& x)
     *this = tmp;
 }
 
+
 template <class T, class Allocator> 
 void ft::vector<T, Allocator>::clear()
 {
-    std::allocator <T> destroyer;
-
     for (size_t i = 0; i < size_e; i++)
-        destroyer.destroy(this->elements + i);
+        alloc.destroy(this->elements + i);
     this->size_e = 0;       
+}
+
+
+
+template <class T, class Allocator> 
+typename ft::vector<T, Allocator>::allocator_type 
+ft::vector<T, Allocator>::get_allocator() const
+{
+    return (alloc);
+}
+
+
+
+
+
+/*/////////////////////////////////////////////////////////////////*/
+//                   /*Non-member function overloads*/             //
+/*/////////////////////////////////////////////////////////////////*/
+
+
+
+template <class T, class Alloc>
+bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    if ()
+}
+
+template <class T, class Alloc>
+bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    
+}
+
+template <class T, class Alloc>
+bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    
+}
+
+template <class T, class Alloc>
+bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    
+}
+
+template <class T, class Alloc>
+bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    
+}
+
+template <class T, class Alloc>
+bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    
+}
+
+
+        //*swap*//
+template <class T, class Alloc>
+void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
+{
+    vector tmp (x);
+
+    x = y;
+    y = tmp;
+}
+
+
+
+
+template <class InputIterator1, class InputIterator2>  
+bool equal (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
+{
+    while (first1!=last1)
+    {
+        if (*first1 != *first2)
+            return false;
+        ++first1;
+        ++first2;
+    }
+    return true;
+}
+
+template <class InputIterator1, class InputIterator2, class BinaryPredicate>  
+bool equal (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, BinaryPredicate pred)
+{
+    while (pred(first1, last1))
+    {
+        if (*first1 != *first2)
+            return false;
+        ++first1;
+        ++first2;
+    }
+    return true;
 }
 
 
