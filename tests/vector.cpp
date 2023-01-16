@@ -47,7 +47,6 @@ typename iterator_traits<Iterator>::value_type    func (Iterator first, Iterator
 
 int main ()
 {
-    // std::vector <int> arr (5, 42);
-    int arr[] = {1, 2, 3 ,4};
-    std::cout << func(arr , arr + 4) << std::endl;
+    std::vector <int> arr (5, 42);
+    arr.begin().operator*(arr.begin()++);
 }

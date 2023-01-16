@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/16 15:32:16 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/16 16:19:47 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,38 @@ struct iterator_traits<T*>
     typedef T value_type;
     typedef T* pointer;
     typedef T& reference;
-    typedef random_access_iterator_tag iterator_category;
+    typedef std::random_access_iterator_tag iterator_category;
 };
 
  
-template<class Category, class T, class Distance = ptrdiff_t,
-         class Pointer = T*, class Reference = T&>
-struct iterator
+template<class T>
+class iterator
 {
-    typedef T         value_type;
-    typedef Distance  difference_type;
-    typedef Pointer   pointer;
-    typedef Reference reference;
-    typedef Category  iterator_category;
+
+    public:
+        typedef T                                                          iterator_type;
+        typedef typename iterator_traits<iterator_type>::iterator_category iterator_category;
+        typedef typename iterator_traits<iterator_type>::value_type        value_type;
+        typedef typename iterator_traits<iterator_type>::difference_type   difference_type;
+        typedef typename iterator_traits<iterator_type>::pointer           pointer;
+        typedef typename iterator_traits<iterator_type>::reference         reference;
+    
+        reference operator*() const;
+        pointer operator->() const;
+        iterator& operator++();
+        iterator operator++(int);
+        iterator& operator--();
+        iterator operator--(int);
+        bool operator==(const iterator&) const;
+        bool operator!=(const iterator&) const;
+        iterator operator+(difference_type) const;
+        iterator operator-(difference_type) const;
+        difference_type operator-(const iterator&) const;
+
 };
 
 
-struct input_iterator_tag  {};
-struct output_iterator_tag {};
-struct forward_iterator_tag       : public input_iterator_tag         {};
-struct bidirectional_iterator_tag : public forward_iterator_tag       {};
-struct random_access_iterator_tag : public bidirectional_iterator_tag {};
+
 
 
 

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 15:22:56 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/14 18:03:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/16 15:41:31 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 
 int main ()
 {
-    std::vector <int> arr(1, 1337);
-    arr.assign (3, 42);
-    for (size_t i = 0; i < arr.size(); i++)
-        std::cout << arr[i] << std::endl;
-    std::cout << arr.capacity() << std::endl;
-    std::cout << arr.size() << std::endl;
+    int arr[] = {1 , 2, 3};
+    std::vector <int> v(arr, arr + 3);
+    std::vector <int>::reverse_iterator riter = v.rbegin();
+    std::vector <int>::iterator iter = v.begin();
+    // for (std::vector <int>::reverse_iterator iter = v.rbegin(); iter != v.rend(); iter++)
+    // {
+    //     std::cout << *iter.operator->() << std::endl;
+    // }
+    
 }
