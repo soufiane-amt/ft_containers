@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/16 14:55:27 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/16 15:01:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ namespace ft
         typedef typename allocator_type::const_pointer   const_pointer;
 
         /*Iterators*/
+        typedef typename ft::iterator<ft::random_access_iterator_tag, T>              iterator;
+        typedef typename ft::iterator<ft::random_access_iterator_tag, T>              const_iterator;
         typedef typename ft::iterator<ft::random_access_iterator_tag, T>              iterator;
         typedef typename ft::iterator<ft::random_access_iterator_tag, T>              const_iterator;
         
@@ -109,6 +111,13 @@ namespace ft
 
         iterator                end();
         const_iterator          end() const;
+
+        //reverse iterators
+        reverse_iterator       rbegin();
+        const_reverse_iterator rbegin() const;
+
+        reverse_iterator       rend();
+        const_reverse_iterator rend() const;
 
     private:
         pointer                 elements;
@@ -588,6 +597,21 @@ typename vector<T, Allocator>::const_iterator vector<T, Allocator>::end() const
     return (this->elements + size_e);
 }
 
+
+
+
+/*/////////////////////////////////////////////////////////////////*/
+//                   /*reverse iteraors*/                                  //
+/*/////////////////////////////////////////////////////////////////*/
+// template <class T, class Allocator> 
+// reverse_iterator       rbegin();
+// template <class T, class Allocator> 
+// const_reverse_iterator rbegin() const
+
+// template <class T, class Allocator> 
+// reverse_iterator       rend();
+// template <class T, class Allocator> 
+// const_reverse_iterator rend() const;
 
 
 /*/////////////////////////////////////////////////////////////////*/
