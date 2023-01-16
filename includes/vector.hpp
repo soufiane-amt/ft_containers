@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/15 18:53:51 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/16 14:55:27 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@ namespace ft
         typedef value_type*                              pointer;
         typedef const value_type*                        const_pointer;
         typedef size_t                                   size_type;
+        
         // typedef typename allocator_type::size_type       allocator_type;
         typedef typename allocator_type::difference_type difference_type;
         typedef typename allocator_type::pointer         pointer;
         typedef typename allocator_type::const_pointer   const_pointer;
 
         /*Iterators*/
-        typedef ft::iterator<ft::random_access_iterator_tag, T>              iterator;
-        typedef ft::const_iterator<ft::random_access_iterator_tag, T>        const_iterator;
+        typedef typename ft::iterator<ft::random_access_iterator_tag, T>              iterator;
+        typedef typename ft::iterator<ft::random_access_iterator_tag, T>              const_iterator;
         
         
         
@@ -93,30 +94,31 @@ namespace ft
         template <class InputIterator>
         void                    insert (iterator position, InputIterator first, InputIterator last);
 
-        iterator erase (iterator position);
-        iterator erase (iterator first, iterator last);
+        iterator                erase (iterator position);
+        iterator                erase (iterator first, iterator last);
         
-        void swap (vector& x);
+        void                    swap (vector& x);
+ 
+        void                    clear();
 
-        void clear();
-
-        allocator_type get_allocator() const;
+        allocator_type          get_allocator() const;
 
         //iterators
-        iterator begin();
-        const_iterator begin() const;
+        iterator                begin();
+        const_iterator          begin() const;
 
-        iterator end();
-        const_iterator end() const;
-        
+        iterator                end();
+        const_iterator          end() const;
+
     private:
-        pointer                   elements;
-        size_type                 capacity_e;
-        size_type                 size_e;
-        allocator_type            alloc;
+        pointer                 elements;
+        size_type               capacity_e;
+        size_type               size_e;
+        allocator_type          alloc;
+
         //utils
-        value_type                *_alloc_double_capacity(size_type    acctual_capacity);
-        void                      _copy_elements  (value_type* dst, value_type* src, size_t    n);
+        value_type              *_alloc_double_capacity(size_type    acctual_capacity);
+        void                    _copy_elements  (value_type* dst, value_type* src, size_t    n);
     };
         
         
@@ -561,27 +563,31 @@ bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, Input
 //                   /*iteraors*/                                  //
 /*/////////////////////////////////////////////////////////////////*/
 
+
 template <class T, class Allocator> 
-typename vector<T, Allocator>::iterator vector<T, Allocator>::begin()
+typename vector<T, Allocator>::iterator       vector<T, Allocator>::begin()
 {
-    
+    return (this->elements);
 }
-template <class T, class Allocator> 
+
+template <class T, class Allocator>
 typename vector<T, Allocator>::const_iterator vector<T, Allocator>::begin() const
 {
-    
+    return (this->elements);
 }
 
 template <class T, class Allocator> 
-typename vector<T, Allocator>::iterator vector<T, Allocator>::end()
+typename vector<T, Allocator>::iterator       vector<T, Allocator>::end()
 {
-    
+    return (this->elements + size_e);
 }
+
 template <class T, class Allocator> 
 typename vector<T, Allocator>::const_iterator vector<T, Allocator>::end() const
 {
-    
+    return (this->elements + size_e);
 }
+
 
 
 /*/////////////////////////////////////////////////////////////////*/
