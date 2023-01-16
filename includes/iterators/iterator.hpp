@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/16 16:19:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/16 16:21:35 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ class iterator
         typedef typename iterator_traits<iterator_type>::pointer           pointer;
         typedef typename iterator_traits<iterator_type>::reference         reference;
     
-        reference operator*() const;
-        pointer operator->() const;
-        iterator& operator++();
-        iterator operator++(int);
-        iterator& operator--();
-        iterator operator--(int);
-        bool operator==(const iterator&) const;
-        bool operator!=(const iterator&) const;
-        iterator operator+(difference_type) const;
-        iterator operator-(difference_type) const;
+        reference       operator*() const;
+        pointer         operator->() const;
+        iterator&       operator++();
+        iterator        operator++(int);
+        iterator&       operator--();
+        iterator        operator--(int);
+        bool            operator==(const iterator&) const;
+        bool            operator!=(const iterator&) const;
+        iterator        operator+(difference_type) const;
+        iterator        operator-(difference_type) const;
         difference_type operator-(const iterator&) const;
 
 };
