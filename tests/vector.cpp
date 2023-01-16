@@ -45,13 +45,13 @@ typename iterator_traits<Iterator>::value_type    func (Iterator first, Iterator
 }
 
 
+
 int main ()
 {
-    int a [] = {1, 2, 3 ,4};
+    int a [] = {1, 1, 3 ,4};
     std::vector <int>arr (a , a + 3);
-    std::vector <int>::iterator iter = arr.begin();
-    std::vector <int>::iterator iter2(iter2);
+    std::vector <int>::iterator iter1 (arr.begin());
+    std::vector <int>::iterator iter2 (arr.begin());
 
-    // std::cout << *iter << std::endl;
-    std::cout << *iter2 << std::endl;
+        std::cout << iter1 - iter2;
 }

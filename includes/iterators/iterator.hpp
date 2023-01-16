@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/16 18:22:36 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/16 18:42:26 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,49 +83,59 @@ class iterator
 template<class T>
 typename iterator<T>::reference       iterator<T>::operator*() const
 {
-    return (this->__value);
+    return (*this->__value);
 }
 
 template<class T>
 typename iterator<T>::pointer         iterator<T>::operator->() const
 {
-    return (&this->__value)
+    return (this->__value)
 }
 
 template<class T>
 iterator<T>&       iterator<T>::operator++()
 {
-    
+    this->__value++;
+    return (*this->__value);
 }
 
 template<class T>
 iterator<T>        iterator<T>::operator++(int)
 {
+    pointer tmp = this->__value;
+    this->__value++;
     
+    return (*tmp);
 }
 
 template<class T>
 iterator<T>&       iterator<T>::operator--()
 {
+    this->__value--;
     
+    return (*this->__value);
+
 }
 
 template<class T>
 iterator<T>        iterator<T>::operator--(int)
 {
+    pointer tmp = this->__value;
+    this->__value--;
     
+    return (*tmp);
 }
 
 template<class T>
-bool            iterator<T>::operator==(const iterator<T>&) const
+bool            iterator<T>::operator==(const iterator<T>& iter) const
 {
-    
+    return (! *this - iter);
 }
 
 template<class T>
-bool            iterator<T>::operator!=(const iterator<T>&) const
+bool            iterator<T>::operator!=(const iterator<T>& iter) const
 {
-    
+    return (*this - iter);
 }
 
 template<class T>
