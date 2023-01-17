@@ -51,7 +51,7 @@ int main ()
     int a [] = {1, 1, 3 ,4};
     std::vector <int>arr (a , a + 3);
     std::vector <int>::iterator iter1 (arr.begin());
-    std::vector <int>::iterator iter2 (arr.begin());
+    std::vector <int>::iterator iter2 (arr.begin() + 1);
 
-        std::cout << iter1 - iter2;
+    std::cout << iter1 - iter2 << std::endl;
 }
