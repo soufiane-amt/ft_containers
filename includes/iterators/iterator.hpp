@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 12:27:53 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 12:31:05 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,18 @@ class iterator
 {
 
     public:
-        typedef T                                                          iterator_type;
-        typedef typename iterator_traits<iterator_type>::iterator_category iterator_category;
-        typedef typename iterator_traits<iterator_type>::difference_type   difference_type;
-        typedef typename iterator_traits<iterator_type>::pointer           pointer;
-        typedef typename iterator_traits<iterator_type>::reference         reference;
+        typedef T                                                          value_type;
+        typedef typename iterator_traits<value_type>::iterator_category iterator_category;
+        typedef typename iterator_traits<value_type>::difference_type   difference_type;
+        typedef typename iterator_traits<value_type>::pointer           pointer;
+        typedef typename iterator_traits<value_type>::reference         reference;
     
         iterator();
-        iterator(const ft::vector<int>::iterator &);
-        iterator(iterator_type element);
+        iterator(const ft::vector<int>::iterator &other);
+        iterator(value_type *ptr);
         
-        // __wrap_iter<_Up>(const std::__1::__wrap_iter<_Up> &__u, 
-        // std::__1::enable_if<std::__1::is_convertible<_Up, int *>::value>::type *)
         
         reference       operator*() const;
-        pointer         operator->() const;
         iterator&       operator++();
         iterator        operator++(int);
         iterator&       operator--();
@@ -182,7 +179,7 @@ typename iterator<T> ::difference_type iterator<T>::operator-(const iterator<T>&
 //     protected:
 //         Iterator current;
 //     public:
-//         typedef Iterator                                              iterator_type;
+//         typedef Iterator                                              value_type;
 //         typedef typename iterator_traits<Iterator>::difference_type   difference_type;
 //         typedef typename iterator_traits<Iterator>::reference         reference;
 //         typedef typename iterator_traits<Iterator>::pointer           pointer;
