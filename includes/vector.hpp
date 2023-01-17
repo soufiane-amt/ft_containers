@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 14:52:33 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 16:49:00 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <memory>
 #include <iostream>
+#include <cstring>
 #include "iterator.hpp"
 
 /*/////////////////////////////////////////////////////////////////
@@ -126,9 +127,20 @@ namespace ft
         //utils
         value_type              *_alloc_double_capacity(size_type    acctual_capacity);
         void                    _copy_elements  (value_type* dst, value_type* src, size_t    n);
+        pointer                 arrayCopy(pointer    arr, size_t    size);
     };
-        
-        
+
+
+template <class T, class Allocator  >   
+typename vector <T, Allocator>::pointer vector <T, Allocator>::arrayCopy(pointer    arr, size_t size)
+{
+    pointer tmp;
+
+    tmp = allocator.allocate (size);
+    for (size_t i = 0; i < size; i++)
+        allocator.construct(tmp + i, arr[i]);
+    return (tmp);
+}
 
 
 
@@ -159,9 +171,9 @@ template <class T, class Allocator  >
 vector <T, Allocator>::vector (size_type n, const value_type& val = value_type(),
     const allocator_type& alloc = allocator_type()):_v_capacity(n), _v_size(n), allocator(MyAllocator)
 {
-    this->elements = alloc.allocate (n);
+    this->elements = allocator.allocate (n);
     for (size_t i = 0; i < n; i++)
-        alloc.construct(this->elements + i, val);
+        allocator.construct(this->elements + i, val);
 }
 
 
@@ -182,9 +194,9 @@ vector<T, Allocator>::vector (const vector& x)
 {
     this->_v_size = x.size();
     this->_v_capacity = x.size();
-    this->elements = alloc.allocate (this->_v_size);
+    this->elements = allocator.allocate (this->_v_size);
     for (size_t i = 0; i < this->size; i++)
-        alloc.construct(this->elements + i, x[i]);
+        allocator.construct(this->elements + i, x[i]);
 }
 
 template <class T, class Allocator >
@@ -193,8 +205,8 @@ vector<T, Allocator>:: ~vector()
     if (this->elements)
     {
         for (size_t i = 0; i < _v_capacity; i++)
-            alloc.destroy(this->elements + i);
-        alloc.deallocate(this->elements, _v_capacity);
+            allocator.destroy(this->elements + i);
+        allocator.deallocate(this->elements, _v_capacity);
     }
 }
 
@@ -207,15 +219,15 @@ vector<T, Allocator>& vector<T, Allocator>::operator=(const vector& x)
         if (this->elements)
         {
             for (size_t i = 0; i < _v_capacity; i++)
-                alloc.destroy(this->elements + i);
-            alloc.deallocate(this->elements, _v_capacity);
+                allocator.destroy(this->elements + i);
+            allocator.deallocate(this->elements, _v_capacity);
         }
         this->_v_size = x.size();
         this->_v_capacity = x.size();
-        this->elements = alloc.allocate (this->_v_size);
+        this->elements = allocator.allocate (this->_v_size);
     }
     for (size_t i = 0; i < x.size(); i++)
-        alloc.construct(this->elements + i, x[i]);
+        allocator.construct(this->elements + i, x[i]);
 }
 
 /*/////////////////////////////////////////////////////////////////*/
@@ -239,7 +251,7 @@ typename vector<T, Allocator>::size_type vector<T, Allocator>:: capacity() const
 template <class T, class Allocator >
 typename vector<T, Allocator>::size_type vector<T, Allocator>::  max_size() const
 {
-    return (alloc.max_size());
+    return (allocator.max_size());
 }
 
 // template <class T, class Allocator >
@@ -249,13 +261,13 @@ typename vector<T, Allocator>::size_type vector<T, Allocator>::  max_size() cons
 //     std::allocator<T>  alloc;
 
 //     this->_v_size = n;
-//     alloc.destroy(this->elements);
-//     alloc.deallocate(this->elements, _v_capacity);
-//     this->elements = alloc.allocate(n);
+//     allocator.destroy(this->elements);
+//     allocator.deallocate(this->elements, _v_capacity);
+//     this->elements = allocator.allocate(n);
 //     for (size_t i = 0; i < this->size(); i++)
-//         alloc.construct(this->elements + i, temp[i]);
+//         allocator.construct(this->elements + i, temp[i]);
 //     for (size_t i = 0; i < temp.size(); i++)
-//         alloc.construct(this->elements + i, val);
+//         allocator.construct(this->elements + i, val);
 // }
 
 
@@ -275,15 +287,16 @@ This function has no effect on the vector size and cannot alter its elements.
 template <class T, class Allocator >
 void      vector<T, Allocator>::reserve (size_type n)
 {
-    vector              temp(*this);
+    pointer              temp;
 
     n <= _v_capacity ? return : NULL;
+    temp = arrayCopy(this->elements, this->_v_size);
     for (size_t i = 0; i < _v_capacity; i++)        
-        alloc.destroy(this->elements + i);
-    alloc.deallocate(this->elements, _v_capacity);
-    this->elements = alloc.allocate(n);
-    for (size_t i = 0; i < temp.size(); i++)
-        alloc.construct(this->elements + i, temp[i]);
+        allocator.destroy(this->elements + i);
+    allocator.deallocate(this->elements, _v_capacity);
+    this->elements = allocator.allocate(n);
+    for (size_t i = 0; i < this->_v_size; i++)
+        allocator.construct(this->elements + i, temp[i]);
 }
 
 
@@ -372,12 +385,17 @@ void vector<T, Allocator>::assign (size_type n, const value_type& val)
     if (n > this->_v_capacity)
     {
         for (size_t i = 0; i < _v_capacity; i++)        
-            alloc.destroy(this->elements + i);
-        alloc.deallocate(this->elements, _v_capacity);
-        this->elements = alloc.allocate(n);
+            allocator.destroy(this->elements + i);
+        allocator.deallocate(this->elements, _v_capacity);
+        this->elements = allocator.allocate(n);
+    }
+    else
+    {
+        for (size_t i = 0; i < this->_v_size; i++)        
+            allocator.destroy(this->elements + i);
     }
     for (size_t i = 0; i < n; i++)
-        alloc.construct(this->elements + i, val);
+        allocator.construct(this->elements + i, val);
 }
 
 
@@ -385,7 +403,30 @@ template <class T, class Allocator>
 template <class InputIterator>
 void vector<T, Allocator>::assign (InputIterator first, InputIterator last)
 {
+    size_t          n = 0;
+    InputIterator   temp (first);
+
+    while (temp != last)
+    {
+        temp++;
+        n++;
+    }
     
+    this->_v_size = n;
+    if (n > this->_v_capacity)
+    {
+        for (size_t i = 0; i < _v_capacity; i++)        
+            allocator.destroy(this->elements + i);
+        allocator.deallocate(this->elements, _v_capacity);
+        this->elements = allocator.allocate(n);
+    }
+    else
+    {
+        for (size_t i = 0; i < this->_v_size; i++)        
+            allocator.destroy(this->elements + i);
+    }
+    for (size_t i = 0; i < n; i++)
+        allocator.construct(this->elements + i, first++);
 }
 
 
@@ -403,8 +444,8 @@ void vector<T, Allocator>::push_back (const value_type& val)
         if (this->_v_size)
         {
             for (size_t i = 0; i < _v_capacity; i++)        
-                alloc.destroy(this->elements + i);
-            alloc.deallocate(this->elements, _v_capacity);
+                allocator.destroy(this->elements + i);
+            allocator.deallocate(this->elements, _v_capacity);
         }
         this->elements = temp;
         this->_v_capacity = this->_v_capacity > 0 ? (this->_v_capacity * 2) : 1;
@@ -419,7 +460,7 @@ void vector<T, Allocator>::push_back (const value_type& val)
 template <class T, class Allocator> 
 void vector<T, Allocator>::pop_back()
 {
-    alloc.destroy   (this->elements + _v_size - 1);
+    allocator.destroy   (this->elements + _v_size - 1);
     this->_v_size--;
 }
 
@@ -461,7 +502,7 @@ template <class T, class Allocator>
 void vector<T, Allocator>::clear()
 {
     for (size_t i = 0; i < _v_size; i++)
-        alloc.destroy(this->elements + i);
+        allocator.destroy(this->elements + i);
     this->_v_size = 0;       
 }
 
@@ -645,7 +686,7 @@ vector<T, Allocator>::value_type
 {
     Allocator alloc;
     
-    acctual_capacity > 0 ? return (alloc.allocate(acctual_capacity * 2)) : return (alloc.allocate(1));
+    acctual_capacity > 0 ? return (allocator.allocate(acctual_capacity * 2)) : return (allocator.allocate(1));
 }
 
 template <class T, class Allocator> 
@@ -654,7 +695,7 @@ void vector<T, Allocator>::_copy_elements  (value_type* dst, value_type* src, si
     Allocator alloc;
 
     for (size_t i = 0; i < n; i++)
-        alloc.construct(dst + i, src + i );
+        allocator.construct(dst + i, src + i );
 }
 
 }
