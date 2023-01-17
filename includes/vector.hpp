@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 16:49:00 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 17:08:24 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -526,39 +526,72 @@ vector<T, Allocator>::get_allocator() const
 
 
 template <class T, class Alloc>
-bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+bool operator== (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    if (equal(lhs.begin()))
+    if (equal(v1.begin(), v1.end(), v2.begin()))
+        return (true);
+    return (false);
 }
 
 template <class T, class Alloc>
-bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+bool operator!= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    
+    if (!equal(v1.begin(), v1.end(), v2.begin()))
+        return (true);
+    return (false);
 }
 
 template <class T, class Alloc>
-bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+bool operator<  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    
+    while (first1!=last1)
+    {
+        if (*first1 < *first2)
+            return true;
+        ++first1;
+        ++first2;
+    }
+    return false;
 }
 
 template <class T, class Alloc>
-bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+bool operator<= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    
+    while (first1!=last1)
+    {
+        if (*first1 > *first2)
+            return false;
+        ++first1;
+        ++first2;
+    }
+    return true;
 }
 
 template <class T, class Alloc>
-bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+bool operator>  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    
+    while (first1!=last1)
+    {
+        if (*first1 > *first2)
+            return true;
+        ++first1;
+        ++first2;
+    }
+    return false;
+
 }
 
 template <class T, class Alloc>
-bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+bool operator>= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    
+    while (first1!=last1)
+    {
+        if (*first1 < *first2)
+            return false;
+        ++first1;
+        ++first2;
+    }
+    return true;
 }
 
 
@@ -638,25 +671,25 @@ bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, Input
 template <class T, class Allocator> 
 typename vector<T, Allocator>::iterator       vector<T, Allocator>::begin()
 {
-    return (this->elements);
+    return (vector<T, Allocator>::iterator(this->elements));
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::const_iterator vector<T, Allocator>::begin() const
 {
-    return (this->elements);
+    return (vector<T, Allocator>::iterator(this->elements));
 }
 
 template <class T, class Allocator> 
 typename vector<T, Allocator>::iterator       vector<T, Allocator>::end()
 {
-    return (this->elements + _v_size);
+    return (vector<T, Allocator>::iterator(this->elements + _v_size));
 }
 
 template <class T, class Allocator> 
 typename vector<T, Allocator>::const_iterator vector<T, Allocator>::end() const
 {
-    return (this->elements + _v_size);
+    return (vector<T, Allocator>::iterator(this->elements + _v_size));
 }
 
 
