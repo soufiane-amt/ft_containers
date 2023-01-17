@@ -13,4 +13,7 @@
 
 int main ()
 {
+    ft::vector<int> v;
+    std::cout <<
+    // v.push_back(12);
 }
