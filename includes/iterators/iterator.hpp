@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 12:31:52 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 18:03:08 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 namespace ft {
 
+// class vector;
 template<class Iterator>
 struct iterator_traits
 {

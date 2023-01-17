@@ -1,18 +1,16 @@
-#include <vector>
-#include <memory>
-#include <iostream>
-// #include <iterator>
-#include <algorithm>
+#include "../includes/vector.hpp"
+// #include <memory>
+// #include <iostream>
+// // #include <iterator>
+// #include <algorithm>
+
+// void foo() {
+
+//     int a = 1 > 0 ? 1 : return;
+//     int a = if (1 > 0) ? 1 : return;
+// }
 
 
 int main ()
 {
-    // std::vector <int>arr (5, 42);
-    // arr.clear();
-    // for (size_t i = 0; i < arr.size(); i++)
-    //     std::cout << arr[i] << std::endl;
-    // std::cout << "\n" << arr.capacity() << std::endl;
-    // std::cout << arr.size() << std::endl;
-    std::allocator<int> a;   
-    int *ptr = a.allocate(0);
 }

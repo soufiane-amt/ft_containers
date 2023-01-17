@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 17:56:23 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 18:37:21 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,8 @@
 #include <memory>
 #include <iostream>
 #include <cstring>
-#include "iterator.hpp"
+// #include "iterators/iterator.hpp"
 
-/*/////////////////////////////////////////////////////////////////
-                
-                    /*ft::vector prototype*/
-
-/////////////////////////////////////////////////////////////////*/
 
 namespace ft
 {
@@ -40,12 +35,10 @@ namespace ft
         
         // typedef typename allocator_type::size_type       allocator_type;
         typedef typename allocator_type::difference_type difference_type;
-        typedef typename allocator_type::pointer         pointer;
-        typedef typename allocator_type::const_pointer   const_pointer;
 
         /*Iterators*/
-        typedef typename ft::iterator<ft::random_access_iterator_tag, T>              iterator;
-        typedef typename ft::iterator<ft::random_access_iterator_tag, T>              const_iterator;
+        // typedef typename ft::iterator<ft::random_access_iterator_tag, T>              iterator;
+        // typedef typename ft::iterator<ft::random_access_iterator_tag, T>              const_iterator;
         
         
         
@@ -90,13 +83,13 @@ namespace ft
         void                    push_back (const value_type& val);
         void                    pop_back();
 
-        iterator                insert (iterator position, const value_type& val);
-        void                    insert (iterator position, size_type n, const value_type& val);    
-        template <class InputIterator>
-        void                    insert (iterator position, InputIterator first, InputIterator last);
+        // iterator                insert (iterator position, const value_type& val);
+        // void                    insert (iterator position, size_type n, const value_type& val);    
+        // template <class InputIterator>
+        // void                    insert (iterator position, InputIterator first, InputIterator last);
 
-        iterator                erase (iterator position);
-        iterator                erase (iterator first, iterator last);
+        // iterator                erase (iterator position);
+        // iterator                erase (iterator first, iterator last);
         
         void                    swap (vector& x);
  
@@ -105,11 +98,11 @@ namespace ft
         allocator_type          get_allocator() const;
 
         //iterators
-        iterator                begin();
-        const_iterator          begin() const;
+        // iterator                begin();
+        // const_iterator          begin() const;
 
-        iterator                end();
-        const_iterator          end() const;
+        // iterator                end();
+        // const_iterator          end() const;
 
         // //reverse iterators
         // reverse_iterator       rbegin();
@@ -145,14 +138,6 @@ typename vector <T, Allocator>::pointer vector <T, Allocator>::arrayCopy(pointer
 
 
 
-/*/////////////////////////////////////////////////////////////////
-                
-                    /*ft::vector Implementation*/
-
-/////////////////////////////////////////////////////////////////*/
-
-
-
 
 
 /*/////////////////////////////////////////////////////////////////*/
@@ -168,8 +153,8 @@ vector <T, Allocator>::vector (const allocator_type& MyAllocator):_v_capacity(0)
 
 
 template <class T, class Allocator  >
-vector <T, Allocator>::vector (size_type n, const value_type& val = value_type(),
-    const allocator_type& alloc = allocator_type()):_v_capacity(n), _v_size(n), allocator(MyAllocator)
+vector <T, Allocator>::vector (size_type n, const value_type& val,
+    const allocator_type& alloc):_v_capacity(n), _v_size(n), allocator(alloc)
 {
     this->elements = allocator.allocate (n);
     for (size_t i = 0; i < n; i++)
@@ -180,7 +165,7 @@ vector <T, Allocator>::vector (size_type n, const value_type& val = value_type()
 template <class T, class Allocator >
 template <class InputIterator>
 vector <T, Allocator >::vector (InputIterator first, InputIterator last,
-    const allocator_type& alloc = allocator_type()):_v_capacity(n), _v_size(n), allocator(MyAllocator)
+    const allocator_type& alloc):_v_capacity(0), _v_size(0), allocator(alloc)
 {
     while (first != last)
     {
@@ -257,7 +242,7 @@ typename vector<T, Allocator>::size_type vector<T, Allocator>::  max_size() cons
 
 
 template <class T, class Allocator >
-void vector<T, Allocator>::resize (size_type n, value_type val = value_type())
+void vector<T, Allocator>::resize (size_type n, value_type val)
 {
     if (!n)
         return ;
@@ -270,7 +255,7 @@ void vector<T, Allocator>::resize (size_type n, value_type val = value_type())
        this->elements = this->allocator.allocate(n);
     }
     if (n < this->_v_size)
-        for (size_t i = n; i < this->this->_v_size; i++)
+        for (size_t i = n; i < this->_v_size; i++)
             allocator.destroy(this->elements + i);
     else if (n > this->_v_size)
         for (size_t i = this->_v_size; i < n; i++)
@@ -297,7 +282,7 @@ void      vector<T, Allocator>::reserve (size_type n)
 {
     pointer              temp;
 
-    n <= _v_capacity ? return : NULL;
+    if (n <= _v_capacity)  return;;
     temp = arrayCopy(this->elements, this->_v_size);
     for (size_t i = 0; i < _v_capacity; i++)        
         allocator.destroy(this->elements + i);
@@ -320,7 +305,7 @@ typename vector<T, Allocator>::reference
 vector<T, Allocator>::operator[] (size_type i)
 {
     if (this->_v_size <= i)
-        throw std::out_of_range ();
+        throw std::out_of_range ("Out of range please provide a valid index!");
     return (this->elements[i]);
 }
 
@@ -329,7 +314,7 @@ typename vector<T, Allocator>::const_reference
 vector<T, Allocator>::operator[] (size_type i) const
 {
     if (this->_v_size <= i)
-        throw std::out_of_range ();
+        throw std::out_of_range ("Out of range please provide a valid index!");
     return (this->elements[i]);
 }
 
@@ -338,7 +323,7 @@ typename vector<T, Allocator>::reference
 vector<T, Allocator>::at (size_type n)
 {
     if (this->_v_size <= i)
-        throw std::out_of_range ();
+        throw std::out_of_range ("Out of range please provide a valid index!");
     return (this->elements[i]);
 }
 
@@ -347,7 +332,7 @@ typename vector<T, Allocator>::const_reference
 vector<T, Allocator>::at (size_type n) const
 {
     if (this->_v_size <= i)
-        throw std::out_of_range ();
+        throw std::out_of_range ("Out of range please provide a valid index!");
     return (this->elements[i]);
 }
 
@@ -677,29 +662,29 @@ bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, Input
 /*/////////////////////////////////////////////////////////////////*/
 
 
-template <class T, class Allocator> 
-typename vector<T, Allocator>::iterator       vector<T, Allocator>::begin()
-{
-    return (vector<T, Allocator>::iterator(this->elements));
-}
+// template <class T, class Allocator> 
+// typename vector<T, Allocator>::iterator       vector<T, Allocator>::begin()
+// {
+//     return (vector<T, Allocator>::iterator(this->elements));
+// }
 
-template <class T, class Allocator>
-typename vector<T, Allocator>::const_iterator vector<T, Allocator>::begin() const
-{
-    return (vector<T, Allocator>::iterator(this->elements));
-}
+// template <class T, class Allocator>
+// typename vector<T, Allocator>::const_iterator vector<T, Allocator>::begin() const
+// {
+//     return (vector<T, Allocator>::iterator(this->elements));
+// }
 
-template <class T, class Allocator> 
-typename vector<T, Allocator>::iterator       vector<T, Allocator>::end()
-{
-    return (vector<T, Allocator>::iterator(this->elements + _v_size));
-}
+// template <class T, class Allocator> 
+// typename vector<T, Allocator>::iterator       vector<T, Allocator>::end()
+// {
+//     return (vector<T, Allocator>::iterator(this->elements + _v_size));
+// }
 
-template <class T, class Allocator> 
-typename vector<T, Allocator>::const_iterator vector<T, Allocator>::end() const
-{
-    return (vector<T, Allocator>::iterator(this->elements + _v_size));
-}
+// template <class T, class Allocator> 
+// typename vector<T, Allocator>::const_iterator vector<T, Allocator>::end() const
+// {
+//     return (vector<T, Allocator>::iterator(this->elements + _v_size));
+// }
 
 
 
