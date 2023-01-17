@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 18:37:21 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 18:40:57 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,7 +322,7 @@ template <class T, class Allocator >
 typename vector<T, Allocator>::reference    
 vector<T, Allocator>::at (size_type n)
 {
-    if (this->_v_size <= i)
+    if (this->_v_size <= n)
         throw std::out_of_range ("Out of range please provide a valid index!");
     return (this->elements[i]);
 }
@@ -331,9 +331,9 @@ template <class T, class Allocator >
 typename vector<T, Allocator>::const_reference
 vector<T, Allocator>::at (size_type n) const
 {
-    if (this->_v_size <= i)
+    if (this->_v_size <= n)
         throw std::out_of_range ("Out of range please provide a valid index!");
-    return (this->elements[i]);
+    return (this->elements[n]);
 }
 
 
@@ -506,7 +506,7 @@ template <class T, class Allocator>
 typename vector<T, Allocator>::allocator_type 
 vector<T, Allocator>::get_allocator() const
 {
-    return (alloc);
+    return (this->allocator);
 }
 
 
@@ -538,6 +538,10 @@ bool operator!= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 template <class T, class Alloc>
 bool operator<  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
+    vector<T,Alloc>::iterator   first1 = v1.begin();
+    vector<T,Alloc>::iterator   first2 = v2.begin();
+    vector<T,Alloc>::iterator   last1  = v1.end();
+
     while (first1!=last1)
     {
         if (*first1 < *first2)
@@ -551,6 +555,10 @@ bool operator<  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 template <class T, class Alloc>
 bool operator<= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
+    vector<T,Alloc>::iterator   first1 = v1.begin();
+    vector<T,Alloc>::iterator   first2 = v2.begin();
+    vector<T,Alloc>::iterator   last1  = v1.end();
+
     while (first1!=last1)
     {
         if (*first1 > *first2)
@@ -564,6 +572,10 @@ bool operator<= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 template <class T, class Alloc>
 bool operator>  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
+    vector<T,Alloc>::iterator   first1 = v1.begin();
+    vector<T,Alloc>::iterator   first2 = v2.begin();
+    vector<T,Alloc>::iterator   last1  = v1.end();
+
     while (first1!=last1)
     {
         if (*first1 > *first2)
@@ -578,6 +590,10 @@ bool operator>  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 template <class T, class Alloc>
 bool operator>= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
+    vector<T,Alloc>::iterator   first1 = v1.begin();
+    vector<T,Alloc>::iterator   first2 = v2.begin();
+    vector<T,Alloc>::iterator   last1  = v1.end();
+
     while (first1!=last1)
     {
         if (*first1 < *first2)
