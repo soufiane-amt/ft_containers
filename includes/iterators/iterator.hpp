@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 12:31:05 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 12:31:52 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,6 @@ typename iterator<T> ::difference_type iterator<T>::operator-(const iterator<T>&
 // template <class Iterator>  
 // bool operator>= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
 
-// }
+}
 
 #endif
