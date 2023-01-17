@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 18:44:32 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 18:51:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -736,7 +736,7 @@ template <class T, class Allocator>
 void vector<T, Allocator>::_copy_elements  (value_type* dst, value_type* src, size_t    n)
 {
     for (size_t i = 0; i < n; i++)
-        allocator.construct(dst + i, src + i );
+        allocator.construct(dst + i, src [i] );
 }
 
 }

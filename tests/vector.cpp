@@ -14,6 +14,15 @@
 int main ()
 {
     ft::vector<int> v;
-    std::cout <<
-    // v.push_back(12);
+    std::cout << v.size() << std::endl << v.capacity() << std::endl;
+    v.push_back(12);
+    std::cout << v.size() << std::endl << v.capacity() << std::endl;
+    v.push_back(12);
+    std::cout << v.size() << std::endl << v.capacity() << std::endl;
+    v.push_back(12);
+    std::cout << v.size() << std::endl << v.capacity() << std::endl;
+    v.push_back(12);
+    std::cout << v.size() << std::endl << v.capacity() << std::endl;
+    v.push_back(12);
+    std::cout << v.size() << std::endl << v.capacity() << std::endl;
 }
