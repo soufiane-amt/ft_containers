@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 17:08:24 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 17:29:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,12 @@ namespace ft
         iterator                end();
         const_iterator          end() const;
 
-        //reverse iterators
-        reverse_iterator       rbegin();
-        const_reverse_iterator rbegin() const;
+        // //reverse iterators
+        // reverse_iterator       rbegin();
+        // const_reverse_iterator rbegin() const;
 
-        reverse_iterator       rend();
-        const_reverse_iterator rend() const;
+        // reverse_iterator       rend();
+        // const_reverse_iterator rend() const;
 
     private:
         pointer                 elements;
@@ -254,21 +254,29 @@ typename vector<T, Allocator>::size_type vector<T, Allocator>::  max_size() cons
     return (allocator.max_size());
 }
 
-// template <class T, class Allocator >
-// void vector<T, Allocator>::resize (size_type n, value_type val = value_type())
-// {
-//     vector temp     (*this);
-//     std::allocator<T>  alloc;
 
-//     this->_v_size = n;
-//     allocator.destroy(this->elements);
-//     allocator.deallocate(this->elements, _v_capacity);
-//     this->elements = allocator.allocate(n);
-//     for (size_t i = 0; i < this->size(); i++)
-//         allocator.construct(this->elements + i, temp[i]);
-//     for (size_t i = 0; i < temp.size(); i++)
-//         allocator.construct(this->elements + i, val);
-// }
+/*Resizes the container so that it contains n elements.
+
+If n is smaller than the current container size, the content is reduced to its first n elements, removing those beyond (and destroying them).
+
+If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.
+
+If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.
+
+*/
+
+template <class T, class Allocator >
+void vector<T, Allocator>::resize (size_type n, value_type val = value_type())
+{
+    if (!n)
+        return ;
+    if (n > this->_v_capacity)
+    {
+        for (size_t i = 0; i < _v_capacity; i++)        
+            allocator.destroy(this->elements + i);
+        allocator.deallocate(this->elements, _v_capacity);
+    }
+}
 
 
 template <class T, class Allocator >
@@ -717,16 +725,12 @@ template <class T, class Allocator>
 vector<T, Allocator>::value_type  
 *vector<T, Allocator>::_alloc_double_capacity(size_type    acctual_capacity)
 {
-    Allocator alloc;
-    
     acctual_capacity > 0 ? return (allocator.allocate(acctual_capacity * 2)) : return (allocator.allocate(1));
 }
 
 template <class T, class Allocator> 
 void vector<T, Allocator>::_copy_elements  (value_type* dst, value_type* src, size_t    n)
 {
-    Allocator alloc;
-
     for (size_t i = 0; i < n; i++)
         allocator.construct(dst + i, src + i );
 }
