@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 17:29:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 17:54:51 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,11 +257,14 @@ typename vector<T, Allocator>::size_type vector<T, Allocator>::  max_size() cons
 
 /*Resizes the container so that it contains n elements.
 
-If n is smaller than the current container size, the content is reduced to its first n elements, removing those beyond (and destroying them).
+If n is smaller than the current container size, the content is reduced to its first n elements, removing those 
+beyond (and destroying them).
 
-If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.
+If n is greater than the current container size, the content is expanded by inserting at the end as many elements
+ as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.
 
-If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.
+If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space
+ takes place.
 
 */
 
@@ -274,8 +277,21 @@ void vector<T, Allocator>::resize (size_type n, value_type val = value_type())
     {
         for (size_t i = 0; i < _v_capacity; i++)        
             allocator.destroy(this->elements + i);
-        allocator.deallocate(this->elements, _v_capacity);
+        if (this->elements)
+            allocator.deallocate(this->elements, _v_capacity);
+       this->elements = this->allocator.allocate(n);
     }
+    if (n < this->_v_size)
+    {
+        for (size_t i = n; i < this->this->_v_size; i++)
+            allocator.destroy(this->elements + i);
+    }
+    else if (n > this->_v_size)
+    {
+        for (size_t i = this->_v_size; i < n; i++)
+            allocator.construct(this->elements, val);
+    }
+    this->_v_size = n;    
 }
 
 
@@ -453,7 +469,8 @@ void vector<T, Allocator>::push_back (const value_type& val)
         {
             for (size_t i = 0; i < _v_capacity; i++)        
                 allocator.destroy(this->elements + i);
-            allocator.deallocate(this->elements, _v_capacity);
+            if (this->elements)
+                allocator.deallocate(this->elements, _v_capacity);
         }
         this->elements = temp;
         this->_v_capacity = this->_v_capacity > 0 ? (this->_v_capacity * 2) : 1;
