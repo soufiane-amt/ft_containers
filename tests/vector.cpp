@@ -7,13 +7,14 @@
 
 int main ()
 {
-    // int a [] = {1, 1, 3 ,4};
-    std::vector <int>arr (452);
-    // std::vector <int>::iterator iter1 (arr.begin());
-    // std::vector <int>::iterator iter2 (arr.begin() + 1);
-
-    // std::cout << iter1 - iter2 << std::endl;
-    std::cout << arr.size() << std::endl << arr.capacity();
-    // std::vector <int>::iterator iter = arr.begin();
-    // std::cout << *iter << std::endl;
+    std::vector <int>arr (5, 42);
+    std::vector <int>arr1 ;
+    // arr1.push_back(4);
+    std::cout << "arr :" << "capacity: " << arr.capacity() << " size: " <<arr.size() << std::endl; 
+    std::cout << "arr1 :" << "capacity: " << arr1.capacity() << " size: " <<arr1.size() << std::endl; 
+    arr =arr1;
+    std::cout << "arr :" << "capacity: " << arr.capacity() << " size: " <<arr.size() << std::endl; 
+    std::cout << "arr1 :" << "capacity: " << arr1.capacity() << " size: " <<arr1.size() << std::endl; 
+    for (size_t i = 0; i < arr.size(); i++)
+        std::cout << arr[i] << std::endl;
 }

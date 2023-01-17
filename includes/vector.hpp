@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 13:25:35 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 14:52:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ vector<T, Allocator>::vector (const vector& x)
 template <class T, class Allocator >
 vector<T, Allocator>:: ~vector()
 {
-    if (this->element)
+    if (this->elements)
     {
         for (size_t i = 0; i < _v_capacity; i++)
             alloc.destroy(this->elements + i);
@@ -202,7 +202,20 @@ vector<T, Allocator>:: ~vector()
 template <class T, class Allocator >
 vector<T, Allocator>& vector<T, Allocator>::operator=(const vector& x)
 {
-    
+    if (this->_v_capacity < x.size())
+    {
+        if (this->elements)
+        {
+            for (size_t i = 0; i < _v_capacity; i++)
+                alloc.destroy(this->elements + i);
+            alloc.deallocate(this->elements, _v_capacity);
+        }
+        this->_v_size = x.size();
+        this->_v_capacity = x.size();
+        this->elements = alloc.allocate (this->_v_size);
+    }
+    for (size_t i = 0; i < x.size(); i++)
+        alloc.construct(this->elements + i, x[i]);
 }
 
 /*/////////////////////////////////////////////////////////////////*/
