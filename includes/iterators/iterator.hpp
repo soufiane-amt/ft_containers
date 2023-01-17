@@ -6,16 +6,16 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 18:03:08 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 18:56:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RANDOM_ACCESS_ITERATOR_HPP
 #define RANDOM_ACCESS_ITERATOR_HPP
 
+#include "../vector.hpp"
 namespace ft {
 
-// class vector;
 template<class Iterator>
 struct iterator_traits
 {

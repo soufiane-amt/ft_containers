@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 18:51:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 18:55:55 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <memory>
 #include <iostream>
 #include <cstring>
-// #include "iterators/iterator.hpp"
+#include "iterators/iterator.hpp"
 
 
 namespace ft
@@ -31,14 +31,12 @@ namespace ft
         typedef const value_type&                        const_reference;
         typedef value_type*                              pointer;
         typedef const value_type*                        const_pointer;
-        typedef size_t                                   size_type;
-        
-        // typedef typename allocator_type::size_type       allocator_type;
+        typedef size_t                                   size_type;   
         typedef typename allocator_type::difference_type difference_type;
 
         /*Iterators*/
-        // typedef typename ft::iterator<ft::random_access_iterator_tag, T>              iterator;
-        // typedef typename ft::iterator<ft::random_access_iterator_tag, T>              const_iterator;
+        typedef typename ft::iterator<ft::random_access_iterator_tag, T>              iterator;
+        typedef typename ft::iterator<ft::random_access_iterator_tag, T>              const_iterator;
         
         
         
@@ -98,11 +96,11 @@ namespace ft
         allocator_type          get_allocator() const;
 
         //iterators
-        // iterator                begin();
-        // const_iterator          begin() const;
+        iterator                begin();
+        const_iterator          begin() const;
 
-        // iterator                end();
-        // const_iterator          end() const;
+        iterator                end();
+        const_iterator          end() const;
 
         // //reverse iterators
         // reverse_iterator       rbegin();
@@ -535,74 +533,74 @@ bool operator!= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
     return (false);
 }
 
-// template <class T, class Alloc>
-// bool operator<  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
-// {
-//     vector<T,Alloc>::iterator   first1 = v1.begin();
-//     vector<T,Alloc>::iterator   first2 = v2.begin();
-//     vector<T,Alloc>::iterator   last1  = v1.end();
+template <class T, class Alloc>
+bool operator<  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
+{
+    vector<T,Alloc>::iterator   first1 = v1.begin();
+    vector<T,Alloc>::iterator   first2 = v2.begin();
+    vector<T,Alloc>::iterator   last1  = v1.end();
 
-//     while (first1!=last1)
-//     {
-//         if (*first1 < *first2)
-//             return true;
-//         ++first1;
-//         ++first2;
-//     }
-//     return false;
-// }
+    while (first1!=last1)
+    {
+        if (*first1 < *first2)
+            return true;
+        ++first1;
+        ++first2;
+    }
+    return false;
+}
 
-// template <class T, class Alloc>
-// bool operator<= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
-// {
-//     vector<T,Alloc>::iterator   first1 = v1.begin();
-//     vector<T,Alloc>::iterator   first2 = v2.begin();
-//     vector<T,Alloc>::iterator   last1  = v1.end();
+template <class T, class Alloc>
+bool operator<= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
+{
+    vector<T,Alloc>::iterator   first1 = v1.begin();
+    vector<T,Alloc>::iterator   first2 = v2.begin();
+    vector<T,Alloc>::iterator   last1  = v1.end();
 
-//     while (first1!=last1)
-//     {
-//         if (*first1 > *first2)
-//             return false;
-//         ++first1;
-//         ++first2;
-//     }
-//     return true;
-// }
+    while (first1!=last1)
+    {
+        if (*first1 > *first2)
+            return false;
+        ++first1;
+        ++first2;
+    }
+    return true;
+}
 
-// template <class T, class Alloc>
-// bool operator>  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
-// {
-//     vector<T,Alloc>::iterator   first1 = v1.begin();
-//     vector<T,Alloc>::iterator   first2 = v2.begin();
-//     vector<T,Alloc>::iterator   last1  = v1.end();
+template <class T, class Alloc>
+bool operator>  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
+{
+    vector<T,Alloc>::iterator   first1 = v1.begin();
+    vector<T,Alloc>::iterator   first2 = v2.begin();
+    vector<T,Alloc>::iterator   last1  = v1.end();
 
-//     while (first1!=last1)
-//     {
-//         if (*first1 > *first2)
-//             return true;
-//         ++first1;
-//         ++first2;
-//     }
-//     return false;
+    while (first1!=last1)
+    {
+        if (*first1 > *first2)
+            return true;
+        ++first1;
+        ++first2;
+    }
+    return false;
 
-// }
+}
 
-// template <class T, class Alloc>
-// bool operator>= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
-// {
-//     vector<T,Alloc>::iterator   first1 = v1.begin();
-//     vector<T,Alloc>::iterator   first2 = v2.begin();
-//     vector<T,Alloc>::iterator   last1  = v1.end();
+template <class T, class Alloc>
+bool operator>= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
+{
+    vector<T,Alloc>::iterator   first1 = v1.begin();
+    vector<T,Alloc>::iterator   first2 = v2.begin();
+    vector<T,Alloc>::iterator   last1  = v1.end();
 
-//     while (first1!=last1)
-//     {
-//         if (*first1 < *first2)
-//             return false;
-//         ++first1;
-//         ++first2;
-//     }
-//     return true;
-// }
+    while (first1!=last1)
+    {
+        if (*first1 < *first2)
+            return false;
+        ++first1;
+        ++first2;
+    }
+    return true;
+}
 
 
         //*swap*//
@@ -678,29 +676,29 @@ bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, Input
 /*/////////////////////////////////////////////////////////////////*/
 
 
-// template <class T, class Allocator> 
-// typename vector<T, Allocator>::iterator       vector<T, Allocator>::begin()
-// {
-//     return (vector<T, Allocator>::iterator(this->elements));
-// }
+template <class T, class Allocator> 
+typename vector<T, Allocator>::iterator       vector<T, Allocator>::begin()
+{
+    return (vector<T, Allocator>::iterator(this->elements));
+}
 
-// template <class T, class Allocator>
-// typename vector<T, Allocator>::const_iterator vector<T, Allocator>::begin() const
-// {
-//     return (vector<T, Allocator>::iterator(this->elements));
-// }
+template <class T, class Allocator>
+typename vector<T, Allocator>::const_iterator vector<T, Allocator>::begin() const
+{
+    return (vector<T, Allocator>::iterator(this->elements));
+}
 
-// template <class T, class Allocator> 
-// typename vector<T, Allocator>::iterator       vector<T, Allocator>::end()
-// {
-//     return (vector<T, Allocator>::iterator(this->elements + _v_size));
-// }
+template <class T, class Allocator> 
+typename vector<T, Allocator>::iterator       vector<T, Allocator>::end()
+{
+    return (vector<T, Allocator>::iterator(this->elements + _v_size));
+}
 
-// template <class T, class Allocator> 
-// typename vector<T, Allocator>::const_iterator vector<T, Allocator>::end() const
-// {
-//     return (vector<T, Allocator>::iterator(this->elements + _v_size));
-// }
+template <class T, class Allocator> 
+typename vector<T, Allocator>::const_iterator vector<T, Allocator>::end() const
+{
+    return (vector<T, Allocator>::iterator(this->elements + _v_size));
+}
 
 
 
