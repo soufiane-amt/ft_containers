@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 13:21:16 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/17 13:25:35 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ namespace ft
 template <class T, class Allocator  >
 vector <T, Allocator>::vector (const allocator_type& MyAllocator):_v_capacity(0), _v_size(0), allocator(MyAllocator)
 {
+    this->elements = NULL;
 }
 
 
@@ -186,13 +187,16 @@ vector<T, Allocator>::vector (const vector& x)
         alloc.construct(this->elements + i, x[i]);
 }
 
-// template <class T, class Allocator >
-// ~vector()
-// {
-//     std::allocator <T>  dealloc;
-
-//     dealloc.destroy();
-// }
+template <class T, class Allocator >
+vector<T, Allocator>:: ~vector()
+{
+    if (this->element)
+    {
+        for (size_t i = 0; i < _v_capacity; i++)
+            alloc.destroy(this->elements + i);
+        alloc.deallocate(this->elements, _v_capacity);
+    }
+}
 
 
 template <class T, class Allocator >
