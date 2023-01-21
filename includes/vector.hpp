@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/21 16:55:18 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/21 17:44:23 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <cstring>
 #include "iterators/iterator.hpp"
+#include <iterator>
 
 
 namespace ft
@@ -120,6 +121,8 @@ namespace ft
         void                    _copy_elements  (pointer dst, pointer src, size_t n);
         pointer                 _arrayCopy(pointer    arr, size_t    size);
         void                    _insert_element (pointer dst, pointer src, size_t i, const_reference element);
+        template <class InputIterator>
+        size_type               distance (InputIterator first, InputIterator  last);
     };
 
 
@@ -164,8 +167,9 @@ vector <T, Allocator>::vector (size_type n, const_reference val,
 template <class T, class Allocator >
 template <class InputIterator >
 vector <T, Allocator >::vector (InputIterator first, InputIterator last,
-    const allocator_type& alloc):_v_capacity(std::distance(first, last)), _v_size(std::distance(first, last)), allocator(alloc)
+    const allocator_type& alloc): allocator(alloc)
 {
+    _v_capacity = std::distance(first, last);
     this->elements = allocator.allocate(_v_size);
     for (size_t i = 0; i < _v_size; i++)
         allocator.construct(this->elements + i, *first++);
@@ -405,7 +409,7 @@ void vector<T, Allocator>::assign (InputIterator first, InputIterator last)
         for (size_t i = 0; i < _v_size; i++)        
             allocator.destroy(this->elements + i);
         allocator.deallocate(this->elements, _v_capacity);
-        this->elements = allocator.allocate(n);
+        this->elements = allocator.allocate(distance);
     }
     else
     {
@@ -459,7 +463,7 @@ template <class T, class Allocator>
 typename vector<T, Allocator>::iterator    
 vector<T, Allocator>::insert (iterator position, const_reference val)
 {
-    t_size  index = position - begin();
+    size_type  index = position - begin();
 
     this->push_back(val);
     for (iterator it = _v_size; it > position; --it)
@@ -493,7 +497,7 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
 template <class T, class Allocator> 
 void                    vector<T, Allocator>::insert (iterator position, size_type n, const_reference val)
 {
-    t_size  index = position - begin();
+    size_type  index = position - begin();
     for (size_t i = 0; i < n; i++)
         this->push_back(val);
     for (size_t i = 0; i < n; i++)
@@ -818,6 +822,21 @@ void vector<T, Allocator>::_copy_elements  (value_type* dst, value_type* src, si
 {
     for (size_t i = 0; i < n; i++)
         allocator.construct(dst + i, src [i] );
+}
+
+template <class T, class Allocator> 
+template <class InputIterator>
+typename vector<T, Allocator>::size_type               
+vector<T, Allocator>::distance (InputIterator first, InputIterator  last)
+{
+    size_type distance = 0;
+
+    while (first != last)
+    {
+        distance++;
+        first++;
+    }
+    return (distance);
 }
 
 
