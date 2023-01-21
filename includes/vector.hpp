@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/21 17:44:23 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/21 18:37:27 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ namespace ft
         explicit vector (const allocator_type& alloc = allocator_type());
         explicit vector (size_type n, const_reference val = value_type(), const allocator_type& alloc = allocator_type());
         
-        template <class InputIterator>         
-        vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+        // template <class InputIterator>         
+        // vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
         
         vector (const vector& x);
         ~vector();
@@ -164,20 +164,22 @@ vector <T, Allocator>::vector (size_type n, const_reference val,
 }
 
 
-template <class T, class Allocator >
-template <class InputIterator >
-vector <T, Allocator >::vector (InputIterator first, InputIterator last,
-    const allocator_type& alloc): allocator(alloc)
-{
-    _v_capacity = std::distance(first, last);
-    this->elements = allocator.allocate(_v_size);
-    for (size_t i = 0; i < _v_size; i++)
-        allocator.construct(this->elements + i, *first++);
-}
+// template <class T, class Allocator >
+// template <class InputIterator >
+// vector <T, Allocator >::vector (InputIterator first, InputIterator last,
+//     const allocator_type& alloc): allocator(alloc)
+// {
+//     _v_capacity = distance(first, last);
+//     _v_size = _v_capacity;
+//     this->elements = allocator.allocate(_v_size);
+//     for (size_t i = 0; i < _v_size; i++)
+//         allocator.construct(this->elements + i, *first++);
+// }
 
 template <class T, class Allocator >
 vector<T, Allocator>::vector (const vector& x): _v_size(x.size()), _v_capacity(_v_size)
 {
+    _v_capacity = _v_size;
     this->elements = allocator.allocate (this->_v_size);
     for (size_t i = 0; i < this->_v_size; i++)
         allocator.construct(this->elements + i, x[i]);
@@ -212,7 +214,8 @@ vector<T, Allocator>& vector<T, Allocator>::operator=(const vector& x)
         this->elements = allocator.allocate (this->_v_size);
     }
     for (size_t i = 0; i < this->_v_size; i++)
-        allocator.construct(this->elements + i, x[i]);
+        allocator.construct(this->elements + i, x.at(i));
+    return (*this);
 }
 
 /*/////////////////////////////////////////////////////////////////*/

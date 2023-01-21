@@ -12,11 +12,13 @@ void    test_construct ()
 
 int main ()
 {
-    ft::vector <int> v(3, 5);
+    ft::vector <int> c(1337, 42);
+    ft::vector <int> v(1, 1);
+    c = v;
     // v.erase(v.begin(), v.end());
-    // for (size_t i = 0; i < v.size(); i++)
-    //     std::cout << v[i] << std::endl;
+    for (size_t i = 0; i < c.size(); i++)
+        std::cout << c[i] << std::endl;
     // std::cout << "----------\n";
-    // std::cout << "capacity :" << v.capacity();
-    // std::cout << "\nsize :" << v.size();
+    std::cout << "capacity :" << v.capacity();
+    std::cout << "\nsize :" << v.size() << std::endl;
 }
