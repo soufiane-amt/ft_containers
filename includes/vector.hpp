@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/21 16:30:08 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:52:34 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ namespace ft
         template <class InputIterator>
         void                    insert (iterator position, InputIterator first, InputIterator last);
 
-        // iterator                erase (iterator position);
-        // iterator                erase (iterator first, iterator last);
+        iterator                erase (iterator position);
+        iterator                erase (iterator first, iterator last);
         
         void                    swap (vector& x);
  
@@ -523,6 +523,28 @@ void                    vector<T, Allocator>::insert (iterator position, InputIt
         first++;
         lastTmp--;
     }
+}
+
+
+
+template <class T, class Allocator>
+typename vector<T, Allocator>::iterator    
+vector<T, Allocator>::erase (iterator position)
+{
+    for (iterator it = _v_size; it > position; --it)
+    {
+        allocator.destroy(&(*it));
+        allocator.construct(&(*it), *(it - 1));
+    }
+    allocator.destroy(this->elements + _v_size - 1);
+    _v_size--;
+}
+
+template <class T, class Allocator>
+typename vector<T, Allocator>::iterator    
+vector<T, Allocator>::erase (iterator first, iterator last)
+{
+    
 }
 
 

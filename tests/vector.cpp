@@ -13,7 +13,7 @@ void    test_construct ()
 int main ()
 {
     std::vector <int> v(3, 5);
-    v.insert(v.begin(), 1337);
+    v.erase(v.begin(), v.end());
     for (size_t i = 0; i < v.size(); i++)
         std::cout << v[i] << std::endl;
     std::cout << "----------\n";
