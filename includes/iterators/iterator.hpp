@@ -6,14 +6,14 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/17 18:56:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/18 11:42:06 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RANDOM_ACCESS_ITERATOR_HPP
 #define RANDOM_ACCESS_ITERATOR_HPP
 
-#include "../vector.hpp"
+// #include "../vector.hpp"
 namespace ft {
 
 template<class Iterator>
@@ -42,14 +42,14 @@ class iterator
 {
 
     public:
-        typedef T                                                          value_type;
+        typedef T                                                       value_type;
         typedef typename iterator_traits<value_type>::iterator_category iterator_category;
         typedef typename iterator_traits<value_type>::difference_type   difference_type;
         typedef typename iterator_traits<value_type>::pointer           pointer;
         typedef typename iterator_traits<value_type>::reference         reference;
     
         iterator();
-        iterator(const ft::vector<int>::iterator &other);
+        iterator(const iterator &other);
         iterator(value_type *ptr);
         
         
@@ -131,7 +131,7 @@ bool            iterator<T>::operator!=(const iterator<T>& iter) const
 template<class T>
 iterator<T>        iterator<T>::operator+(difference_type add) const
 {
-    return (iterator<T> (this->__value + diff));
+    return (iterator<T> (this->__value + add));
 }
 
 template<class T>
