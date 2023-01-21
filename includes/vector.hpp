@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/21 16:10:28 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:30:08 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ namespace ft
         void                    pop_back();
 
         iterator                insert (iterator position, const_reference val);
-        // void                    insert (iterator position, size_type n, const_reference val);    
-        // template <class InputIterator>
-        // void                    insert (iterator position, InputIterator first, InputIterator last);
+        void                    insert (iterator position, size_type n, const_reference val);    
+        template <class InputIterator>
+        void                    insert (iterator position, InputIterator first, InputIterator last);
 
         // iterator                erase (iterator position);
         // iterator                erase (iterator first, iterator last);
@@ -490,18 +490,40 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
     // }
     // this->_v_size = _new_size;
 
-// template <class T, class Allocator> 
-// void                    insert (iterator position, size_type n, const_reference val)
-// {
-    
-// }   
-//  template <class T, class Allocator> 
+template <class T, class Allocator> 
+void                    vector<T, Allocator>::insert (iterator position, size_type n, const_reference val)
+{
+    t_size  index = position - begin();
+    for (size_t i = 0; i < n; i++)
+        this->push_back(val);
+    for (size_t i = 0; i < n; i++)
+    {
+        for (iterator it = _v_size; it > position; --it)
+            *it = *(it - 1);
+    }
+        
+    for (size_t i = 0; i < n; i++)
+    {
+        allocator.destroy(this->elements + index + i);
+        allocator.construct(this->elements + index + i, val);
+    }
+    this->_v_size++;
+}   
 
-// template <class InputIterator>
-// void                    insert (iterator position, InputIterator first, InputIterator last)
-// {
-    
-// }
+
+ template <class T, class Allocator> 
+
+template <class InputIterator>
+void                    vector<T, Allocator>::insert (iterator position, InputIterator first, InputIterator last)
+{
+    InputIterator lastTmp = last;
+    while (first != last)
+    {
+        insert(position, *lastTmp);
+        first++;
+        lastTmp--;
+    }
+}
 
 
 //*-*//
