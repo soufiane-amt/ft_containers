@@ -12,7 +12,8 @@ void    test_construct ()
 
 int main ()
 {
-
+    ft::vector <int> v (1337, 4);
+    
 }
 
 
