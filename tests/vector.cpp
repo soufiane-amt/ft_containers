@@ -15,7 +15,6 @@ int main ()
     ft::vector <int> c(1337, 42);
     ft::vector <int> v(1, 1);
     c = v;
-    // v.erase(v.begin(), v.end());
     for (size_t i = 0; i < c.size(); i++)
         std::cout << c[i] << std::endl;
     // std::cout << "----------\n";

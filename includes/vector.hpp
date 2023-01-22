@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/21 18:37:27 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/22 11:33:22 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,8 @@ template <class T, class Allocator >
 vector<T, Allocator>& vector<T, Allocator>::operator=(const vector& x)
 {
     if(this == &x) return *this;
-    if (this->_v_capacity < x.size())
+    this->_v_size = x.size();
+    if (this->_v_capacity < _v_size)
     {
         if (this->elements)
         {
@@ -209,12 +210,11 @@ vector<T, Allocator>& vector<T, Allocator>::operator=(const vector& x)
                 allocator.destroy(this->elements + i);
             allocator.deallocate(this->elements, _v_capacity);
         }
-        this->_v_size = x.size();
         this->_v_capacity = this->_v_size;
         this->elements = allocator.allocate (this->_v_size);
     }
     for (size_t i = 0; i < this->_v_size; i++)
-        allocator.construct(this->elements + i, x.at(i));
+        allocator.construct(this->elements + i, x[i]);
     return (*this);
 }
 
