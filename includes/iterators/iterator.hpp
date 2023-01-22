@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/18 11:42:06 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/22 13:31:10 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,17 @@ template<class T>
 class iterator
 {
 
-    public:
-        typedef T                                                       value_type;
-        typedef typename iterator_traits<value_type>::iterator_category iterator_category;
-        typedef typename iterator_traits<value_type>::difference_type   difference_type;
-        typedef typename iterator_traits<value_type>::pointer           pointer;
-        typedef typename iterator_traits<value_type>::reference         reference;
+    public:                                       
+        typedef T                                        value_type;
+        typedef typename std::random_access_iterator_tag iterator_category;
+        typedef ptrdiff_t                                difference_type;
+        typedef T*                                       pointer;
+        typedef T&                                       reference;
+        typedef const T&                                 const_reference;
     
         iterator();
         iterator(const iterator &other);
-        iterator(value_type *ptr);
+        iterator(pointer ptr);
         
         
         reference       operator*() const;
@@ -63,11 +64,13 @@ class iterator
         iterator        operator+(difference_type) const;
         iterator        operator-(difference_type) const;
         difference_type operator-(const iterator&) const;
+        
+        iterator&       operator=(const iterator&);
+        pointer         get_pointer() const ;
+    
     private:
         pointer   __value;
-
-};
-
+    };
 
 
 
@@ -76,7 +79,30 @@ class iterator
 
 
 
+template<class T>
+iterator<T>::iterator():__value(0)
+{
+    
+}
 
+template<class T>
+iterator<T>::iterator(const iterator &other)
+{
+    this->__value = other.get_pointer();
+}
+
+template<class T>
+iterator<T>::iterator(pointer ptr)
+{
+    this->__value = ptr;
+}
+
+
+template<class T>
+typename iterator<T>::pointer iterator<T>::get_pointer() const 
+{
+    return (this->__value);
+}
 
 template<class T>
 typename iterator<T>::reference       iterator<T>::operator*() const
@@ -145,6 +171,14 @@ typename iterator<T> ::difference_type iterator<T>::operator-(const iterator<T>&
 {
     return (this->__value - &(*iter));
 }
+
+
+template<class T>
+iterator<T>&       iterator<T>::operator=(const iterator& other)
+{
+    this->__value = other.get_pointer();
+}
+
 
 
 

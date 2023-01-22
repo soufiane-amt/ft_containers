@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/22 11:33:22 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/22 11:37:35 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -563,14 +563,7 @@ vector<T, Allocator>::erase (iterator first, iterator last)
 
 
 
-template <class T, class Allocator> 
-void vector<T, Allocator>::swap (vector& x)
-{
-    vector tmp (x);
 
-    x = *this;
-    *this = tmp;
-}
 
 
 template <class T, class Allocator> 
@@ -692,7 +685,14 @@ bool operator>= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
     return true;
 }
 
+template <class T, class Allocator> 
+void vector<T, Allocator>::swap (vector& x)
+{
+    vector tmp (x);
 
+    x = *this;
+    *this = tmp;
+}
         //*swap*//
 template <class T, class Alloc>
 void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
