@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/22 14:06:57 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/24 18:21:56 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ vector <T, Allocator >::vector (InputIterator first, InputIterator last,
 }
 
 template <class T, class Allocator >
-vector<T, Allocator>::vector (const vector& x): _v_size(x.size()), _v_capacity(_v_size)
+vector<T, Allocator>::vector (const vector& x): _v_size(x.size())
 {
     _v_capacity = _v_size;
     this->elements = allocator.allocate (this->_v_size);
@@ -403,25 +403,25 @@ template <class T, class Allocator>
 template <class InputIterator>
 void vector<T, Allocator>::assign (InputIterator first, InputIterator last)
 {
-    size_t          distance;
+    size_t          _distance;
     InputIterator   temp (first);
 
-    distance = distance (first, last);    
-    if (distance > this->_v_capacity)
+    _distance = distance(first, last);    
+    if (_distance > this->_v_capacity)
     {
         for (size_t i = 0; i < _v_size; i++)        
             allocator.destroy(this->elements + i);
         allocator.deallocate(this->elements, _v_capacity);
-        this->elements = allocator.allocate(distance);
+        this->elements = allocator.allocate(_distance);
     }
     else
     {
         for (size_t i = 0; i < this->_v_size; i++)        
             allocator.destroy(this->elements + i);
     }
-    for (size_t i = 0; i < distance; i++)
+    for (size_t i = 0; i < _distance; i++)
         allocator.construct(this->elements + i, first++);
-    this->_v_size = distance;
+    this->_v_size = _distance;
 }
 
 

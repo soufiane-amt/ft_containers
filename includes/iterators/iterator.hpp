@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/22 13:31:10 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/24 18:41:06 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ class iterator
         iterator        operator-(difference_type) const;
         difference_type operator-(const iterator&) const;
         
+        reference       operator[] (size_t n);
+        const_reference operator[] (size_t n) const;
         iterator&       operator=(const iterator&);
         pointer         get_pointer() const ;
     
@@ -181,9 +183,20 @@ iterator<T>&       iterator<T>::operator=(const iterator& other)
 
 
 
+template<class T>
+typename iterator<T>::reference       
+iterator<T>::operator[] (size_t i)
+{
+    return (this->__value[i]);
 
+}
 
-
+template<class T>
+typename iterator<T>::const_reference 
+iterator<T>::operator[] (size_t i) const
+{
+    return (this->__value[i]);
+}
 
 
 
