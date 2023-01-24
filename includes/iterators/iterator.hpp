@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/24 18:41:06 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/24 18:49:17 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ class iterator
         bool            operator==(const iterator&) const;
         bool            operator!=(const iterator&) const;
         iterator        operator+(difference_type) const;
+        difference_type operator+(const iterator&) const;
         iterator        operator-(difference_type) const;
         difference_type operator-(const iterator&) const;
         
@@ -157,9 +158,15 @@ bool            iterator<T>::operator!=(const iterator<T>& iter) const
 }
 
 template<class T>
-iterator<T>        iterator<T>::operator+(difference_type add) const
+iterator<T>        iterator<T>::operator+(difference_type value) const
 {
-    return (iterator<T> (this->__value + add));
+    return (iterator<T> (this->__value + value));
+}
+
+template<class T>
+typename iterator<T> ::difference_type iterator<T>::operator+(const iterator<T>& iter) const
+{
+    return (this->__value + &(*iter));
 }
 
 template<class T>
@@ -179,6 +186,7 @@ template<class T>
 iterator<T>&       iterator<T>::operator=(const iterator& other)
 {
     this->__value = other.get_pointer();
+    return (*this);
 }
 
 

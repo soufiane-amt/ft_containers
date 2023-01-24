@@ -9,7 +9,7 @@
 #define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
 
 template <typename T>
-#define TESTED_TYPE std::string
+#define TESTED_TYPE int
 #define TESTED_NAMESPACE ft
 void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true)
 {
@@ -33,36 +33,59 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 }
 
 
-
-int		main(void)
+void    prepost_incdec(TESTED_NAMESPACE::vector<TESTED_TYPE> &vct)
 {
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(8);
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
         TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it_tmp;
 
-        for (unsigned long int i = 0; i < vct.size(); ++i)
-                it[i] = std::string((vct.size() - i), i + 65);
-        printSize(vct, true);
+        std::cout << "Pre inc" << std::endl;
+        it_tmp = ++it;
+        std::cout << *it_tmp << " | " << *it << std::endl;
 
-        std::cout << "push_back():\n" << std::endl;
+        std::cout << "Pre dec" << std::endl;
+        it_tmp = --it;
+        std::cout << *it_tmp << " | " << *it << std::endl;
 
-        vct.push_back("One long string");
-        vct2.push_back("Another long string");
+        std::cout << "Post inc" << std::endl;
+        it_tmp = it++;
+        std::cout << *it_tmp << " | " << *it << std::endl;
 
-        printSize(vct);
-        printSize(vct2);
+        std::cout << "Post dec" << std::endl;
+        it_tmp = it--;
+        std::cout << *it_tmp << " | " << *it << std::endl;
+        std::cout << "###############################################" << std::endl;
+}
 
-        vct.pop_back();
-        vct2.pop_back();
+int main ()
+{
+        TESTED_NAMESPACE::vector<TESTED_TYPE> foo(3, 15);
+        TESTED_NAMESPACE::vector<TESTED_TYPE> bar(5, 42);
 
-        printSize(vct);
-        printSize(vct2);
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator it_foo = foo.begin();
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator it_bar = bar.begin();
 
-        return (0);}
+        std::cout << "BEFORE SWAP" << std::endl;
 
+        std::cout << "foo contains:" << std::endl;
+        printSize(foo);
+        std::cout << "bar contains:" << std::endl;
+        printSize(bar);
 
+        foo.swap(bar);
 
-// void    test_construct ()
+        std::cout << "AFTER SWAP" << std::endl;
+
+        std::cout << "foo contains:" << std::endl;
+        printSize(foo);
+        std::cout << "bar contains:" << std::endl;
+        printSize(bar);
+
+        std::cout << "Iterator validity:" << std::endl;
+        std::cout << (it_foo == bar.begin()) << std::endl;
+        std::cout << (it_bar == foo.begin()) << std::endl;
+
+        return (0);
+}// void    test_construct ()
 // {
 
 // }
