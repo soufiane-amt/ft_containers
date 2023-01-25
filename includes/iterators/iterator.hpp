@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/25 13:19:14 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/25 15:16:36 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ class iterator
         typedef typename std::random_access_iterator_tag iterator_category;
         typedef ptrdiff_t                                difference_type;
         typedef T*                                       pointer;
+        typedef const T*                                 const_pointer;
         typedef T&                                       reference;
         typedef const T&                                 const_reference;
     
@@ -61,10 +62,12 @@ class iterator
         iterator        operator--(int);
         bool            operator==(const iterator&) const;
         bool            operator!=(const iterator&) const;
-        iterator        operator+(difference_type) ;
-        iterator        operator+(const iterator&) const;
-        iterator        operator-(difference_type) ;
-        iterator        operator-(const iterator&) const;
+        
+        iterator        operator+(difference_type) const;
+        iterator        operator-(difference_type) const;
+        
+        difference_type operator+(const iterator&) const;
+        difference_type operator-(const iterator&) const;
         
         iterator        operator+= (difference_type) ;
         iterator        operator-= (difference_type) ;
@@ -74,6 +77,8 @@ class iterator
         iterator&       operator=(const iterator&);
         pointer         get_pointer() const ;
     
+        pointer         operator->();
+        const_pointer   operator->() const;
     private:
         pointer   __value;
     };
@@ -161,18 +166,33 @@ bool            iterator<T>::operator!=(const iterator<T>& iter) const
 }
 
 
+//
 template<class T>
-iterator<T> iterator<T>::operator+(const iterator<T>& iter) const
+iterator<T> iterator<T>::operator+(difference_type ele) const
 {
-    return (iterator (this->__value + &(*iter)));
+    return (iterator<T>(this->__value + ele));
 }
 
 
 template<class T>
-iterator<T> iterator<T>::operator-(const iterator<T>& iter) const
+iterator<T> iterator<T>::operator-(difference_type ele) const
 {
-    return (iterator (this->__value - &(*iter)));
+    return (iterator<T>(this->__value - ele));
 }
+
+
+template<class T>
+typename iterator<T>::difference_type iterator<T>::operator+(const iterator<T>& iter) const
+{
+    return (this->__value + &(*iter));
+}
+
+template<class T>
+typename iterator<T>::difference_type iterator<T>::operator-(const iterator<T>& iter) const
+{
+    return (this->__value - &(*iter));
+}
+
 
 
 template<class T>
@@ -199,6 +219,18 @@ iterator<T>::operator[] (size_t i) const
     return (this->__value[i]);
 }
 
+
+template<class T>
+typename iterator<T>::pointer         iterator<T>::operator->()
+{
+    return (this->__value);
+}
+
+template<class T>
+typename iterator<T>::const_pointer   iterator<T>::operator->() const
+{
+    return (this->__value);
+}
 
 
 
