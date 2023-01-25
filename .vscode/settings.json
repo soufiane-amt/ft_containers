@@ -69,6 +69,7 @@
         "__tree": "cpp",
         "list": "cpp",
         "queue": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "iomanip": "cpp"
     }
 }

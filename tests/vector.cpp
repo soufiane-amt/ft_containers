@@ -4,13 +4,14 @@
 #include <iterator>
 // #include <algorithm>
 #include <vector>
+#include <vector>
 
 
 #define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
 
 template <typename T>
 #define TESTED_TYPE int
-#define TESTED_NAMESPACE ft
+#define TESTED_NAMESPACE std
 void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true)
 {
 	const T_SIZE_TYPE size = vct.size();
@@ -56,36 +57,37 @@ void    prepost_incdec(TESTED_NAMESPACE::vector<TESTED_TYPE> &vct)
         std::cout << "###############################################" << std::endl;
 }
 
-int main ()
+
+int             main(void)
 {
-        TESTED_NAMESPACE::vector<TESTED_TYPE> foo(3, 15);
-        TESTED_NAMESPACE::vector<TESTED_TYPE> bar(5, 42);
+        const int size = 5;
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator ite = vct.begin();
 
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator it_foo = foo.begin();
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator it_bar = bar.begin();
+        for (int i = 0; i < size; ++i)
+                it[i] = (size - i) * 5;
+        prepost_incdec(vct);
 
-        std::cout << "BEFORE SWAP" << std::endl;
+        it = it + 5;
+        it = 1 + it;
+        it = it - 4;
+        std::cout << *(it += 2) << std::endl;
+        std::cout << *(it -= 1) << std::endl;
 
-        std::cout << "foo contains:" << std::endl;
-        printSize(foo);
-        std::cout << "bar contains:" << std::endl;
-        printSize(bar);
+        *(it -= 2) = 42;
+        *(it += 2) = 21;
 
-        foo.swap(bar);
+        std::cout << "const_ite +=: " << *(ite += 2) << std::endl;
+        std::cout << "const_ite -=: " << *(ite -= 2) << std::endl;
 
-        std::cout << "AFTER SWAP" << std::endl;
+        std::cout << "(it == const_it): " << (ite == it) << std::endl;
+        std::cout << "(const_ite - it): " << (ite - it) << std::endl;
+        std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
 
-        std::cout << "foo contains:" << std::endl;
-        printSize(foo);
-        std::cout << "bar contains:" << std::endl;
-        printSize(bar);
-
-        std::cout << "Iterator validity:" << std::endl;
-        std::cout << (it_foo == bar.begin()) << std::endl;
-        std::cout << (it_bar == foo.begin()) << std::endl;
-
+        printSize(vct, true);
         return (0);
-}// void    test_construct ()
+}
 // {
 
 // }

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/24 18:49:17 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/25 13:19:14 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,14 @@ class iterator
         iterator        operator--(int);
         bool            operator==(const iterator&) const;
         bool            operator!=(const iterator&) const;
-        iterator        operator+(difference_type) const;
-        difference_type operator+(const iterator&) const;
-        iterator        operator-(difference_type) const;
-        difference_type operator-(const iterator&) const;
+        iterator        operator+(difference_type) ;
+        iterator        operator+(const iterator&) const;
+        iterator        operator-(difference_type) ;
+        iterator        operator-(const iterator&) const;
         
+        iterator        operator+= (difference_type) ;
+        iterator        operator-= (difference_type) ;
+
         reference       operator[] (size_t n);
         const_reference operator[] (size_t n) const;
         iterator&       operator=(const iterator&);
@@ -157,28 +160,18 @@ bool            iterator<T>::operator!=(const iterator<T>& iter) const
     return (this->__value != &(*iter));
 }
 
-template<class T>
-iterator<T>        iterator<T>::operator+(difference_type value) const
-{
-    return (iterator<T> (this->__value + value));
-}
 
 template<class T>
-typename iterator<T> ::difference_type iterator<T>::operator+(const iterator<T>& iter) const
+iterator<T> iterator<T>::operator+(const iterator<T>& iter) const
 {
-    return (this->__value + &(*iter));
+    return (iterator (this->__value + &(*iter)));
 }
 
-template<class T>
-iterator<T>        iterator<T>::operator-(difference_type diff) const
-{
-    return (iterator<T> (this->__value - diff));
-}
 
 template<class T>
-typename iterator<T> ::difference_type iterator<T>::operator-(const iterator<T>& iter) const
+iterator<T> iterator<T>::operator-(const iterator<T>& iter) const
 {
-    return (this->__value - &(*iter));
+    return (iterator (this->__value - &(*iter)));
 }
 
 
@@ -210,15 +203,38 @@ iterator<T>::operator[] (size_t i) const
 
 
 
+//non members
+
+
+template<class T>
+iterator<T> operator+(typename iterator<T>::difference_type value, iterator<T> iter ) 
+{
+    return (iter + value);
+}
+
+template<class T>
+iterator<T> operator-(typename iterator<T>::difference_type diff, iterator<T> iter) 
+{
+    return (iter - diff);
+}
 
 
 
 
 
 
+template<class T>
+iterator<T>        iterator<T>::operator+= (difference_type elem)
+{
+    return (iterator<T> (this->__value + elem));
 
+}
 
-
+template<class T>
+iterator<T>        iterator<T>::operator-= (difference_type elem)
+{
+    return (iterator<T> (this->__value - elem));
+}
 
 
 
