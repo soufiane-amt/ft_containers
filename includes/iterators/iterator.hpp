@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/25 15:16:36 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:27:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,16 @@ class iterator
     
         pointer         operator->();
         const_pointer   operator->() const;
+
+        //comparison
+        bool operator== (const iterator<value_type>& iter1);        
+        bool operator!= (const iterator<value_type>& iter1);        
+        bool operator<  (const iterator<value_type>& iter1);        
+        bool operator<= (const iterator<value_type>& iter1);        
+        bool operator>  (const iterator<value_type>& iter1);        
+        bool operator>= (const iterator<value_type>& iter1);
+t
+
     private:
         pointer   __value;
     };
@@ -233,6 +243,47 @@ typename iterator<T>::const_pointer   iterator<T>::operator->() const
 }
 
 
+
+//comparison
+
+template<class T>
+bool iterator<T>::operator== (const iterator<T>& iter1)
+{
+    return (iter1.get_pointer() == this->__value);
+}
+
+template<class T>
+bool iterator<T>::operator!= (const iterator<T>& iter1)
+{
+    return (iter1.get_pointer() != this->__value);
+
+}
+
+template<class T>
+bool iterator<T>::operator<  (const iterator<T>& iter1)
+{
+    return (iter1.get_pointer() < this->__value);
+
+}
+
+template<class T>
+bool iterator<T>::operator<= (const iterator<T>& iter1)
+{
+    return (iter1.get_pointer() <= this->__value);
+}
+
+template<class T>
+bool iterator<T>::operator>  (const iterator<T>& iter1)
+{
+    return (iter1.get_pointer() > this->__value);
+}
+
+template<class T>
+bool iterator<T>::operator>= (const iterator<T>& iter1)
+{
+    return (iter1.get_pointer() >= this->__value);
+
+}
 
 
 //non members
