@@ -6,37 +6,34 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/28 17:18:57 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/28 18:45:19 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <vector>
+#include "../includes/vector.hpp"
 
-#include <iostream>
-#include <type_traits>
-#include <tuple>
 
-template<bool Condition, typename T = void>
-struct enable_if
+struct A
 {
+    A(int a, int b)
+    {
+        std::cout << "int constr is called\n";
+    }
+    template<class X>
+    A(X a, X b)
+    {
+        std::cout << "templ constr is called\n";
+    }
+
 };
- 
-template<typename T>
-struct enable_if<true, T>
-{
-    typedef T type;
-};
-
-
-template <typename T>
-typename enable_if < std::is_integral<T>::value, T >::type sum (const T& a, const T& b)
-{
-    return (a + b);
-}
-
 int main()
 {
-    std::pair<> result ; 
-    std::cout << result.first << std::endl;
-    std::cout << result.second << std::endl;
+    ft::vector <int > v(13, 43);
+    for (size_t i = 0; i < v.size(); i++)
+    {
+        std::cout << v[i] << std::endl;
+    }
+    
 }

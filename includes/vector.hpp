@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/24 18:21:56 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/28 18:44:42 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <iostream>
 #include <cstring>
 #include "iterators/iterator.hpp"
-#include <iterator>
+#include "utils.hpp"
 
 
 namespace ft
@@ -45,7 +45,7 @@ namespace ft
         explicit vector (size_type n, const_reference val = value_type(), const allocator_type& alloc = allocator_type());
         
         template <class InputIterator>         
-        vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+        vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0);
         
         vector (const vector& x);
         ~vector();
@@ -156,7 +156,7 @@ vector <T, Allocator>::vector (const allocator_type& MyAllocator):_v_capacity(0)
 
 template <class T, class Allocator  >
 vector <T, Allocator>::vector (size_type n, const_reference val,
-    const allocator_type& alloc):_v_capacity(n), _v_size(n), allocator(alloc)
+    const allocator_type& alloc):_v_capacity(n), _v_size(n), allocator(alloc) 
 {
     this->elements = allocator.allocate (n);
     for (size_t i = 0; i < n; i++)
@@ -167,7 +167,7 @@ vector <T, Allocator>::vector (size_type n, const_reference val,
 template <class T, class Allocator >
 template <class InputIterator >
 vector <T, Allocator >::vector (InputIterator first, InputIterator last,
-    const allocator_type& alloc): allocator(alloc)
+    const allocator_type& alloc, typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type*): allocator(alloc) 
 {
     _v_capacity = distance(first, last);
     _v_size = _v_capacity;
