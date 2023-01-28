@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/28 18:44:42 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/28 18:54:41 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ namespace ft
         explicit vector (size_type n, const_reference val = value_type(), const allocator_type& alloc = allocator_type());
         
         template <class InputIterator>         
-        vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0);
+        vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
+                typename ft::enable_if<!ft::is_integral<InputIterator>::value , InputIterator>::type* = nullptr);
         
         vector (const vector& x);
         ~vector();
@@ -167,7 +168,7 @@ vector <T, Allocator>::vector (size_type n, const_reference val,
 template <class T, class Allocator >
 template <class InputIterator >
 vector <T, Allocator >::vector (InputIterator first, InputIterator last,
-    const allocator_type& alloc, typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type*): allocator(alloc) 
+    const allocator_type& alloc, typename ft::enable_if<!ft::is_integral<InputIterator>::value,  InputIterator>::type*): allocator(alloc) 
 {
     _v_capacity = distance(first, last);
     _v_size = _v_capacity;
