@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/28 17:23:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/28 17:34:09 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,9 @@ struct pair
     pair (const pair<U,V>& pr);
     
     pair (const first_type& a, const second_type& b);
+
+    pair& operator= (const pair& pr);
+
 };
 
 
@@ -190,6 +193,16 @@ pair<T1, T2>::pair (const first_type& a, const second_type& b) : first(a), secon
 {
     
 }
+
+
+template< class T1, class T2 > 
+pair<T1, T2>& pair<T1, T2>::operator= (const pair& pr)
+{
+    this->first = pr.first;
+    this->second = pr.second;
+}
+
+
 
 }
 #endif
