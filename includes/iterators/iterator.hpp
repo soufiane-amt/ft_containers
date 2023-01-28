@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/25 17:27:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/28 16:42:34 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ struct iterator_traits<T*>
     typedef std::random_access_iterator_tag iterator_category;
 };
 
- 
+template <class T> 
+struct is_integral : std::integral_constant
+{
+    typedef bool value_type;
+    typedef type 
+};
+
 template<class T>
 class iterator
 {
@@ -87,7 +93,6 @@ class iterator
         bool operator<= (const iterator<value_type>& iter1);        
         bool operator>  (const iterator<value_type>& iter1);        
         bool operator>= (const iterator<value_type>& iter1);
-t
 
     private:
         pointer   __value;
