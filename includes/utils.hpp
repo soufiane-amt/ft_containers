@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/28 17:44:01 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/28 17:48:55 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,17 @@ template <class T1, class T2>
 template <class T1, class T2>
   bool operator>= (const pair<T1,T2>& p1, const pair<T1,T2>& p2)
 { return !(p1<p2); }
+
+
+
+
+
+//make pair
+template <class T1,class T2>
+pair<T1,T2> make_pair (T1 x, T2 y)
+{
+  return ( pair<T1,T2>(x,y) );
+}
 
 }
 #endif
