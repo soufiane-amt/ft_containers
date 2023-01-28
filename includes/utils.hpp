@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/28 17:34:09 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/28 17:44:01 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,29 @@ pair<T1, T2>& pair<T1, T2>::operator= (const pair& pr)
 }
 
 
+template <class T1, class T2>
+  bool operator== (const pair<T1,T2>& p1, const pair<T1,T2>& p2)
+{ return p1.first==p2.first && p1.second==p2.second; }
+
+template <class T1, class T2>
+  bool operator!= (const pair<T1,T2>& p1, const pair<T1,T2>& p2)
+{ return !(p1==p2); }
+
+template <class T1, class T2>
+  bool operator<  (const pair<T1,T2>& p1, const pair<T1,T2>& p2)
+{ return p1.first<p2.first || (!(p2.first<p1.first) && p1.second<p2.second); }
+
+template <class T1, class T2>
+  bool operator<= (const pair<T1,T2>& p1, const pair<T1,T2>& p2)
+{ return !(p2<p1); }
+
+template <class T1, class T2>
+  bool operator>  (const pair<T1,T2>& p1, const pair<T1,T2>& p2)
+{ return p2<p1; }
+
+template <class T1, class T2>
+  bool operator>= (const pair<T1,T2>& p1, const pair<T1,T2>& p2)
+{ return !(p1<p2); }
 
 }
 #endif
