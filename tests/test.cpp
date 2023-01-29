@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/29 18:31:42 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:50:30 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,15 +129,22 @@ void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 
 int             main(void)
 {
-        const int size = 5;
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct;
         TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator ite = vct.begin();
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit = vct.begin();
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator rit(it);
 
-        for (int i = 0; i < size; ++i)
-                it[i] = i;
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit(rit);
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit_(it);
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit_2(cit);
 
-        *ite = 42; // < -- error
+        /* error expected
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator rit_(crit);
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator rit2(cit);
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it2(rit);
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit2(crit);
+        */
 
+        std::cout << "OK" << std::endl;
         return (0);
 }

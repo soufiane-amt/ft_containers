@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/29 18:17:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:50:03 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <cstring>
 #include "iterators/iterator.hpp"
+#include "iterators/reverse_iterator.hpp"
 #include "utils.hpp"
 
 
@@ -38,6 +39,10 @@ namespace ft
         /*Iterators*/
         typedef typename ft::iterator<T>              iterator;
         typedef typename ft::iterator<T>              const_iterator;
+        
+        /*reverse_iterator*/
+        typedef typename ft::reverse_iterator<T>      reverse_iterator;
+        typedef typename ft::reverse_iterator<T>      const_reverse_iterator;
         
         
         

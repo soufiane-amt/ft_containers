@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/29 18:43:15 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:47:31 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #ifndef REVERSE_ITERATOR_HPP
 #define REVERSE_ITERATOR_HPP
 
+#include <cstddef>
 namespace ft
 {
 
@@ -23,7 +24,7 @@ class reverse_iterator
 
     public:                                       
         typedef T                                        value_type;
-        typedef typename std::random_access_reverse_iterator_tag rreverse_iterator_category;
+        typedef typename std::random_access_iterator_tag rreverse_iterator_category;
         typedef ptrdiff_t                                difference_type;
         typedef T*                                       pointer;
         typedef const T*                                 const_pointer;
