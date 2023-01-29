@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/29 16:12:43 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/29 16:15:00 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,46 +47,53 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 }
 
 
+/*
+single element (1)
+        iterator insert (iterator position, const value_type& val);
 
-#define TESTED_TYPE std::string
+fill (2)
+    void insert (iterator position, size_type n, const value_type& val);
 
-#define TESTED_TYPE std::string
+range (3)
+        template <class InputIterator>
+                void insert (iterator position, InputIterator first, InputIterator last);
+*/
 
-void    checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
-                                        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator const &it)
-{
-        static int i = 0;
-        std::cout << "[" << i++ << "] " << "erase: " << it - vct.begin() << std::endl;
-        printSize(vct);
-}
+#define TESTED_TYPE int
 
 int             main(void)
 {
         TESTED_NAMESPACE::vector<TESTED_TYPE> vct(10);
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct3;
 
         for (unsigned long int i = 0; i < vct.size(); ++i)
-                vct[i] = std::string((vct.size() - i), i + 65);
+                vct[i] = (vct.size() - i) * 3;
         printSize(vct);
 
-        checkErase(vct, vct.erase(vct.begin() + 2));
+        vct2.insert(vct2.end(), 42);
+        vct2.insert(vct2.begin(), 2, 21);
+        printSize(vct2);
 
-        checkErase(vct, vct.erase(vct.begin()));
-        checkErase(vct, vct.erase(vct.end() - 1));
+        vct2.insert(vct2.end() - 2, 42);
+        printSize(vct2);
 
-        checkErase(vct, vct.erase(vct.begin(), vct.begin() + 3));
-        checkErase(vct, vct.erase(vct.end() - 3, vct.end() - 1));
+        vct2.insert(vct2.end(), 2, 84);
+        printSize(vct2);
 
-        vct.push_back("Hello");
-        vct.push_back("Hi there");
+        vct2.resize(4);
+        printSize(vct2);
+
+        vct2.insert(vct2.begin() + 2, vct.begin(), vct.end());
+        vct.clear();
+        printSize(vct2);
+
         printSize(vct);
-        checkErase(vct, vct.erase(vct.end() - 3, vct.end()));
 
-        vct.push_back("ONE");
-        vct.push_back("TWO");
-        vct.push_back("THREE");
-        vct.push_back("FOUR");
-        printSize(vct);
-        checkErase(vct, vct.erase(vct.begin(), vct.end()));
+        for (int i = 0; i < 5; ++i)
+                vct3.insert(vct3.end(), i);
+        vct3.insert(vct3.begin() + 1, 2, 111);
+        printSize(vct3);
 
         return (0);
 }

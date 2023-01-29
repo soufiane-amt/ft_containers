@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/29 16:13:10 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/29 16:22:32 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ namespace ft
 
         iterator                insert (iterator position, const_reference val);
         void                    insert (iterator position, size_type n, const_reference val);    
+        
         template <class InputIterator>
-        void                    insert (iterator position, InputIterator first, InputIterator last);
+        typename enable_if<!is_integral<InputIterator>::value, void>::type
+        insert (iterator position, InputIterator first, InputIterator last);
 
         iterator                erase (iterator position);
         iterator                erase (iterator first, iterator last);
@@ -254,7 +256,6 @@ void vector<T, Allocator>::resize (size_type n, value_type val)
         return ;
     if (n > this->_v_capacity)
     {
-        pointer tmp;
         if (this->elements)
         {
             for (size_t i = 0; i < _v_size; i++)
@@ -509,7 +510,7 @@ void                    vector<T, Allocator>::insert (iterator position, size_ty
         this->push_back(val);
     for (size_t i = 0; i < n; i++)
     {
-        for (iterator it = _v_size; it > position; --it)
+        for (iterator it = end(); it > position; --it)
             *it = *(it - 1);
     }
         
@@ -525,7 +526,8 @@ void                    vector<T, Allocator>::insert (iterator position, size_ty
  template <class T, class Allocator> 
 
 template <class InputIterator>
-void                    vector<T, Allocator>::insert (iterator position, InputIterator first, InputIterator last)
+typename enable_if<!is_integral<InputIterator>::value, void>::type
+vector<T, Allocator>::insert (iterator position, InputIterator first, InputIterator last)
 {
     InputIterator lastTmp = last;
     while (first != last)
