@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/29 16:22:32 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:17:31 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -470,14 +470,18 @@ template <class T, class Allocator>
 typename vector<T, Allocator>::iterator    
 vector<T, Allocator>::insert (iterator position, const_reference val)
 {
-    size_type  index = position - begin();
+    (void)val;
+    (void)position;
+    // size_type  index = distance (position ,  begin());
 
-    this->push_back(val);
-    for (iterator it = end(); it > position; --it)
-        *it = *(it - 1);
-    allocator.destroy(this->elements + index);
-    allocator.construct(this->elements + index, val);
-    this->_v_size++;
+    // this->push_back(val);
+    // for (iterator it = end() ; it > position ; --it)
+    //     *it = *(it - 1);
+    // if (this->_v_size)
+    // {
+    //     allocator.destroy(this->elements + index);
+    //     allocator.construct(this->elements + index, val);
+    // }    
     return (this->elements);
 }
 

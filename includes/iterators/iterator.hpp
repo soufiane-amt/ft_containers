@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/28 17:53:08 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:29:55 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ class iterator
         iterator        operator++(int);
         iterator&       operator--();
         iterator        operator--(int);
-        bool            operator==(const iterator&) const;
-        bool            operator!=(const iterator&) const;
         
         iterator        operator+(difference_type) const;
         iterator        operator-(difference_type) const;
@@ -81,12 +79,12 @@ class iterator
         const_pointer   operator->() const;
 
         //comparison
-        bool operator== (const iterator<value_type>& iter1);        
-        bool operator!= (const iterator<value_type>& iter1);        
-        bool operator<  (const iterator<value_type>& iter1);        
-        bool operator<= (const iterator<value_type>& iter1);        
-        bool operator>  (const iterator<value_type>& iter1);        
-        bool operator>= (const iterator<value_type>& iter1);
+        bool operator== (const iterator<value_type>& iter1)   const;
+        bool operator!= (const iterator<value_type>& iter1)   const;
+        bool operator<  (const iterator<value_type>& iter1)   const;
+        bool operator<= (const iterator<value_type>& iter1)   const;
+        bool operator>  (const iterator<value_type>& iter1)   const;
+        bool operator>= (const iterator<value_type>& iter1)   const;
 
     private:
         pointer   __value;
@@ -245,40 +243,28 @@ typename iterator<T>::const_pointer   iterator<T>::operator->() const
 
 //comparison
 
-template<class T>
-bool iterator<T>::operator== (const iterator<T>& iter1)
-{
-    return (iter1.get_pointer() == this->__value);
-}
 
 template<class T>
-bool iterator<T>::operator!= (const iterator<T>& iter1)
-{
-    return (iter1.get_pointer() != this->__value);
-
-}
-
-template<class T>
-bool iterator<T>::operator<  (const iterator<T>& iter1)
+bool iterator<T>::operator<  (const iterator<T>& iter1) const
 {
     return (iter1.get_pointer() < this->__value);
 
 }
 
 template<class T>
-bool iterator<T>::operator<= (const iterator<T>& iter1)
+bool iterator<T>::operator<= (const iterator<T>& iter1) const
 {
     return (iter1.get_pointer() <= this->__value);
 }
 
 template<class T>
-bool iterator<T>::operator>  (const iterator<T>& iter1)
+bool iterator<T>::operator>  (const iterator<T>& iter1) const
 {
     return (iter1.get_pointer() > this->__value);
 }
 
 template<class T>
-bool iterator<T>::operator>= (const iterator<T>& iter1)
+bool iterator<T>::operator>= (const iterator<T>& iter1) const
 {
     return (iter1.get_pointer() >= this->__value);
 
