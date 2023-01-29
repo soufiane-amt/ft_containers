@@ -6,14 +6,13 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/29 18:29:55 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:41:44 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RANDOM_ACCESS_ITERATOR_HPP
-#define RANDOM_ACCESS_ITERATOR_HPP
+#ifndef ITERATOR_HPP
+#define ITERATOR_HPP
 
-// #include "../vector.hpp"
 namespace ft {
 
 template<class Iterator>
