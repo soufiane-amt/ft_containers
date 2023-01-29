@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/29 11:11:22 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/29 16:13:10 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -477,7 +477,7 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
     allocator.destroy(this->elements + index);
     allocator.construct(this->elements + index, val);
     this->_v_size++;
-    return (iterator (this->elements));
+    return (this->elements);
 }
 
     // t_size      _new_size = this->_v_size + 1;
@@ -538,28 +538,43 @@ void                    vector<T, Allocator>::insert (iterator position, InputIt
 
 
 
+// template <class T, class Allocator>
+// typename vector<T, Allocator>::iterator    
+// vector<T, Allocator>::erase (iterator position)
+// {
+//     for (iterator it = end() - 1; it > position; --it)
+//     {
+//         // allocator.destroy(&(*it));
+//         allocator.construct(&(*it), *(it - 1));
+//     }
+//     allocator.destroy(this->elements + _v_size - 1);
+//     _v_size--;
+//     return (this->elements);
+// }
 template <class T, class Allocator>
 typename vector<T, Allocator>::iterator    
 vector<T, Allocator>::erase (iterator position)
 {
-    for (iterator it = _v_size; it > position; --it)
-    {
-        allocator.destroy(&(*it));
-        allocator.construct(&(*it), *(it - 1));
-    }
+    for (iterator it = position; it < end() - 1; it++)
+        *it = *(it + 1);
     allocator.destroy(this->elements + _v_size - 1);
     _v_size--;
+    return (this->elements);
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::iterator    
 vector<T, Allocator>::erase (iterator first, iterator last)
 {
-    while (first != last)
+    size_t  range = distance(first, last);
+    while (first != end())
     {
-        erase(first);
+        *first = *(first + range);
         first++;
     }
+    for (size_t i = _v_size - 1; i >= range; i--)
+        allocator.destroy(this->elements + i);
+    return (this->elements);
 }
 
 
