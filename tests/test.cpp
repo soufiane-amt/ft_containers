@@ -6,38 +6,68 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/28 18:59:34 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/29 11:09:34 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include <vector>
+#include <iterator>
+#include <list>
 #include "../includes/vector.hpp"
 
 
-struct A
-{
-    A(int a, int b)
-    {
-        std::cout << "int constr is called\n";
-    }
-    template<class X>
-    A(X a, X b)
-    {
-        std::cout << "templ constr is called\n";
-    }
 
-};
-int main()
+
+
+#define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
+#define TESTED_TYPE int
+#define TESTED_NAMESPACE ft
+
+template <typename T>
+void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true)
 {
-    
-    ft::vector <int > v (13, 423);
-    ft::vector <int > ::iterator iter = v.begin();
-    ft::vector <int > ::iterator iter1 = v.end();
-    ft::vector <int > temp (iter, iter1);
-    for (size_t i = 0; i < temp.size(); i++)
-    {
-        std::cout << temp[i] << std::endl;
-    }   
+	const T_SIZE_TYPE size = vct.size();
+	const T_SIZE_TYPE capacity = vct.capacity();
+	const std::string isCapacityOk = (capacity >= size) ? "OK" : "KO";
+	// Cannot limit capacity's max value because it's implementation dependent
+
+	std::cout << "size: " << size << std::endl;
+	std::cout << "capacity: " << isCapacityOk << std::endl;
+	std::cout << "max_size: " << vct.max_size() << std::endl;
+	if (print_content)
+	{
+		typename TESTED_NAMESPACE::vector<T>::const_iterator it = vct.begin();
+		typename TESTED_NAMESPACE::vector<T>::const_iterator ite = vct.end();
+		std::cout << std::endl << "Content is:" << std::endl;
+		for (; it != ite; ++it)
+			std::cout << "- " << *it << std::endl;
+	}
+	std::cout << "###############################################" << std::endl;
 }
-    
+
+
+
+#include <list>
+
+#define TESTED_TYPE int
+
+int             main(void)
+{
+        std::list<TESTED_TYPE> lst;
+        std::list<TESTED_TYPE>::iterator lst_it;
+        for (int i = 1; i < 5; ++i)
+                lst.push_back(i * 3);
+
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(lst.begin(), lst.end());
+        printSize(vct);
+
+        lst_it = lst.begin();
+        for (int i = 1; lst_it != lst.end(); ++i)
+                *lst_it++ = i * 5;
+        vct.assign(lst.begin(), lst.end());
+        printSize(vct);
+
+        vct.insert(vct.end(), lst.rbegin(), lst.rend());
+        printSize(vct);
+        return (0);
+}

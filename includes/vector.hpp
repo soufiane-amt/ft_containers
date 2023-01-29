@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/28 18:54:41 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/29 11:11:22 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,10 @@ namespace ft
         
         //Modifiers
         void                    assign (size_type n, const_reference val);
+        
         template <class InputIterator>  
-        void                    assign (InputIterator first, InputIterator last);
+        typename enable_if<!is_integral<InputIterator>::value, void>::type
+        assign (InputIterator first, InputIterator last);
         
         void                    push_back (const_reference val);
         void                    pop_back();
@@ -402,10 +404,10 @@ void vector<T, Allocator>::assign (size_type n, const_reference val)
 
 template <class T, class Allocator> 
 template <class InputIterator>
-void vector<T, Allocator>::assign (InputIterator first, InputIterator last)
+typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
+vector<T, Allocator>::assign (InputIterator first, InputIterator last)
 {
     size_t          _distance;
-    InputIterator   temp (first);
 
     _distance = distance(first, last);    
     if (_distance > this->_v_capacity)
@@ -421,7 +423,7 @@ void vector<T, Allocator>::assign (InputIterator first, InputIterator last)
             allocator.destroy(this->elements + i);
     }
     for (size_t i = 0; i < _distance; i++)
-        allocator.construct(this->elements + i, first++);
+        allocator.construct(this->elements + i, *first++);
     this->_v_size = _distance;
 }
 
@@ -470,11 +472,12 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
     size_type  index = position - begin();
 
     this->push_back(val);
-    for (iterator it = _v_size; it > position; --it)
+    for (iterator it = end(); it > position; --it)
         *it = *(it - 1);
     allocator.destroy(this->elements + index);
     allocator.construct(this->elements + index, val);
     this->_v_size++;
+    return (iterator (this->elements));
 }
 
     // t_size      _new_size = this->_v_size + 1;
