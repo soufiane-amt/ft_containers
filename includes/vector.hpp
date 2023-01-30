@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/30 16:55:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/30 17:18:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,12 @@ namespace ft
         iterator                end();
         const_iterator          end() const;
 
-        // //reverse iterators
-        // reverse_iterator       rbegin();
-        // const_reverse_iterator rbegin() const;
+        //reverse iterators
+        reverse_iterator       rbegin();
+        const_reverse_iterator rbegin() const;
 
-        // reverse_iterator       rend();
-        // const_reverse_iterator rend() const;
+        reverse_iterator       rend();
+        const_reverse_iterator rend() const;
 
     private:
         pointer                 elements;
@@ -826,15 +826,33 @@ typename vector<T, Allocator>::const_iterator vector<T, Allocator>::end() const
 /*/////////////////////////////////////////////////////////////////*/
 //                   /*reverse iteraors*/                                  //
 /*/////////////////////////////////////////////////////////////////*/
-// template <class T, class Allocator> 
-// reverse_iterator       rbegin();
-// template <class T, class Allocator> 
-// const_reverse_iterator rbegin() const
+template <class T, class Allocator> 
+typename vector<T, Allocator>::reverse_iterator       
+vector<T, Allocator>::rbegin()
+{
+    return (vector<T, Allocator>::iterator(this->elements));
+}
 
-// template <class T, class Allocator> 
-// reverse_iterator       rend();
-// template <class T, class Allocator> 
-// const_reverse_iterator rend() const;
+template <class T, class Allocator> 
+typename vector<T, Allocator>::const_reverse_iterator 
+vector<T, Allocator>::rbegin() const
+{
+    return (vector<T, Allocator>::iterator(this->elements));
+}
+
+template <class T, class Allocator> 
+typename vector<T, Allocator>::reverse_iterator       
+vector<T, Allocator>::rend()
+{
+    return (vector<T, Allocator>::iterator(this->elements + _v_size));
+}
+
+template <class T, class Allocator> 
+typename vector<T, Allocator>::const_reverse_iterator 
+vector<T, Allocator>::rend() const
+{
+    return (vector<T, Allocator>::iterator(this->elements + _v_size));
+}
 
 
 /*/////////////////////////////////////////////////////////////////*/

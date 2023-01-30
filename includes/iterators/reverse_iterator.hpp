@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/30 17:11:42 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/30 17:43:50 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,17 +230,17 @@ bool operator>=( const std::reverse_iterator<Iterator1>& iter1,
 
 
 template< class Iter >
-typename reverse_iterator<Iter>::difference_type
+reverse_iterator<Iter>
 operator+( typename reverse_iterator<Iter>::difference_type n, const reverse_iterator<Iter>& it)
 {
-    return (it.base() + n);
+    return (it + n);
 }
 
 template< class Iter >
 typename reverse_iterator<Iter>::difference_type
-operator-( typename reverse_iterator<Iter>::difference_type n, const reverse_iterator<Iter>& it)
+operator-( const reverse_iterator<Iter> it1, const reverse_iterator<Iter>& it2)
 {
-    return (it.base() - n);
+    return (it1.base() - it2.base());
 }
 
 
