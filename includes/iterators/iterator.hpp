@@ -6,28 +6,31 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/30 15:23:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/30 18:40:17 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITERATOR_HPP
 #define ITERATOR_HPP
 
+#include "../utils.hpp"
+
 namespace ft {
 
-template<class T>
+template<class _ite>
 class iterator
 {
 
     public:                                       
-        typedef T                                        value_type;
-        typedef typename std::random_access_iterator_tag iterator_category;
-        typedef ptrdiff_t                                difference_type;
-        typedef T*                                       pointer;
-        typedef const T*                                 const_pointer;
-        typedef T&                                       reference;
-        typedef const T&                                 const_reference;
-    
+        typedef _ite                                                       iterator_type;
+        typedef typename iterator_traits<iterator_type>::iterator_category iterator_category;
+        typedef typename iterator_traits<iterator_type>::value_type        value_type;
+        typedef typename iterator_traits<iterator_type>::difference_type   difference_type;
+        typedef typename iterator_traits<iterator_type>::pointer           pointer;
+        typedef typename iterator_traits<iterator_type>::const_pointer           const_pointer;
+        typedef typename iterator_traits<iterator_type>::reference         reference;
+        typedef typename iterator_traits<iterator_type>::const_reference         const_reference;
+
         iterator();
         iterator(const iterator &other);
         iterator(pointer ptr);
@@ -49,7 +52,6 @@ class iterator
         iterator        operator-= (difference_type) ;
 
         reference       operator[] (size_t n);
-        const_reference operator[] (size_t n) const;
         iterator&       operator=(const iterator&);
         pointer         get_pointer() const ;
     
@@ -57,12 +59,12 @@ class iterator
         const_pointer   operator->() const;
 
         //comparison
-        bool operator== (const iterator<value_type>& iter1)   const;
-        bool operator!= (const iterator<value_type>& iter1)   const;
-        bool operator<  (const iterator<value_type>& iter1)   const;
-        bool operator<= (const iterator<value_type>& iter1)   const;
-        bool operator>  (const iterator<value_type>& iter1)   const;
-        bool operator>= (const iterator<value_type>& iter1)   const;
+        bool operator== (const iterator& iter1)   const;
+        bool operator!= (const iterator& iter1)   const;
+        bool operator<  (const iterator& iter1)   const;
+        bool operator<= (const iterator& iter1)   const;
+        bool operator>  (const iterator& iter1)   const;
+        bool operator>= (const iterator& iter1)   const;
 
     private:
         pointer   __value;
@@ -195,13 +197,6 @@ iterator<T>::operator[] (size_t i)
 {
     return (this->__value[i]);
 
-}
-
-template<class T>
-typename iterator<T>::const_reference 
-iterator<T>::operator[] (size_t i) const
-{
-    return (this->__value[i]);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/30 17:13:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/30 18:07:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 int             main(void)
 {
         const int size = 5;
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+        std::vector<TESTED_TYPE> vct(size);
         TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it = vct.rbegin();
         TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator ite = vct.rbegin();
 
