@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/29 18:50:30 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/30 12:37:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 
 #define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
-#define TESTED_NAMESPACE ft
+#define TESTED_NAMESPACE std
 
 // --- Class foo
 template <typename T>
@@ -113,38 +113,34 @@ range (3)
                 void insert (iterator position, InputIterator first, InputIterator last);
 */
 
-
-template <typename Ite_1, typename Ite_2>
-void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
-{
-        std::cout << (first < second) << std::endl;
-        std::cout << (first <= second) << std::endl;
-        std::cout << (first > second) << std::endl;
-        std::cout << (first >= second) << std::endl;
-        if (redo)
-                ft_eq_ope(second, first, 0);
-}
-
 #define TESTED_TYPE int
 
 int             main(void)
 {
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct;
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit = vct.begin();
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator rit(it);
+        const int size = 5;
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+        // TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_ = vct.begin();
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it(5);
 
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit(rit);
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit_(it);
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit_2(cit);
+        // for (int i = 0; i < size; ++i)
+        //         vct[i] = (i + 1) * 5;
+        // printSize(vct);
 
-        /* error expected
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator rit_(crit);
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator rit2(cit);
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it2(rit);
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit2(crit);
-        */
+        // std::cout << (it_ == it.base()) << std::endl;
+        // std::cout << (it_ == (it + 3).base()) << std::endl;
 
-        std::cout << "OK" << std::endl;
+        // std::cout << *(it.base() + 1) << std::endl;
+        // std::cout << *(it - 3) << std::endl;
+        // std::cout << *(it - 3).base() << std::endl;
+        // it -= 3;
+        // std::cout << *it.base() << std::endl;
+
+        // std::cout << "TEST OFFSET" << std::endl;
+        // std::cout << *(it) << std::endl;
+        // std::cout << *(it).base() << std::endl;
+        // std::cout << *(it - 0) << std::endl;
+        // std::cout << *(it - 0).base() << std::endl;
+        // std::cout << *(it - 1).base() << std::endl;
+
         return (0);
 }
