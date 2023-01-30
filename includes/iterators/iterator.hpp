@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/30 18:40:17 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/30 18:46:00 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ class iterator
         typedef typename iterator_traits<iterator_type>::value_type        value_type;
         typedef typename iterator_traits<iterator_type>::difference_type   difference_type;
         typedef typename iterator_traits<iterator_type>::pointer           pointer;
-        typedef typename iterator_traits<iterator_type>::const_pointer           const_pointer;
         typedef typename iterator_traits<iterator_type>::reference         reference;
-        typedef typename iterator_traits<iterator_type>::const_reference         const_reference;
+        typedef const reference         const_reference;
+        typedef const pointer           const_pointer;
 
         iterator();
         iterator(const iterator &other);
