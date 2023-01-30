@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/30 18:40:56 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/30 18:42:16 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ namespace ft
         typedef typename allocator_type::difference_type difference_type;
 
         /*Iterators*/
-        typedef typename        ft::iterator<T>                 iterator;
-        typedef const typename        ft::iterator<T>          const_iterator;
+        typedef typename        ft::iterator<pointer>                 iterator;
+        typedef const typename        ft::iterator<pointer>          const_iterator;
         
         /*reverse_iterator*/
         typedef typename ft::reverse_iterator<iterator >            reverse_iterator;
