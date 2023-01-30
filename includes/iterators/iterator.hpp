@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/29 18:41:44 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/30 15:23:02 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,6 @@
 #define ITERATOR_HPP
 
 namespace ft {
-
-template<class Iterator>
-struct iterator_traits
-{
-    typedef typename Iterator::difference_type difference_type;
-    typedef typename Iterator::value_type value_type;
-    typedef typename Iterator::pointer pointer;
-    typedef typename Iterator::reference reference;
-    typedef typename Iterator::iterator_category iterator_category;
-};
-
-template<class T>
-struct iterator_traits<T*>
-{
-    typedef ptrdiff_t difference_type;
-    typedef T value_type;
-    typedef T* pointer;
-    typedef T& reference;
-    typedef std::random_access_iterator_tag iterator_category;
-};
-
 
 template<class T>
 class iterator
