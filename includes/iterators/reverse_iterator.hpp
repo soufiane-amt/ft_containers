@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/30 16:44:54 by samajat          ###   ########.fr       */
+/*   Updated: 2023/01/30 16:56:53 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ reverse_iterator<iter>::reverse_iterator():__iter(0)
 
 template<class iter>
 template< class U >
-reverse_iterator<iter>::reverse_iterator( const reverse_iterator<U>& other ):__iter(this->__iter)
+reverse_iterator<iter>::reverse_iterator( const reverse_iterator<U>& other ):__iter(other.__iter)
 {
 }
 
@@ -144,14 +144,14 @@ reverse_iterator<iter>        reverse_iterator<iter>::operator--(int)
 template<class iter>
 reverse_iterator<iter> reverse_iterator<iter>::operator+(difference_type ele) const
 {
-    return (this->__iter + ele);
+    return (reverse_iterator<iter>(this->__iter + ele));
 }
 
 
 template<class iter>
 reverse_iterator<iter> reverse_iterator<iter>::operator-(difference_type ele) const
 {
-    return (this->__iter - ele);
+    return (reverse_iterator<iter>(this->__iter - ele));
 }
 
 
@@ -165,13 +165,13 @@ reverse_iterator<iter>::operator[](difference_type n) const
 template<class iter>
 reverse_iterator<iter>&        reverse_iterator<iter>::operator+= (difference_type elem)
 {
-    return ( this->__iter - elem);
+    return ( reverse_iterator<iter>(this->__iter - elem));
 }
 
 template<class iter>
 reverse_iterator<iter>&        reverse_iterator<iter>::operator-= (difference_type elem)
 {
-    return ( this->__iter + elem);
+    return ( reverse_iterator<iter>(this->__iter + elem));
 }
 
 
