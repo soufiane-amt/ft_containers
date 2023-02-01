@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/30 18:42:16 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/01 15:11:19 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,25 @@
 #include "utils.hpp"
 
 
+
 namespace ft
 {
     template <class T, class Allocator = std::allocator<T> >
     class vector
     {
     public:
-        typedef T                                        value_type;
-        typedef Allocator                                allocator_type;
-        typedef value_type&                              reference;
-        typedef const value_type&                        const_reference;
-        typedef value_type*                              pointer;
-        typedef const value_type*                        const_pointer;
-        typedef size_t                                   size_type;   
-        typedef typename allocator_type::difference_type difference_type;
+            typedef T                                        value_type;
+            typedef Allocator                                allocator_type;
+            typedef value_type&                              reference;
+            typedef const value_type&                        const_reference;
+            typedef value_type*                              pointer;
+            typedef value_type const *                        const_pointer;
+            typedef size_t                                   size_type;   
+            typedef typename allocator_type::difference_type difference_type;
 
         /*Iterators*/
-        typedef typename        ft::iterator<pointer>                 iterator;
-        typedef const typename        ft::iterator<pointer>          const_iterator;
+        typedef typename              ft::iterator<pointer>                iterator;
+        typedef typename              ft::iterator<const_pointer>          const_iterator;
         
         /*reverse_iterator*/
         typedef typename ft::reverse_iterator<iterator >            reverse_iterator;
@@ -844,14 +845,14 @@ template <class T, class Allocator>
 typename vector<T, Allocator>::reverse_iterator       
 vector<T, Allocator>::rend()
 {
-    return (vector<T, Allocator>::iterator(this->elements + _v_size));
+    return (vector<T, Allocator>::reverse_iterator(this->elements + _v_size));
 }
 
 template <class T, class Allocator> 
 typename vector<T, Allocator>::const_reverse_iterator 
 vector<T, Allocator>::rend() const
 {
-    return (vector<T, Allocator>::iterator(this->elements + _v_size));
+    return (vector<T, Allocator>::const_reverse_iterator(this->elements + _v_size));
 }
 
 

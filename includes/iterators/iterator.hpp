@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/30 18:46:00 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/01 15:24:05 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "../utils.hpp"
 
 namespace ft {
-
 template<class _ite>
 class iterator
 {
@@ -32,7 +31,8 @@ class iterator
         typedef const pointer           const_pointer;
 
         iterator();
-        iterator(const iterator &other);
+        template <typename it>
+        iterator(const it &other);
         iterator(pointer ptr);
         
         
@@ -45,14 +45,14 @@ class iterator
         iterator        operator+(difference_type) const;
         iterator        operator-(difference_type) const;
         
-        difference_type operator+(const iterator&) const;
+                                                                                                                    difference_type operator+(const iterator&) const;
         difference_type operator-(const iterator&) const;
         
         iterator        operator+= (difference_type) ;
         iterator        operator-= (difference_type) ;
 
-        reference       operator[] (size_t n);
-        iterator&       operator=(const iterator&);
+        reference       operator[] (size_t n) const;
+        iterator&       operator=(const iterator&)  ;
         pointer         get_pointer() const ;
     
         pointer         operator->();
@@ -72,11 +72,6 @@ class iterator
 
 
 
-
-
-
-
-
 template<class T>
 iterator<T>::iterator():__value(0)
 {
@@ -84,7 +79,8 @@ iterator<T>::iterator():__value(0)
 }
 
 template<class T>
-iterator<T>::iterator(const iterator &other)
+template <typename it>
+iterator<T>::iterator(const it &other)
 {
     this->__value = other.get_pointer();
 }
@@ -116,7 +112,7 @@ iterator<T>&       iterator<T>::operator++()
 }
 
 template<class T>
-iterator<T>        iterator<T>::operator++(int)
+iterator<T>        iterator<T>::operator++(int)  
 {
     iterator<T> tmp (this->__value);
     this->__value++;
@@ -183,7 +179,7 @@ typename iterator<T>::difference_type iterator<T>::operator-(const iterator<T>& 
 
 
 template<class T>
-iterator<T>&       iterator<T>::operator=(const iterator& other)
+iterator<T>&       iterator<T>::operator=(const iterator& other) 
 {
     this->__value = other.get_pointer();
     return (*this);
@@ -193,7 +189,7 @@ iterator<T>&       iterator<T>::operator=(const iterator& other)
 
 template<class T>
 typename iterator<T>::reference       
-iterator<T>::operator[] (size_t i)
+iterator<T>::operator[] (size_t i)const
 {
     return (this->__value[i]);
 

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/30 18:07:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/01 15:51:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,34 +99,44 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 	}
 	std::cout << "###############################################" << std::endl;
 }
-
 #define TESTED_TYPE int
 
 int             main(void)
 {
-        const int size = 5;
-        std::vector<TESTED_TYPE> vct(size);
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it = vct.rbegin();
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator ite = vct.rbegin();
+  TESTED_NAMESPACE::vector<TESTED_TYPE> vct(7);
+  TESTED_NAMESPACE::vector<TESTED_TYPE> vct_two(4);
+  TESTED_NAMESPACE::vector<TESTED_TYPE> vct_three;
+  TESTED_NAMESPACE::vector<TESTED_TYPE> vct_four;
 
-        for (int i = 0; i < size; ++i)
-                it[i] = (size - i) * 5;
+  for (unsigned long int i = 0; i < vct.size(); ++i)
+        vct[i] = (vct.size() - i) * 3;
+  for (unsigned long int i = 0; i < vct_two.size(); ++i)
+        vct_two[i] = (vct_two.size() - i) * 5;
+  printSize(vct);
+  printSize(vct_two);
 
-        it = it + 5;
-        it = 1 + it;
-        it = it - 4;
-        std::cout << *(it += 2) << std::endl;
-        std::cout << *(it -= 1) << std::endl;
+  vct_three.assign(vct.begin(), vct.end());
+  vct.assign(vct_two.begin(), vct_two.end());
+  vct_two.assign(2, 42);
+  vct_four.assign(4, 21);
 
-        *(it -= 2) = 42;
-        *(it += 2) = 21;
+  std::cout << "\t### After assign(): ###" << std::endl;
 
-        std::cout << "const_ite +=/-=: " << *(ite += 2) << " | " << *(ite -= 2) << std::endl;
+  printSize(vct);
+  printSize(vct_two);
+  printSize(vct_three);
+  printSize(vct_four);
 
-        std::cout << "(it == const_it): " << (ite == it) << std::endl;
-        std::cout << "(const_ite - it): " << (ite - it) << std::endl;
-        std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
+  vct_four.assign(6, 84);
+  printSize(vct_four);
 
-        printSize(vct, true);
-        return (0);
+  std::cout << "\t### assign() on enough capacity and low size: ###" << std::endl;
+
+  vct.assign(5, 53);
+  vct_two.assign(vct_three.begin(), vct_three.begin() + 3);
+
+  printSize(vct);
+  printSize(vct_two);
+
+  return (0);
 }
