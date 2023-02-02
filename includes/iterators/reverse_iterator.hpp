@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/02 19:27:20 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 19:59:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ reverse_iterator<iter>&       reverse_iterator<iter>::operator++()
 template<class iter>
 reverse_iterator<iter>        reverse_iterator<iter>::operator++(int)
 {
-    iter tmp (this->__iter);
+    reverse_iterator<iter>tmp(*this);
     this->__iter--;
     
     return (tmp);
