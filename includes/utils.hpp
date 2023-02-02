@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/01/30 18:45:09 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 15:05:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ struct iterator_traits<T*>
 };
 
 
+template<class T>
+    struct iterator_traits<const T *> {
+    typedef std::random_access_iterator_tag iterator_category;
+    typedef T value_type;
+    typedef ptrdiff_t difference_type;
+    typedef const T* pointer;
+    typedef const T& reference;
+};
 
 
 //is_integral  .////Inherited from integral_constant:

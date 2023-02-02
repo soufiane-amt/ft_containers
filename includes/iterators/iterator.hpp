@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/01 15:24:05 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 17:36:28 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ class iterator
         typedef const pointer           const_pointer;
 
         iterator();
-        template <typename it>
+        
+        template <class it>
         iterator(const it &other);
+        
         iterator(pointer ptr);
         
         
@@ -52,22 +54,23 @@ class iterator
         iterator        operator-= (difference_type) ;
 
         reference       operator[] (size_t n) const;
-        iterator&       operator=(const iterator&)  ;
-        pointer         get_pointer() const ;
+        template <class it>
+        iterator&       operator=(const it&)  ;
+        iterator_type         get_pointer() const ;
     
         pointer         operator->();
         const_pointer   operator->() const;
 
         //comparison
-        bool operator== (const iterator& iter1)   const;
-        bool operator!= (const iterator& iter1)   const;
-        bool operator<  (const iterator& iter1)   const;
-        bool operator<= (const iterator& iter1)   const;
-        bool operator>  (const iterator& iter1)   const;
-        bool operator>= (const iterator& iter1)   const;
+        // bool operator== (const iterator& iter1)   const;
+        // bool operator!= (const iterator& iter1)   const;
+        // bool operator<  (const iterator& iter1)   const;
+        // bool operator<= (const iterator& iter1)   const;
+        // bool operator>  (const iterator& iter1)   const;
+        // bool operator>= (const iterator& iter1)   const;
 
     private:
-        pointer   __value;
+        iterator_type   __value;
     };
 
 
@@ -79,9 +82,10 @@ iterator<T>::iterator():__value(0)
 }
 
 template<class T>
-template <typename it>
+template <class it>
 iterator<T>::iterator(const it &other)
 {
+
     this->__value = other.get_pointer();
 }
 
@@ -93,7 +97,7 @@ iterator<T>::iterator(pointer ptr)
 
 
 template<class T>
-typename iterator<T>::pointer iterator<T>::get_pointer() const 
+typename iterator<T>::iterator_type iterator<T>::get_pointer() const 
 {
     return (this->__value);
 }
@@ -136,18 +140,6 @@ iterator<T>        iterator<T>::operator--(int)
     return (tmp);
 }
 
-template<class T>
-bool            iterator<T>::operator==(const iterator<T>& iter) const
-{
-    return (this->__value == &(*iter));
-}
-
-template<class T>
-bool            iterator<T>::operator!=(const iterator<T>& iter) const
-{
-    return (this->__value != &(*iter));
-}
-
 
 //
 template<class T>
@@ -179,7 +171,8 @@ typename iterator<T>::difference_type iterator<T>::operator-(const iterator<T>& 
 
 
 template<class T>
-iterator<T>&       iterator<T>::operator=(const iterator& other) 
+template <class it>
+iterator<T>&       iterator<T>::operator=(const it& other) 
 {
     this->__value = other.get_pointer();
     return (*this);
@@ -212,32 +205,50 @@ typename iterator<T>::const_pointer   iterator<T>::operator->() const
 
 //comparison
 
+//non members
 
-template<class T>
-bool iterator<T>::operator<  (const iterator<T>& iter1) const
+
+template< class Iterator1, class Iterator2 >
+bool operator==( const ft::iterator<Iterator1>& iter1,
+                 const ft::iterator<Iterator2>& iter2 )
 {
-    return (iter1.get_pointer() < this->__value);
+    return (iter1.base() == iter2.base());
+}
+
+template< class Iterator1, class Iterator2 >
+bool operator!=( const ft::iterator<Iterator1>& iter1,
+                 const ft::iterator<Iterator2>& iter2 )
+{
+    return (iter1.base() != iter2.base());
+}
+
+template< class Iterator1, class Iterator2 >
+bool operator<( const ft::iterator<Iterator1>& iter1,
+                const ft::iterator<Iterator2>& iter2 )
+{
+    return (iter1.base() < iter2.base());
 
 }
 
-template<class T>
-bool iterator<T>::operator<= (const iterator<T>& iter1) const
+template< class Iterator1, class Iterator2 >
+bool operator<=( const ft::iterator<Iterator1>& iter1,
+                 const ft::iterator<Iterator2>& iter2 )
 {
-    return (iter1.get_pointer() <= this->__value);
+    return (iter1.base() <= iter2.base());
 }
 
-template<class T>
-bool iterator<T>::operator>  (const iterator<T>& iter1) const
+template< class Iterator1, class Iterator2 >
+bool operator>( const ft::iterator<Iterator1>& iter1,
+                const ft::iterator<Iterator2>& iter2 )
 {
-    return (iter1.get_pointer() > this->__value);
+    return (iter1.base() > iter2.base());
 }
 
-template<class T>
-bool iterator<T>::operator>= (const iterator<T>& iter1) const
+template< class Iterator1, class Iterator2 >
+bool operator>=( const ft::iterator<Iterator1>& iter1,
+                 const ft::iterator<Iterator2>& iter2 )
 {
-    return (iter1.get_pointer() >= this->__value);
-
-}
+    return (iter1.base() >= iter2.base());
 
 
 //non members

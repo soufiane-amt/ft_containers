@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/01 15:51:29 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 17:22:05 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 
 #define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
-#define TESTED_NAMESPACE ft
+#define TESTED_NAMESPACE std
 
 // --- Class foo
 template <typename T>
@@ -99,44 +99,50 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 	}
 	std::cout << "###############################################" << std::endl;
 }
+#include <list>
 #define TESTED_TYPE int
 
 int             main(void)
 {
-  TESTED_NAMESPACE::vector<TESTED_TYPE> vct(7);
-  TESTED_NAMESPACE::vector<TESTED_TYPE> vct_two(4);
-  TESTED_NAMESPACE::vector<TESTED_TYPE> vct_three;
-  TESTED_NAMESPACE::vector<TESTED_TYPE> vct_four;
+        const int size = 5;
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it(vct.begin());
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator ite(vct.end());
 
-  for (unsigned long int i = 0; i < vct.size(); ++i)
-        vct[i] = (vct.size() - i) * 3;
-  for (unsigned long int i = 0; i < vct_two.size(); ++i)
-        vct_two[i] = (vct_two.size() - i) * 5;
-  printSize(vct);
-  printSize(vct_two);
+		std::cout << (it != ite) << std::endl;
+        // for (int i = 1; it != ite; ++i)
+        //         *it++ = i;
+        // printSize(vct, 1);
 
-  vct_three.assign(vct.begin(), vct.end());
-  vct.assign(vct_two.begin(), vct_two.end());
-  vct_two.assign(2, 42);
-  vct_four.assign(4, 21);
+        // it = vct.begin();
+        // ite = vct.begin();
 
-  std::cout << "\t### After assign(): ###" << std::endl;
+        // std::cout << *(++ite) << std::endl;
+        // std::cout << *(ite++) << std::endl;
+        // std::cout << *ite++ << std::endl;
+        // std::cout << *++ite << std::endl;
 
-  printSize(vct);
-  printSize(vct_two);
-  printSize(vct_three);
-  printSize(vct_four);
+        // it->m();
+        // ite->m();
 
-  vct_four.assign(6, 84);
-  printSize(vct_four);
+        // std::cout << *(++it) << std::endl;
+        // std::cout << *(it++) << std::endl;
+        // std::cout << *it++ << std::endl;
+        // std::cout << *++it << std::endl;
 
-  std::cout << "\t### assign() on enough capacity and low size: ###" << std::endl;
+        // std::cout << *(--ite) << std::endl;
+        // std::cout << *(ite--) << std::endl;
+        // std::cout << *--ite << std::endl;
+        // std::cout << *ite-- << std::endl;
 
-  vct.assign(5, 53);
-  vct_two.assign(vct_three.begin(), vct_three.begin() + 3);
+        // (*it).m();
+        // (*ite).m();
 
-  printSize(vct);
-  printSize(vct_two);
-
-  return (0);
+        // std::cout << *(--it) << std::endl;
+        // std::cout << *(it--) << std::endl;
+        // std::cout << *it-- << std::endl;
+        // std::cout << *--it << std::endl;
+		(void)ite;
+		(void)it;
+        return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/01 15:11:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 17:36:42 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ namespace ft
         typedef typename              ft::iterator<const_pointer>          const_iterator;
         
         /*reverse_iterator*/
-        typedef typename ft::reverse_iterator<iterator >            reverse_iterator;
-        typedef typename ft::reverse_iterator<const_iterator >      const_reverse_iterator;
+        typedef typename              ft::reverse_iterator<iterator >            reverse_iterator;
+        typedef typename              ft::reverse_iterator<const_iterator >      const_reverse_iterator;
         
         
         
@@ -96,7 +96,7 @@ namespace ft
         
         template <class InputIterator>
         typename enable_if<!is_integral<InputIterator>::value, void>::type
-        insert (iterator position, InputIterator first, InputIterator last);
+         insert (const_iterator position, InputIterator first, InputIterator last);
 
         iterator                erase (iterator position);
         iterator                erase (iterator first, iterator last);
@@ -537,7 +537,7 @@ void                    vector<T, Allocator>::insert (iterator position, size_ty
 
 template <class InputIterator>
 typename enable_if<!is_integral<InputIterator>::value, void>::type
-vector<T, Allocator>::insert (iterator position, InputIterator first, InputIterator last)
+vector<T, Allocator>::insert (const_iterator position, InputIterator first, InputIterator last)
 {
     InputIterator lastTmp = last;
     while (first != last)
