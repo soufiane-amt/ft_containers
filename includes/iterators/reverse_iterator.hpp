@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/02 18:49:28 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 19:27:20 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,13 +236,13 @@ operator+( typename reverse_iterator<Iter>::difference_type n, const reverse_ite
     return (it + n);
 }
 
-template< class Iter >
-typename reverse_iterator<Iter>::difference_type
-operator-( const reverse_iterator<Iter> it1, const reverse_iterator<Iter>& it2)
+template< class iterator1, class iterator2 >
+typename reverse_iterator<iterator1>::difference_type
+operator-( const reverse_iterator<iterator1> it1, const reverse_iterator<iterator2>& it2)
 {
     return (it1.base() - it2.base());
 }
-
+ 
 
 
 

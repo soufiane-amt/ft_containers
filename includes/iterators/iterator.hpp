@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/02 18:25:21 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 19:25:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,52 @@ iterator<T>        iterator<T>::operator-= (difference_type elem)
 }
 
 
+
+
+
+
+// template< class Iterator1, class Iterator2 >
+// bool operator==( const ft::iterator<Iterator1>& iter1,
+//                  const ft::iterator<Iterator2>& iter2 )
+// {
+//     return (iter1.base() == iter2.base());
+// }
+
+// template< class Iterator1, class Iterator2 >
+// bool operator!=( const ft::iterator<Iterator1>& iter1,
+//                  const ft::iterator<Iterator2>& iter2 )
+// {
+//     return (iter1.base() != iter2.base());
+// }
+
+// template< class Iterator1, class Iterator2 >
+// bool operator<( const ft::iterator<Iterator1>& iter1,
+//                 const ft::iterator<Iterator2>& iter2 )
+// {
+//     return (iter1.base() < iter2.base());
+
+// }
+
+// template< class Iterator1, class Iterator2 >
+// bool operator<=( const ft::iterator<Iterator1>& iter1,
+//                  const ft::iterator<Iterator2>& iter2 )
+// {
+//     return (iter1.base() <= iter2.base());
+// }
+
+// template< class Iterator1, class Iterator2 >
+// bool operator>( const ft::iterator<Iterator1>& iter1,
+//                 const ft::iterator<Iterator2>& iter2 )
+// {
+//     return (iter1.base() > iter2.base());
+// }
+
+// template< class Iterator1, class Iterator2 >
+// bool operator>=( const ft::iterator<Iterator1>& iter1,
+//                  const ft::iterator<Iterator2>& iter2 )
+// {
+//     return (iter1.base() >= iter2.base());
+// }
 
 
 
