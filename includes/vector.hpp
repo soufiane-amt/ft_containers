@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/02 17:36:42 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:41:51 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -643,11 +643,11 @@ bool operator!= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 template <class T, class Alloc>
 bool operator<  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    typedef typename ft::iterator<T>              iterator;
+    typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
     
-    iterator   first1 = v1.begin();
-    iterator   first2 = v2.begin();
-    iterator   last1  = v1.end();
+    const_iterator   first1 = v1.begin();
+    const_iterator   first2 = v2.begin();
+    const_iterator   last1  = v1.end();
 
     while (first1!=last1)
     {
@@ -662,11 +662,11 @@ bool operator<  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 template <class T, class Alloc>
 bool operator<= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    typedef typename ft::iterator<T>              iterator;
+    typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
 
-    iterator   first1 = v1.begin();
-    iterator   first2 = v2.begin();
-    iterator   last1  = v1.end();
+    const_iterator   first1 = v1.begin();
+    const_iterator   first2 = v2.begin();
+    const_iterator   last1  = v1.end();
 
     while (first1!=last1)
     {
@@ -681,11 +681,11 @@ bool operator<= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 template <class T, class Alloc>
 bool operator>  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    typedef typename ft::iterator<T>              iterator;
+    typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
 
-    iterator   first1 = v1.begin();
-    iterator   first2 = v2.begin();
-    iterator   last1  = v1.end();
+    const_iterator   first1 = v1.begin();
+    const_iterator   first2 = v2.begin();
+    const_iterator   last1  = v1.end();
 
     while (first1!=last1)
     {
@@ -700,11 +700,11 @@ bool operator>  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 template <class T, class Alloc>
 bool operator>= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    typedef typename ft::iterator<T>              iterator;
+    typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
 
-    iterator   first1 = v1.begin();
-    iterator   first2 = v2.begin();
-    iterator   last1  = v1.end();
+    const_iterator   first1 = v1.begin();
+    const_iterator   first2 = v2.begin();
+    const_iterator   last1  = v1.end();
 
     while (first1!=last1)
     {

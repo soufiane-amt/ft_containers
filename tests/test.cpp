@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/02 17:38:13 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:43:41 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 
 #define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
-#define TESTED_NAMESPACE ft
+#define TESTED_NAMESPACE std
 
 // --- Class foo
 template <typename T>
@@ -102,47 +102,39 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 #include <list>
 #define TESTED_TYPE int
 
+template <class T, class Alloc>
+void    cmp(const TESTED_NAMESPACE::vector<T, Alloc> &lhs, const TESTED_NAMESPACE::vector<T, Alloc> &rhs)
+{
+        static int i = 0;
+
+        std::cout << "############### [" << i++ << "] ###############"  << std::endl;
+        std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
+        std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
+        // std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
+}
+
 int             main(void)
 {
-        const int size = 5;
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it(vct.begin());
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator ite(vct.end());
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(4);
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct2(4);
 
-		std::cout << (it != ite) << std::endl;
-        // for (int i = 1; it != ite; ++i)
-        //         *it++ = i;
-        // printSize(vct, 1);
+        cmp(vct, vct);  // 0
+        cmp(vct, vct2); // 1
 
-        // it = vct.begin();
-        // ite = vct.begin();
+        vct2.resize(10);
 
-        // std::cout << *(++ite) << std::endl;
-        // std::cout << *(ite++) << std::endl;
-        // std::cout << *ite++ << std::endl;
-        // std::cout << *++ite << std::endl;
+        cmp(vct, vct2); // 2
+        cmp(vct2, vct); // 3
 
-        // it->m();
-        // ite->m();
+        vct[2] = 42;
 
-        // std::cout << *(++it) << std::endl;
-        // std::cout << *(it++) << std::endl;
-        // std::cout << *it++ << std::endl;
-        // std::cout << *++it << std::endl;
+        cmp(vct, vct2); // 4
+        cmp(vct2, vct); // 5
 
-        // std::cout << *(--ite) << std::endl;
-        // std::cout << *(ite--) << std::endl;
-        // std::cout << *--ite << std::endl;
-        // std::cout << *ite-- << std::endl;
+        swap(vct, vct2);
 
-        // (*it).m();
-        // (*ite).m();
+        cmp(vct, vct2); // 6
+        cmp(vct2, vct); // 7
 
-        // std::cout << *(--it) << std::endl;
-        // std::cout << *(it--) << std::endl;
-        // std::cout << *it-- << std::endl;
-        // std::cout << *--it << std::endl;
-		(void)ite;
-		(void)it;
         return (0);
 }

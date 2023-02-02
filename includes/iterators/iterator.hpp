@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/02 17:40:03 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:25:21 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ iterator<T>::iterator():__value(0)
 
 template<class T>
 template <class it>
-iterator<T>::iterator(const it &other)
+iterator<T>::iterator(const it &other):__value(other.base())
 {
 
-    this->__value = other.base();
+    // this->__value = other.base();
 }
 
 template<class T>
