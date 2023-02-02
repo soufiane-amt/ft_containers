@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/02 17:36:28 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 17:40:03 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 #include "../utils.hpp"
 
-namespace ft {
+namespace ft 
+{
 template<class _ite>
 class iterator
 {
@@ -36,6 +37,8 @@ class iterator
         iterator(const it &other);
         
         iterator(pointer ptr);
+
+        iterator_type      base() const;
         
         
         reference       operator*() const;
@@ -56,7 +59,6 @@ class iterator
         reference       operator[] (size_t n) const;
         template <class it>
         iterator&       operator=(const it&)  ;
-        iterator_type         get_pointer() const ;
     
         pointer         operator->();
         const_pointer   operator->() const;
@@ -86,7 +88,7 @@ template <class it>
 iterator<T>::iterator(const it &other)
 {
 
-    this->__value = other.get_pointer();
+    this->__value = other.base();
 }
 
 template<class T>
@@ -96,11 +98,13 @@ iterator<T>::iterator(pointer ptr)
 }
 
 
+
 template<class T>
-typename iterator<T>::iterator_type iterator<T>::get_pointer() const 
+typename iterator<T>::iterator_type iterator<T>::base() const 
 {
     return (this->__value);
 }
+
 
 template<class T>
 typename iterator<T>::reference       iterator<T>::operator*() const
@@ -174,7 +178,7 @@ template<class T>
 template <class it>
 iterator<T>&       iterator<T>::operator=(const it& other) 
 {
-    this->__value = other.get_pointer();
+    this->__value = other.base();
     return (*this);
 }
 
@@ -250,7 +254,7 @@ bool operator>=( const ft::iterator<Iterator1>& iter1,
 {
     return (iter1.base() >= iter2.base());
 
-
+}
 //non members
 
 
