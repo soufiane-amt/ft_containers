@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/02 18:41:51 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:55:10 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -831,14 +831,14 @@ template <class T, class Allocator>
 typename vector<T, Allocator>::reverse_iterator       
 vector<T, Allocator>::rbegin()
 {
-    return (vector<T, Allocator>::iterator(this->elements));
+    return (vector<T, Allocator>::reverse_iterator(this->elements));
 }
 
 template <class T, class Allocator> 
 typename vector<T, Allocator>::const_reverse_iterator 
 vector<T, Allocator>::rbegin() const
 {
-    return (vector<T, Allocator>::iterator(this->elements));
+    return (vector<T, Allocator>::const_reverse_iterator(this->elements));
 }
 
 template <class T, class Allocator> 
