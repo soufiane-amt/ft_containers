@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/02 12:56:44 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:49:28 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ reverse_iterator<iter>::reverse_iterator():__iter(0)
 
 template<class iter>
 template< class U >
-reverse_iterator<iter>::reverse_iterator( const reverse_iterator<U>& other ):__iter(other.__iter)
+reverse_iterator<iter>::reverse_iterator( const reverse_iterator<U>& other ):__iter(other.base())
 {
 }
 
