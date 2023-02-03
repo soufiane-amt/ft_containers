@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/03 11:19:01 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/03 13:58:03 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,8 +258,10 @@ typename vector<T, Allocator>::size_type vector<T, Allocator>::  max_size() cons
 template <class T, class Allocator >
 void vector<T, Allocator>::resize (size_type n, value_type val)
 {
-    if (!n)
-        return ;
+    // if (!n)
+    //     return ;
+    pointer tmp = new value_type[_v_size];
+    std::copy(this->elements, this->elements + _v_size, tmp);
     if (n > this->_v_capacity)
     {
         if (this->elements)
@@ -269,13 +271,16 @@ void vector<T, Allocator>::resize (size_type n, value_type val)
             allocator.deallocate(this->elements, _v_capacity);
         }
         this->elements = this->allocator.allocate(n);
+        this->_v_capacity = n;
     }
     if (n < this->_v_size)
         for (size_t i = n; i < this->_v_size; i++)
             allocator.destroy(this->elements + i);
     else if (n > this->_v_size)
         for (size_t i = this->_v_size; i < n; i++)
-            allocator.construct(this->elements, val);
+            allocator.construct(this->elements + i, val);
+    for (size_t i = 0; i < this->_v_size; i++)
+        allocator.construct(this->elements + i, tmp[i]);
     this->_v_size = n;
 }
 
