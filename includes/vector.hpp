@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/02 18:55:10 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/03 11:07:34 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -831,28 +831,28 @@ template <class T, class Allocator>
 typename vector<T, Allocator>::reverse_iterator       
 vector<T, Allocator>::rbegin()
 {
-    return (vector<T, Allocator>::reverse_iterator(this->elements));
+    return (reverse_iterator(end()));
 }
 
 template <class T, class Allocator> 
 typename vector<T, Allocator>::const_reverse_iterator 
 vector<T, Allocator>::rbegin() const
 {
-    return (vector<T, Allocator>::const_reverse_iterator(this->elements));
+    return (const_reverse_iterator(end()));
 }
 
 template <class T, class Allocator> 
 typename vector<T, Allocator>::reverse_iterator       
 vector<T, Allocator>::rend()
 {
-    return (vector<T, Allocator>::reverse_iterator(this->elements + _v_size));
+    return (reverse_iterator(begin()));
 }
 
 template <class T, class Allocator> 
 typename vector<T, Allocator>::const_reverse_iterator 
 vector<T, Allocator>::rend() const
 {
-    return (vector<T, Allocator>::const_reverse_iterator(this->elements + _v_size));
+    return (const_reverse_iterator(begin()));
 }
 
 
