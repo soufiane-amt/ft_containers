@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/03 17:22:41 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:56:14 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,34 +99,59 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 	}
 	std::cout << "###############################################" << std::endl;
 }
-#define TESTED_TYPE int
-int main ()
+
+#define TESTED_TYPE foo<int>
+
+template <typename Ite_1, typename Ite_2>
+void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 {
-        TESTED_NAMESPACE::vector<TESTED_TYPE> foo(3, 15);
-        TESTED_NAMESPACE::vector<TESTED_TYPE> bar(5, 42);
+        std::cout << (first < second) << std::endl;
+        std::cout << (first <= second) << std::endl;
+        std::cout << (first > second) << std::endl;
+        std::cout << (first >= second) << std::endl;
+        if (redo)
+                ft_eq_ope(second, first, 0);
+}
 
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator it_foo = foo.begin();
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator it_bar = bar.begin();
+int             main(void)
+{
+        const int size = 5;
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_0(vct.rbegin());
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_1(vct.rend());
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_mid;
 
-        std::cout << "BEFORE SWAP" << std::endl;
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_0 = vct.rbegin();
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_1;
+        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_mid;
 
-        std::cout << "foo contains:" << std::endl;
-        printSize(foo);
-        std::cout << "bar contains:" << std::endl;
-        printSize(bar);
+        for (int i = size; it_0 != it_1; --i)
+                *it_0++ = i;
+        printSize(vct, 1);
+        it_0 = vct.rbegin();
+        cit_1 = vct.rend();
+        it_mid = it_0 + 3;
+        cit_mid = it_0 + 3; cit_mid = cit_0 + 3; cit_mid = it_mid;
 
-        foo.swap(bar);
+        std::cout << std::boolalpha;
+        std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
 
-        std::cout << "AFTER SWAP" << std::endl;
-
-        std::cout << "foo contains:" << std::endl;
-        printSize(foo);
-        std::cout << "bar contains:" << std::endl;
-        printSize(bar);
-
-        std::cout << "Iterator validity:" << std::endl;
-        std::cout << (it_foo == bar.begin()) << std::endl;
-        std::cout << (it_bar == foo.begin()) << std::endl;
+        std::cout << "\t\tft_eq_ope:" << std::endl;
+        // regular it
+        ft_eq_ope(it_0 + 3, it_mid);
+        ft_eq_ope(it_0, it_1);
+        ft_eq_ope(it_1 - 3, it_mid);
+        // const it
+        ft_eq_ope(cit_0 + 3, cit_mid);
+        ft_eq_ope(cit_0, cit_1);
+        ft_eq_ope(cit_1 - 3, cit_mid);
+        // both it
+        ft_eq_ope(it_0 + 3, cit_mid);
+        ft_eq_ope(it_mid, cit_0 + 3);
+        ft_eq_ope(it_0, cit_1);
+        ft_eq_ope(it_1, cit_0);
+        ft_eq_ope(it_1 - 3, cit_mid);
+        ft_eq_ope(it_mid, cit_1 - 3);
 
         return (0);
 }

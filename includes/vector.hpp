@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/03 17:51:25 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:55:17 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ namespace ft
         pointer data();
         const_pointer data() const;
 
-        void set_holder(pointer new_element);
         
     private:
         pointer                 elements;
@@ -728,14 +727,9 @@ void vector<T, Allocator>::swap (vector& x)
     std::swap(this->elements, x.elements);
     std::swap(this->_v_capacity, x._v_capacity);
     std::swap(this->_v_size, x._v_size);
+    std::swap(this->allocator, x.allocator);
 }
 
-template <class T, class Allocator> 
-
-void vector<T, Allocator>::set_holder(pointer new_element)
-{
-    this->elements = new_element;
-}
 
         //*swap*//
 template <class T, class Alloc>
