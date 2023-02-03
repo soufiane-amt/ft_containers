@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/03 19:04:43 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/03 19:45:37 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,10 @@ int             main(void)
 
         std::cout << *(it.base() + 1) << std::endl;
         std::cout << *(it - 3) << std::endl;
-        // std::cout << *(it - 3).base() << std::endl;
-        // it -= 3;
-        // std::cout << *it.base() << std::endl;
+        std::cout << *(it - 3).base() << std::endl;
+        it -= 3;
+        std::cout << *it.base() << std::endl;
+        std::cout << *it << std::endl;
 
         // std::cout << "TEST OFFSET" << std::endl;
         // std::cout << *(it) << std::endl;

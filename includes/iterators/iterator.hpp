@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/03 10:28:34 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/03 19:49:55 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ class iterator
                                                                                                                     difference_type operator+(const iterator&) const;
         difference_type operator-(const iterator&) const;
         
-        iterator        operator+= (difference_type) ;
-        iterator        operator-= (difference_type) ;
+        iterator&        operator+= (difference_type) ;
+        iterator&        operator-= (difference_type) ;
 
         reference       operator[] (size_t n) const;
         template <class it>
@@ -275,16 +275,18 @@ iterator<T> operator-(typename iterator<T>::difference_type diff, iterator<T> it
 
 
 template<class T>
-iterator<T>        iterator<T>::operator+= (difference_type elem)
+iterator<T>&        iterator<T>::operator+= (difference_type elem)
 {
-    return (iterator<T> (this->__value + elem));
+    this->__value += elem;
+    return ( *this);
 
 }
 
 template<class T>
-iterator<T>        iterator<T>::operator-= (difference_type elem)
+iterator<T>&        iterator<T>::operator-= (difference_type elem)
 {
-    return (iterator<T> (this->__value - elem));
+    this->__value -= elem;
+    return ( *this);
 }
 
 

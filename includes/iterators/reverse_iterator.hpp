@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/03 18:54:42 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/03 19:38:54 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ iter      reverse_iterator<iter>::base() const
 template<class iter>
 typename reverse_iterator<iter>::reference       reverse_iterator<iter>::operator*() const
 {
-    return (*this->__iter);
+    iter tmp = this->__iter;
+
+    return (*--tmp);
 }
 
 
@@ -151,7 +153,7 @@ reverse_iterator<iter> reverse_iterator<iter>::operator+(difference_type ele) co
 template<class iter>
 reverse_iterator<iter> reverse_iterator<iter>::operator-(difference_type ele) const
 {
-    return (reverse_iterator<iter>(this->__iter + ele));
+    return (reverse_iterator(this->__iter + ele));
 }
 
 
