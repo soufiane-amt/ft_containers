@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/03 13:58:03 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:51:25 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,11 @@ namespace ft
         reverse_iterator       rend();
         const_reverse_iterator rend() const;
 
+        pointer data();
+        const_pointer data() const;
+
+        void set_holder(pointer new_element);
+        
     private:
         pointer                 elements;
         size_type               _v_capacity;
@@ -213,7 +218,7 @@ vector<T, Allocator>& vector<T, Allocator>::operator=(const vector& x)
 {
     if(this == &x) return *this;
     this->_v_size = x.size();
-    if (this->_v_capacity < _v_size)
+    if (this->_v_capacity < this->_v_size)
     {
         if (this->elements)
         {
@@ -258,8 +263,6 @@ typename vector<T, Allocator>::size_type vector<T, Allocator>::  max_size() cons
 template <class T, class Allocator >
 void vector<T, Allocator>::resize (size_type n, value_type val)
 {
-    // if (!n)
-    //     return ;
     pointer tmp = new value_type[_v_size];
     std::copy(this->elements, this->elements + _v_size, tmp);
     if (n > this->_v_capacity)
@@ -722,11 +725,18 @@ bool operator>= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 template <class T, class Allocator> 
 void vector<T, Allocator>::swap (vector& x)
 {
-    vector tmp (x);
-
-    x = *this;
-    *this = tmp;
+    std::swap(this->elements, x.elements);
+    std::swap(this->_v_capacity, x._v_capacity);
+    std::swap(this->_v_size, x._v_size);
 }
+
+template <class T, class Allocator> 
+
+void vector<T, Allocator>::set_holder(pointer new_element)
+{
+    this->elements = new_element;
+}
+
         //*swap*//
 template <class T, class Alloc>
 void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
@@ -857,6 +867,20 @@ vector<T, Allocator>::rend() const
 {
     return (const_reverse_iterator(begin()));
 }
+
+
+template <class T, class Allocator> 
+typename vector<T, Allocator>::pointer vector<T, Allocator>::data()
+{
+    return (this->elements);
+}
+
+template <class T, class Allocator> 
+typename vector<T, Allocator>::const_pointer vector<T, Allocator>::data() const
+{
+    return (this->element);
+}
+
 
 
 /*/////////////////////////////////////////////////////////////////*/

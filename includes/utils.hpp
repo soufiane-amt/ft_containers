@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/02 15:05:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:12:36 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,16 @@ template <class T1,class T2>
 pair<T1,T2> make_pair (T1 x, T2 y)
 {
   return ( pair<T1,T2>(x,y) );
+}
+
+
+template <class T>
+void swap( T& a,   T& b)
+{
+    T tmp(a);
+
+    a = b;
+    b = tmp;
 }
 
 }
