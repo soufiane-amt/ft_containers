@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/03 19:49:55 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 16:07:53 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ class iterator
         iterator        operator-(difference_type) const;
         
                                                                                                                     difference_type operator+(const iterator&) const;
-        difference_type operator-(const iterator&) const;
         
         iterator&        operator+= (difference_type) ;
         iterator&        operator-= (difference_type) ;
@@ -85,9 +84,8 @@ iterator<T>::iterator():__value(0)
 
 template<class T>
 template <class it>
-iterator<T>::iterator(const it &other):__value(other.base())
+iterator<T>::iterator(const it &other):__value ( other.base())
 {
-
 }
 
 template<class T>
@@ -159,17 +157,27 @@ iterator<T> iterator<T>::operator-(difference_type ele) const
 }
 
 
-template<class T>
-typename iterator<T>::difference_type iterator<T>::operator+(const iterator<T>& iter) const
+template< class iterator1, class iterator2 >
+typename iterator<iterator1>::difference_type
+operator+( const iterator<iterator1>& it1, const iterator<iterator2>& it2)
 {
-    return (this->__value + &(*iter));
+    return (it2.base() - it1.base());
 }
 
-template<class T>
-typename iterator<T>::difference_type iterator<T>::operator-(const iterator<T>& iter) const
+template< class iterator1, class iterator2 >
+typename iterator<iterator1>::difference_type
+operator-( const iterator<iterator1>& it1, const iterator<iterator2>& it2)
 {
-    return (this->__value - &(*iter));
+    return (it1.base() - it2.base());
 }
+
+// template< class T >
+// typename iterator<T>::difference_type
+// operator-( const iterator<iterator1>& it1)
+// {
+//     return (this->elements - it2.base());
+// }
+
 
 
 

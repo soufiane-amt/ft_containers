@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/03 19:52:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 16:51:11 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,48 +100,41 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 	std::cout << "###############################################" << std::endl;
 }
 
-
-template <typename Ite_1, typename Ite_2>
-void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
-{
-	static	int i;
-	std::cout << "----->" << i << std::endl;
-	i++;
-    std::cout << (first < second) << std::endl;
-    std::cout << (first <= second) << std::endl;
-    std::cout << (first > second) << std::endl;
-    std::cout << (first >= second) << std::endl;
-    if (redo)
-            ft_eq_ope(second, first, 0);
-}
-
 #define TESTED_TYPE int
+
+template <class T, class Alloc>
+void    cmp(const TESTED_NAMESPACE::vector<T, Alloc> &lhs, const TESTED_NAMESPACE::vector<T, Alloc> &rhs)
+{
+        static int i = 0;
+
+        std::cout << "############### [" << i++ << "] ###############"  << std::endl;
+        std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
+        std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
+        std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
+}
 
 int             main(void)
 {
-        const int size = 5;
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it = vct.rbegin();
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator ite = vct.rbegin();
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(4);
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct2(4);
 
-        for (int i = 0; i < size; ++i)
-                it[i] = (size - i) * 5;
+        cmp(vct, vct);  // 0
+        cmp(vct, vct2); // 1
 
-        it = it + 5;
-        it = 1 + it;
-        it = it - 4;
-        std::cout << *(it += 2) << std::endl;
-        std::cout << *(it -= 1) << std::endl;
+        vct2.resize(10);
 
-        *(it -= 2) = 42;
-        *(it += 2) = 21;
+        cmp(vct, vct2); // 2
+        cmp(vct2, vct); // 3
 
-        std::cout << "const_ite +=/-=: " << *(ite += 2) << " | " << *(ite -= 2) << std::endl;
+        vct[2] = 42;
 
-        std::cout << "(it == const_it): " << (ite == it) << std::endl;
-        std::cout << "(const_ite - it): " << (ite - it) << std::endl;
-        std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
+        cmp(vct, vct2); // 4
+        cmp(vct2, vct); // 5
 
-        printSize(vct, true);
+        swap(vct, vct2);
+
+        cmp(vct, vct2); // 6
+        cmp(vct2, vct); // 7
+
         return (0);
 }

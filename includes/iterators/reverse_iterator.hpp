@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/03 19:38:54 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 16:34:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ reverse_iterator<iter>::reverse_iterator(iter __iter_other):__iter(__iter_other)
 }
 
 template<class iter>
-iter      reverse_iterator<iter>::base() const
+typename reverse_iterator<iter>::iterator_type      reverse_iterator<iter>::base() const
 {
     return (this->__iter);
 }
@@ -105,7 +105,7 @@ typename reverse_iterator<iter>::reference       reverse_iterator<iter>::operato
 template<class iter>
 typename reverse_iterator<iter>::pointer   reverse_iterator<iter>::operator->() const
 {
-    return (&(*this->__iter));
+    return (std::addressof(operator*()));
 }
 
 
@@ -161,7 +161,7 @@ template<class iter>
 typename reverse_iterator<iter>::reference
 reverse_iterator<iter>::operator[](difference_type n) const
 {
-    return(this->__iter[n]);
+    return(base()[-n - 1]);
 }
 
 template<class iter>
@@ -240,9 +240,9 @@ operator+( typename reverse_iterator<Iter>::difference_type n, const reverse_ite
 
 template< class iterator1, class iterator2 >
 typename reverse_iterator<iterator1>::difference_type
-operator-( const reverse_iterator<iterator1> it1, const reverse_iterator<iterator2>& it2)
+operator-( const reverse_iterator<iterator1>& it1, const reverse_iterator<iterator2>& it2)
 {
-    return (it1.base() - it2.base());
+    return (it2.base() - it1.base());
 }
  
 
