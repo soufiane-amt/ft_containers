@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 18:34:43 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 18:42:28 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -502,13 +502,19 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
     iterator    _begin = begin();
     iterator    _end = end() - 1;
     iterator    _dup_position = position;
-    int         i = -1;
+    size_t       pos_index = 0;
 
     new_elements = this->allocator.allocate(++_v_size);
     for (size_t i = 0; _begin != _dup_position; _begin++)
+    {
         allocator.construct(new_elements + (i++), *_begin);
-    for (size_t i = _v_size; _end != _dup_position; _end--)
+        pos_index = i + 1;
+    }
+    allocator.construct(new_elements + pos_index, val);
+
+    for (size_t i = _v_size - 1; _end != _dup_position; _end--)
         allocator.construct(new_elements + (i--), *_end);
+    
     return (this->elements);
 }
 
