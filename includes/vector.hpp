@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 18:42:28 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 18:48:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -504,17 +504,23 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
     iterator    _dup_position = position;
     size_t       pos_index = 0;
 
-    new_elements = this->allocator.allocate(++_v_size);
-    for (size_t i = 0; _begin != _dup_position; _begin++)
+    ++_v_size;
+    if (_v_size == _v_capacity)
     {
-        allocator.construct(new_elements + (i++), *_begin);
-        pos_index = i + 1;
+        new_elements = this->allocator.allocate(_v_size);
+        for (size_t i = 0; _begin != _dup_position; _begin++)
+        {
+            allocator.construct(new_elements + (i++), *_begin);
+            pos_index = i + 1;
+        }
+        allocator.construct(new_elements + pos_index, val);
+        for (size_t i = _v_size - 1; _end != _dup_position; _end--)
+            allocator.construct(new_elements + (i--), *_end);
     }
-    allocator.construct(new_elements + pos_index, val);
+    else
+    {
 
-    for (size_t i = _v_size - 1; _end != _dup_position; _end--)
-        allocator.construct(new_elements + (i--), *_end);
-    
+    }
     return (this->elements);
 }
 
