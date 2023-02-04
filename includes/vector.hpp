@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 17:41:35 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 18:00:30 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -404,6 +404,7 @@ void vector<T, Allocator>::assign (size_type n, const_reference val)
             allocator.destroy(this->elements + i);
         allocator.deallocate(this->elements, _v_capacity);
         this->elements = allocator.allocate(n);
+        this->_v_capacity = n;
     }
     else
     {
@@ -426,10 +427,14 @@ vector<T, Allocator>::assign (InputIterator first, InputIterator last)
     _distance = distance(first, last);    
     if (_distance > this->_v_capacity)
     {
-        for (size_t i = 0; i < _v_size; i++)        
-            allocator.destroy(this->elements + i);
-        allocator.deallocate(this->elements, _v_capacity);
+        if (this->elements)
+        {
+            for (size_t i = 0; i < _v_size; i++)        
+                allocator.destroy(this->elements + i);
+            allocator.deallocate(this->elements, _v_capacity);
+        }
         this->elements = allocator.allocate(_distance);
+        this->_v_capacity = _distance;
     }
     else
     {

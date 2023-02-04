@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 17:46:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 17:59:27 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 
 #define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
-#define TESTED_NAMESPACE std
+#define TESTED_NAMESPACE ft
 
 // --- Class foo
 template <typename T>
@@ -100,7 +100,6 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 	std::cout << "###############################################" << std::endl;
 }
 
-#define TESTED_TYPE foo<int>
 
 template <typename Ite_1, typename Ite_2>
 void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
@@ -113,45 +112,44 @@ void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
                 ft_eq_ope(second, first, 0);
 }
 
+#define TESTED_TYPE int
+
 int             main(void)
 {
-        const int size = 5;
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_0(vct.rbegin());
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_1(vct.rend());
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_mid;
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(7);
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct_two(4);
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct_three;
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct_four;
 
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_0 = vct.rbegin();
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_1;
-        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_mid;
+        for (unsigned long int i = 0; i < vct.size(); ++i)
+                vct[i] = (vct.size() - i) * 3;
+        for (unsigned long int i = 0; i < vct_two.size(); ++i)
+                vct_two[i] = (vct_two.size() - i) * 5;
+        // printSize(vct);
+        // printSize(vct_two);
 
-        for (int i = size; it_0 != it_1; --i)
-                *it_0++ = i;
-        printSize(vct, 1);
-        it_0 = vct.rbegin();
-        cit_1 = vct.rend();
-        it_mid = it_0 + 3;
-        cit_mid = it_0 + 3; cit_mid = cit_0 + 3; cit_mid = it_mid;
+        vct_three.assign(vct.begin(), vct.end());
+        vct.assign(vct_two.begin(), vct_two.end());
+        vct_two.assign(2, 42);
+        vct_four.assign(4, 21);
 
-        std::cout << std::boolalpha;
-        std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
+        std::cout << "\t### After assign(): ###" << std::endl;
 
-        std::cout << "\t\tft_eq_ope:" << std::endl;
-        // regular it
-        ft_eq_ope(it_0 + 3, it_mid);
-        // ft_eq_ope(it_0, it_1);
-        // ft_eq_ope(it_1 - 3, it_mid);
-        // // const it
-        // ft_eq_ope(cit_0 + 3, cit_mid);
-        // ft_eq_ope(cit_0, cit_1);
-        // ft_eq_ope(cit_1 - 3, cit_mid);
-        // // both it
-        // ft_eq_ope(it_0 + 3, cit_mid);
-        // ft_eq_ope(it_mid, cit_0 + 3);
-        // ft_eq_ope(it_0, cit_1);
-        // ft_eq_ope(it_1, cit_0);
-        // ft_eq_ope(it_1 - 3, cit_mid);
-        // ft_eq_ope(it_mid, cit_1 - 3);
+        // printSize(vct);
+        // printSize(vct_two);
+        // printSize(vct_three);
+        printSize(vct_four);
+
+        vct_four.assign(6, 84);
+        printSize(vct_four);
+
+        std::cout << "\t### assign() on enough capacity and low size: ###" << std::endl;
+
+        vct.assign(5, 53);
+        vct_two.assign(vct_three.begin(), vct_three.begin() + 3);
+
+        printSize(vct);
+        printSize(vct_two);
 
         return (0);
 }
