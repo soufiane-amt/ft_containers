@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 18:48:12 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 19:29:39 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -498,7 +498,7 @@ template <class T, class Allocator>
 typename vector<T, Allocator>::iterator    
 vector<T, Allocator>::insert (iterator position, const_reference val)
 {
-    pointer new_elements;
+    pointer new_elements = this->elements;
     iterator    _begin = begin();
     iterator    _end = end() - 1;
     iterator    _dup_position = position;
@@ -519,7 +519,20 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
     }
     else
     {
-
+        for (size_t i = 0; _begin  != _dup_position; _begin++)
+        {
+            allocator.destroy(new_elements + (i++));
+            allocator.construct(new_elements + (i), *_begin);
+            pos_index = i ;
+        }
+        // std::cout << "pos  : " << pos_index << std::endl;
+        allocator.destroy(new_elements + pos_index);
+        allocator.construct(new_elements + pos_index, val);
+        for (size_t i = _v_size - 1; _end != _dup_position; _end--)
+        {
+            allocator.destroy(new_elements + (i--));
+            allocator.construct(new_elements + (i), *_end);
+        }
     }
     return (this->elements);
 }
@@ -575,7 +588,7 @@ vector<T, Allocator>::insert (const_iterator position, InputIterator first, Inpu
     InputIterator lastTmp = last;
     while (first != last)
     {
-        // insert(position, *lastTmp);
+        insert(position, *lastTmp);
         first++;
         lastTmp--;
     }

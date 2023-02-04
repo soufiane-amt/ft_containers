@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 18:03:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 19:16:42 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,37 +129,40 @@ range (3)
 
 int             main(void)
 {
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(10);
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct3;
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(4, 1337);
+		vct.insert(vct.begin() + 1, 0);
+		for (size_t i = 0; i < vct.size(); i++)
+			std::cout << vct[i] << std::endl;		
+        // TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
+        // TESTED_NAMESPACE::vector<TESTED_TYPE> vct3;
 
-        for (unsigned long int i = 0; i < vct.size(); ++i)
-                vct[i] = (vct.size() - i) * 3;
-        printSize(vct);
+        // for (unsigned long int i = 0; i < vct.size(); ++i)
+        //         vct[i] = (vct.size() - i) * 3;
+        // printSize(vct);
 
-        vct2.insert(vct2.end(), 42);
-        vct2.insert(vct2.begin(), 2, 21);
-        printSize(vct2);
+        // vct2.insert(vct2.end(), 42);
+        // vct2.insert(vct2.begin(), 2, 21);
+        // printSize(vct2);
 
-        vct2.insert(vct2.end() - 2, 42);
-        printSize(vct2);
+        // vct2.insert(vct2.end() - 2, 42);
+        // printSize(vct2);
 
-        vct2.insert(vct2.end(), 2, 84);
-        printSize(vct2);
+        // vct2.insert(vct2.end(), 2, 84);
+        // printSize(vct2);
 
-        vct2.resize(4);
-        printSize(vct2);
+        // vct2.resize(4);
+        // printSize(vct2);
 
-        vct2.insert(vct2.begin() + 2, vct.begin(), vct.end());
-        vct.clear();
-        printSize(vct2);
+        // vct2.insert(vct2.begin() + 2, vct.begin(), vct.end());
+        // vct.clear();
+        // printSize(vct2);
 
-        printSize(vct);
+        // printSize(vct);
 
-        for (int i = 0; i < 5; ++i)
-                vct3.insert(vct3.end(), i);
-        vct3.insert(vct3.begin() + 1, 2, 111);
-        printSize(vct3);
+        // for (int i = 0; i < 5; ++i)
+        //         vct3.insert(vct3.end(), i);
+        // vct3.insert(vct3.begin() + 1, 2, 111);
+        // printSize(vct3);
 
         return (0);
 }
