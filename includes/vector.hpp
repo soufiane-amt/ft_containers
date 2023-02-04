@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 18:00:30 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 18:34:43 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -484,20 +484,31 @@ void vector<T, Allocator>::pop_back()
 
 
 
+    // size_type  index = distance (position ,  begin());
+
+    // this->push_back(val);
+    // for (iterator it = end() ; it > position ; --it)
+    //     *it = *(it - 1);
+    // if (this->_v_size)
+    // {
+    //     allocator.destroy(this->elements + index);
+    //     allocator.construct(this->elements + index, val);
+    // }    
 template <class T, class Allocator> 
 typename vector<T, Allocator>::iterator    
 vector<T, Allocator>::insert (iterator position, const_reference val)
 {
-    size_type  index = distance (position ,  begin());
+    pointer new_elements;
+    iterator    _begin = begin();
+    iterator    _end = end() - 1;
+    iterator    _dup_position = position;
+    int         i = -1;
 
-    this->push_back(val);
-    for (iterator it = end() ; it > position ; --it)
-        *it = *(it - 1);
-    if (this->_v_size)
-    {
-        allocator.destroy(this->elements + index);
-        allocator.construct(this->elements + index, val);
-    }    
+    new_elements = this->allocator.allocate(++_v_size);
+    for (size_t i = 0; _begin != _dup_position; _begin++)
+        allocator.construct(new_elements + (i++), *_begin);
+    for (size_t i = _v_size; _end != _dup_position; _end--)
+        allocator.construct(new_elements + (i--), *_end);
     return (this->elements);
 }
 
@@ -552,7 +563,7 @@ vector<T, Allocator>::insert (const_iterator position, InputIterator first, Inpu
     InputIterator lastTmp = last;
     while (first != last)
     {
-        insert(position, *lastTmp);
+        // insert(position, *lastTmp);
         first++;
         lastTmp--;
     }
