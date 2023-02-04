@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 19:41:06 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 19:48:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -531,7 +531,7 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
         for (size_t i = pos_index + 1 ; i < _v_size ; i++ )
         {
             allocator.destroy(new_elements + (i));
-            allocator.construct(new_elements + i + 1, *(_begin + i));
+            allocator.construct(new_elements + (i) , *(_begin + i + 1));
         }
     }
     return (this->elements);
