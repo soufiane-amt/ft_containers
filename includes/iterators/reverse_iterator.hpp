@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 16:34:33 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 17:48:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ template< class Iterator1, class Iterator2 >
 bool operator<( const ft::reverse_iterator<Iterator1>& iter1,
                 const ft::reverse_iterator<Iterator2>& iter2 )
 {
-    return ((iter1.base() < iter2.base()));
+    return ((iter1.base() > iter2.base()));
 
 }
 
@@ -211,21 +211,21 @@ template< class Iterator1, class Iterator2 >
 bool operator<=( const ft::reverse_iterator<Iterator1>& iter1,
                  const ft::reverse_iterator<Iterator2>& iter2 )
 {
-    return ((iter1.base() <= iter2.base()));
+    return ((iter1.base() >= iter2.base()));
 }
 
 template< class Iterator1, class Iterator2 >
 bool operator>( const ft::reverse_iterator<Iterator1>& iter1,
                 const ft::reverse_iterator<Iterator2>& iter2 )
 {
-    return ((iter1.base() > iter2.base()));
+    return ((iter1.base() < iter2.base()));
 }
 
 template< class Iterator1, class Iterator2 >
 bool operator>=( const ft::reverse_iterator<Iterator1>& iter1,
                  const ft::reverse_iterator<Iterator2>& iter2 )
 {
-    return ((iter1.base() >= iter2.base()));
+    return ((iter1.base() <= iter2.base()));
 }
 
 
