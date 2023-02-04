@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 19:53:40 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 19:59:38 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -528,10 +528,10 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
         // std::cout << "pos  : " << pos_index << std::endl;
         allocator.destroy(new_elements + pos_index);
         allocator.construct(new_elements + pos_index, val);
-        for (size_t i = pos_index + 1 ; i < _v_size  ; i++ )
+        for (size_t i = pos_index + 1 ; i < _v_size - 1  ; i++ )
         {
             allocator.destroy(new_elements + (i));
-            allocator.construct(new_elements + (i) , *(_begin + i - 1));
+            allocator.construct(new_elements + (i) , *(_begin + pos_index++ ));
         }
     }
     return (this->elements);
