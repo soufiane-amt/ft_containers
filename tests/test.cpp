@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 16:51:11 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 17:34:51 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 
 #define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
-#define TESTED_NAMESPACE ft
+#define TESTED_NAMESPACE std
 
 // --- Class foo
 template <typename T>
@@ -118,6 +118,7 @@ int             main(void)
         TESTED_NAMESPACE::vector<TESTED_TYPE> vct(4);
         TESTED_NAMESPACE::vector<TESTED_TYPE> vct2(4);
 
+		(vct == vct2);
         cmp(vct, vct);  // 0
         cmp(vct, vct2); // 1
 

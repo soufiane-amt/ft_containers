@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 17:24:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/04 17:41:35 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -627,104 +627,140 @@ vector<T, Allocator>::get_allocator() const
 //                   /*Non-member function overloads*/             //
 /*/////////////////////////////////////////////////////////////////*/
 
-
-
 template <class T, class Alloc>
 bool operator== (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    if (v1.size() != v2.size())
-        return (false);
-    return (equal(v1.begin(), v1.end(), v2.begin()));
+    return (v1.size() == v2.size() && equal(v1.begin(), v1.end(), v2.begin()));
 }
 
 template <class T, class Alloc>
 bool operator!= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    if (v1.size() != v2.size())
-        return (true);
-    return (!equal(v1.begin(), v1.end(), v2.begin()));
+    return !(v1 == v2);
 }
 
 template <class T, class Alloc>
 bool operator<  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    // typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
-    
-    // const_iterator   first1 = v1.begin();
-    // const_iterator   first2 = v2.begin();
-    // const_iterator   last1  = v1.end();
-
-    // while (first1!=last1)
-    // {
-    //     if (*first1 < *first2)
-    //         return true;
-    //     ++first1;
-    //     ++first2;
-    // }
-    // return false;
-    return !(v1>v2);
+    return (lexicographical_compare(v1.begin(), v1.end(), v2.begin(), v2.end()));
 }
 
 template <class T, class Alloc>
 bool operator<= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    // typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
-
-    // const_iterator   first1 = v1.begin();
-    // const_iterator   first2 = v2.begin();
-    // const_iterator   last1  = v1.end();
-
-    // while (first1!=last1)
-    // {
-    //     if (*first1 > *first2)
-    //         return false;
-    //     ++first1;
-    //     ++first2;
-    // }
-    // return true;
-    return !(v1 > v2);
+    return !(v2 < v1);
 }
 
 template <class T, class Alloc>
 bool operator>  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
-
-    const_iterator   first1 = v1.begin();
-    const_iterator   first2 = v2.begin();
-    const_iterator   last1  = v1.end();
-    const_iterator   last2  = v1.end();
-
-    // while (first1!=last1)
-    // {
-    //     if (*first1 > *first2)
-    //         return true;
-    //     ++first1;
-    //     ++first2;
-    // }
-    // return false;
-    return (lexicographical_compare(first1, first2, last1, last2));
+    return (v2 < v1);
 }
 
 template <class T, class Alloc>
 bool operator>= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    // typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
-
-    // const_iterator   first1 = v1.begin();
-    // const_iterator   first2 = v2.begin();
-    // const_iterator   last1  = v1.end();
-
-    // while (first1!=last1)
-    // {
-    //     if (*first1 < *first2)
-    //         return false;
-    //     ++first1;
-    //     ++first2;
-    // }
-    // return true;
     return !(v1 < v2);
 }
+
+
+/////-----
+// template <class T, class Alloc>
+// bool operator== (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
+// {
+//     if (v1.size() != v2.size())
+//         return (false);
+//     return (equal(v1.begin(), v1.end(), v2.begin()));
+// }
+
+// template <class T, class Alloc>
+// bool operator!= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
+// {
+//     if (v1.size() != v2.size())
+//         return (true);
+//     return (!equal(v1.begin(), v1.end(), v2.begin()));
+// }
+
+// template <class T, class Alloc>
+// bool operator<  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
+// {
+//     // typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
+    
+//     // const_iterator   first1 = v1.begin();
+//     // const_iterator   first2 = v2.begin();
+//     // const_iterator   last1  = v1.end();
+
+//     // while (first1!=last1)
+//     // {
+//     //     if (*first1 < *first2)
+//     //         return true;
+//     //     ++first1;
+//     //     ++first2;
+//     // }
+//     // return false;
+//     return !(v1>v2);
+// }
+
+// template <class T, class Alloc>
+// bool operator<= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
+// {
+//     // typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
+
+//     // const_iterator   first1 = v1.begin();
+//     // const_iterator   first2 = v2.begin();
+//     // const_iterator   last1  = v1.end();
+
+//     // while (first1!=last1)
+//     // {
+//     //     if (*first1 > *first2)
+//     //         return false;
+//     //     ++first1;
+//     //     ++first2;
+//     // }
+//     // return true;
+//     return !(v1 > v2);
+// }
+
+// template <class T, class Alloc>
+// bool operator>  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
+// {
+//     typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
+
+//     const_iterator   first1 = v1.begin();
+//     const_iterator   first2 = v2.begin();
+//     const_iterator   last1  = v1.end();
+//     const_iterator   last2  = v1.end();
+
+//     // while (first1!=last1)
+//     // {
+//     //     if (*first1 > *first2)
+//     //         return true;
+//     //     ++first1;
+//     //     ++first2;
+//     // }
+//     // return false;
+//     return (lexicographical_compare(first1, first2, last1, last2));
+// }
+
+// template <class T, class Alloc>
+// bool operator>= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
+// {
+//     // typedef typename ft::vector<T,Alloc>::const_iterator              const_iterator;
+
+//     // const_iterator   first1 = v1.begin();
+//     // const_iterator   first2 = v2.begin();
+//     // const_iterator   last1  = v1.end();
+
+//     // while (first1!=last1)
+//     // {
+//     //     if (*first1 < *first2)
+//     //         return false;
+//     //     ++first1;
+//     //     ++first2;
+//     // }
+//     // return true;
+//     return !(v1 < v2);
+// }
 
 template <class T, class Allocator> 
 void vector<T, Allocator>::swap (vector& x)
