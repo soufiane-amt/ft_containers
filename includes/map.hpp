@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 17:23:56 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 17:53:40 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,21 @@ template<
     ~map();
 
 };
+
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+map<Key, T, Compare, Allocator>::map()
+{
+    
+}
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+map<Key, T, Compare, Allocator>::map( const map& other )
+{
+    
+}
+
+
 }
