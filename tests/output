@@ -1,0 +1,159 @@
+size: 10
+capacity: OK
+max_size: 768614336404564650
+
+Content is:
+- AAAAAAAAAA
+- BBBBBBBBB
+- CCCCCCCC
+- DDDDDDD
+- EEEEEE
+- FFFFF
+- GGGG
+- HHH
+- II
+- J
+###############################################
+[0] erase: 0
+size: 9
+capacity: OK
+max_size: 768614336404564650
+
+Content is:
+- AAAAAAAAAA
+- BBBBBBBBB
+- DDDDDDD
+- EEEEEE
+- FFFFF
+- GGGG
+- HHH
+- II
+- J
+###############################################
+[1] erase: 0
+size: 8
+capacity: OK
+max_size: 768614336404564650
+
+Content is:
+- BBBBBBBBB
+- DDDDDDD
+- EEEEEE
+- FFFFF
+- GGGG
+- HHH
+- II
+- J
+###############################################
+[2] erase: 0
+size: 7
+capacity: OK
+max_size: 768614336404564650
+
+Content is:
+- BBBBBBBBB
+- DDDDDDD
+- EEEEEE
+- FFFFF
+- GGGG
+- HHH
+- II
+###############################################
+[3] erase: 0
+size: 7
+capacity: OK
+max_size: 768614336404564650
+
+Content is:
+- FFFFF
+- GGGG
+- HHH
+- II
+- J
+- J
+- J
+###############################################
+[4] erase: 0
+size: 7
+capacity: OK
+max_size: 768614336404564650
+
+Content is:
+- FFFFF
+- GGGG
+- HHH
+- II
+- J
+- J
+- J
+###############################################
+size: 9
+capacity: OK
+max_size: 768614336404564650
+
+Content is:
+- FFFFF
+- GGGG
+- HHH
+- II
+- J
+- J
+- J
+- Hello
+- Hi there
+###############################################
+[5] erase: 0
+size: 9
+capacity: OK
+max_size: 768614336404564650
+
+Content is:
+- FFFFF
+- GGGG
+- HHH
+- II
+- J
+- J
+- J
+- 
+- 
+###############################################
+size: 13
+capacity: OK
+max_size: 768614336404564650
+
+Content is:
+- FFFFF
+- GGGG
+- HHH
+- II
+- J
+- J
+- J
+- 
+- 
+- ONE
+- TWO
+- THREE
+- FOUR
+###############################################
+[6] erase: 0
+size: 13
+capacity: OK
+max_size: 768614336404564650
+
+Content is:
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+###############################################

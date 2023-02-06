@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 14:57:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 15:20:35 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 
 #define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
-#define TESTED_NAMESPACE ft
+#define TESTED_NAMESPACE std
 
 // --- Class foo
 template <typename T>
@@ -101,54 +101,43 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 }
 
 
-template <typename Ite_1, typename Ite_2>
-void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
+#define TESTED_TYPE std::string
+
+void    checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
+                                        TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator const &it)
 {
-        std::cout << (first < second) << std::endl;
-        std::cout << (first <= second) << std::endl;
-        std::cout << (first > second) << std::endl;
-        std::cout << (first >= second) << std::endl;
-        if (redo)
-                ft_eq_ope(second, first, 0);
+        static int i = 0;
+        std::cout << "[" << i++ << "] " << "erase: " << it - vct.begin() << std::endl;
+        printSize(vct);
 }
-
-
-/*
-single element (1)
-        iterator insert (iterator position, const value_type& val);
-
-fill (2)
-    void insert (iterator position, size_type n, const value_type& val);
-
-range (3)
-        template <class InputIterator>
-                void insert (iterator position, InputIterator first, InputIterator last);
-*/
-#define TESTED_TYPE int
 
 int             main(void)
 {
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(5);
-        TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
-        const int cut = 3;
+        TESTED_NAMESPACE::vector<TESTED_TYPE> vct(10);
 
         for (unsigned long int i = 0; i < vct.size(); ++i)
-                vct[i] = (vct.size() - i) * 7;
+                vct[i] = std::string((vct.size() - i), i + 65);
+        // printSize(vct);
+
+        // checkErase(vct, vct.erase(vct.begin() + 2));
+
+        // checkErase(vct, vct.erase(vct.begin()));
+        // checkErase(vct, vct.erase(vct.end() - 1));
+
+        checkErase(vct, vct.erase(vct.begin(), vct.begin() + 3));
+        checkErase(vct, vct.erase(vct.end() - 3, vct.end() - 1));
+
+        vct.push_back("Hello");
+        vct.push_back("Hi there");
         printSize(vct);
+        checkErase(vct, vct.erase(vct.end() - 3, vct.end()));
 
-        vct2.insert(vct2.begin(), vct.begin(), vct.begin() + cut);
-        printSize(vct2);
-        vct2.insert(vct2.begin(), vct.begin() + cut, vct.end());
-        printSize(vct2);
-        vct2.insert(vct2.end(), vct.begin(), vct.begin() + cut);
-        printSize(vct2);
+        vct.push_back("ONE");
+        vct.push_back("TWO");
+        vct.push_back("THREE");
+        vct.push_back("FOUR");
+        printSize(vct);
+        checkErase(vct, vct.erase(vct.begin(), vct.end()));
 
-        // std::cout << "insert return:" << std::endl;
-
-        std::cout << *vct2.insert(vct2.end(), 42) << std::endl;
-        std::cout << *vct2.insert(vct2.begin() + 5, 84) << std::endl;
-        // std::cout << "----------------------------------------" << std::endl;
-
-        printSize(vct2);
         return (0);
 }
