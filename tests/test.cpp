@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 19:38:08 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 10:26:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ range (3)
 int             main(void)
 {
         TESTED_NAMESPACE::vector<TESTED_TYPE> vct(4, 1337);
-		vct.insert(vct.begin() + 1, 0);
+		vct.insert(vct.begin() + 1, 12);
 		for (size_t i = 0; i < vct.size(); i++)
 			std::cout << vct[i] << std::endl;		
         // TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;

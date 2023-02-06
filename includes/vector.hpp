@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/04 19:59:38 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 10:35:23 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -500,22 +500,23 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
 {
     pointer new_elements = this->elements;
     iterator    _begin = begin();
-    iterator    _end = end() - 1;
+    iterator    _end = end() ;
     iterator    _dup_position = position;
     size_t       pos_index = 0;
 
     ++_v_size;
-    if (_v_size == _v_capacity)
+    if (_v_size > _v_capacity)
     {
         new_elements = this->allocator.allocate(_v_size);
+
         for (size_t i = 0; _begin != _dup_position; _begin++)
         {
             allocator.construct(new_elements + (i++), *_begin);
-            pos_index = i + 1;
+            pos_index = i;
         }
         allocator.construct(new_elements + pos_index, val);
-        for (size_t i = _v_size - 1; _end != _dup_position; _end--)
-            allocator.construct(new_elements + (i--), *_end);
+        for (size_t i = pos_index + 1 ; _dup_position != _end; _dup_position++)
+            allocator.construct(new_elements + (i++), *_dup_position);
     }
     else
     {
@@ -534,6 +535,7 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
             allocator.construct(new_elements + (i) , *(_begin + pos_index++ ));
         }
     }
+    this->elements = new_elements;
     return (this->elements);
 }
 
