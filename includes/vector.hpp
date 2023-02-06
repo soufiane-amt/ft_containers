@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 12:09:12 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:40:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -508,7 +508,6 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
     if (_v_size > _v_capacity)
     {
         new_elements = this->allocator.allocate(_v_size);
-
         for (size_t i = 0; _begin != _dup_position; _begin++)
         {
             allocator.construct(new_elements + (i++), *_begin);
@@ -528,49 +527,55 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
         allocator.destroy(position.base());
         *position = val;
     }
+    _v_capacity = _v_size;
     this->elements = new_elements;
     return (this->elements);
 }
 
-    // t_size      _new_size = this->_v_size + 1;
-    // t_size      index_insert = std::distance (this->elements, &(*position));
-    // pointer     _new_elements;
-    
-    // if (this->_v_capacity == this->_v_size)
-    // {
-    //     _new_elements = this->allocator.allocate(_new_size);
-    //     _copy_elements(_new_elements, this->elements, index_insert);
-    //     allocator.construct(_new_elements + index_insert, val);
-    //     _copy_elements(_new_elements + index_insert + 1, this->elements + index_insert, this->_v_size - index_insert);
-    //     for (size_t i = 0; i < _v_size; i++)
-    //         allocator.destroy(this->elements + i);
-    //     allocator.deallocate(this->elements, _v_capacity);
-    //     this->elements = _new_elements;
-    // }
-    // else
-    // {
-        
-    // }
-    // this->_v_size = _new_size;
 
 template <class T, class Allocator> 
 void                    vector<T, Allocator>::insert (iterator position, size_type n, const_reference val)
 {
-    size_type  index = position - begin();
-    for (size_t i = 0; i < n; i++)
-        this->push_back(val);
-    for (size_t i = 0; i < n; i++)
+    pointer new_elements = this->elements;
+    iterator    _begin = begin();
+    iterator    _end = end() ;
+    iterator    _dup_position = position;
+    size_t       pos_index = 0;
+
+    _v_size += n;
+    if (_v_size > _v_capacity)
     {
-        for (iterator it = end(); it > position; --it)
-            *it = *(it - 1);
+
+        new_elements = this->allocator.allocate(_v_size);
+        for (size_t i = 0; _begin != _dup_position; _begin++)
+        {
+            allocator.construct(new_elements + (i++), *_begin);
+            pos_index = i;
+        }
+        n += pos_index;
+        while( pos_index <  n)
+            allocator.construct(new_elements + (pos_index++), val);
+        for (size_t i = pos_index ; _dup_position != _end; _dup_position++)
+        {
+            allocator.construct(new_elements + (i++), *_dup_position);
+        }
     }
+    else
+    {
+        for ( ; _end != _dup_position ; _end--)
+        {
+            allocator.destroy(_end.base());
+            allocator.construct(_end.base(), *(_end.base() - 1));
+        }
+        for (size_t i = 0; i < n; i++)
+        {
+            allocator.destroy(position.base() + i);
+            position[i] = val;
+        }
         
-    for (size_t i = 0; i < n; i++)
-    {
-        allocator.destroy(this->elements + index + i);
-        allocator.construct(this->elements + index + i, val);
     }
-    this->_v_size++;
+    _v_capacity = _v_size;
+    this->elements = new_elements;
 }   
 
 
@@ -580,12 +585,13 @@ template <class InputIterator>
 typename enable_if<!is_integral<InputIterator>::value, void>::type
 vector<T, Allocator>::insert (iterator position, InputIterator first, InputIterator last)
 {
-    InputIterator lastTmp = last;
+    // InputIterator lastTmp = last - 1;
+    size_t pos = position - begin();
     while (first != last)
     {
-        insert(position, *lastTmp);
+
+        insert(elements + pos, *first);
         first++;
-        lastTmp--;
     }
 }
 

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 12:06:35 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:31:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,31 +135,32 @@ int             main(void)
 
         for (unsigned long int i = 0; i < vct.size(); ++i)
                 vct[i] = (vct.size() - i) * 3;
-        printSize(vct);
-
+        // printSize(vct);
+		
         vct2.insert(vct2.end(), 42);
         vct2.insert(vct2.begin(), 2, 21);
-        printSize(vct2);
+		
+        // // printSize(vct2);
 
         vct2.insert(vct2.end() - 2, 42);
-        printSize(vct2);
+        // // printSize(vct2);
 
         vct2.insert(vct2.end(), 2, 84);
-        printSize(vct2);
+        // // printSize(vct2);
 
         vct2.resize(4);
-        printSize(vct2);
+        // printSize(vct2);
 
         vct2.insert(vct2.begin() + 2, vct.begin(), vct.end());
-        vct.clear();
+        // vct.clear();
         printSize(vct2);
 
-        printSize(vct);
+        // printSize(vct);
 
-        for (int i = 0; i < 5; ++i)
-                vct3.insert(vct3.end(), i);
-        vct3.insert(vct3.begin() + 1, 2, 111);
-        printSize(vct3);
+        // for (int i = 0; i < 5; ++i)
+        //         vct3.insert(vct3.end(), i);
+        // vct3.insert(vct3.begin() + 1, 2, 111);
+        // printSize(vct3);
 
         return (0);
 }
