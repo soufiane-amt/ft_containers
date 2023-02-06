@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 10:26:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 10:39:43 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 
 #define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
-#define TESTED_NAMESPACE ft
+#define TESTED_NAMESPACE std
 
 // --- Class foo
 template <typename T>
@@ -130,7 +130,9 @@ range (3)
 int             main(void)
 {
         TESTED_NAMESPACE::vector<TESTED_TYPE> vct(4, 1337);
+		vct.push_back(5);
 		vct.insert(vct.begin() + 1, 12);
+		std::cout << vct.capacity() << std::endl;
 		for (size_t i = 0; i < vct.size(); i++)
 			std::cout << vct[i] << std::endl;		
         // TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
