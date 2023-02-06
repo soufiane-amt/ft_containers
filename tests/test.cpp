@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 16:40:21 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 17:15:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@
 
 int             main(void)
 {
-		std::map<int, int> m;
-		
+		std::map<int, int> a(1, 14);
+		std::map<int, int> b(21, 14);
+		std::cout << (a - b) <<std::endl;
         // std::list<TESTED_TYPE> lst;
         // std::list<TESTED_TYPE>::iterator lst_it;
         // for (int i = 1; i < 5; ++i)

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 17:03:16 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 17:08:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 17:19:40 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,6 @@ class bidirectional_it
         bidirectional_it        operator+(difference_type) const;
         bidirectional_it        operator-(difference_type) const;
         
-                                                                                                                    difference_type operator+(const bidirectional_it&) const;
-        
-        bidirectional_it&        operator+= (difference_type) ;
-        bidirectional_it&        operator-= (difference_type) ;
-
-        reference               operator[] (size_t n) const;
         template <class it>
         bidirectional_it&       operator=(const it&)  ;
     
@@ -134,20 +128,6 @@ bidirectional_it<T>        bidirectional_it<T>::operator--(int)
 }
 
 
-template<class T>
-bidirectional_it<T> bidirectional_it<T>::operator+(difference_type ele) const
-{
-    return (bidirectional_it<T>(this->__value + ele));
-}
-
-
-template<class T>
-bidirectional_it<T> bidirectional_it<T>::operator-(difference_type ele) const
-{
-    return (bidirectional_it<T>(this->__value - ele));
-}
-
-
 
 template<class T>
 template <class it>
@@ -157,15 +137,6 @@ bidirectional_it<T>&       bidirectional_it<T>::operator=(const it& other)
     return (*this);
 }
 
-
-
-template<class T>
-typename bidirectional_it<T>::reference       
-bidirectional_it<T>::operator[] (size_t i)const
-{
-    return (this->__value[i]);
-
-}
 
 
 template<class T>
@@ -182,38 +153,8 @@ typename bidirectional_it<T>::const_pointer   bidirectional_it<T>::operator->() 
 
 
 
-template<class T>
-bidirectional_it<T>&        bidirectional_it<T>::operator+= (difference_type elem)
-{
-    this->__value += elem;
-    return ( *this);
-
-}
-
-template<class T>
-bidirectional_it<T>&        bidirectional_it<T>::operator-= (difference_type elem)
-{
-    this->__value -= elem;
-    return ( *this);
-}
-
 
 //non members
-
-
-template< class iterator1, class iterator2 >
-typename bidirectional_it<iterator1>::difference_type
-operator+( const bidirectional_it<iterator1>& it1, const bidirectional_it<iterator2>& it2)
-{
-    return (it2.base() - it1.base());
-}
-
-template< class iterator1, class iterator2 >
-typename bidirectional_it<iterator1>::difference_type
-operator-( const bidirectional_it<iterator1>& it1, const bidirectional_it<iterator2>& it2)
-{
-    return (it1.base() - it2.base());
-}
 
 
 template< class Iterator1, class Iterator2 >
@@ -228,48 +169,6 @@ bool operator!=( const ft::bidirectional_it<Iterator1>& iter1,
                  const ft::bidirectional_it<Iterator2>& iter2 )
 {
     return (iter1.base() != iter2.base());
-}
-
-template< class Iterator1, class Iterator2 >
-bool operator<( const ft::bidirectional_it<Iterator1>& iter1,
-                const ft::bidirectional_it<Iterator2>& iter2 )
-{
-    return (iter1.base() < iter2.base());
-
-}
-
-template< class Iterator1, class Iterator2 >
-bool operator<=( const ft::bidirectional_it<Iterator1>& iter1,
-                 const ft::bidirectional_it<Iterator2>& iter2 )
-{
-    return (iter1.base() <= iter2.base());
-}
-
-template< class Iterator1, class Iterator2 >
-bool operator>( const ft::bidirectional_it<Iterator1>& iter1,
-                const ft::bidirectional_it<Iterator2>& iter2 )
-{
-    return (iter1.base() > iter2.base());
-}
-
-template< class Iterator1, class Iterator2 >
-bool operator>=( const ft::bidirectional_it<Iterator1>& iter1,
-                 const ft::bidirectional_it<Iterator2>& iter2 )
-{
-    return (iter1.base() >= iter2.base());
-
-}
-
-template<class T>
-bidirectional_it<T> operator+(typename bidirectional_it<T>::difference_type value, bidirectional_it<T> iter ) 
-{
-    return (iter + value);
-}
-
-template<class T>
-bidirectional_it<T> operator-(typename bidirectional_it<T>::difference_type diff, bidirectional_it<T> iter) 
-{
-    return (iter - diff);
 }
 
 
