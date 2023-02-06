@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 14:40:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:41:36 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -585,12 +585,12 @@ template <class InputIterator>
 typename enable_if<!is_integral<InputIterator>::value, void>::type
 vector<T, Allocator>::insert (iterator position, InputIterator first, InputIterator last)
 {
-    // InputIterator lastTmp = last - 1;
+    InputIterator lastTmp = last - 1;
     size_t pos = position - begin();
     while (first != last)
     {
-
-        insert(elements + pos, *first);
+        insert(elements + pos, *lastTmp);
+        lastTmp--;
         first++;
     }
 }
