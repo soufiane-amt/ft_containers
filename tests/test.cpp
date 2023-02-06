@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 16:29:20 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:40:21 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,19 +101,14 @@
 // }
 
 
-// #include <list>
+#include <map>
 
-void	foo()
-{
-	std::cout << "hello";
-}
-typedef	 foo l;
 #define TESTED_TYPE int
 
 int             main(void)
 {
-		l();
-	
+		std::map<int, int> m;
+		
         // std::list<TESTED_TYPE> lst;
         // std::list<TESTED_TYPE>::iterator lst_it;
         // for (int i = 1; i < 5; ++i)

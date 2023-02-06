@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 16:31:52 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:46:00 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,17 @@ template<
     > class map
 {
 
-    typedef     key_type	Key;
-    typedef     mapped_type	T;
-    typedef     value_type	pair<const key_type,mapped_type>;
-    typedef     key_compare std::less<key_type>;
+    typedef     Key                                 key_type;
+    typedef     T                                   mapped_type;
+    typedef 	pair<const key_type,mapped_type>    value_type;
+    typedef     Compare                 key_compare;
     //value_compare
-    typedef     allocator_type allocator_type;
-    typedef     reference      allocator_type::reference;
-    typedef     const_reference      allocator_type::const_reference;
+    typedef     Allocator               allocator_type;
+    typedef     value_type&             reference;
+    typedef     const  value_type&      const_reference;
+    typedef     value_type*	            pointer;
+    typedef     const pointer           const_pointer;
+    typedef     size_t                  size_type;
+    typedef     ptrdiff_t               difference_type;
 };
 }
