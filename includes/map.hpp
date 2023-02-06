@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 16:46:00 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:46:43 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,15 @@ template<
     typedef     const pointer           const_pointer;
     typedef     size_t                  size_type;
     typedef     ptrdiff_t               difference_type;
+
+
+    /*Iterators*/
+    typedef typename              ft::iterator<pointer>                iterator;
+    typedef typename              ft::iterator<const_pointer>          const_iterator;
+    
+    /*reverse_iterator*/
+    typedef typename              ft::reverse_iterator<iterator >            reverse_iterator;
+    typedef typename              ft::reverse_iterator<const_iterator >      const_reverse_iterator;
+
 };
 }
