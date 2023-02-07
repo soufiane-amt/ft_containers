@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 17:45:42 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/07 15:31:10 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,10 @@
 #include <map>
 
 #define TESTED_TYPE int
-
+typedef std::vector<int> MyVector;
 int             main(void)
 {
-		std::map<int, int> a(1, 14);
-		// std::map<int, int> b(21, 14);
+		std::map<int, int> b(21, 14);
 		// std::cout << (a - b) <<std::endl;
         // std::list<TESTED_TYPE> lst;
         // std::list<TESTED_TYPE>::iterator lst_it;
