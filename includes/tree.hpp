@@ -6,12 +6,16 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/07 15:56:42 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/07 16:35:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TREE_HPP
 #define TREE_HPP
+
+
+namespace ft
+{
 
 
 template <typename data>
@@ -27,7 +31,21 @@ template<
     class data,
     class Compare ,
     class Allocator 
-    > class map
-          
+    >
+class binary_tree
+
+{
+    public:
+    typedef 	data                    value_type;
+    typedef     Compare                 key_compare;
+    typedef     Allocator               allocator_type;
+    
+
+    private:
+    tree_node   __tree_root;
+    
+};
+
+}
 
 #endif
