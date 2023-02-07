@@ -6,13 +6,15 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 17:53:40 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/07 11:46:55 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <functional>
 #include <utils.hpp>
 
+#include "iterators/bidirectional_it.hpp"
+#include "iterators/reverse_iterator.hpp"
 
 namespace ft
 {
@@ -40,8 +42,8 @@ template<
 
 
     /*Iterators*/
-    typedef typename              ft::iterator<pointer>                iterator;
-    typedef typename              ft::iterator<const_pointer>          const_iterator;
+    typedef typename              ft::bidirectional_it<pointer>                iterator;
+    typedef typename              ft::bidirectional_it<const_pointer>          const_iterator;
     
     /*reverse_iterator*/
     typedef typename              ft::reverse_iterator<iterator >            reverse_iterator;
