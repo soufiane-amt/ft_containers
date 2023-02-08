@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/08 15:10:26 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/08 17:11:27 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <list>
 #include <iostream>
 #include <string>
-#include "../includes/vector.hpp"
+#include "../includes/tree.hpp"
 
 
 
@@ -117,34 +117,16 @@ struct comp
 typedef std::vector<int> MyVector;
 int             main(void)
 {
-        std::cout << std::pair<int, int>().first << std::endl;
-
-		// std::map<int, int > b;
-        // b[5] = 300;
-        // b[4] = 200;
-        // b[4] = 2030;
-        // b[1] = 100;
-        // b[2] = 400;
-        // b[3] = 400;
-        // for (std::map<int, int>::iterator i = b.begin(); i != b.end(); i++)
-        //     std::cout << i->first << " - " << i->second << std::endl;
-        
-		// std::cout << (a - b) <<std::endl;
-        // std::list<TESTED_TYPE> lst;
-        // std::list<TESTED_TYPE>::iterator lst_it;
-        // for (int i = 1; i < 5; ++i)
-        //         lst.push_back(i * 3);
-
-        // TESTED_NAMESPACE::vector<TESTED_TYPE> vct(lst.begin(), lst.end());
-        // printSize(vct);
-
-        // lst_it = lst.begin();
-        // for (int i = 1; lst_it != lst.end(); ++i)
-        //         *lst_it++ = i * 5;
-        // vct.assign(lst.begin(), lst.end());
-        // printSize(vct);
-
-        // vct.insert(vct.end(), lst.rbegin(), lst.rend());
-        // printSize(vct);
+    ft::binary_tree<int, int > b; 
+    
+    // std::map<int, int > b;
+    // b[5] = 300;
+    // b[4] = 200;
+    // b[4] = 2030;
+    // b[1] = 100;
+    // b[2] = 400;
+    // b[3] = 400;
+    // for (std::map<int, int>::iterator i = b.begin(); i != b.end(); i++)
+    //     std::cout << i->first << " - " << i->second << std::endl;
         return (0);
 }
