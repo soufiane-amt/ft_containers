@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/08 17:11:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/08 18:19:27 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ class binary_tree
 
     private:
     allocator_type                                  __allocat;
-    tree_node                                      *__tree_root;
     
+    tree_node                                      *__tree_root;
     public:
 
     binary_tree(const   allocator_type& = allocator_type());
@@ -70,6 +70,7 @@ class binary_tree
     //searching
     tree_node   *search_node(tree_node *_tree, key_type to_search);
     
+    void    tarverseNodesInOrder(tree_node *_tree, void (*func)());
     
     private:
     tree_node   *create_node(value_type value);
@@ -177,6 +178,22 @@ typename binary_tree<Key,T,Compare ,Allocator>::tree_node
             search_node(_tree->right, to_search);
     }
     return (nullptr);
+}
+
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(tree_node *_tree, void (*func)())
+{
+    if (!_tree->left)
+        tarverseNodesInOrder(_tree->left, func);
+    else
+        func(_tree);
+    
 }
 
 }
