@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/07 16:50:37 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/08 10:59:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,12 @@
 
 #include <map>
 
-template <typename value_type>
+template <class value_type = void>
 struct comp
 {
  
-    bool    operator()(const value_type& a, const value_type& b){
+    bool    operator()(const value_type& a, const value_type& b)const 
+    {
         return (a > b);
     }
 };
@@ -116,15 +117,14 @@ struct comp
 typedef std::vector<int> MyVector;
 int             main(void)
 {
-		std::map<int, int, comp<int>() > b;
-        b[3] = 300;
-        b[2] = 200;
+		std::map<int, int > b;
+        b[5] = 300;
+        b[4] = 200;
         b[1] = 100;
-        b[4] = 400;
+        b[2] = 400;
+        b[3] = 400;
         for (std::map<int, int>::iterator i = b.begin(); i != b.end(); i++)
-        {
             std::cout << i->first << " - " << i->second << std::endl;
-        }
         
 		// std::cout << (a - b) <<std::endl;
         // std::list<TESTED_TYPE> lst;
