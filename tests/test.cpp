@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/08 17:11:27 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/08 17:15:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int             main(void)
 {
     ft::binary_tree<int, int > b; 
     
+    b.insert_node(b.__tree_root, b.create_node(ft::pair<const int, int>()));
     // std::map<int, int > b;
     // b[5] = 300;
     // b[4] = 200;
