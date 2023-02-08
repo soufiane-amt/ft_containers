@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/08 16:25:23 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:35:53 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,9 +163,7 @@ template<
     >
 tree_node   *<Key,T,Compare ,Allocator>::search_node(tree_node *_tree, key_type to_search)
 {
-    if (!_tree)
-        return (nullptr);
-    else
+    if (_tree)
     {
         if (_tree->data.first == to_search) { return (_tree);};
         
@@ -174,7 +172,7 @@ tree_node   *<Key,T,Compare ,Allocator>::search_node(tree_node *_tree, key_type 
         else
             search_node(_tree->right, new_node);
     }
-
+    return (nullptr);
 }
 
 }
