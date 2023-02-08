@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/08 13:32:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/08 13:50:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ class binary_tree
     typedef 	data                                value_type;
     typedef     Compare                             key_compare;
     typedef     Allocator                           allocator_type;
-    
+    typedef     tree_node<value_type>               tree_node;
 
-    binary_tree(const   allocator_type&);
+    binary_tree(const   allocator_type& = allocator_type());
     binary_tree(const binary_tree& copy);
     binary_tree& operator=(const binary_tree& copy);
     ~binary_tree();
 
     private:
-    tree_node                                       *__tree_root;
-    allocator_type                                   __allocat;
+    allocator_type                                  __allocat;
+    tree_node                                       __tree_root;
     
+   
     public:
-
     //insertion
     void         insert_node (tree_node *new_node);
     //searching
@@ -67,6 +67,55 @@ class binary_tree
     tree_node   *create_node(value_type value);
 };
 
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type&)
+{
+    __tree_root.left = nullptr;
+    __tree_root.right = nullptr;
+    __tree_root.parent = nullptr;
+    __tree_root.data = value_type();
 }
 
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const binary_tree& copy)
+{
+    
+}
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+binary_tree<Key,T,Compare ,Allocator>::binary_tree& operator=(const binary_tree& copy)
+{
+    
+}
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+~binary_tree<Key,T,Compare ,Allocator>::binary_tree()
+{
+    
+}
+
+}
 #endif
