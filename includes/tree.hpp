@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/08 13:50:12 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/08 15:08:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ struct tree_node
     tree_node   *left;
     tree_node   *right;
     T           data;
+    
+    tree_node(T d = T())
+    {
+        this->parent = nullptr;
+        this->left = nullptr;
+        this->right = nullptr;
+        this->data = d;
+    }
 };
 
 
@@ -46,17 +54,17 @@ class binary_tree
     typedef     Allocator                           allocator_type;
     typedef     tree_node<value_type>               tree_node;
 
-    binary_tree(const   allocator_type& = allocator_type());
-    binary_tree(const binary_tree& copy);
-    binary_tree& operator=(const binary_tree& copy);
-    ~binary_tree();
-
     private:
     allocator_type                                  __allocat;
     tree_node                                       __tree_root;
     
-   
     public:
+
+    binary_tree(const   allocator_type& = allocator_type());
+    binary_tree(const binary_tree& copy);
+    binary_tree& operator=(const binary_tree& copy);
+    ~binary_tree();
+   
     //insertion
     void         insert_node (tree_node *new_node);
     //searching
@@ -92,7 +100,6 @@ template<
 
 binary_tree<Key,T,Compare ,Allocator>::binary_tree(const binary_tree& copy)
 {
-    
 }
 
 template<
@@ -112,8 +119,23 @@ template<
     class Compare ,
     class Allocator 
     >
-~binary_tree<Key,T,Compare ,Allocator>::binary_tree()
+binary_tree<Key,T,Compare ,Allocator>::~binary_tree()
 {
+    
+}
+
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+tree_node   *binary_tree<Key,T,Compare ,Allocator>::create_node(value_type value)
+{
+    tree_node   *node;
+
+    node = new tree_node;
     
 }
 
