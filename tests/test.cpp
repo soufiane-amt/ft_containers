@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/08 13:14:05 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/08 15:10:26 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,17 @@ struct comp
 typedef std::vector<int> MyVector;
 int             main(void)
 {
-		std::map<int, int > b;
-        b[5] = 300;
-        b[4] = 200;
-        b[4] = 2030;
-        b[1] = 100;
-        b[2] = 400;
-        b[3] = 400;
-        for (std::map<int, int>::iterator i = b.begin(); i != b.end(); i++)
-            std::cout << i->first << " - " << i->second << std::endl;
+        std::cout << std::pair<int, int>().first << std::endl;
+
+		// std::map<int, int > b;
+        // b[5] = 300;
+        // b[4] = 200;
+        // b[4] = 2030;
+        // b[1] = 100;
+        // b[2] = 400;
+        // b[3] = 400;
+        // for (std::map<int, int>::iterator i = b.begin(); i != b.end(); i++)
+        //     std::cout << i->first << " - " << i->second << std::endl;
         
 		// std::cout << (a - b) <<std::endl;
         // std::list<TESTED_TYPE> lst;

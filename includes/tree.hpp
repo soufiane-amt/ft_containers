@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/08 15:08:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:15:47 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ class binary_tree
 
     private:
     allocator_type                                  __allocat;
-    tree_node                                       __tree_root;
+    tree_node                                      *__tree_root;
     
     public:
 
@@ -66,7 +66,7 @@ class binary_tree
     ~binary_tree();
    
     //insertion
-    void         insert_node (tree_node *new_node);
+    void         insert_node (tree_node *sub_tree, tree_node *new_node);
     //searching
     tree_node   *search_node(key_type to_search);
     
@@ -82,12 +82,8 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type&)
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type&):__tree_root(nullptr)
 {
-    __tree_root.left = nullptr;
-    __tree_root.right = nullptr;
-    __tree_root.parent = nullptr;
-    __tree_root.data = value_type();
 }
 
 
@@ -133,11 +129,32 @@ template<
     >
 tree_node   *binary_tree<Key,T,Compare ,Allocator>::create_node(value_type value)
 {
-    tree_node   *node;
-
-    node = new tree_node;
-    
+    return (new tree_node(value));
 }
+
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+void    binary_tree<Key,T,Compare ,Allocator>::insert_node (tree_node *sub_tree, tree_node *new_node)
+{
+    if (!__tree_root)
+        __tree_root = new_node;
+    else
+    {
+        
+        if (new_node->data.first < sub_tree->data.first && !sub_tree->left) { sub_tree->left = new_node; return;};
+        if (new_node->data.first > sub_tree->data.first && !sub_tree->right) { sub_tree->right = new_node; return;};
+        if (new_node->data.first < sub_tree->data.first)
+            insert_node(sub_tree->left, new_node);
+        else
+            insert_node(sub_tree->right, new_node);
+    }
+}
+
 
 }
 #endif
