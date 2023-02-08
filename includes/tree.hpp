@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/08 16:15:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:25:23 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ class binary_tree
     ~binary_tree();
    
     //insertion
-    void         insert_node (tree_node *sub_tree, tree_node *new_node);
+    void         insert_node (tree_node *_tree, tree_node *new_node);
     //searching
-    tree_node   *search_node(key_type to_search);
+    tree_node   *search_node(tree_node *_tree, key_type to_search);
     
     
     private:
@@ -139,22 +139,43 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::insert_node (tree_node *sub_tree, tree_node *new_node)
+void    binary_tree<Key,T,Compare ,Allocator>::insert_node (tree_node *_tree, tree_node *new_node)
 {
     if (!__tree_root)
         __tree_root = new_node;
     else
     {
+        if (new_node->data.first < _tree->data.first && !_tree->left) { _tree->left = new_node; return;};
+        if (new_node->data.first > _tree->data.first && !_tree->right) { _tree->right = new_node; return;};
         
-        if (new_node->data.first < sub_tree->data.first && !sub_tree->left) { sub_tree->left = new_node; return;};
-        if (new_node->data.first > sub_tree->data.first && !sub_tree->right) { sub_tree->right = new_node; return;};
-        if (new_node->data.first < sub_tree->data.first)
-            insert_node(sub_tree->left, new_node);
+        if (new_node->data.first < _tree->data.first)
+            insert_node(_tree->left, new_node);
         else
-            insert_node(sub_tree->right, new_node);
+            insert_node(_tree->right, new_node);
     }
 }
 
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+tree_node   *<Key,T,Compare ,Allocator>::search_node(tree_node *_tree, key_type to_search)
+{
+    if (!_tree)
+        return (nullptr);
+    else
+    {
+        if (_tree->data.first == to_search) { return (_tree);};
+        
+        if (to_search < _tree->data.first)
+            search_node(_tree->left, new_node);
+        else
+            search_node(_tree->right, new_node);
+    }
+
+}
 
 }
 #endif
