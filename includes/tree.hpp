@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/08 18:19:27 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/09 13:48:39 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ struct tree_node
     tree_node   *right;
     T           data;
     
-    tree_node(T d = T())
+    tree_node(T d = T()): data(d)
     {
         this->parent = nullptr;
         this->left = nullptr;
         this->right = nullptr;
-        this->data = d;
     }
 };
 
@@ -57,8 +56,8 @@ class binary_tree
     private:
     allocator_type                                  __allocat;
     
-    tree_node                                      *__tree_root;
     public:
+    tree_node                                      *__tree_root;
 
     binary_tree(const   allocator_type& = allocator_type());
     binary_tree(const binary_tree& copy);
@@ -70,10 +69,10 @@ class binary_tree
     //searching
     tree_node   *search_node(tree_node *_tree, key_type to_search);
     
-    void    tarverseNodesInOrder(tree_node *_tree, void (*func)());
+    void    tarverseNodesInOrder(tree_node *_tree, void (*func)(), key_type _previous_key);
     
-    private:
     tree_node   *create_node(value_type value);
+    private:
 };
 
 
@@ -187,14 +186,28 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(tree_node *_tree, void (*func)())
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(tree_node *_tree, void (*func)(), key_type _previous_key)
 {
-    if (!_tree->left)
-        tarverseNodesInOrder(_tree->left, func);
+    if (_previous_key == _tree->left->data.first)
+    {
+        if (_tree->left)
+            tarverseNodesInOrder(_tree->left, func);
+        else
+            func(_tree);
+    }
+    if (_tree->right)
+        tarverseNodesInOrder(_tree->right, func);
     else
-        func(_tree);
-    
+        tarverseNodesInOrder(_tree->parent, func);
 }
 
+
+
+
+template <typename U, typename V> 
+void    print_node (pair <U, V> p)
+{
+    std::cout << "key : " << p.first << " -- " << "value : " << p.second << std::endl;
+}
 }
 #endif

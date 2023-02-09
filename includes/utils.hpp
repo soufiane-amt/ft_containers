@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 17:38:54 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/09 13:46:15 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ pair<T1, T2>& pair<T1, T2>::operator= (const pair& pr)
 {
     this->first = pr.first;
     this->second = pr.second;
+    return (*this);
 }
 
 
