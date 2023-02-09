@@ -6,11 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/02/09 13:45:01 by samajat          ###   ########.fr       */
-=======
-/*   Updated: 2023/02/08 17:15:07 by samajat          ###   ########.fr       */
->>>>>>> d6cc4b0545fb5f5b0ab9606ca0ae23f3c8f4c9ed
+/*   Updated: 2023/02/09 14:00:17 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +120,8 @@ int             main(void)
     std::pair<int, int> a;
     ft::binary_tree<int, int > b; 
     
-<<<<<<< HEAD
     b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>()));
-    b.
-=======
-    b.insert_node(b.__tree_root, b.create_node(ft::pair<const int, int>()));
->>>>>>> d6cc4b0545fb5f5b0ab9606ca0ae23f3c8f4c9ed
+    b.tarverseNodesInOrder(b.__tree_root, ft::print_node, -1);
     // std::map<int, int > b;
     // b[5] = 300;
     // b[4] = 200;

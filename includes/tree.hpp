@@ -6,11 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/02/09 13:48:39 by samajat          ###   ########.fr       */
-=======
-/*   Updated: 2023/02/08 18:19:27 by samajat          ###   ########.fr       */
->>>>>>> d6cc4b0545fb5f5b0ab9606ca0ae23f3c8f4c9ed
+/*   Updated: 2023/02/09 14:14:40 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +56,6 @@ class binary_tree
     private:
     allocator_type                                  __allocat;
     
-    tree_node                                      *__tree_root;
     public:
     tree_node                                      *__tree_root;
 
@@ -74,11 +69,7 @@ class binary_tree
     //searching
     tree_node   *search_node(tree_node *_tree, key_type to_search);
     
-<<<<<<< HEAD
-    void    tarverseNodesInOrder(tree_node *_tree, void (*func)(), key_type _previous_key);
-=======
-    void    tarverseNodesInOrder(tree_node *_tree, void (*func)());
->>>>>>> d6cc4b0545fb5f5b0ab9606ca0ae23f3c8f4c9ed
+    void    tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*), key_type _previous_key);
     
     tree_node   *create_node(value_type value);
     private:
@@ -195,28 +186,29 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(tree_node *_tree, void (*func)(), key_type _previous_key)
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*), key_type _previous_key)
 {
     if (_previous_key == _tree->left->data.first)
     {
         if (_tree->left)
-            tarverseNodesInOrder(_tree->left, func);
+            tarverseNodesInOrder(_tree->left, func, _previous_key);
         else
             func(_tree);
     }
     if (_tree->right)
-        tarverseNodesInOrder(_tree->right, func);
+        tarverseNodesInOrder(_tree->right, func, _previous_key);
     else
-        tarverseNodesInOrder(_tree->parent, func);
+        tarverseNodesInOrder(_tree->parent, func, _previous_key);
 }
 
 
 
 
 template <typename U, typename V> 
-void    print_node (pair <U, V> p)
+void    print_node (tree_node<pair<U, V> > *_node)
 {
-    std::cout << "key : " << p.first << " -- " << "value : " << p.second << std::endl;
+    std::cout << "key : " << _node->data.first << " -- " << "value : " << _node->data.second << std::endl;
 }
+
 }
 #endif
