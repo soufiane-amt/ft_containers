@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/09 14:14:40 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/09 18:01:13 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,16 @@
 
 namespace ft
 {
-
-
+    enum Dir
+    {
+        BACK_FROM_RIGHT =  1,
+        BACK_FROM_LEFT  = -1,
+    };
+    
 template <typename T>
 struct tree_node
 {
+
     tree_node   *parent;
     tree_node   *left;
     tree_node   *right;
@@ -69,7 +74,7 @@ class binary_tree
     //searching
     tree_node   *search_node(tree_node *_tree, key_type to_search);
     
-    void    tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*), key_type _previous_key);
+    void    tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*), int _route_before= int());
     
     tree_node   *create_node(value_type value);
     private:
@@ -186,19 +191,26 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*), key_type _previous_key)
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*), int _route_before)
 {
-    if (_previous_key == _tree->left->data.first)
+    // if (_route_before != BACK_FROM_LEFT)
+    // {
+    if (_tree)
     {
         if (_tree->left)
-            tarverseNodesInOrder(_tree->left, func, _previous_key);
+            tarverseNodesInOrder(_tree->left, func, _route_before);
         else
-            func(_tree);
+        {
+                func(_tree);
+            // if (_tree->data.first == 5)
+            //     return ;
+        }
+    // }
+        if ( _tree->right)
+                tarverseNodesInOrder(_tree->right, func, _route_before);
+        else
+                tarverseNodesInOrder(_tree->parent, func, _route_before);
     }
-    if (_tree->right)
-        tarverseNodesInOrder(_tree->right, func, _previous_key);
-    else
-        tarverseNodesInOrder(_tree->parent, func, _previous_key);
 }
 
 

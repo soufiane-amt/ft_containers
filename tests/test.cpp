@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/09 14:00:17 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/09 17:56:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,21 @@ struct comp
 typedef std::vector<int> MyVector;
 int             main(void)
 {
+    srand(time(NULL));
     std::pair<int, int> a;
     ft::binary_tree<int, int > b; 
+    // for (size_t i = 0; i < 100; i++)
+    // {
+        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(5, 5)));
+        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(2, 2)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(3, 3)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(4, 4)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(7, 7)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(6, 6)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(rand() % 10000000, rand() % 10000000)));
+        /* code */
+    // }
     
-    b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>()));
     b.tarverseNodesInOrder(b.__tree_root, ft::print_node, -1);
     // std::map<int, int > b;
     // b[5] = 300;
