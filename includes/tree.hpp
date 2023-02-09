@@ -6,7 +6,11 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/09 13:48:39 by samajat          ###   ########.fr       */
+=======
+/*   Updated: 2023/02/08 18:19:27 by samajat          ###   ########.fr       */
+>>>>>>> d6cc4b0545fb5f5b0ab9606ca0ae23f3c8f4c9ed
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +60,7 @@ class binary_tree
     private:
     allocator_type                                  __allocat;
     
+    tree_node                                      *__tree_root;
     public:
     tree_node                                      *__tree_root;
 
@@ -69,7 +74,11 @@ class binary_tree
     //searching
     tree_node   *search_node(tree_node *_tree, key_type to_search);
     
+<<<<<<< HEAD
     void    tarverseNodesInOrder(tree_node *_tree, void (*func)(), key_type _previous_key);
+=======
+    void    tarverseNodesInOrder(tree_node *_tree, void (*func)());
+>>>>>>> d6cc4b0545fb5f5b0ab9606ca0ae23f3c8f4c9ed
     
     tree_node   *create_node(value_type value);
     private:
