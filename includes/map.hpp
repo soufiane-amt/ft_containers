@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 18:36:29 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:40:43 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,32 @@ map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
         insert (end(), pair<k, mapped_type());
     return (node->data.second);
 }
+
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::mapped_type&
+map<Key, T, Compare, Allocator>::at (const key_type& k)
+{
+    tree_node   *node = _tree.search(k);
+    if (!node)
+        throw std::out_of_range ("Out of range please provide a valid key to map!");
+    return (node->data.second);
+}
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+const typename map<Key, T, Compare, Allocator>::mapped_type&    
+map<Key, T, Compare, Allocator>::at (const key_type& k) const
+{
+    tree_node   *node = _tree.search(k);
+    if (!node)
+        throw std::out_of_range ("Out of range please provide a valid key to map!");
+    return (node->data.second);
+}
+
+
+
 
 template< class Key, class T, class Compare , class Allocator  > 
 typename map<Key, T, Compare, Allocator>::iterator                            
