@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 18:01:13 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:19:36 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,25 @@ map<Key, T, Compare, Allocator>::map( const map& other )
         insert(end(), *it);
     _allocat = other._allocat;
     _comp = other._comp;
+}
+
+template< class Key, class T, class Compare , class Allocator  > 
+map<Key, T, Compare, Allocator>&    
+map<Key, T, Compare, Allocator>::operator=( const map& other )
+{
+    clear();
+    for (iterator it = other.begin(); it != other.end() ; it++)
+        insert(end(), *it);
+    _allocat = other._allocat;
+    _comp = other._comp;
+}
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::size_type
+map<Key, T, Compare, Allocator>::size() const
+{
+    return (_tree.size());
 }
 
 template< class Key, class T, class Compare , class Allocator  > 
