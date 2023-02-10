@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 15:22:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 17:45:42 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ class binary_tree
     typedef     Allocator                           allocator_type;
     typedef     tree_node<value_type>               tree_node;
 
+    
+    tree_node   *create_node(value_type value);
     private:
-    allocator_type                                  __allocat;
+
     
     public:
-    tree_node                                      *__tree_root;
 
     binary_tree(const   allocator_type& = allocator_type());
     binary_tree(const binary_tree& copy);
@@ -74,10 +75,13 @@ class binary_tree
     //searching
     tree_node   *search_node(tree_node *_tree, key_type to_search);
     
-    void    tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*));
+    void        tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*));
+    void        tarverseNodesPreOrder(tree_node *_tree, void (*func)(tree_node*));
+    // tree_node*  clone_binary_tree(tree_node *_copy);
     
-    tree_node   *create_node(value_type value);
+    tree_node                                      *__tree_root;
     private:
+    allocator_type                                  __allocat;
 };
 
 
@@ -87,7 +91,7 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type&):__tree_root(nullptr)
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type&)
 {
 }
 
@@ -101,7 +105,8 @@ template<
 
 binary_tree<Key,T,Compare ,Allocator>::binary_tree(const binary_tree& copy)
 {
-    (void)copy;
+    __tree_root = copy.__tree_root;
+    __allocat = copy.__allocat;
 }
 
 
@@ -172,35 +177,16 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::tree_node   
 *binary_tree<Key,T,Compare ,Allocator>::search_node(tree_node *_tree, key_type to_search)
 {
-    if (_tree->data.first == to_search) { return (_tree);};
+    if (!_tree)
+        return (nullptr);
     if (to_search < _tree->data.first)
         return (search_node (_tree->left, to_search));
-    if (to_search > _tree->data.first)
+    else 
         return (search_node (_tree->right, to_search));
-    return (nullptr);
+    return (_tree);
 }
-    // if (_tree)
-    // {
-    //     if (_tree->data.first == to_search) { return (_tree);};
-        
-    //     if (to_search < _tree->data.first)
-    //         search_node(_tree->left, to_search);
-    //     else
-    //         search_node(_tree->right, to_search);
-    // }
-    // return (nullptr);
 
 
-
-// void iterate(Node *n){
-    // if(!n)
-        // return;
-// 
-    // iterate(n->left);
-    // cout << n->value; // do something with the value
-    // iterate(n->right);
-// }
-// 
 template<
     class Key,
     class T,
@@ -216,6 +202,23 @@ void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(tree_node *_
     tarverseNodesInOrder(_tree->right, func);
 }
 
+
+
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPreOrder(tree_node *_tree, void (*func)(tree_node*))
+{
+    if (!_tree)
+        return;
+    func(_tree);
+    tarverseNodesPreOrder(_tree->right, func);
+    tarverseNodesPreOrder(_tree->left, func);
+}
 
 
 

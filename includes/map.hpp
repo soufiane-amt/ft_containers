@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/07 11:46:55 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:01:13 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "iterators/bidirectional_it.hpp"
 #include "iterators/reverse_iterator.hpp"
+#include "tree.hpp"
 
 namespace ft
 {
@@ -52,9 +53,7 @@ template<
 
 
 
-    map();
-    
-    explicit map( const key_compare& comp,
+    explicit map( const key_compare& comp =  key_compare(),
                   const allocator_type& alloc = allocator_type() );
     
     template< class InputIt >
@@ -89,6 +88,18 @@ template<
     void                                swap (map& x);
     void                                clear();
 
+    //iterators
+    iterator                begin();
+    const_iterator          begin() const;
+    iterator                end();
+    const_iterator          end() const;
+    
+    //reverse iterators
+    reverse_iterator       rbegin();
+    const_reverse_iterator rbegin() const;
+    reverse_iterator       rend();
+    const_reverse_iterator rend() const;
+
     //Observers:
     key_compare                         key_comp() const;
     value_compare                       value_comp() const;
@@ -112,6 +123,11 @@ template<
 
     ~map();
 
+    private:
+    //all the member functions of the _tree have to be friends and private 
+    binary_tree                 _tree;
+    key_compare                 _comp;
+    allocator_type              _allocat;
 };
 
 
@@ -125,6 +141,23 @@ map<Key, T, Compare, Allocator>::map()
 
 template< class Key, class T, class Compare , class Allocator  > 
 map<Key, T, Compare, Allocator>::map( const map& other )
+{
+    for (iterator it = other.begin(); it != other.end() ; it++)
+        insert(end(), *it);
+    _allocat = other._allocat;
+    _comp = other._comp;
+}
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::iterator                            
+map<Key, T, Compare, Allocator>::find (const key_type& k)
+{
+    
+}
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::const_iterator                     
+map<Key, T, Compare, Allocator>::find (const key_type& k) const
 {
     
 }

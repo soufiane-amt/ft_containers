@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 15:23:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 17:17:40 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int             main(void)
         /* code */
     // }
     
-    // b.tarverseNodesInOrder(b.__tree_root, ft::print_node);
-    print_node (b.search_node(b.__tree_root, 8));
+    b.tarverseNodesPreOrder(b.__tree_root, ft::print_node);
+    // print_node (b.search_node(b.__tree_root, 6));
     return (0);
 }
