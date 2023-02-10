@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 18:18:13 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:55:44 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ class binary_tree
 
     
     tree_node   *create_node(value_type value);
+    void        delete_node(tree_node *_node);
     private:
 
     
@@ -78,9 +79,11 @@ class binary_tree
     
     void        tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*));
     void        tarverseNodesPreOrder(tree_node *_tree, void (*func)(tree_node*));
+    void        tarverseNodesPostOrder(tree_node *_tree, void (*func)(tree_node*));
     
     // tree_node*  clone_binary_tree(tree_node *_copy);
     size_type   size();
+    void        clear();
     
     tree_node                                      *__tree_root;
     private:
@@ -100,30 +103,29 @@ binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type&):__si
 }
 
 
-// template<
-//     class Key,
-//     class T,
-//     class Compare ,
-//     class Allocator 
-//     >
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const binary_tree& copy)
+{
+    __tree_root = copy.__tree_root;
+    __allocat = copy.__allocat;
+}
 
-// binary_tree<Key,T,Compare ,Allocator>::binary_tree(const binary_tree& copy)
-// {
-//     __tree_root = copy.__tree_root;
-//     __allocat = copy.__allocat;
-// }
 
-
-// template<
-//     class Key,
-//     class T,
-//     class Compare ,
-//     class Allocator 
-//     >
-// binary_tree<Key,T,Compare ,Allocator> & binary_tree<Key,T,Compare ,Allocator>::operator=(const binary_tree& copy)
-// {
-//     (void)copy;
-// }
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+binary_tree<Key,T,Compare ,Allocator> & binary_tree<Key,T,Compare ,Allocator>::operator=(const binary_tree& copy)
+{
+    (void)copy;
+}
 
 template<
     class Key,
@@ -146,8 +148,10 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::tree_node   
 *binary_tree<Key,T,Compare ,Allocator>::create_node(value_type value)
 {
+    //you have to use construct
     return (new tree_node(value));
 }
+
 
 
 template<
@@ -224,6 +228,25 @@ void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPreOrder(tree_node *
     tarverseNodesPreOrder(_tree->left, func);
 }
 
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(tree_node *_tree, void (*func)(tree_node*))
+{
+    if (!_tree)
+        return;
+    tarverseNodesPreOrder(_tree->right, func);
+    tarverseNodesPreOrder(_tree->left, func);
+    func(_tree);
+}
+
+
+
+
 template<
     class Key,
     class T,
@@ -234,6 +257,23 @@ binary_tree<Key,T,Compare ,Allocator>::size()
 {
     return (__size);
 }
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator >
+void    binary_tree<Key,T,Compare ,Allocator>::clear()
+{
+    tarverseNodesPostOrder(this->__tree_root, delete_node);
+}
+
+template <typename U, typename V> 
+void delete_node(tree_node<pair<U, V> > *_node)
+{
+    delete node;
+}
+
 
 
 template <typename U, typename V> 

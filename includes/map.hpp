@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 18:40:43 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:45:44 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,20 @@ map<Key, T, Compare, Allocator>::at (const key_type& k) const
 }
 
 
+
+template< class Key, class T, class Compare , class Allocator  > 
+void map<Key, T, Compare, Allocator>::swap (map& x)
+{
+    std::swap(_tree, x._tree);
+    std::swap(this->_v_size, x._v_size);
+    std::swap(this->allocator, x.allocator);
+}
+
+template< class Key, class T, class Compare , class Allocator  > 
+void map<Key, T, Compare, Allocator>::clear()
+{
+
+}
 
 
 template< class Key, class T, class Compare , class Allocator  > 
