@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/09 18:01:13 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 15:22:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ class binary_tree
     //searching
     tree_node   *search_node(tree_node *_tree, key_type to_search);
     
-    void    tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*), int _route_before= int());
+    void    tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*));
     
     tree_node   *create_node(value_type value);
     private:
@@ -172,45 +172,48 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::tree_node   
 *binary_tree<Key,T,Compare ,Allocator>::search_node(tree_node *_tree, key_type to_search)
 {
-    if (_tree)
-    {
-        if (_tree->data.first == to_search) { return (_tree);};
-        
-        if (to_search < _tree->data.first)
-            search_node(_tree->left, to_search);
-        else
-            search_node(_tree->right, to_search);
-    }
+    if (_tree->data.first == to_search) { return (_tree);};
+    if (to_search < _tree->data.first)
+        return (search_node (_tree->left, to_search));
+    if (to_search > _tree->data.first)
+        return (search_node (_tree->right, to_search));
     return (nullptr);
 }
+    // if (_tree)
+    // {
+    //     if (_tree->data.first == to_search) { return (_tree);};
+        
+    //     if (to_search < _tree->data.first)
+    //         search_node(_tree->left, to_search);
+    //     else
+    //         search_node(_tree->right, to_search);
+    // }
+    // return (nullptr);
 
 
+
+// void iterate(Node *n){
+    // if(!n)
+        // return;
+// 
+    // iterate(n->left);
+    // cout << n->value; // do something with the value
+    // iterate(n->right);
+// }
+// 
 template<
     class Key,
     class T,
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*), int _route_before)
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(tree_node *_tree, void (*func)(tree_node*))
 {
-    // if (_route_before != BACK_FROM_LEFT)
-    // {
-    if (_tree)
-    {
-        if (_tree->left)
-            tarverseNodesInOrder(_tree->left, func, _route_before);
-        else
-        {
-                func(_tree);
-            // if (_tree->data.first == 5)
-            //     return ;
-        }
-    // }
-        if ( _tree->right)
-                tarverseNodesInOrder(_tree->right, func, _route_before);
-        else
-                tarverseNodesInOrder(_tree->parent, func, _route_before);
-    }
+    if (!_tree)
+        return;
+    tarverseNodesInOrder(_tree->left, func);
+    func(_tree);
+    tarverseNodesInOrder(_tree->right, func);
 }
 
 
@@ -219,6 +222,7 @@ void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(tree_node *_
 template <typename U, typename V> 
 void    print_node (tree_node<pair<U, V> > *_node)
 {
+    std::cout << _node << std::endl;
     std::cout << "key : " << _node->data.first << " -- " << "value : " << _node->data.second << std::endl;
 }
 

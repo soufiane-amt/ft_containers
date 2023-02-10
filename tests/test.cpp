@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/09 17:56:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 15:23:02 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <string>
 #include "../includes/tree.hpp"
+#include "../includes/vector.hpp"
 
 
 
@@ -117,30 +118,22 @@ struct comp
 typedef std::vector<int> MyVector;
 int             main(void)
 {
+
     srand(time(NULL));
     std::pair<int, int> a;
     ft::binary_tree<int, int > b; 
     // for (size_t i = 0; i < 100; i++)
     // {
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(5, 5)));
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(2, 2)));
-        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(3, 3)));
-        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(4, 4)));
-        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(7, 7)));
-        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(6, 6)));
-        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(rand() % 10000000, rand() % 10000000)));
+        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(5, 5 + 1)));
+        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(2, 2 + 1)));
+        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(3, 3 + 1)));
+        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(4, 4 + 1)));
+        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(7, 7 + 1)));
+        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(6, 6 + 1)));
         /* code */
     // }
     
-    b.tarverseNodesInOrder(b.__tree_root, ft::print_node, -1);
-    // std::map<int, int > b;
-    // b[5] = 300;
-    // b[4] = 200;
-    // b[4] = 2030;
-    // b[1] = 100;
-    // b[2] = 400;
-    // b[3] = 400;
-    // for (std::map<int, int>::iterator i = b.begin(); i != b.end(); i++)
-    //     std::cout << i->first << " - " << i->second << std::endl;
-        return (0);
+    // b.tarverseNodesInOrder(b.__tree_root, ft::print_node);
+    print_node (b.search_node(b.__tree_root, 8));
+    return (0);
 }
