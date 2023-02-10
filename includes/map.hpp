@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 18:56:21 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:58:31 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,14 @@ template< class Key, class T, class Compare , class Allocator  >
 void map<Key, T, Compare, Allocator>::clear()
 {
     _tree.clear();
+}
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::key_compare
+map<Key, T, Compare, Allocator>::key_comp() const
+{
+    return (_comp);
 }
 
 
