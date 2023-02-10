@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 18:19:36 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:36:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,31 @@ typename map<Key, T, Compare, Allocator>::size_type
 map<Key, T, Compare, Allocator>::size() const
 {
     return (_tree.size());
+}
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::size_type
+map<Key, T, Compare, Allocator>::max_size() const
+{
+    return (_allocat.max_size());
+}
+
+template< class Key, class T, class Compare , class Allocator  > 
+bool   map<Key, T, Compare, Allocator>::empty() const
+{
+    return (!size());
+}
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::mapped_type&    
+map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
+{
+    tree_node   *node = _tree.search(k);
+    if (!node)
+        insert (end(), pair<k, mapped_type());
+    return (node->data.second);
 }
 
 template< class Key, class T, class Compare , class Allocator  > 

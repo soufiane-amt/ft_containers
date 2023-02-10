@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 17:17:40 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:32:24 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,21 +119,25 @@ typedef std::vector<int> MyVector;
 int             main(void)
 {
 
-    srand(time(NULL));
-    std::pair<int, int> a;
-    ft::binary_tree<int, int > b; 
+    std::map <int, int > m;
+    m[4];
+        std::cout << m[4] << std::endl;
+    
+    // srand(time(NULL));
+    // std::pair<int, int> a;
+    // ft::binary_tree<int, int > b; 
     // for (size_t i = 0; i < 100; i++)
     // {
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(5, 5 + 1)));
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(2, 2 + 1)));
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(3, 3 + 1)));
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(4, 4 + 1)));
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(7, 7 + 1)));
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(6, 6 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(5, 5 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(2, 2 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(3, 3 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(4, 4 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(7, 7 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(6, 6 + 1)));
         /* code */
     // }
     
-    b.tarverseNodesPreOrder(b.__tree_root, ft::print_node);
+    // b.tarverseNodesPreOrder(b.__tree_root, ft::print_node);
     // print_node (b.search_node(b.__tree_root, 6));
     return (0);
 }
