@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 18:55:44 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:56:44 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,14 +266,16 @@ template<
 void    binary_tree<Key,T,Compare ,Allocator>::clear()
 {
     tarverseNodesPostOrder(this->__tree_root, delete_node);
+    __size = 0;
 }
+
+
 
 template <typename U, typename V> 
 void delete_node(tree_node<pair<U, V> > *_node)
 {
     delete node;
 }
-
 
 
 template <typename U, typename V> 
