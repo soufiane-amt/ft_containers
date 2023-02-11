@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 18:56:44 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 11:57:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,13 +185,16 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::tree_node   
 *binary_tree<Key,T,Compare ,Allocator>::search_node(tree_node *_tree, key_type to_search)
 {
-    if (!_tree)
-        return (nullptr);
-    if (to_search < _tree->data.first)
-        return (search_node (_tree->left, to_search));
-    else 
-        return (search_node (_tree->right, to_search));
-    return (_tree);
+    if (_tree)
+    {
+        if (_tree->data.first == to_search) { return (_tree);};
+        
+        if (to_search < _tree->data.first)
+            search_node(_tree->left, to_search);
+        else
+            search_node(_tree->right, to_search);
+    }
+    return (nullptr);
 }
 
 
@@ -265,7 +268,7 @@ template<
     class Allocator >
 void    binary_tree<Key,T,Compare ,Allocator>::clear()
 {
-    tarverseNodesPostOrder(this->__tree_root, delete_node);
+    tarverseNodesPostOrder(this->__tree_root, &delete_node);
     __size = 0;
 }
 
@@ -274,7 +277,7 @@ void    binary_tree<Key,T,Compare ,Allocator>::clear()
 template <typename U, typename V> 
 void delete_node(tree_node<pair<U, V> > *_node)
 {
-    delete node;
+    delete _node;
 }
 
 

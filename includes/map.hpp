@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/10 18:58:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 11:46:24 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,16 @@ template<
     typedef     Key                                 key_type;
     typedef     T                                   mapped_type;
     typedef 	pair<const key_type,mapped_type>    value_type;
-    typedef     Compare                 key_compare;
+    typedef     Compare                             key_compare;
+    typedef     std::less<pair<const key_type,mapped_type>> value_compare;
     //value_compare
-    typedef     Allocator               allocator_type;
-    typedef     value_type&             reference;
-    typedef     const  value_type&      const_reference;
-    typedef     value_type*	            pointer;
-    typedef     const pointer           const_pointer;
-    typedef     size_t                  size_type;
-    typedef     ptrdiff_t               difference_type;
+    typedef     Allocator                           allocator_type;
+    typedef     value_type&                         reference;
+    typedef     const  value_type&                  const_reference;
+    typedef     value_type*	                        pointer;
+    typedef     const pointer                       const_pointer;
+    typedef     size_t                              size_type;
+    typedef     ptrdiff_t                           difference_type;
 
 
     /*Iterators*/
@@ -127,13 +128,14 @@ template<
     //all the member functions of the _tree have to be friends and private 
     binary_tree                 _tree;
     key_compare                 _comp;
+    value_compare               _v_cmp;
     allocator_type              _allocat;
 };
 
 
 
 template< class Key, class T, class Compare , class Allocator  > 
-map<Key, T, Compare, Allocator>::map()
+map<Key, T, Compare, Allocator>::map(const key_compare& comp, const allocator_type& alloc)
 {
     
 }
@@ -241,6 +243,14 @@ map<Key, T, Compare, Allocator>::key_comp() const
 
 
 template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::value_compare
+map<Key, T, Compare, Allocator>::value_comp() const
+{
+    return (_v_cmp);
+}
+
+
+template< class Key, class T, class Compare , class Allocator  > 
 typename map<Key, T, Compare, Allocator>::iterator                            
 map<Key, T, Compare, Allocator>::find (const key_type& k)
 {
@@ -254,5 +264,11 @@ map<Key, T, Compare, Allocator>::find (const key_type& k) const
     
 }
 
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::size_type 
+map<Key, T, Compare, Allocator>::count (const key_type& k) const
+{
+    
+}
 
 }
