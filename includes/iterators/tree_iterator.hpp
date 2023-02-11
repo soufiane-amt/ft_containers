@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 17:39:20 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 17:58:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ class tree_iterator
         typedef typename iterator_traits<iterator_type>::difference_type   difference_type;
         typedef typename iterator_traits<iterator_type>::pointer           pointer;
         typedef typename iterator_traits<iterator_type>::reference         reference;
-        typedef const reference         const_reference;
-        typedef const pointer           const_pointer;
+        typedef const reference                                            const_reference;
+        typedef const pointer                                              const_pointer;
 
         tree_iterator();
         
@@ -41,7 +41,7 @@ class tree_iterator
         iterator_type           base() const;
         
         
-        reference               operator*() const;
+        reference            operator*() const;
         tree_iterator&       operator++();
         tree_iterator        operator++(int);
         tree_iterator&       operator--();

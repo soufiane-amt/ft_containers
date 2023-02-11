@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 17:12:14 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 18:15:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <list>
 #include <iostream>
 #include <string>
-#include "../includes/tree.hpp"
-#include "../includes/vector.hpp"
+// #include "../includes/tree.hpp"
+// #include "../includes/vector.hpp"
 
 
 
@@ -118,7 +118,13 @@ struct comp
 typedef std::vector<int> MyVector;
 int             main(void)
 {
-    std::map<int, int>::iterator itr ;
+    std::map<int, int> m;
+    m.insert (std::pair<int, int>(1, 4));
+    m.insert (std::pair<int, int>(2, 4));
+    m.insert (std::pair<int, int>(3, 4));
+    std::map<int, int>&p = m;
+    std::map<int, int>::iterator itr = m.begin();
+    std::cout << itr->first << std::endl;
     // std::map<int, int > m;
     // m[34] = 4;
     // m[3] = 24;

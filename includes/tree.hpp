@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 17:42:17 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 17:57:51 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,12 @@ class binary_tree
     typedef     size_t                                  size_type;
     
     typedef     tree_iterator<tree_node*>               iterator;
+    typedef     tree_iterator<const tree_node*>         const_iterator;
 
     
     tree_node   *create_node(value_type value);
     void        delete_node(tree_node *_node);
+    
     private:
 
     
@@ -106,12 +108,23 @@ class binary_tree
     void        tarverseNodesPostOrder(tree_node *_tree, void (*func)(tree_node*));
     
     // tree_node*  clone_binary_tree(tree_node *_copy);
+    
+    
     size_type   size();
     void        clear();
     
+    iterator        begin();
+    // const_iterator          begin() const;
+
+    
+    iterator        end();
+    // const_iterator          end() const;
+
     void        operator++();
     
     tree_node                                      *__tree_root;
+    tree_node                                      *_begin;
+    tree_node                                      *_end;
     private:
     size_type                                       __size;
     allocator_type                                  __allocat;
@@ -124,7 +137,9 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type&):__size(0)
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type&):__size(0),
+                                                                __allocat(allocator_type), _begin(nullptr), 
+                                                                _end(nullptr)
 {
 }
 
@@ -138,6 +153,7 @@ template<
 binary_tree<Key,T,Compare ,Allocator>::binary_tree(const binary_tree& copy)
 {
     __tree_root = copy.__tree_root;
+    this->__size = copy.__size;
     __allocat = copy.__allocat;
 }
 
@@ -310,6 +326,30 @@ void    binary_tree<Key,T,Compare ,Allocator>::clear()
     __size = 0;
 }
 
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator >
+typename binary_tree<Key,T,Compare ,Allocator>::iterator
+binary_tree<Key,T,Compare ,Allocator>::begin()
+{
+
+}
+
+
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator >
+
+typename binary_tree<Key,T,Compare ,Allocator>::iterator
+binary_tree<Key,T,Compare ,Allocator>::end()
+{
+
+}
 
 
 template <typename U, typename V> 
