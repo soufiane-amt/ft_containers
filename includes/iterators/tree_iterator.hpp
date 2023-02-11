@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 17:58:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 18:34:04 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typename tree_iterator<T>::iterator_type tree_iterator<T>::base() const
 template<class T>
 typename tree_iterator<T>::reference       tree_iterator<T>::operator*() const
 {
-    return (*this->__value);
+    return (__value->data);
 }
 
 template<class T>
@@ -142,13 +142,13 @@ tree_iterator<T>&       tree_iterator<T>::operator=(const it& other)
 template<class T>
 typename tree_iterator<T>::pointer         tree_iterator<T>::operator->()
 {
-    return (this->__value);
+    return (&__value->data);
 }
 
 template<class T>
 typename tree_iterator<T>::const_pointer   tree_iterator<T>::operator->() const
 {
-    return (this->__value);
+    return (&__value->data);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 17:57:51 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 18:47:08 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,17 @@ namespace ft
         BACK_FROM_RIGHT =  1,
         BACK_FROM_LEFT  = -1,
     };
-    
-template <typename T>
+
+//this struct is gonna be a class
+template <typename T, typename Allocator>
 struct tree_node
 {
+    typedef Allocator                                allocator_type;
+    typedef typename allocator_type::difference_type difference_type;
+    typedef typename Iterator::value_type value_type;
+    typedef typename Iterator::pointer pointer;
+    typedef typename Iterator::reference reference;
+    typedef typename Iterator::iterator_category iterator_category;
 
     tree_node   *parent;
     tree_node   *left;
@@ -38,23 +45,29 @@ struct tree_node
         this->left = nullptr;
         this->right = nullptr;
     }
+    tree_iterator&       operator++()
+    {
+
+    }
+    
     void        set_node_to_left (tree_node *_node);
     void        set_node_to_right (tree_node *_node);
 
 };
-        template <typename T>
-        void set_node_to_left(tree_node<T> *_node)
-        {
-            this->left = _node;
-            _node->parent = this;
-        }
 
-        template <typename T>
-        void set_node_to_right(tree_node<T> *_node)
-        {
-            this->right = _node;
-            _node->parent = this;
-        }
+
+template <typename T>
+void set_node_to_left(tree_node<T> *_node)
+{
+    this->left = _node;
+    _node->parent = this;
+
+template <typename T>
+void set_node_to_right(tree_node<T> *_node)
+{
+    this->right = _node;
+    _node->parent = this;
+}
 
 
 
