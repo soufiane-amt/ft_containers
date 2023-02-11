@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 11:57:33 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 15:38:46 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,28 @@ struct tree_node
         this->left = nullptr;
         this->right = nullptr;
     }
+    void        set_node_to_left (tree_node *_node);
+    void        set_node_to_right (tree_node *_node);
+
 };
+        template <typename T>
+        void set_node_to_left(tree_node<T> *_node)
+        {
+            this->left = _node;
+            _node->parent = this;
+        }
+
+        template <typename T>
+        void set_node_to_right(tree_node<T> *_node)
+        {
+            this->right = _node;
+            _node->parent = this;
+        }
+
+
+
+
+
 
 
 template<
@@ -72,6 +93,7 @@ class binary_tree
     binary_tree& operator=(const binary_tree& copy);
     ~binary_tree();
    
+    tree_node   *get_tree() const;
     //insertion
     void         insert_node (tree_node *_tree, tree_node *new_node);
     //searching
@@ -151,6 +173,7 @@ typename binary_tree<Key,T,Compare ,Allocator>::tree_node
     //you have to use construct
     return (new tree_node(value));
 }
+
 
 
 
@@ -247,6 +270,17 @@ void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(tree_node 
     func(_tree);
 }
 
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+typename binary_tree<Key,T,Compare ,Allocator>::tree_node   
+*binary_tree<Key,T,Compare ,Allocator>::get_tree() const
+{
+    return (__tree_root);
+}
 
 
 

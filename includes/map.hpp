@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 11:46:24 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 12:15:22 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ template<
 
     //Element access:                   
     mapped_type&                        operator[] (const key_type& k);
-    mapped_type&                        at (const key_type& k);
-    const mapped_type&                  at (const key_type& k) const;
 
         //Modifiers
     iterator                            insert (iterator position, const_reference val);
@@ -196,27 +194,6 @@ map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 
 
 
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::mapped_type&
-map<Key, T, Compare, Allocator>::at (const key_type& k)
-{
-    tree_node   *node = _tree.search(k);
-    if (!node)
-        throw std::out_of_range ("Out of range please provide a valid key to map!");
-    return (node->data.second);
-}
-
-
-template< class Key, class T, class Compare , class Allocator  > 
-const typename map<Key, T, Compare, Allocator>::mapped_type&    
-map<Key, T, Compare, Allocator>::at (const key_type& k) const
-{
-    tree_node   *node = _tree.search(k);
-    if (!node)
-        throw std::out_of_range ("Out of range please provide a valid key to map!");
-    return (node->data.second);
-}
-
 
 
 template< class Key, class T, class Compare , class Allocator  > 
@@ -268,7 +245,20 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::size_type 
 map<Key, T, Compare, Allocator>::count (const key_type& k) const
 {
-    
+    return (_tree.search(_tree.get_tree(), k) != nullptr);
+}
+
+
+
+iterator                            lower_bound (const key_type& k);
+const_iterator                      lower_bound (const key_type& k) const;
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::allocator_type 
+map<Key, T, Compare, Allocator>::get_allocator() const
+{
+    return (_allocat);
 }
 
 }

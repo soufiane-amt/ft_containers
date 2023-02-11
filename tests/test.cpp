@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 11:54:11 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 13:51:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,23 +118,31 @@ struct comp
 typedef std::vector<int> MyVector;
 int             main(void)
 {
-
-    ft::binary_tree<int , int > b;
+    std::iterator<int> itr ;
+    // std::map<int, int > m;
+    // m[34] = 4;
+    // m[3] = 24;
+    // m[4] = 41;
+    // m[2] = 14;
+    // for (std::map<int, int >::iterator i = m.begin(); i != m.end(); i++)
+    //     std::cout << (*i).first << std::endl;
+    
+    // ft::binary_tree<int , int > b;
     // srand(time(NULL));
     // std::pair<int, int> a;
     // ft::binary_tree<int, int > b; 
     // for (size_t i = 0; i < 100; i++)
     // {
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(5, 5 + 1)));
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(2, 2 + 1)));
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(3, 3 + 1)));
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(4, 4 + 1)));
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(7, 7 + 1)));
-        b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(6, 6 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(5, 5 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(2, 2 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(3, 3 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(4, 4 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(7, 7 + 1)));
+        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(6, 6 + 1)));
         /* code */
     // }
     
     // b.tarverseNodesPreOrder(b.__tree_root, ft::print_node);
-    print_node (b.search_node(b.__tree_root, 5));
+    // print_node (b.search_node(b.__tree_root, 5));
     return (0);
 }
