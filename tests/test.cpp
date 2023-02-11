@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 13:51:12 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 17:12:14 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ struct comp
 typedef std::vector<int> MyVector;
 int             main(void)
 {
-    std::iterator<int> itr ;
+    std::map<int, int>::iterator itr ;
     // std::map<int, int > m;
     // m[34] = 4;
     // m[3] = 24;

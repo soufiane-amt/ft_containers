@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bidirectional_it.hpp                               :+:      :+:    :+:   */
+/*   tree_iterator.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 17:03:16 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 17:19:40 by samajat          ###   ########.fr       */
+/*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
+/*   Updated: 2023/02/11 17:39:20 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef ITERATOR_HPP
 #define ITERATOR_HPP
@@ -18,9 +19,8 @@
 namespace ft 
 {
 template<class _ite>
-class bidirectional_it
+class tree_iterator
 {
-
     public:                                       
         typedef _ite                                                       iterator_type;
         typedef typename iterator_traits<iterator_type>::iterator_category iterator_category;
@@ -31,27 +31,27 @@ class bidirectional_it
         typedef const reference         const_reference;
         typedef const pointer           const_pointer;
 
-        bidirectional_it();
+        tree_iterator();
         
         template <class it>
-        bidirectional_it(const it &other);
+        tree_iterator(const it &other);
         
-        bidirectional_it(pointer ptr);
+        tree_iterator(pointer ptr);
 
         iterator_type           base() const;
         
         
         reference               operator*() const;
-        bidirectional_it&       operator++();
-        bidirectional_it        operator++(int);
-        bidirectional_it&       operator--();
-        bidirectional_it        operator--(int);
+        tree_iterator&       operator++();
+        tree_iterator        operator++(int);
+        tree_iterator&       operator--();
+        tree_iterator        operator--(int);
         
-        bidirectional_it        operator+(difference_type) const;
-        bidirectional_it        operator-(difference_type) const;
+        tree_iterator        operator+(difference_type) const;
+        tree_iterator        operator-(difference_type) const;
         
         template <class it>
-        bidirectional_it&       operator=(const it&)  ;
+        tree_iterator&       operator=(const it&)  ;
     
         pointer                 operator->();
         const_pointer           operator->() const;
@@ -63,19 +63,19 @@ class bidirectional_it
 
 
 template<class T>
-bidirectional_it<T>::bidirectional_it():__value(0)
+tree_iterator<T>::tree_iterator():__value(0)
 {
     
 }
 
 template<class T>
 template <class it>
-bidirectional_it<T>::bidirectional_it(const it &other):__value ( other.base())
+tree_iterator<T>::tree_iterator(const it &other):__value ( other.base())
 {
 }
 
 template<class T>
-bidirectional_it<T>::bidirectional_it(pointer ptr)
+tree_iterator<T>::tree_iterator(pointer ptr)
 {
     this->__value = ptr;
 }
@@ -83,45 +83,45 @@ bidirectional_it<T>::bidirectional_it(pointer ptr)
 
 
 template<class T>
-typename bidirectional_it<T>::iterator_type bidirectional_it<T>::base() const 
+typename tree_iterator<T>::iterator_type tree_iterator<T>::base() const 
 {
     return (this->__value);
 }
 
 
 template<class T>
-typename bidirectional_it<T>::reference       bidirectional_it<T>::operator*() const
+typename tree_iterator<T>::reference       tree_iterator<T>::operator*() const
 {
     return (*this->__value);
 }
 
 template<class T>
-bidirectional_it<T>&       bidirectional_it<T>::operator++()
+tree_iterator<T>&       tree_iterator<T>::operator++()
 {
     this->__value++;
     return (*this);
 }
 
 template<class T>
-bidirectional_it<T>        bidirectional_it<T>::operator++(int)  
+tree_iterator<T>        tree_iterator<T>::operator++(int)  
 {
-    bidirectional_it<T> tmp (this->__value);
+    tree_iterator<T> tmp (this->__value);
     this->__value++;
     
     return (tmp);
 }
 
 template<class T>
-bidirectional_it<T>&       bidirectional_it<T>::operator--()
+tree_iterator<T>&       tree_iterator<T>::operator--()
 {
     this->__value--;
     return (*this);
 }
 
 template<class T>
-bidirectional_it<T>        bidirectional_it<T>::operator--(int)
+tree_iterator<T>        tree_iterator<T>::operator--(int)
 {
-    bidirectional_it<T> tmp (this->__value);
+    tree_iterator<T> tmp (this->__value);
     this->__value--;
     
     return (tmp);
@@ -131,7 +131,7 @@ bidirectional_it<T>        bidirectional_it<T>::operator--(int)
 
 template<class T>
 template <class it>
-bidirectional_it<T>&       bidirectional_it<T>::operator=(const it& other) 
+tree_iterator<T>&       tree_iterator<T>::operator=(const it& other) 
 {
     this->__value = other.base();
     return (*this);
@@ -140,13 +140,13 @@ bidirectional_it<T>&       bidirectional_it<T>::operator=(const it& other)
 
 
 template<class T>
-typename bidirectional_it<T>::pointer         bidirectional_it<T>::operator->()
+typename tree_iterator<T>::pointer         tree_iterator<T>::operator->()
 {
     return (this->__value);
 }
 
 template<class T>
-typename bidirectional_it<T>::const_pointer   bidirectional_it<T>::operator->() const
+typename tree_iterator<T>::const_pointer   tree_iterator<T>::operator->() const
 {
     return (this->__value);
 }
@@ -158,15 +158,15 @@ typename bidirectional_it<T>::const_pointer   bidirectional_it<T>::operator->() 
 
 
 template< class Iterator1, class Iterator2 >
-bool operator==( const ft::bidirectional_it<Iterator1>& iter1,
-                 const ft::bidirectional_it<Iterator2>& iter2 )
+bool operator==( const ft::tree_iterator<Iterator1>& iter1,
+                 const ft::tree_iterator<Iterator2>& iter2 )
 {
     return (iter1.base() == iter2.base());
 }
 
 template< class Iterator1, class Iterator2 >
-bool operator!=( const ft::bidirectional_it<Iterator1>& iter1,
-                 const ft::bidirectional_it<Iterator2>& iter2 )
+bool operator!=( const ft::tree_iterator<Iterator1>& iter1,
+                 const ft::tree_iterator<Iterator2>& iter2 )
 {
     return (iter1.base() != iter2.base());
 }

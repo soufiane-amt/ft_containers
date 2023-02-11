@@ -6,14 +6,14 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 15:38:46 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/11 17:42:17 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TREE_HPP
 #define TREE_HPP
 
-#include "utils.hpp"
+#include "iterators/tree_iterator.hpp"
 
 namespace ft
 {
@@ -79,6 +79,8 @@ class binary_tree
     typedef     Allocator                               allocator_type;
     typedef     tree_node<value_type>                   tree_node;
     typedef     size_t                                  size_type;
+    
+    typedef     tree_iterator<tree_node*>               iterator;
 
     
     tree_node   *create_node(value_type value);
@@ -106,6 +108,8 @@ class binary_tree
     // tree_node*  clone_binary_tree(tree_node *_copy);
     size_type   size();
     void        clear();
+    
+    void        operator++();
     
     tree_node                                      *__tree_root;
     private:
@@ -189,8 +193,8 @@ void    binary_tree<Key,T,Compare ,Allocator>::insert_node (tree_node *_tree, tr
         __tree_root = new_node;
     else
     {
-        if (new_node->data.first < _tree->data.first && !_tree->left) { _tree->left = new_node; __size++; return;};
-        if (new_node->data.first > _tree->data.first && !_tree->right) { _tree->right = new_node; __size++; return;};
+        if (new_node->data.first < _tree->data.first && !_tree->left) { _tree->set_node_to_left(new_node); __size++; return;};
+        if (new_node->data.first > _tree->data.first && !_tree->right) { _tree->set_node_to_right(new_node); __size++; return;};
         
         if (new_node->data.first < _tree->data.first)
             insert_node(_tree->left, new_node);
