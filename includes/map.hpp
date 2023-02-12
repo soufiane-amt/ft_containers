@@ -6,12 +6,12 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 15:08:10 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 15:25:24 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <functional>
-#include <utils.hpp>
+#include "utils.hpp"
 
 #include "iterators/reverse_iterator.hpp"
 #include "tree.hpp"
@@ -23,7 +23,7 @@ template<
     class Key,
     class T,
     class Compare = std::less<Key>,
-    class Allocator = std::allocator<pair<const Key, T>>
+    class Allocator = std::allocator<pair<const Key, T> >
     > class map 
 {
 
@@ -31,7 +31,7 @@ template<
     typedef     T                                   mapped_type;
     typedef 	pair<const key_type,mapped_type>    value_type;
     typedef     Compare                             key_compare;
-    typedef     std::less<pair<const key_type,mapped_type>> value_compare;
+    typedef     std::less<pair<const key_type,mapped_type> > value_compare;
     //value_compare
     typedef     Allocator                           allocator_type;
     typedef     value_type&                         reference;
@@ -41,14 +41,16 @@ template<
     typedef     size_t                              size_type;
     typedef     ptrdiff_t                           difference_type;
 
+    typedef     tree_node<value_type, allocator_type>  tree_node;
+    typedef     binary_tree<Key, T, key_compare, allocator_type > binary_tree;
 
     /*Iterators*/
     typedef typename              ft::tree_iterator<pointer>                iterator;
-    typedef typename              ft::tree_iterator<const_pointer>          const_iterator;
+    // typedef typename              tree_iterator<const_pointer>          const_iterator;
     
     /*reverse_iterator*/
-    typedef typename              ft::reverse_iterator<iterator >            reverse_iterator;
-    typedef typename              ft::reverse_iterator<const_iterator >      const_reverse_iterator;
+    // typedef typename              reverse_iterator<iterator >            reverse_iterator;
+    // typedef typename              reverse_iterator<const_iterator >      const_reverse_iterator;
 
 
 
@@ -88,15 +90,15 @@ template<
 
     //iterators
     iterator                begin();
-    const_iterator          begin() const;
+    // const_iterator          begin() const;
     iterator                end();
-    const_iterator          end() const;
+    // const_iterator          end() const;
     
     //reverse iterators
-    reverse_iterator       rbegin();
-    const_reverse_iterator rbegin() const;
-    reverse_iterator       rend();
-    const_reverse_iterator rend() const;
+    // reverse_iterator       rbegin();
+    // const_reverse_iterator rbegin() const;
+    // reverse_iterator       rend();
+    // const_reverse_iterator rend() const;
 
     //Observers:
     key_compare                         key_comp() const;
@@ -104,17 +106,17 @@ template<
 
     //Operations:
     iterator                            find (const key_type& k);
-    const_iterator                      find (const key_type& k) const;
+    // const_iterator                      find (const key_type& k) const;
             
     size_type                           count (const key_type& k) const;
                 
     iterator                            lower_bound (const key_type& k);
-    const_iterator                      lower_bound (const key_type& k) const;
+    // const_iterator                      lower_bound (const key_type& k) const;
                 
     iterator                            upper_bound (const key_type& k);
-    const_iterator                      upper_bound (const key_type& k) const;
+    // const_iterator                      upper_bound (const key_type& k) const;
 
-    pair<const_iterator,const_iterator> equal_range (const key_type& k) const;
+    // pair<const_iterator,const_iterator> equal_range (const key_type& k) const;
     pair<iterator,iterator>             equal_range (const key_type& k);
 
     allocator_type                      get_allocator() const;
@@ -134,7 +136,7 @@ template<
 template< class Key, class T, class Compare , class Allocator  > 
 map<Key, T, Compare, Allocator>::map(const key_compare& comp, const allocator_type& alloc)
 {
-    
+    (void)comp;(void)alloc;
 }
 
 
@@ -187,7 +189,7 @@ map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 {
     tree_node   *node = _tree.search(k);
     if (!node)
-        insert (end(), pair<k, mapped_type());
+        insert (end(), pair<key_type, mapped_type >(k, mapped_type()) );
     return (node->data.second);
 }
 
@@ -226,19 +228,19 @@ map<Key, T, Compare, Allocator>::value_comp() const
 }
 
 
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::iterator                            
-map<Key, T, Compare, Allocator>::find (const key_type& k)
-{
+// template< class Key, class T, class Compare , class Allocator  > 
+// typename map<Key, T, Compare, Allocator>::iterator                            
+// map<Key, T, Compare, Allocator>::find (const key_type& k)
+// {
     
-}
+// }
 
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::const_iterator                     
-map<Key, T, Compare, Allocator>::find (const key_type& k) const
-{
+// template< class Key, class T, class Compare , class Allocator  > 
+// typename map<Key, T, Compare, Allocator>::const_iterator                     
+// map<Key, T, Compare, Allocator>::find (const key_type& k) const
+// {
     
-}
+// }
 
 template< class Key, class T, class Compare , class Allocator  > 
 typename map<Key, T, Compare, Allocator>::size_type 
@@ -249,8 +251,8 @@ map<Key, T, Compare, Allocator>::count (const key_type& k) const
 
 
 
-iterator                            lower_bound (const key_type& k);
-const_iterator                      lower_bound (const key_type& k) const;
+// iterator                            lower_bound (const key_type& k);
+// const_iterator                      lower_bound (const key_type& k) const;
 
 
 template< class Key, class T, class Compare , class Allocator  > 

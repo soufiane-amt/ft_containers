@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 15:02:49 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 15:16:11 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ template <typename T, typename Allocator>
 struct tree_node
 {
     typedef Allocator                                allocator_type;
-    typedef typename allocator_type::difference_type difference_type;
-    typedef typename Iterator::value_type value_type;
-    typedef typename Iterator::pointer pointer;
-    typedef typename Iterator::reference reference;
-    typedef typename Iterator::iterator_category iterator_category;
+    // typedef typename allocator_type::difference_type difference_type;
+    // typedef typename Iterator::value_type value_type;
+    // typedef typename Iterator::pointer pointer;
+    // typedef typename Iterator::reference reference;
+    // typedef typename Iterator::iterator_category iterator_category;
 
     tree_node   *parent;
     tree_node   *left;
@@ -52,14 +52,15 @@ struct tree_node
 };
 
 
-template <typename T>
-void set_node_to_left(tree_node<T> *_node)
+template <typename T, typename Allocator>
+void tree_node<T, Allocator>::set_node_to_left(tree_node<T, Allocator> *_node)
 {
     this->left = _node;
     _node->parent = this;
+}
 
-template <typename T>
-void set_node_to_right(tree_node<T> *_node)
+template <typename T, typename Allocator>
+void tree_node<T, Allocator>::set_node_to_right(tree_node<T, Allocator> *_node)
 {
     this->right = _node;
     _node->parent = this;
@@ -86,7 +87,7 @@ class binary_tree
     typedef 	ft::pair<const key_type,mapped_type>    value_type;
     typedef     Compare                                 key_compare;
     typedef     Allocator                               allocator_type;
-    typedef     tree_node<value_type>                   tree_node;
+    typedef     tree_node<value_type, allocator_type>   tree_node;
     typedef     size_t                                  size_type;
     
     typedef     tree_iterator<tree_node*>               iterator;
@@ -146,8 +147,8 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type&):__size(0),
-                                                                __allocat(allocator_type), _begin(nullptr), 
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type& alloc):__size(0),
+                                                                __allocat(alloc), _begin(nullptr), 
                                                                 _end(nullptr)
 {
 }
@@ -361,15 +362,15 @@ binary_tree<Key,T,Compare ,Allocator>::end()
 }
 
 
-template <typename U, typename V> 
-void delete_node(tree_node<pair<U, V> > *_node)
+template <typename U, typename V, typename Allocator > 
+void delete_node(tree_node<pair<U, V>, Allocator > *_node)
 {
     delete _node;
 }
 
 
-template <typename U, typename V> 
-void    print_node (tree_node<pair<U, V> > *_node)
+template <typename U, typename V, typename Allocator > 
+void    print_node (tree_node<pair<U, V>, Allocator > *_node)
 {
     std::cout << _node << std::endl;
     std::cout << "key : " << _node->data.first << " -- " << "value : " << _node->data.second << std::endl;
