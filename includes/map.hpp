@@ -6,14 +6,13 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 12:15:22 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 15:08:10 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <functional>
 #include <utils.hpp>
 
-#include "iterators/bidirectional_it.hpp"
 #include "iterators/reverse_iterator.hpp"
 #include "tree.hpp"
 
@@ -24,8 +23,8 @@ template<
     class Key,
     class T,
     class Compare = std::less<Key>,
-    class Allocator = std::allocator<ft::pair<const Key, T>>
-    > class map
+    class Allocator = std::allocator<pair<const Key, T>>
+    > class map 
 {
 
     typedef     Key                                 key_type;
@@ -44,8 +43,8 @@ template<
 
 
     /*Iterators*/
-    typedef typename              ft::bidirectional_it<pointer>                iterator;
-    typedef typename              ft::bidirectional_it<const_pointer>          const_iterator;
+    typedef typename              ft::tree_iterator<pointer>                iterator;
+    typedef typename              ft::tree_iterator<const_pointer>          const_iterator;
     
     /*reverse_iterator*/
     typedef typename              ft::reverse_iterator<iterator >            reverse_iterator;
