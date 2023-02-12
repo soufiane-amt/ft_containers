@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 11:49:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 12:34:08 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ class tree_iterator
         tree_iterator(pointer ptr);
 
         iterator_type           base() const;
-        
         
         reference            operator*() const;
         tree_iterator&       operator++();
@@ -76,6 +75,7 @@ template<class T>
 template <class it>
 tree_iterator<T>::tree_iterator(const it &other):__node ( other.base())
 {
+    __last_node = other.find_last_node(__node);
 }
 
 template<class T>
@@ -90,6 +90,15 @@ template<class T>
 typename tree_iterator<T>::iterator_type tree_iterator<T>::base() const 
 {
     return (this->__node);
+}
+
+
+
+
+template<class T>
+typename tree_iterator<T>::iterator_type tree_iterator<T>::get_last_node() const 
+{
+    return (this->__last_node);
 }
 
 
@@ -108,7 +117,7 @@ tree_iterator<T>&       tree_iterator<T>::operator++()
         while (__node->left)
             __node = __node->left;
     }
-    if (__node->right)
+    if (__node->right || __node == __last_node)
         __node = __node->right;
     else //protect null parent
     {
