@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 11:27:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 12:22:43 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,19 +119,29 @@ typedef std::vector<int> MyVector;
 int             main(void)
 {
     std::map<int, int> m;
+    
     m.insert (std::pair<int, int>(1, 4));
-    // m.insert (std::pair<int, int>(2, 4));
-    // m.insert (std::pair<int, int>(3, 4));
-    std::map<int, int>::iterator itr;
-    itr = m.begin();
-    std::cout << itr->first << std::endl;
+    m.insert (std::pair<int, int>(2, 4));
+    m.insert (std::pair<int, int>(3, 4));
+    
+    std::cout << "-------\n";
+    std::map<int, int >::iterator i = m.begin();
+    i++;
+    i++;
+    i++;
+    i++;
+    m.insert (std::pair<int, int>(22, 4));
+    m.insert (std::pair<int, int>(12, 4));
+    m.insert (std::pair<int, int>(2112, 4));
+    std::cout << (*i).first << std::endl;
+    // for ( ; i != m.end(); i++)
+    //     std::cout << (*i).first << std::endl;
+    
     // std::map<int, int > m;
     // m[34] = 4;
     // m[3] = 24;
     // m[4] = 41;
     // m[2] = 14;
-    // for (std::map<int, int >::iterator i = m.begin(); i != m.end(); i++)
-    //     std::cout << (*i).first << std::endl;
     
     // ft::binary_tree<int , int > b;
     // srand(time(NULL));
