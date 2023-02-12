@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 14:40:12 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 15:48:36 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,11 @@ tree_iterator<T>        tree_iterator<T>::operator++(int)
 template<class T>
 tree_iterator<T>&       tree_iterator<T>::operator  --()
 {
+    if (__node == __first_node)
+    {
+        __node = nullptr;
+        return;
+    }
     if (!__node->left)
     {
         while (__node->parent->data.first > __node->data.first)
