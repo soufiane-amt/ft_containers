@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 11:07:09 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 11:49:31 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,31 @@ class tree_iterator
         const_pointer           operator->() const;
 
     private:
-        iterator_type   __value;
+        iterator_type   __node;
+        iterator_type   __last_node;
+
+    private:
+        iterator_type   find_last_node(iterator_type __node) const;
     };
 
 
 
 template<class T>
-tree_iterator<T>::tree_iterator():__value(0)
+tree_iterator<T>::tree_iterator():__node(0)
 {
     
 }
 
 template<class T>
 template <class it>
-tree_iterator<T>::tree_iterator(const it &other):__value ( other.base())
+tree_iterator<T>::tree_iterator(const it &other):__node ( other.base())
 {
 }
 
 template<class T>
 tree_iterator<T>::tree_iterator(pointer ptr)
 {
-    this->__value = ptr;
+    this->__node = ptr;
 }
 
 
@@ -85,34 +89,37 @@ tree_iterator<T>::tree_iterator(pointer ptr)
 template<class T>
 typename tree_iterator<T>::iterator_type tree_iterator<T>::base() const 
 {
-    return (this->__value);
+    return (this->__node);
 }
 
 
 template<class T>
 typename tree_iterator<T>::reference       tree_iterator<T>::operator*() const
 {
-    return (__value->data);
+    return (__node->data);
 }
 
 template<class T>
 tree_iterator<T>&       tree_iterator<T>::operator++()
 {
-    if (!__value->parent)
+    if (!__node->parent)
     {
-        __value = __value->right;
-        while (__value->left)
-            __value = __value->left;
+        __node = __node->right;
+        while (__node->left)
+            __node = __node->left;
     }
-    if (__value->right)
-        __value = __value->right;
+    if (__node->right)
+        __node = __node->right;
     else //protect null parent
     {
-        if (__value->parent->data.first > __value->data.first)
-            __value = __value->parent;
+        if (__node->parent->data.first > __node->data.first)
+            __node = __node->parent;
         else
-            while (__value->parent->data.first < __value->data.first)
-                __value = __value->parent;
+        {
+            while (__node->parent->data.first < __node->data.first)
+                __node = __node->parent;
+            __node = __node->parent;
+        }
     }
     return (*this);
 }
@@ -120,7 +127,7 @@ tree_iterator<T>&       tree_iterator<T>::operator++()
 template<class T>
 tree_iterator<T>        tree_iterator<T>::operator++(int)  
 {
-    tree_iterator<T> tmp (this->__value);
+    tree_iterator<T> tmp (this->__node);
     operator++();
     
     return (tmp);
@@ -129,15 +136,15 @@ tree_iterator<T>        tree_iterator<T>::operator++(int)
 template<class T>
 tree_iterator<T>&       tree_iterator<T>::operator--()
 {
-    this->__value--;
+    this->__node--;
     return (*this);
 }
 
 template<class T>
 tree_iterator<T>        tree_iterator<T>::operator--(int)
 {
-    tree_iterator<T> tmp (this->__value);
-    this->__value--;
+    tree_iterator<T> tmp (this->__node);
+    this->__node--;
     
     return (tmp);
 }
@@ -148,7 +155,7 @@ template<class T>
 template <class it>
 tree_iterator<T>&       tree_iterator<T>::operator=(const it& other) 
 {
-    this->__value = other.base();
+    this->__node = other.base();
     return (*this);
 }
 
@@ -157,16 +164,25 @@ tree_iterator<T>&       tree_iterator<T>::operator=(const it& other)
 template<class T>
 typename tree_iterator<T>::pointer         tree_iterator<T>::operator->()
 {
-    return (&__value->data);
+    return (&__node->data);
 }
 
 template<class T>
 typename tree_iterator<T>::const_pointer   tree_iterator<T>::operator->() const
 {
-    return (&__value->data);
+    return (&__node->data);
 }
 
 
+//
+template<class T>
+typename tree_iterator<T>::iterator_type   
+tree_iterator<T>::find_last_node(iterator_type __node) const
+{
+    if (__node->right)
+        return find_last_node(__node->right);
+    return (__node);
+}
 
 
 //non members
