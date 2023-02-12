@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 18:34:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 11:03:15 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,22 @@ typename tree_iterator<T>::reference       tree_iterator<T>::operator*() const
 template<class T>
 tree_iterator<T>&       tree_iterator<T>::operator++()
 {
-    this->__value++;
+    if (!__value->parent)
+    {
+        __value = __value->right;
+        while (__value->left)
+            __value = __value->left;
+    }
+    if (__value->right)
+        __value = __value->right;
+    else //protect null parent
+    {
+        if (__value->parent->data.first > __value->data.first)
+            __value = __value->parent;
+        else
+            while (__value->parent->data.first < __value->data.first)
+                __value = __value->parent;
+    }
     return (*this);
 }
 

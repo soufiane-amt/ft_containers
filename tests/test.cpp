@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 18:26:40 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 11:02:04 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,11 @@ int             main(void)
 {
     std::map<int, int> m;
     m.insert (std::pair<int, int>(1, 4));
-    m.insert (std::pair<int, int>(2, 4));
-    m.insert (std::pair<int, int>(3, 4));
-    // std::map<int, int>&p = m;
-    std::map<int, int>::iterator itr = m.begin();
-    ;
+    // m.insert (std::pair<int, int>(2, 4));
+    // m.insert (std::pair<int, int>(3, 4));
+    std::map<int, int>::iterator itr;
+    itr++;
+    // std::cout << itr->first << std::endl;
     // std::map<int, int > m;
     // m[34] = 4;
     // m[3] = 24;

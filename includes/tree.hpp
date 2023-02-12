@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/11 18:47:08 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 10:48:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ struct tree_node
         this->parent = nullptr;
         this->left = nullptr;
         this->right = nullptr;
-    }
-    tree_iterator&       operator++()
-    {
-
     }
     
     void        set_node_to_left (tree_node *_node);
