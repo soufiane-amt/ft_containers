@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 12:34:08 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 14:29:46 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,24 +111,24 @@ typename tree_iterator<T>::reference       tree_iterator<T>::operator*() const
 template<class T>
 tree_iterator<T>&       tree_iterator<T>::operator++()
 {
+    if (__node == __last_node)
+    {
+        __node = nullptr;
+        return;
+    }
     if (!__node->parent)
     {
         __node = __node->right;
         while (__node->left)
             __node = __node->left;
     }
-    if (__node->right || __node == __last_node)
+    if (__node->right )
         __node = __node->right;
     else //protect null parent
     {
-        if (__node->parent->data.first > __node->data.first)
+        while (__node->parent->data.first < __node->data.first)
             __node = __node->parent;
-        else
-        {
-            while (__node->parent->data.first < __node->data.first)
-                __node = __node->parent;
-            __node = __node->parent;
-        }
+        __node = __node->parent;
     }
     return (*this);
 }
@@ -139,13 +139,24 @@ tree_iterator<T>        tree_iterator<T>::operator++(int)
     tree_iterator<T> tmp (this->__node);
     operator++();
     
-    return (tmp);
+    return (tmp); 
 }
 
 template<class T>
-tree_iterator<T>&       tree_iterator<T>::operator--()
+tree_iterator<T>&       tree_iterator<T>::operator  --()
 {
-    this->__node--;
+    if (!__node->left)
+    {
+        while (__node->parent->data.first > __node->data.first)
+            __node = __node->parent;
+        __node = __node->parent;
+    }
+    else
+    {
+        __node = __node->left;
+        while (__node->right)
+            __node = __node->right;
+    }
     return (*this);
 }
 
@@ -153,7 +164,7 @@ template<class T>
 tree_iterator<T>        tree_iterator<T>::operator--(int)
 {
     tree_iterator<T> tmp (this->__node);
-    this->__node--;
+    operator--();
     
     return (tmp);
 }
