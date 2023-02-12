@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 14:29:46 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 14:40:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ class tree_iterator
 
     private:
         iterator_type   __node;
+        iterator_type   __first_node;
         iterator_type   __last_node;
 
     private:
         iterator_type   find_last_node(iterator_type __node) const;
+        iterator_type   find_first_node(iterator_type __node) const;
     };
 
 
@@ -76,6 +78,7 @@ template <class it>
 tree_iterator<T>::tree_iterator(const it &other):__node ( other.base())
 {
     __last_node = other.find_last_node(__node);
+    __first_node = other.find_first_node(__node);
 }
 
 template<class T>
@@ -90,15 +93,6 @@ template<class T>
 typename tree_iterator<T>::iterator_type tree_iterator<T>::base() const 
 {
     return (this->__node);
-}
-
-
-
-
-template<class T>
-typename tree_iterator<T>::iterator_type tree_iterator<T>::get_last_node() const 
-{
-    return (this->__last_node);
 }
 
 
@@ -203,6 +197,20 @@ tree_iterator<T>::find_last_node(iterator_type __node) const
         return find_last_node(__node->right);
     return (__node);
 }
+
+
+
+
+template<class T>
+typename tree_iterator<T>::iterator_type 
+tree_iterator<T>::find_first_node(iterator_type __node) const 
+{
+    if (__node->left)
+        return find_last_node(__node->left);
+    return (__node);
+}
+
+
 
 
 //non members

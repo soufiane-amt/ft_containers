@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/06 17:26:35 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 14:42:03 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ class random_access_iterator
         typedef typename iterator_traits<iterator_type>::difference_type   difference_type;
         typedef typename iterator_traits<iterator_type>::pointer           pointer;
         typedef typename iterator_traits<iterator_type>::reference         reference;
-        typedef const reference         const_reference;
-        typedef const pointer           const_pointer;
+        typedef const reference                                            const_reference;
+        typedef const pointer                                              const_pointer;
 
         random_access_iterator();
         
