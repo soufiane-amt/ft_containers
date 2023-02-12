@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 17:07:26 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 17:47:53 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ template<
     typedef     binary_tree<Key, T, key_compare, allocator_type > binary_tree;
 
     /*Iterators*/
-    typedef typename              ft::tree_iterator<pointer>                iterator;
+    typedef typename              ft::tree_iterator<tree_node*>                iterator;
     // typedef typename              tree_iterator<const_pointer>          const_iterator;
     
     /*reverse_iterator*/
@@ -291,7 +291,7 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::iterator 
 map<Key, T, Compare, Allocator>::begin ()
 {
-    return (_tree.begin());
+    return (iterator(_tree.begin()));
 }
 
 
@@ -299,7 +299,7 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::iterator 
 map<Key, T, Compare, Allocator>::end ()
 {
-    return (_tree.end());
+    return (iterator(_tree.end()));
 }
 
 

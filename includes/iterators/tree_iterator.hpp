@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 17:15:38 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 18:46:20 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class tree_iterator
         typedef typename iterator_traits<iterator_type>::difference_type   difference_type;
         typedef typename iterator_traits<iterator_type>::pointer           pointer;
         typedef typename iterator_traits<iterator_type>::reference         reference;
+        typedef typename value_type::data_value_type_ref                   data_value_type_ref;
         typedef const reference                                            const_reference;
         typedef const pointer                                              const_pointer;
 
@@ -36,11 +37,11 @@ class tree_iterator
         template <class it>
         tree_iterator(const it &other);
         
-        tree_iterator(pointer ptr);
+        tree_iterator(iterator_type ptr);
 
         iterator_type           base() const;
         
-        reference            operator*() const;
+        data_value_type_ref            operator*() const;
         tree_iterator&       operator++();
         tree_iterator        operator++(int);
         tree_iterator&       operator--();
@@ -61,8 +62,8 @@ class tree_iterator
         iterator_type   __last_node;
 
     private:
-        iterator_type   find_last_node(iterator_type __node) const;
-        iterator_type   find_first_node(iterator_type __node) const;
+        friend iterator_type   find_last_node(iterator_type _node) const;
+        friend iterator_type   find_first_node(iterator_type _node) const;
     };
 
 
@@ -82,7 +83,7 @@ tree_iterator<T>::tree_iterator(const it &other):__node ( other.base())
 }
 
 template<class T>
-tree_iterator<T>::tree_iterator(pointer ptr)
+tree_iterator<T>::tree_iterator(iterator_type ptr)
 {
     this->__node = ptr;
 }
@@ -97,7 +98,7 @@ typename tree_iterator<T>::iterator_type tree_iterator<T>::base() const
 
 
 template<class T>
-typename tree_iterator<T>::reference       tree_iterator<T>::operator*() const
+typename tree_iterator<T>::data_value_type_ref       tree_iterator<T>::operator*() const
 {
     return (__node->data);
 }
@@ -108,7 +109,7 @@ tree_iterator<T>&       tree_iterator<T>::operator++()
     if (__node == __last_node)
     {
         __node = nullptr;
-        return;
+        return *this;
     }
     if (!__node->parent)
     {

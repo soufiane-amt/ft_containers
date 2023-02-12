@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 17:34:36 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 18:45:15 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ namespace ft
 template <typename T, typename Allocator>
 struct tree_node
 {
-    typedef Allocator                                allocator_type;
-    // typedef typename allocator_type::difference_type difference_type;
+    typedef Allocator                               allocator_type;
+    typedef T                                       data_value_type;
+    typedef T                                       data_value_type_ref;
     // typedef typename Iterator::value_type value_type;
     // typedef typename Iterator::pointer pointer;
     // typedef typename Iterator::reference reference;
@@ -213,6 +214,8 @@ template<
     >
 void    binary_tree<Key,T,Compare ,Allocator>::insert_node (tree_node *_tree, tree_node *new_node)
 {
+    _begin      = nullptr;
+    _end        = nullptr;
     if (!__tree_root)
         __tree_root = new_node;
     else
@@ -342,10 +345,11 @@ template<
     class T,
     class Compare ,
     class Allocator >
+
 typename binary_tree<Key,T,Compare ,Allocator>::iterator
 binary_tree<Key,T,Compare ,Allocator>::begin()
 {
-    return (iterator(_begin));
+    return (iterator(__tree_root->find_first_node()));
 }
 
 
@@ -359,7 +363,7 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::iterator
 binary_tree<Key,T,Compare ,Allocator>::end()
 {
-    return (nullptr);
+    return (iterator(_end));
 }
 
 
