@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 15:16:11 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 17:34:36 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ class binary_tree
     
     tree_node   *create_node(value_type value);
     void        delete_node(tree_node *_node);
-    
     private:
 
     
@@ -130,7 +129,6 @@ class binary_tree
     iterator        end();
     // const_iterator          end() const;
 
-    void        operator++();
     
     tree_node                                      *__tree_root;
     tree_node                                      *_begin;
@@ -147,10 +145,10 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type& alloc):__size(0),
-                                                                __allocat(alloc), _begin(nullptr), 
-                                                                _end(nullptr)
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type& alloc): _begin(nullptr),
+                                                         _end(nullptr), __allocat(alloc) 
 {
+    __size = 0;
 }
 
 
@@ -333,7 +331,10 @@ template<
 void    binary_tree<Key,T,Compare ,Allocator>::clear()
 {
     tarverseNodesPostOrder(this->__tree_root, &delete_node);
-    __size = 0;
+    __size      = 0;
+    _begin      = nullptr;
+    _end        = nullptr;
+    __tree_root = nullptr;
 }
 
 template<
@@ -344,7 +345,7 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::iterator
 binary_tree<Key,T,Compare ,Allocator>::begin()
 {
-
+    return (iterator(_begin));
 }
 
 
@@ -358,7 +359,7 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::iterator
 binary_tree<Key,T,Compare ,Allocator>::end()
 {
-
+    return (nullptr);
 }
 
 

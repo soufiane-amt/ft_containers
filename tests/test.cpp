@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 15:09:24 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 17:04:08 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 
 // #define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
-// #define TESTED_NAMESPACE ft
 
 // // --- Class foo
 // template <typename T>
@@ -114,26 +113,25 @@ struct comp
     }
 };
 
+
+
 #define TESTED_TYPE int
+#define TESTED_NAMESPACE ft
+
 typedef std::vector<int> MyVector;
 int             main(void)
 {
-    std::map<int, int> m;
+    TESTED_NAMESPACE::map<int, int> m;
     
-    m.insert (std::pair<int, int>(1, 4));
-    m.insert (std::pair<int, int>(2, 4));
-    m.insert (std::pair<int, int>(3, 4));
+    m.insert (TESTED_NAMESPACE::pair<int, int>(1, 4));
+    m.insert (TESTED_NAMESPACE::pair<int, int>(2, 4));
+    m.insert (TESTED_NAMESPACE::pair<int, int>(3, 4));
+    for ( TESTED_NAMESPACE::map<int, int>::iterator i = m.begin(); i != m.end(); i++)
+        std::cout << (*i).first << std::endl;
     
-    std::cout << "-------\n";
-    std::map<int, int >::iterator i = m.begin();
-    i--;
-    // m.insert (std::pair<int, int>(22, 4));
-    // m.insert (std::pair<int, int>(12, 4));
-    // m.insert (std::pair<int, int>(2112, 4));
-    std::cout << (*i).first << std::endl;
-    // for ( ; i != m.end(); i++)
-    //     std::cout << (*i).first << std::endl;
-    
+    // m.insert (TESTED_NAMESPACE::pair<int, int>(22, 4));
+    // m.insert (TESTED_NAMESPACE::pair<int, int>(12, 4));
+    // m.insert (TESTED_NAMESPACE::pair<int, int>(2112, 4));
     // std::map<int, int > m;
     // m[34] = 4;
     // m[3] = 24;

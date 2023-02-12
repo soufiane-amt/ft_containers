@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 15:25:24 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 17:07:26 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ template<
     > class map 
 {
 
+    public:
+    friend class binary_tree<Key, T, Compare, Allocator>;
+    
     typedef     Key                                 key_type;
     typedef     T                                   mapped_type;
     typedef 	pair<const key_type,mapped_type>    value_type;
@@ -77,6 +80,9 @@ template<
     mapped_type&                        operator[] (const key_type& k);
 
         //Modifiers
+
+    value_type                          insert (const value_type& val);
+
     iterator                            insert (iterator position, const_reference val);
     
     template <class InputIterator> 
@@ -149,6 +155,13 @@ map<Key, T, Compare, Allocator>::map( const map& other )
     _comp = other._comp;
 }
 
+
+template< class Key, class T, class Compare , class Allocator  > 
+map<Key, T, Compare, Allocator>::~map()
+{
+}
+
+
 template< class Key, class T, class Compare , class Allocator  > 
 map<Key, T, Compare, Allocator>&    
 map<Key, T, Compare, Allocator>::operator=( const map& other )
@@ -193,8 +206,33 @@ map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
     return (node->data.second);
 }
 
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::value_type
+map<Key, T, Compare, Allocator>::insert (const value_type& val)
+{
+    _tree.insert_node(_tree.__tree_root, _tree.create_node(val));
+    return (val);
+}
 
 
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::iterator 
+map<Key, T, Compare, Allocator>::insert (iterator position, const_reference val)
+{
+    (void)position;
+    _tree.insert_node(_tree.__tree_root, _tree.create_node(val));
+}
+
+template< class Key, class T, class Compare , class Allocator  > 
+template <class InputIterator> 
+void    map<Key, T, Compare, Allocator>::insert (InputIterator first, InputIterator last)
+{
+    while (first != last)
+    {
+        _tree.insert_node(_tree.__tree_root, _tree.create_node(*first));
+        first++;
+    }
+}
 
 
 template< class Key, class T, class Compare , class Allocator  > 
@@ -247,6 +285,21 @@ typename map<Key, T, Compare, Allocator>::size_type
 map<Key, T, Compare, Allocator>::count (const key_type& k) const
 {
     return (_tree.search(_tree.get_tree(), k) != nullptr);
+}
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::iterator 
+map<Key, T, Compare, Allocator>::begin ()
+{
+    return (_tree.begin());
+}
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::iterator 
+map<Key, T, Compare, Allocator>::end ()
+{
+    return (_tree.end());
 }
 
 
