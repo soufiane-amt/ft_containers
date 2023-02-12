@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 11:03:15 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/12 11:07:09 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ template<class T>
 tree_iterator<T>        tree_iterator<T>::operator++(int)  
 {
     tree_iterator<T> tmp (this->__value);
-    this->__value++;
+    operator++();
     
     return (tmp);
 }
