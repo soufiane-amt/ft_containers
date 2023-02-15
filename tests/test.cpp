@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/15 15:35:25 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 17:19:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,56 +118,18 @@ struct comp
 #define TESTED_TYPE int
 #define TESTED_NAMESPACE ft
 
+
 int             main(void)
 {
     TESTED_NAMESPACE::map<int, int> m;
     
-    m.insert (TESTED_NAMESPACE::pair<int, int>(1, 4));
-    m.insert (TESTED_NAMESPACE::pair<int, int>(2, 4));
-    // m.insert (TESTED_NAMESPACE::pair<int, int>(2, 4));
-    // m.insert (TESTED_NAMESPACE::pair<int, int>(2, 4));
-    m.insert (TESTED_NAMESPACE::pair<int, int>(3, 4));
-    TESTED_NAMESPACE::map<int, int>::iterator i = m.begin();
-    std::cout << (*i).first << std::endl;
-    i++;
-    std::cout << (*i).first << std::endl;
-    i++;
-    std::cout << (*i).first << std::endl;
-    i++;
-    std::cout << (*i).first << std::endl;
-    i++;
-    std::cout << (*i).first << std::endl;
+    m.insert(TESTED_NAMESPACE::pair<int, int>(5, 5));
+    m.insert(TESTED_NAMESPACE::pair<int, int>(1, 5));
+    m.insert(TESTED_NAMESPACE::pair<int, int>(8, 5));
+    m.insert(TESTED_NAMESPACE::pair<int, int>(2, 5));
 
-    // std::cout << (*i).first << std::endl;
-    // std::cout << 
-    // for ( TESTED_NAMESPACE::map<int, int>::iterator i = m.begin(); i != m.end(); i++)
-    //     std::cout << (*i).first << std::endl;
     
-    // m.insert (TESTED_NAMESPACE::pair<int, int>(22, 4));
-    // m.insert (TESTED_NAMESPACE::pair<int, int>(12, 4));
-    // m.insert (TESTED_NAMESPACE::pair<int, int>(2112, 4));
-    // std::map<int, int > m;
-    // m[34] = 4;
-    // m[3] = 24;
-    // m[4] = 41;
-    // m[2] = 14;
-    
-    // ft::binary_tree<int , int > b;
-    // srand(time(NULL));
-    // std::pair<int, int> a;
-    // ft::binary_tree<int, int > b; 
-    // for (size_t i = 0; i < 100; i++)
-    // {
-        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(5, 5 + 1)));
-        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(2, 2 + 1)));
-        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(3, 3 + 1)));
-        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(4, 4 + 1)));
-        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(7, 7 + 1)));
-        // b.insert_node(b.__tree_root, b.create_node(ft::pair< int, int>(6, 6 + 1)));
-        /* code */
-    // }
-    
-    // b.tarverseNodesPreOrder(b.__tree_root, ft::print_node);
-    // print_node (b.search_node(b.__tree_root, 5));
+    for (TESTED_NAMESPACE::map<int, int>::iterator i = m.begin(); i != m.end(); i++)
+        std::cout << (*i).first << std::endl;
     return (0);
 }

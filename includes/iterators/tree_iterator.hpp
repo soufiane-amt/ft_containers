@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/15 14:50:44 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 17:23:28 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,10 @@ tree_iterator<T>::tree_iterator(iterator_type ptr)
     this->__node = ptr;
     if (__node)
     {
-        __last_node = ptr->find_last_node(__node);
-        __first_node = ptr->find_first_node(__node);
+        __last_node = this->find_last_node(__node);
+        __first_node = this->find_first_node(__node);
     }
+
 }
 
 
@@ -113,6 +114,7 @@ tree_iterator<T>&       tree_iterator<T>::operator++()
 {
     if (__node == __last_node)
     {
+        
         __node = nullptr;
         return *this;
     }
@@ -206,8 +208,8 @@ typename tree_iterator<T>::iterator_type
 tree_iterator<T>::find_last_node(iterator_type _node) 
 {
     iterator_type tmp = _node;
-    // if (_node->right)
-    //     return find_last_node(_node->right);
+    while (tmp && tmp->parent)
+        tmp = tmp->parent;
     while (tmp && tmp->right)
         tmp = tmp->right;
     return (tmp);
@@ -219,9 +221,12 @@ template<class T>
 typename tree_iterator<T>::iterator_type 
 tree_iterator<T>::find_first_node(iterator_type _node)  
 {
-    if (_node->left)
-        return find_first_node(_node->left);
-    return (_node);
+    iterator_type tmp = _node;
+    while (tmp && tmp->parent)
+        tmp = tmp->parent;
+    while (tmp && _node->left)
+        tmp = tmp->left;
+    return (tmp);
 }
 
 

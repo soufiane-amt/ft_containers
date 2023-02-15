@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/15 15:40:01 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 16:03:36 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ template<
     typedef     ptrdiff_t                           difference_type;
 
     typedef     tree_node<value_type, allocator_type>  tree_node;
+    typedef     tree_node*              tree_node_pointer;
+    typedef     tree_node_pointer     tree_node_const_pointer;
     typedef     binary_tree<Key, T, key_compare, allocator_type > binary_tree;
 
     /*Iterators*/
-    typedef typename              ft::tree_iterator<tree_node*>                iterator;
-    typedef typename              ft::tree_iterator<const_pointer>          const_iterator;
+    typedef typename              ft::tree_iterator<tree_node_pointer>                iterator;
+    typedef typename              ft::tree_iterator<tree_node_const_pointer>          const_iterator;
     
     /*reverse_iterator*/
     // typedef typename              reverse_iterator<iterator >            reverse_iterator;
@@ -306,7 +308,7 @@ map<Key, T, Compare, Allocator>::end ()
 
 template< class Key, class T, class Compare , class Allocator  > 
 typename map<Key, T, Compare, Allocator>::const_iterator 
-map<Key, T, Compare, Allocator>::begin ()const
+map<Key, T, Compare, Allocator>::begin () const
 {
     return (const_iterator(_tree.begin()));
 }

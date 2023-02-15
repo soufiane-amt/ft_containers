@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/15 14:44:49 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 17:21:19 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,12 @@ template <typename T, typename Allocator>
 tree_node<T, Allocator>*   
 tree_node<T, Allocator>::find_last_node(tree_node<T, Allocator>* _node) 
 {
-    if (_node->right)
-        return find_last_node(_node->right);
-    return (_node);
+    tree_node<T, Allocator>* tmp = _node;
+    while (tmp && tmp->parent)
+        tmp = tmp->parent;
+    while (tmp && tmp->right)
+        tmp = tmp->right;
+    return (tmp);
 }
 
 
@@ -89,9 +92,12 @@ template <typename T, typename Allocator>
 tree_node<T, Allocator>* 
 tree_node<T, Allocator>::find_first_node(tree_node<T, Allocator>* _node)  
 {
-    if (_node->left)
-        return find_first_node(_node->left);
-    return (_node);
+    tree_node<T, Allocator>* tmp = _node;
+    while (tmp && tmp->parent)
+        tmp = tmp->parent;
+    while (tmp && tmp->left)
+        tmp = tmp->left;
+    return (tmp);
 }
 
 
@@ -143,15 +149,15 @@ class binary_tree
     // tree_node*  clone_binary_tree(tree_node *_copy);
     
     
-    size_type   size();
+    size_type   size() const;
     void        clear();
     
     iterator        begin();
-    // const_iterator          begin() const;
+    const_iterator          begin() const;
 
     
     iterator        end();
-    // const_iterator          end() const;
+    const_iterator          end() const;
 
     
     tree_node                                      *__tree_root;
@@ -240,7 +246,10 @@ void    binary_tree<Key,T,Compare ,Allocator>::insert_node (tree_node *_tree, tr
     _begin      = nullptr;
     _end        = nullptr;
     if (!__tree_root)
+    {
+        __size++;
         __tree_root = new_node;
+    }
     else
     {
         if (new_node->data.first < _tree->data.first && !_tree->left) { _tree->set_node_to_left(new_node); __size++; return;};
@@ -344,7 +353,7 @@ template<
     class Compare ,
     class Allocator >
 typename binary_tree<Key,T,Compare ,Allocator>::size_type   
-binary_tree<Key,T,Compare ,Allocator>::size()
+binary_tree<Key,T,Compare ,Allocator>::size() const 
 {
     return (__size);
 }
@@ -387,6 +396,33 @@ typename binary_tree<Key,T,Compare ,Allocator>::iterator
 binary_tree<Key,T,Compare ,Allocator>::end()
 {
     return (iterator(_end));
+}
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator >
+
+
+typename binary_tree<Key,T,Compare ,Allocator>::const_iterator
+binary_tree<Key,T,Compare ,Allocator>::begin() const
+{
+    return (const_iterator(__tree_root->find_first_node(__tree_root)));
+}
+
+
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator >
+
+typename binary_tree<Key,T,Compare ,Allocator>::const_iterator
+binary_tree<Key,T,Compare ,Allocator>::end() const
+{
+    return (const_iterator(_end));
 }
 
 
