@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/15 11:53:43 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:41:24 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -386,7 +386,7 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::iterator
 binary_tree<Key,T,Compare ,Allocator>::end()
 {
-    return (iterator(_end));
+    return (iterator(nullptr));
 }
 
 
