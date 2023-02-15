@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/15 17:52:38 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 19:03:10 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ class tree_iterator
         tree_iterator();
         
         template <class it>
-        tree_iterator(const it &other);
+        tree_iterator(const it<_ite> &other);
         
         tree_iterator(iterator_type ptr);
 
@@ -81,10 +81,10 @@ tree_iterator<T>::tree_iterator():__node(0)
 
 template<class T>
 template <class it>
-tree_iterator<T>::tree_iterator(const it &other):__node ( other.base())
+tree_iterator<T>::tree_iterator(const it<T> &other):__node ( other.base())
 {
-    __last_node = other.find_last_node(__node);
-    __first_node = other.find_first_node(__node);
+    // __last_node = other.find_last_node(__node);
+    // __first_node = other.find_first_node(__node);
 }
 
 template<class T>

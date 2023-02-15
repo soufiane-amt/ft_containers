@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/15 17:56:22 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 18:11:17 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 {
     tree_node   *node = _tree.search_node( _tree.get_tree(), k);
     if (!node)
-        insert (end(), pair<key_type, mapped_type >(k, mapped_type()) );
+        insert (pair<key_type, mapped_type >(k, mapped_type()) );//this insert is wrong
     return (node->data.second);
 }
 

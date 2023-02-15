@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/15 17:21:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 18:53:08 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -408,7 +408,7 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::const_iterator
 binary_tree<Key,T,Compare ,Allocator>::begin() const
 {
-    return (const_iterator(__tree_root->find_first_node(__tree_root)));
+    return (__tree_root->find_first_node(__tree_root));
 }
 
 
