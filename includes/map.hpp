@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 17:47:53 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 15:40:01 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ template<
 
     /*Iterators*/
     typedef typename              ft::tree_iterator<tree_node*>                iterator;
-    // typedef typename              tree_iterator<const_pointer>          const_iterator;
+    typedef typename              ft::tree_iterator<const_pointer>          const_iterator;
     
     /*reverse_iterator*/
     // typedef typename              reverse_iterator<iterator >            reverse_iterator;
@@ -96,9 +96,9 @@ template<
 
     //iterators
     iterator                begin();
-    // const_iterator          begin() const;
+    const_iterator          begin() const;
     iterator                end();
-    // const_iterator          end() const;
+    const_iterator          end() const;
     
     //reverse iterators
     // reverse_iterator       rbegin();
@@ -112,15 +112,15 @@ template<
 
     //Operations:
     iterator                            find (const key_type& k);
-    // const_iterator                      find (const key_type& k) const;
+    const_iterator                      find (const key_type& k) const;
             
     size_type                           count (const key_type& k) const;
                 
     iterator                            lower_bound (const key_type& k);
-    // const_iterator                      lower_bound (const key_type& k) const;
+    const_iterator                      lower_bound (const key_type& k) const;
                 
     iterator                            upper_bound (const key_type& k);
-    // const_iterator                      upper_bound (const key_type& k) const;
+    const_iterator                      upper_bound (const key_type& k) const;
 
     // pair<const_iterator,const_iterator> equal_range (const key_type& k) const;
     pair<iterator,iterator>             equal_range (const key_type& k);
@@ -300,6 +300,23 @@ typename map<Key, T, Compare, Allocator>::iterator
 map<Key, T, Compare, Allocator>::end ()
 {
     return (iterator(_tree.end()));
+}
+
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::const_iterator 
+map<Key, T, Compare, Allocator>::begin ()const
+{
+    return (const_iterator(_tree.begin()));
+}
+
+
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::const_iterator 
+map<Key, T, Compare, Allocator>::end ()const
+{
+    return (const_iterator(_tree.end()));
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/15 14:41:54 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 15:35:25 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,21 +127,21 @@ int             main(void)
     // m.insert (TESTED_NAMESPACE::pair<int, int>(2, 4));
     // m.insert (TESTED_NAMESPACE::pair<int, int>(2, 4));
     m.insert (TESTED_NAMESPACE::pair<int, int>(3, 4));
-    // TESTED_NAMESPACE::map<int, int>::iterator i = m.begin();
-    // std::cout << (*i).first << std::endl;
-    // i++;
-    // std::cout << (*i).first << std::endl;
-    // i++;
-    // std::cout << (*i).first << std::endl;
-    // i++;
-    // std::cout << (*i).first << std::endl;
-    // i++;
-    // std::cout << (*i).first << std::endl;
+    TESTED_NAMESPACE::map<int, int>::iterator i = m.begin();
+    std::cout << (*i).first << std::endl;
+    i++;
+    std::cout << (*i).first << std::endl;
+    i++;
+    std::cout << (*i).first << std::endl;
+    i++;
+    std::cout << (*i).first << std::endl;
+    i++;
+    std::cout << (*i).first << std::endl;
 
     // std::cout << (*i).first << std::endl;
     // std::cout << 
-    for ( TESTED_NAMESPACE::map<int, int>::iterator i = m.begin(); i != m.end(); i++)
-        std::cout << (*i).first << std::endl;
+    // for ( TESTED_NAMESPACE::map<int, int>::iterator i = m.begin(); i != m.end(); i++)
+    //     std::cout << (*i).first << std::endl;
     
     // m.insert (TESTED_NAMESPACE::pair<int, int>(22, 4));
     // m.insert (TESTED_NAMESPACE::pair<int, int>(12, 4));
