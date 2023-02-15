@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 18:46:20 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 12:55:24 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ class tree_iterator
         template <class it>
         tree_iterator(const it &other);
         
-        tree_iterator(iterator_type ptr);
 
         iterator_type           base() const;
         
@@ -56,15 +55,15 @@ class tree_iterator
         pointer                 operator->();
         const_pointer           operator->() const;
 
+        iterator_type       find_last_node(iterator_type _node) ;
+        iterator_type       find_first_node(iterator_type _node) ;
     private:
         iterator_type   __node;
         iterator_type   __first_node;
         iterator_type   __last_node;
-
-    private:
-        friend iterator_type   find_last_node(iterator_type _node) const;
-        friend iterator_type   find_first_node(iterator_type _node) const;
+        
     };
+
 
 
 
@@ -78,14 +77,9 @@ template<class T>
 template <class it>
 tree_iterator<T>::tree_iterator(const it &other):__node ( other.base())
 {
+    std::cout << "+++++++++\n";
     __last_node = other.find_last_node(__node);
     __first_node = other.find_first_node(__node);
-}
-
-template<class T>
-tree_iterator<T>::tree_iterator(iterator_type ptr)
-{
-    this->__node = ptr;
 }
 
 
@@ -106,6 +100,7 @@ typename tree_iterator<T>::data_value_type_ref       tree_iterator<T>::operator*
 template<class T>
 tree_iterator<T>&       tree_iterator<T>::operator++()
 {
+    std::cout <<  __last_node->data.first;
     if (__node == __last_node)
     {
         __node = nullptr;
@@ -116,10 +111,11 @@ tree_iterator<T>&       tree_iterator<T>::operator++()
         __node = __node->right;
         while (__node->left)
             __node = __node->left;
+        return *this;
     }
     if (__node->right )
         __node = __node->right;
-    else //protect null parent
+    else 
     {
         while (__node->parent->data.first < __node->data.first)
             __node = __node->parent;
@@ -188,32 +184,34 @@ typename tree_iterator<T>::pointer         tree_iterator<T>::operator->()
 }
 
 template<class T>
-typename tree_iterator<T>::const_pointer   tree_iterator<T>::operator->() const
+typename tree_iterator<T>::const_pointer   tree_iterator<T>::operator->() const 
 {
     return (&__node->data);
 }
 
 
 //
-template<class T>
+template<class T>  
 typename tree_iterator<T>::iterator_type   
-tree_iterator<T>::find_last_node(iterator_type __node) const
+tree_iterator<T>::find_last_node(iterator_type _node) 
 {
-    if (__node->right)
-        return find_last_node(__node->right);
-    return (__node);
+    iterator_type tmp = _node;
+    // if (_node->right)
+    //     return find_last_node(_node->right);
+    while (tmp->right)
+        tmp = tmp->right;
+    return (tmp);
 }
-
 
 
 
 template<class T>
 typename tree_iterator<T>::iterator_type 
-tree_iterator<T>::find_first_node(iterator_type __node) const 
+tree_iterator<T>::find_first_node(iterator_type _node)  
 {
-    if (__node->left)
-        return find_last_node(__node->left);
-    return (__node);
+    if (_node->left)
+        return find_first_node(_node->left);
+    return (_node);
 }
 
 

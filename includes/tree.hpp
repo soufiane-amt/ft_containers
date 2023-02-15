@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/12 18:45:15 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 11:53:43 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ struct tree_node
 {
     typedef Allocator                               allocator_type;
     typedef T                                       data_value_type;
-    typedef T                                       data_value_type_ref;
+    typedef T&                                      data_value_type_ref;
     // typedef typename Iterator::value_type value_type;
     // typedef typename Iterator::pointer pointer;
     // typedef typename Iterator::reference reference;
@@ -50,6 +50,9 @@ struct tree_node
     void        set_node_to_left (tree_node *_node);
     void        set_node_to_right (tree_node *_node);
 
+
+    tree_node   *find_last_node(tree_node   * _node) ;
+    tree_node   *find_first_node(tree_node   * _node) ;
 };
 
 
@@ -70,6 +73,26 @@ void tree_node<T, Allocator>::set_node_to_right(tree_node<T, Allocator> *_node)
 
 
 
+
+template <typename T, typename Allocator>
+tree_node<T, Allocator>*   
+tree_node<T, Allocator>::find_last_node(tree_node<T, Allocator>* _node) 
+{
+    if (_node->right)
+        return find_last_node(_node->right);
+    return (_node);
+}
+
+
+
+template <typename T, typename Allocator>
+tree_node<T, Allocator>* 
+tree_node<T, Allocator>::find_first_node(tree_node<T, Allocator>* _node)  
+{
+    if (_node->left)
+        return find_first_node(_node->left);
+    return (_node);
+}
 
 
 
@@ -349,7 +372,7 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::iterator
 binary_tree<Key,T,Compare ,Allocator>::begin()
 {
-    return (iterator(__tree_root->find_first_node()));
+    return (iterator(__tree_root->find_first_node(__tree_root)));
 }
 
 
