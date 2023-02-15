@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/15 16:03:36 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/15 17:56:22 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 {
-    tree_node   *node = _tree.search(k);
+    tree_node   *node = _tree.search_node( _tree.get_tree(), k);
     if (!node)
         insert (end(), pair<key_type, mapped_type >(k, mapped_type()) );
     return (node->data.second);
@@ -223,6 +223,7 @@ map<Key, T, Compare, Allocator>::insert (iterator position, const_reference val)
 {
     (void)position;
     _tree.insert_node(_tree.__tree_root, _tree.create_node(val));
+    return (*this);
 }
 
 template< class Key, class T, class Compare , class Allocator  > 
