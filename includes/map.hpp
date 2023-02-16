@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/16 15:40:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/16 16:11:26 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ template<
 
     typedef     tree_node<value_type, allocator_type>  tree_node;
     typedef     tree_node*                          tree_node_pointer;
-    typedef     const tree_node_pointer             tree_node_const_pointer;
+    typedef     const tree_node*                    tree_node_const_pointer;
     typedef     binary_tree<Key, T, key_compare, allocator_type > binary_tree;
 
     /*Iterators*/
