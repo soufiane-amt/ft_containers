@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/16 16:11:26 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/16 16:26:32 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ template<
     // typedef typename              reverse_iterator<const_iterator >      const_reverse_iterator;
 
 
-
+//ft::map<char, foo<float>, std::__1::less<char>,
+//      std::__1::allocator<ft::pair<const char, foo<float> > > >::const_iterator
 
     explicit map( const key_compare& comp =  key_compare(),
                   const allocator_type& alloc = allocator_type() );

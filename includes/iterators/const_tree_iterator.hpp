@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:01:41 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/16 16:24:32 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/16 18:36:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #define CONST_TREE_ITERATOR_HPP
 
 #include "../utils.hpp"
+#include "tree_iterator.hpp"
 
 namespace ft 
 {
@@ -41,7 +42,10 @@ class const_tree_iterator
 
         const_tree_iterator();
         
-        const_tree_iterator(const const_tree_iterator &other);
+        // const_tree_iterator(const const_tree_iterator &other);
+        
+        template <typename t >
+        const_tree_iterator(const tree_iterator<t> &other);
         
         const_tree_iterator(iterator_type ptr);
 
@@ -80,11 +84,19 @@ const_tree_iterator<T>::const_tree_iterator():__node(0)
     
 }
 
-template<class T>
-const_tree_iterator<T>::const_tree_iterator(const const_tree_iterator &other):__node ( other.base())
-{
+// template<class T>
+// const_tree_iterator<T>::const_tree_iterator(const const_tree_iterator &other):__node ( other.base())
+// {
     // __last_node = other.find_last_node(__node);
     // __first_node = other.find_first_node(__node);
+// }
+
+
+template<class T>
+template <typename _ite >
+const_tree_iterator<T>::const_tree_iterator(const tree_iterator<_ite> &other):__node ( other.base())
+{
+    
 }
 
 template<class T>
@@ -242,19 +254,18 @@ const_tree_iterator<T>::find_first_node(iterator_type _node)
 
 
 template< class Iterator1, class Iterator2 >
-bool operator==( const ft::const_tree_iterator<Iterator1>& iter1,
-                 const ft::const_tree_iterator<Iterator2>& iter2 )
+bool operator==( const Iterator1& iter1,
+                 const Iterator2& iter2 )
 {
     return (iter1.base() == iter2.base());
 }
 
 template< class Iterator1, class Iterator2 >
-bool operator!=( const ft::const_tree_iterator<Iterator1>& iter1,
-                 const ft::const_tree_iterator<Iterator2>& iter2 )
+bool operator!=( const Iterator1& iter1,
+                 const Iterator2& iter2 )
 {
     return (iter1.base() != iter2.base());
 }
-
 
 
 

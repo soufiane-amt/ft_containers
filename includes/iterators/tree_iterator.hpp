@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/16 16:02:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/16 18:16:38 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #define TREE_ITERATOR_HPP
 
 #include "../utils.hpp"
+// #include "const_tree_iterator.hpp"
 
 namespace ft 
 {
@@ -39,7 +40,9 @@ class tree_iterator
 
         tree_iterator();
         
-        tree_iterator(const tree_iterator &other);
+        // tree_iterator(const tree_iterator &other);
+        
+        // tree_iterator(const const_tree_iterator &other);
         
         tree_iterator(iterator_type ptr);
 
@@ -78,12 +81,20 @@ tree_iterator<T>::tree_iterator():__node(0)
     
 }
 
-template<class T>
-tree_iterator<T>::tree_iterator(const tree_iterator &other):__node ( other.base())
-{
-    // __last_node = other.find_last_node(__node);
-    // __first_node = other.find_first_node(__node);
-}
+// template<class T>
+// tree_iterator<T>::tree_iterator(const tree_iterator &other):__node ( other.base())
+// {
+//     // __last_node = other.find_last_node(__node);
+//     // __first_node = other.find_first_node(__node);
+// }
+
+
+// template<class T>
+// tree_iterator<T>::tree_iterator(const ft::const_tree_iterator<T> &other):__node ( other.base())
+// {
+     
+// }
+
 
 template<class T>
 tree_iterator<T>::tree_iterator(iterator_type ptr)
