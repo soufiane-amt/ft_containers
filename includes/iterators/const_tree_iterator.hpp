@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:01:41 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/16 16:10:58 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/16 16:24:32 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ class const_tree_iterator
         typedef typename value_type::data_value_type                       data_value_type;
         typedef data_value_type*                                           data_value_type_ptr;
         typedef data_value_type&                                           data_value_type_ref;
-        typedef const data_value_type_ptr                                  const_data_value_type_ptr;
+        typedef const data_value_type&                                     data_value_type_const_ref;
+        typedef const data_value_type*                                     const_data_value_type_ptr;
         
         typedef const reference                                            const_reference;
         typedef const pointer                                              const_pointer;
@@ -46,7 +47,7 @@ class const_tree_iterator
 
         iterator_type           base() const;
         
-        data_value_type_ref            operator*() const;
+        data_value_type_const_ref            operator*() const;
         const_tree_iterator&       operator++();
         const_tree_iterator        operator++(int);
         const_tree_iterator&       operator--();
@@ -108,7 +109,7 @@ typename const_tree_iterator<T>::iterator_type const_tree_iterator<T>::base() co
 
 
 template<class T>
-typename const_tree_iterator<T>::data_value_type_ref       const_tree_iterator<T>::operator*() const
+typename const_tree_iterator<T>::data_value_type_const_ref       const_tree_iterator<T>::operator*() const
 {
     return (__node->data);
 }
