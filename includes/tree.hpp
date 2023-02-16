@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/15 18:53:08 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/16 15:56:19 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define TREE_HPP
 
 #include "iterators/tree_iterator.hpp"
+#include "iterators/const_tree_iterator.hpp"
 
 namespace ft
 {
@@ -121,7 +122,7 @@ class binary_tree
     typedef     size_t                                  size_type;
     
     typedef     tree_iterator<tree_node*>               iterator;
-    typedef     tree_iterator<const tree_node*>         const_iterator;
+    typedef     const_tree_iterator<const tree_node*>   const_iterator;
 
     
     tree_node   *create_node(value_type value);
