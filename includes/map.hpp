@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/16 16:26:32 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/16 18:46:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,9 +151,19 @@ map<Key, T, Compare, Allocator>::map(const key_compare& comp, const allocator_ty
 
 
 template< class Key, class T, class Compare , class Allocator  > 
+template <typename InputIt>
+map<Key, T, Compare, Allocator>::map( InputIt first, InputIt last,
+         const key_compare& comp ,
+         const allocator_type& alloc  )
+{
+    while (first != last)
+        insert (*first);
+}
+
+template< class Key, class T, class Compare , class Allocator  > 
 map<Key, T, Compare, Allocator>::map( const map& other )
 {
-    for (iterator it = other.begin(); it != other.end() ; it++)
+    for (const_iterator it = other.begin(); it != other.end() ; it++)
         insert(end(), *it);
     _allocat = other._allocat;
     _comp = other._comp;
@@ -225,7 +235,7 @@ map<Key, T, Compare, Allocator>::insert (iterator position, const_reference val)
 {
     (void)position;
     _tree.insert_node(_tree.__tree_root, _tree.create_node(val));
-    return (*this);
+    return (position);
 }
 
 template< class Key, class T, class Compare , class Allocator  > 

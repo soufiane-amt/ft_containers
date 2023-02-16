@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/16 18:16:38 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/16 18:45:21 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ class tree_iterator
 
         tree_iterator();
         
-        // tree_iterator(const tree_iterator &other);
+        tree_iterator(const tree_iterator &other);
         
         // tree_iterator(const const_tree_iterator &other);
         
@@ -81,12 +81,12 @@ tree_iterator<T>::tree_iterator():__node(0)
     
 }
 
-// template<class T>
-// tree_iterator<T>::tree_iterator(const tree_iterator &other):__node ( other.base())
-// {
-//     // __last_node = other.find_last_node(__node);
-//     // __first_node = other.find_first_node(__node);
-// }
+template<class T>
+tree_iterator<T>::tree_iterator(const tree_iterator &other):__node ( other.base())
+{
+    // __last_node = other.find_last_node(__node);
+    // __first_node = other.find_first_node(__node);
+}
 
 
 // template<class T>
@@ -165,7 +165,7 @@ tree_iterator<T>&       tree_iterator<T>::operator  --()
     if (__node == __first_node)
     {
         __node = nullptr;
-        return;
+        return (*this);
     }
     if (!__node->left)
     {
