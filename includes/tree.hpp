@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/16 15:56:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/16 18:57:10 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,7 +366,8 @@ template<
     class Allocator >
 void    binary_tree<Key,T,Compare ,Allocator>::clear()
 {
-    tarverseNodesPostOrder(this->__tree_root, &delete_node);
+    tarverseNodesPostOrder(this->__tree_root, delete_node);
+//void (*)(tree_node<pair<const int, int>, std::__1::allocator<ft::pair<const int, int> > > *)
     __size      = 0;
     _begin      = nullptr;
     _end        = nullptr;
