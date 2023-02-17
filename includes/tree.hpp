@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/17 12:32:18 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/17 14:32:41 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ struct tree_node
     typedef Allocator                               allocator_type;
     typedef T                                       data_value_type;
     typedef T&                                      data_value_type_ref;
+    typedef T&                                      data_value_type_ref;
+    typedef 	ft::pair<const key_type,mapped_type>    value_type;
 
     tree_node   *parent;
     tree_node   *left;
@@ -52,6 +54,14 @@ struct tree_node
         this->parent = nullptr;
         this->left = nullptr;
         this->right = nullptr;
+    }
+    
+    tree_node& operator=(const tree_node& node)
+    {
+        this->data = node.data;
+        this->parent = node.parent;
+        this->left = node.left;
+        this->right = node.right;
     }
     
     void        set_node_to_left (tree_node *_node){    this->left = _node; _node->parent = this;}
@@ -91,6 +101,21 @@ void    delete_1_child_parent (tree_node   * _node)
     else
         _node->parent->right = child;
     delete_node(_node);
+}
+
+void    delete_2_child_parent (iterator element)
+{
+    tree_node   *_node = element.base();
+    tree_node   *_successor = (++element).base();
+    
+    
+    _node->data = _successor->data;
+    while (_successor->right)
+    {
+        _successor->data = _successor->right->data;
+        _successor = _successor->right;
+    }
+    delete_node (_successor);
 }
 
 
