@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/16 18:47:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/17 11:30:58 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ template<
     iterator                            erase (iterator position);
     iterator                            erase (iterator first, iterator last);
     size_type                           erase (const key_type& k);
+    
     void                                swap (map& x);
     void                                clear();
 
@@ -156,6 +157,8 @@ map<Key, T, Compare, Allocator>::map( InputIt first, InputIt last,
          const key_compare& comp ,
          const allocator_type& alloc  )
 {
+    (void)comp;
+    (void)alloc;
     while (first != last)
         insert (*first);
 }
@@ -225,6 +228,7 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::value_type
 map<Key, T, Compare, Allocator>::insert (const value_type& val)
 {
+    
     _tree.insert_node(_tree.__tree_root, _tree.create_node(val));
     return (val);
 }
@@ -279,6 +283,11 @@ typename map<Key, T, Compare, Allocator>::value_compare
 map<Key, T, Compare, Allocator>::value_comp() const
 {
     return (_v_cmp);
+}
+template< class Key, class T, class Compare , class Allocator  > 
+typename map<Key, T, Compare, Allocator>::iterator  erase (iterator position)
+{
+    
 }
 
 

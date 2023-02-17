@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/16 18:57:10 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/17 12:32:18 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,21 @@
 
 namespace ft
 {
+    
+template <typename U, typename V, typename Allocator > 
+void delete_node(tree_node<pair<U, V>, Allocator > *_node)
+{
+    delete _node;
+}
+
     enum Dir
     {
         BACK_FROM_RIGHT =  1,
         BACK_FROM_LEFT  = -1,
     };
+
+
+
 
 //this struct is gonna be a class
 template <typename T, typename Allocator>
@@ -31,10 +41,6 @@ struct tree_node
     typedef Allocator                               allocator_type;
     typedef T                                       data_value_type;
     typedef T&                                      data_value_type_ref;
-    // typedef typename Iterator::value_type value_type;
-    // typedef typename Iterator::pointer pointer;
-    // typedef typename Iterator::reference reference;
-    // typedef typename Iterator::iterator_category iterator_category;
 
     tree_node   *parent;
     tree_node   *left;
@@ -48,31 +54,44 @@ struct tree_node
         this->right = nullptr;
     }
     
-    void        set_node_to_left (tree_node *_node);
-    void        set_node_to_right (tree_node *_node);
+    void        set_node_to_left (tree_node *_node){    this->left = _node; _node->parent = this;}
+    void        set_node_to_right (tree_node *_node){    this->right = _node; _node->parent = this;}
 
 
     tree_node   *find_last_node(tree_node   * _node) ;
     tree_node   *find_first_node(tree_node   * _node) ;
+
+    void    delete_leaf (tree_node   * _node);
+    void    delete_1_child_parent (tree_node   * _node);
+    void    delete_2_child_parent (tree_node   * _node);
+
+
+    void    delete_node (tree_node   * _node);
 };
 
 
-template <typename T, typename Allocator>
-void tree_node<T, Allocator>::set_node_to_left(tree_node<T, Allocator> *_node)
+
+
+void    delete_leaf (tree_node   * _node)
 {
-    this->left = _node;
-    _node->parent = this;
+    if (_node->parent->left == _node)
+        _node->parent->left = nullptr;
+    else
+        _node->parent->right = nullptr;
+    delete_node(_node);
 }
 
-template <typename T, typename Allocator>
-void tree_node<T, Allocator>::set_node_to_right(tree_node<T, Allocator> *_node)
+void    delete_1_child_parent (tree_node   * _node)
 {
-    this->right = _node;
-    _node->parent = this;
+    tree_node   *child;
+
+    child = _node->right ? _node->right : _node->left;
+    if (_node->parent->left == _node)
+        _node->parent->left = child;
+    else
+        _node->parent->right = child;
+    delete_node(_node);
 }
-
-
-
 
 
 template <typename T, typename Allocator>
@@ -126,7 +145,6 @@ class binary_tree
 
     
     tree_node   *create_node(value_type value);
-    void        delete_node(tree_node *_node);
     private:
 
     
@@ -359,6 +377,7 @@ binary_tree<Key,T,Compare ,Allocator>::size() const
     return (__size);
 }
 
+
 template<
     class Key,
     class T,
@@ -366,8 +385,7 @@ template<
     class Allocator >
 void    binary_tree<Key,T,Compare ,Allocator>::clear()
 {
-    tarverseNodesPostOrder(this->__tree_root, delete_node);
-//void (*)(tree_node<pair<const int, int>, std::__1::allocator<ft::pair<const int, int> > > *)
+    tarverseNodesPostOrder(this->__tree_root, &delete_node);
     __size      = 0;
     _begin      = nullptr;
     _end        = nullptr;
@@ -427,12 +445,6 @@ binary_tree<Key,T,Compare ,Allocator>::end() const
     return (const_iterator(_end));
 }
 
-
-template <typename U, typename V, typename Allocator > 
-void delete_node(tree_node<pair<U, V>, Allocator > *_node)
-{
-    delete _node;
-}
 
 
 template <typename U, typename V, typename Allocator > 
