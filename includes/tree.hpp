@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/17 14:32:41 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/17 14:52:46 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ struct tree_node
     void    delete_2_child_parent (tree_node   * _node);
 
 
-    void    delete_node (tree_node   * _node);
+    void    delete_random_node (iterator element);
 };
+
 
 
 
@@ -91,6 +92,7 @@ void    delete_leaf (tree_node   * _node)
     delete_node(_node);
 }
 
+
 void    delete_1_child_parent (tree_node   * _node)
 {
     tree_node   *child;
@@ -102,6 +104,7 @@ void    delete_1_child_parent (tree_node   * _node)
         _node->parent->right = child;
     delete_node(_node);
 }
+
 
 void    delete_2_child_parent (iterator element)
 {
@@ -119,8 +122,20 @@ void    delete_2_child_parent (iterator element)
 }
 
 
+void    delete_random_node (iterator element)
+{
+    tree_node   *_node = element.base();
+    if (_node->right && _node->left)
+        delete_2_child_parent (element);
+    else if (!_node->right && !_node->left)
+        delete_leaf (_node);
+    else
+        delete_1_child_parent (_node);
+}
+
+
 template <typename T, typename Allocator>
-tree_node<T, Allocator>*   
+tree_node<T, Allocator>*
 tree_node<T, Allocator>::find_last_node(tree_node<T, Allocator>* _node) 
 {
     tree_node<T, Allocator>* tmp = _node;
