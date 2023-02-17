@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/17 14:52:46 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/17 18:34:58 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@
 namespace ft
 {
     
-template <typename U, typename V, typename Allocator > 
-void delete_node(tree_node<pair<U, V>, Allocator > *_node)
-{
-    delete _node;
-}
 
     enum Dir
     {
@@ -41,8 +36,6 @@ struct tree_node
     typedef Allocator                               allocator_type;
     typedef T                                       data_value_type;
     typedef T&                                      data_value_type_ref;
-    typedef T&                                      data_value_type_ref;
-    typedef 	ft::pair<const key_type,mapped_type>    value_type;
 
     tree_node   *parent;
     tree_node   *left;
@@ -58,7 +51,6 @@ struct tree_node
     
     tree_node& operator=(const tree_node& node)
     {
-        this->data = node.data;
         this->parent = node.parent;
         this->left = node.left;
         this->right = node.right;
@@ -71,68 +63,20 @@ struct tree_node
     tree_node   *find_last_node(tree_node   * _node) ;
     tree_node   *find_first_node(tree_node   * _node) ;
 
-    void    delete_leaf (tree_node   * _node);
-    void    delete_1_child_parent (tree_node   * _node);
-    void    delete_2_child_parent (tree_node   * _node);
-
-
-    void    delete_random_node (iterator element);
+    void    swap(tree_node& x)
+    {
+        std::swap(this->parent, x.parent);
+        std::swap(this->left, x.left);
+        std::swap(this->right, x.right);
+    }
 };
 
 
-
-
-
-void    delete_leaf (tree_node   * _node)
+template <typename U, typename V, typename Allocator > 
+void delete_node(tree_node<pair<U, V>, Allocator > *_node)
 {
-    if (_node->parent->left == _node)
-        _node->parent->left = nullptr;
-    else
-        _node->parent->right = nullptr;
-    delete_node(_node);
+    delete _node;
 }
-
-
-void    delete_1_child_parent (tree_node   * _node)
-{
-    tree_node   *child;
-
-    child = _node->right ? _node->right : _node->left;
-    if (_node->parent->left == _node)
-        _node->parent->left = child;
-    else
-        _node->parent->right = child;
-    delete_node(_node);
-}
-
-
-void    delete_2_child_parent (iterator element)
-{
-    tree_node   *_node = element.base();
-    tree_node   *_successor = (++element).base();
-    
-    
-    _node->data = _successor->data;
-    while (_successor->right)
-    {
-        _successor->data = _successor->right->data;
-        _successor = _successor->right;
-    }
-    delete_node (_successor);
-}
-
-
-void    delete_random_node (iterator element)
-{
-    tree_node   *_node = element.base();
-    if (_node->right && _node->left)
-        delete_2_child_parent (element);
-    else if (!_node->right && !_node->left)
-        delete_leaf (_node);
-    else
-        delete_1_child_parent (_node);
-}
-
 
 template <typename T, typename Allocator>
 tree_node<T, Allocator>*
@@ -198,6 +142,7 @@ class binary_tree
     tree_node   *get_tree() const;
     //insertion
     void         insert_node (tree_node *_tree, tree_node *new_node);
+    
     //searching
     tree_node   *search_node(tree_node *_tree, key_type to_search);
     
@@ -218,6 +163,13 @@ class binary_tree
     iterator        end();
     const_iterator          end() const;
 
+    //deletion
+    void    delete_leaf (tree_node   * _node);
+    void    delete_1_child_parent (tree_node   * _node);
+    void    delete_2_child_parent (iterator element);
+
+    void    delete_random_node (iterator element);
+    
     
     tree_node                                      *__tree_root;
     tree_node                                      *_begin;
@@ -287,7 +239,6 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::tree_node   
 *binary_tree<Key,T,Compare ,Allocator>::create_node(value_type value)
 {
-    //you have to use construct
     return (new tree_node(value));
 }
 
@@ -484,6 +435,64 @@ binary_tree<Key,T,Compare ,Allocator>::end() const
 {
     return (const_iterator(_end));
 }
+
+
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator >
+
+void    binary_tree<Key,T,Compare ,Allocator>::delete_leaf (tree_node   * _node)
+{
+    if (_node->parent->left == _node)
+        _node->parent->left = nullptr;
+    else
+        _node->parent->right = nullptr;
+    delete_node(_node);
+}
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator >
+
+void    binary_tree<Key,T,Compare ,Allocator>::delete_1_child_parent (tree_node   * _node)
+{
+    tree_node   *child;
+
+    child = _node->right ? _node->right : _node->left;
+    if (_node->parent->left == _node)
+        _node->parent->left = child;
+    else
+        _node->parent->right = child;
+    delete_node(_node);
+}
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator >
+
+void    binary_tree<Key,T,Compare ,Allocator>::delete_2_child_parent (iterator element)
+{
+    
+}
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator >
+
+void    binary_tree<Key,T,Compare ,Allocator>::delete_random_node (iterator element)
+{
+    
+}
+
 
 
 

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/16 17:44:08 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/17 18:06:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,13 @@ void	printSize(T_MAP const &mp, bool print_content = 1)
 
 int main()
 {
-     std::map <int, int> m;
-        m.insert(std::pair<int, int>(1,4));
-        m.insert(std::pair<int, int>(2,4));
-        m.insert(std::pair<int, int>(4,4));
-        printSize(m);
-        return 0;
+	std::map <int, int> m;
+	m.insert(std::pair<int, int>(1,4));
+	m.insert(std::pair<int, int>(2,4));
+	m.insert(std::pair<int, int>(4,4));
+	std::map <int, int>::iterator it = m.begin();
+	m.erase(++m.begin());
+	for (; it !=  m.end(); it++)
+	std::cout << it->first << std::endl;	
+	return 0;
 }
