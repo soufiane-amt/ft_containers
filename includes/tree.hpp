@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/17 18:34:58 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/17 18:36:50 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -479,6 +479,9 @@ template<
 
 void    binary_tree<Key,T,Compare ,Allocator>::delete_2_child_parent (iterator element)
 {
+    tree_node   * _node =  element.base();
+    tree_node   * _next_node =  (++element).base();
+    
     
 }
 
