@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/18 14:06:11 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/18 14:56:01 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,24 @@ struct tree_node
 
     void    swap(tree_node& x)
     {
+        if (this->parent)
+        {
+            if (this->parent->right == this)
+                std::swap(this->parent->right, &x);
+            else if (this->parent->left == this)
+                std::swap(this->parent->left, &x);
+        }
+        if (x.parent)
+        {
+            if (x.parent->right == &x)
+                std::swap(x.parent->right, &x);
+            else if (x.parent->left == &x)
+                std::swap(x.parent->left, this);
+        }
+        if (x.right)
+            x.right->parent = this;
+        if (x.left)
+            x.left->parent = this;
         std::swap(this->parent, x.parent);
         std::swap(this->left, x.left);
         std::swap(this->right, x.right);
