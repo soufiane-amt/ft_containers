@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/18 18:27:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/18 18:31:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ struct tree_node
             else if (this->parent->left == this)
                 this->parent->left = &x;
         }
-        if (x.parent)
+        if (x.parent && this != x.parent)
         {
             if (x.parent->right == &x)
                 x.parent->right =  this;
@@ -87,9 +87,9 @@ struct tree_node
             x.left->parent = this;
         std::swap(this->parent, x.parent);
         if (this->left != this)
-            std::swap(this->left, x.left);
+        std::swap(this->left, x.left);
         if (this->right != this)
-            std::swap(this->right, x.right);
+        std::swap(this->right, x.right);
     }
     bool    is_leaf () {    return (!this->left && ! this->right);}
     bool    has_2_child () {    return (this->left &&   this->right);}
