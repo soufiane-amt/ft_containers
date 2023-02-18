@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/17 18:36:50 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/18 14:06:11 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ struct tree_node
         std::swap(this->left, x.left);
         std::swap(this->right, x.right);
     }
+    bool    is_leaf () {    return (!this->left && ! this->right);}
+    bool    has_2_child () {    return (this->left &&   this->right);}
+    bool    has_1_child () {    return (!is_leaf() && !has_2_child());}
 };
 
 
@@ -444,14 +447,7 @@ template<
     class Compare ,
     class Allocator >
 
-void    binary_tree<Key,T,Compare ,Allocator>::delete_leaf (tree_node   * _node)
-{
-    if (_node->parent->left == _node)
-        _node->parent->left = nullptr;
-    else
-        _node->parent->right = nullptr;
-    delete_node(_node);
-}
+  }
 
 template<
     class Key,
@@ -484,6 +480,7 @@ void    binary_tree<Key,T,Compare ,Allocator>::delete_2_child_parent (iterator e
     
     
 }
+
 
 template<
     class Key,
