@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/18 14:56:01 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/18 18:27:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,31 @@ struct tree_node
 
     void    swap(tree_node& x)
     {
+        //the Goal of the next two conditions is to make the parent 
+        //of the swapped node point to the new node
         if (this->parent)
         {
             if (this->parent->right == this)
-                std::swap(this->parent->right, &x);
+                this->parent->right = &x;
             else if (this->parent->left == this)
-                std::swap(this->parent->left, &x);
+                this->parent->left = &x;
         }
         if (x.parent)
         {
             if (x.parent->right == &x)
-                std::swap(x.parent->right, &x);
+                x.parent->right =  this;
             else if (x.parent->left == &x)
-                std::swap(x.parent->left, this);
+                x.parent->left =  this;
         }
         if (x.right)
             x.right->parent = this;
         if (x.left)
             x.left->parent = this;
         std::swap(this->parent, x.parent);
-        std::swap(this->left, x.left);
-        std::swap(this->right, x.right);
+        if (this->left != this)
+            std::swap(this->left, x.left);
+        if (this->right != this)
+            std::swap(this->right, x.right);
     }
     bool    is_leaf () {    return (!this->left && ! this->right);}
     bool    has_2_child () {    return (this->left &&   this->right);}
