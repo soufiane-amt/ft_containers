@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/19 15:06:12 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/19 15:56:28 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -494,6 +494,7 @@ void    binary_tree<Key,T,Compare ,Allocator>::delete_1_child_parent (tree_node 
     else
         _node->parent->right = child;
     delete_node(_node);
+
 }
 
 template<
@@ -511,6 +512,7 @@ void    binary_tree<Key,T,Compare ,Allocator>::delete_2_child_parent (iterator e
     if (_node ->has_1_child())
         delete_1_child_parent(_node);
     else if (_node->is_leaf())
+        delete_leaf(_node);
 }
 
 
@@ -522,7 +524,13 @@ template<
 
 void    binary_tree<Key,T,Compare ,Allocator>::delete_random_node (iterator element)
 {
-    
+    tree_node   *_node  = element.base();
+    if (_node ->has_1_child())
+        delete_1_child_parent(_node);
+    else if (_node->is_leaf())
+        delete_leaf(_node);
+    else  
+        delete_2_child_parent(element);
 }
 
 

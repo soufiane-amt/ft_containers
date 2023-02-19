@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/17 18:12:14 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/19 15:43:01 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ template<
     map&                               operator=( const map& other );
 
     //Capacity
-std::__is_forward_iterator
     size_type                           size() const;
     size_type                           max_size() const;
     bool                                empty() const;
@@ -290,6 +289,8 @@ map<Key, T, Compare, Allocator>::erase (iterator position)
 {
     iterator    next_2_pos = ++position;
     _tree.delete_random_node(position);
+    std::cout << "It is in \n";
+
     return (next_2_pos);
 }
 
