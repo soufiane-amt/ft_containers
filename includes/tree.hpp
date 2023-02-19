@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/18 18:39:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/19 15:06:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ struct tree_node
             else if (x.parent->left == &x)
                 x.parent->left =  this;
         }
-        if (this->right)
+        if (this->right && this->right != &x)
             this->right->parent = &x;
-        if (this->left)
+        if (this->left && this->left != &x)
             this->left->parent = &x;
         std::swap(this->parent, x.parent);
         if (this->left != &x)
@@ -463,13 +463,20 @@ binary_tree<Key,T,Compare ,Allocator>::end() const
 
 
 
+
 template<
     class Key,
     class T,
     class Compare ,
     class Allocator >
-
-  }
+void    binary_tree<Key,T,Compare ,Allocator>::delete_leaf (tree_node   * _node)
+{
+    if (_node->parent->left == _node)
+        _node->parent->left = nullptr;
+    else
+        _node->parent->right = nullptr;
+    delete_node(_node);
+}
 
 template<
     class Key,
@@ -497,10 +504,13 @@ template<
 
 void    binary_tree<Key,T,Compare ,Allocator>::delete_2_child_parent (iterator element)
 {
-    tree_node   * _node =  element.base();
-    tree_node   * _next_node =  (++element).base();
     
-    
+    tree_node   *_node =  element.base();
+    tree_node   *_next_node =  (++element).base();
+    (*_node).swap(*_next_node);
+    if (_node ->has_1_child())
+        delete_1_child_parent(_node);
+    else if (_node->is_leaf())
 }
 
 
