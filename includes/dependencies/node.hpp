@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 15:57:10 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 16:06:53 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,27 @@ struct Node
     bool    is_leaf () {    return (!this->left && ! this->right);}
     bool    has_2_child () {    return (this->left &&   this->right);}
     bool    has_1_child () {    return (!is_leaf() && !has_2_child());}
+
+    ~Node(){    _alloc.destroy(data);}
+    
+    private:
+    allocator_type _alloc;
 };
+
+/*            allocator.destroy(this->elements + i);
+        allocator.deallocate(this->elements, _v_capacity);
+
+
+            this->elements = allocator.allocate (this->_v_size);
+        allocator.construct(this->elements + i, x[i]);
+*/
 
 
 template <typename U, typename V, typename Allocator > 
 void delete_node(Node<pair<U, V>, Allocator > *_node)
 {
-    delete _node;
+    allocator.destroy(_node);
+    allocator.deallocate(_node, 1);
 }
 
 template <typename T, typename Allocator>

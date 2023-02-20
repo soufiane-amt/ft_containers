@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 15:52:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 16:01:40 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,6 @@ class binary_tree
     size_type                                       __size;
     allocator_type                                  __allocat;
 };
-/*            allocator.destroy(this->elements + i);
-        allocator.deallocate(this->elements, _v_capacity);
-
-
-            this->elements = allocator.allocate (this->_v_size);
-        allocator.construct(this->elements + i, x[i]);
-*/
 
 template<
     class Key,
