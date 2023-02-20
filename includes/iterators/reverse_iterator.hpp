@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 14:44:10 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 15:57:23 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include <cstddef>
 #include <iterator>
-#include "../dependencies/utils.hpp"
+#include "../dependencies/utility.hpp"
 namespace ft
 {
 

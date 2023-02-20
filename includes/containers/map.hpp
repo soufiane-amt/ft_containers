@@ -6,11 +6,11 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 14:49:05 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 15:58:54 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../dependencies/utils.hpp"
+#include "../dependencies/utility.hpp"
 #include "../iterators/reverse_iterator.hpp"
 #include "../dependencies/tree.hpp"
 
@@ -34,6 +34,7 @@ template<
     typedef 	pair<const key_type,mapped_type>    value_type;
     typedef     Compare                             key_compare;
     typedef     std::less<pair<const key_type,mapped_type> > value_compare;
+    
     //value_compare
     typedef     Allocator                           allocator_type;
     typedef     value_type&                         reference;

@@ -6,14 +6,14 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 15:50:53 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 15:57:10 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_HPP
 #define NODE_HPP
 
-#include "../dependencies/utils.hpp"
+#include "../dependencies/utility.hpp"
 
 namespace ft
 {
