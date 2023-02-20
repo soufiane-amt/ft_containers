@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 16:09:22 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 17:34:26 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 
 namespace ft
 {
+    //typedef typename _Alloc::template rebind<_Ty>::other _Alty;
     
 template<
     class Key,
     class T,
-    class Compare = std::less<Key>,
-    class Allocator = std::allocator<ft::pair<const Key, T> >
+    class Compare,
+    class Allocator 
     >
 class binary_tree
 
@@ -38,24 +39,21 @@ class binary_tree
     typedef     Allocator                               allocator_type;
     typedef     size_t                                  size_type;
     
-    typedef     Node<value_type, allocator_type>   Node;
-    
+    typedef     Node<value_type, allocator_type>        Node;
 
-    //iterator
-    typedef     tree_iterator<Node*>               iterator;
-    typedef     const_tree_iterator<const Node*>   const_iterator;
+    //iterator      
+    typedef     tree_iterator<Node*>                    iterator;
+    typedef     const_tree_iterator<const Node*>        const_iterator;
 
     
     private:
-    Node   *create_node(value_type value){  Node   *new_node; new_node = allocator.allocate (1);   __allocat.construct(new_node, Node(value));
+    Node   *create_node(value_type value){  Node   *new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
                                                                         return (new_node);}
 
-
-    
     public:
 
-    binary_tree(const   allocator_type& = allocator_type()): _begin(nullptr),
-                                                         _end(nullptr), __allocat(alloc) {  __size = 0;}
+    binary_tree(const   allocator_type& = allocator_type()): _begin(nullptr), __allocat(alloc) {    
+                                                         _end = create_node(value_type(key_type(), mapped_type())); __size = 0;}
     binary_tree(const binary_tree& copy);
     
     
@@ -100,12 +98,31 @@ class binary_tree
 
 
     private:
-    Node                                      *__tree_root;
-    Node                                      *_begin;
-    Node                                      *_end;
+    Node                                            *__tree_root;
+    Node                                            *_begin;
+    Node                                            *_end;
     size_type                                       __size;
     allocator_type                                  __allocat;
 };
+
+
+
+
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type& = allocator_type()): __allocat(alloc)
+{
+    _begin = create_node(value_type(key_type(), mapped_type()));
+    _end = create_node(value_type(key_type(), mapped_type()));
+    __size = 0;
+}
+
+
 
 template<
     class Key,

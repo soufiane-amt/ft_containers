@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 16:39:35 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 17:10:51 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ struct Node
     Node   *parent;
     Node   *left;
     Node   *right;
-    T           data;
+    T       data;
     
     Node(T d = T()): data(d)
     {
@@ -91,6 +91,12 @@ struct Node
     bool    has_2_child () {    return (this->left &&   this->right);}
     bool    has_1_child () {    return (!is_leaf() && !has_2_child());}
     bool    has_parent() {    return (this->parent != nullptr );}
+    bool    is_last_node () 
+    {
+        bool    first_case = !this->parent && !this->right;
+        bool    second_case = this->parent && (this->parent->data < this->data) && !this->right;
+        return (first_case || second_case);
+    }
 
     ~Node(){    _alloc.destroy(data);}
     

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 15:37:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 17:21:16 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@
 #define NAME_SPACE ft
 int main()
 {
-	std::allocator <int> a;
-	a.allocate(int);
+	std::map <int , int> m;
+	std::cout << m.begin()->first <<std::endl;
+	std::cout << m.end()->first <<std::endl;
 	return 0;
 }
