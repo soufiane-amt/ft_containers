@@ -6,20 +6,18 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/14 11:25:50 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 14:49:11 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
+#include <functional>
+
 namespace ft {
-
-
+    
 //iterator_traits
-
-
-
 template<class Iterator>
 struct iterator_traits
 {

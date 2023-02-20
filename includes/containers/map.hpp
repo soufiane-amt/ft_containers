@@ -6,16 +6,14 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/19 15:43:01 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 14:49:05 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <functional>
-#include "utils.hpp"
-#include <__tree>
+#include "../dependencies/utils.hpp"
+#include "../iterators/reverse_iterator.hpp"
+#include "../dependencies/tree.hpp"
 
-#include "iterators/reverse_iterator.hpp"
-#include "tree.hpp"
 
 namespace ft
 {
@@ -287,11 +285,12 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::iterator  
 map<Key, T, Compare, Allocator>::erase (iterator position)
 {
-    iterator    next_2_pos = ++position;
-    _tree.delete_random_node(position);
-    std::cout << "It is in \n";
+    iterator    next_2_pos = position;
+    iterator    next_2_posl = ++position;
+    
+    _tree.delete_random_node(next_2_pos);
 
-    return (next_2_pos);
+    return (next_2_posl);
 }
 
 

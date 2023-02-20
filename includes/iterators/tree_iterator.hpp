@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/17 15:24:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 14:44:16 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #ifndef TREE_ITERATOR_HPP
 #define TREE_ITERATOR_HPP
 
-#include "../utils.hpp"
+#include "../dependencies/utils.hpp"
 // #include "const_tree_iterator.hpp"
 
 namespace ft 
