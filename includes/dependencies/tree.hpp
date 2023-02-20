@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 15:48:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 15:52:19 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 
 #include "../iterators/tree_iterator.hpp"
 #include "../iterators/const_tree_iterator.hpp"
+#include "node.hpp"
 
 
+namespace ft
+{
+    
 template<
     class Key,
     class T,
@@ -343,5 +347,6 @@ void    print_node (Node<pair<U, V>, Allocator > *_node)
     std::cout << "key : " << _node->data.first << " -- " << "value : " << _node->data.second << std::endl;
 }
 
-}
+};
+
 #endif
