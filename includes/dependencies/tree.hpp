@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 16:01:40 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 16:09:22 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,7 +284,6 @@ void    binary_tree<Key,T,Compare ,Allocator>::delete_1_child_parent (Node   * _
             _node->parent->right = child;
     }
     child->parent = _node->parent;
-    std::cout << "=====>" << std::endl;
 
     delete_node(_node);
 }

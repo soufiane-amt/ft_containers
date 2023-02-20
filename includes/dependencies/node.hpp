@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 16:06:53 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/20 16:39:35 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ struct Node
         this->left = node.left;
         this->right = node.right;
     }
+    
+    bool operator>(const Node& node {    return (this->data > node.data); }
+    
+    bool operator<(const Node& node {    return (this->data < node.data); }
     
     void        set_node_to_left (Node *_node){    this->left = _node; _node->parent = this;}
     void        set_node_to_right (Node *_node){    this->right = _node; _node->parent = this;}
@@ -86,6 +90,7 @@ struct Node
     bool    is_leaf () {    return (!this->left && ! this->right);}
     bool    has_2_child () {    return (this->left &&   this->right);}
     bool    has_1_child () {    return (!is_leaf() && !has_2_child());}
+    bool    has_parent() {    return (this->parent != nullptr );}
 
     ~Node(){    _alloc.destroy(data);}
     
