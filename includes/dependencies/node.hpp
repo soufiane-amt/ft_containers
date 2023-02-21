@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 19:19:05 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 19:33:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,10 +194,6 @@ Node<T>*   prev_node(Node<T>* node)
     return (node->parent);
 }
 
-template <typename T, typename value_type>
-Node<T>*   find_parent(Node<T>* __tree, value_type& value)
-{
-}
 
 };
 

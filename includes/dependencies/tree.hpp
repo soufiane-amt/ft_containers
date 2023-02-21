@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 19:33:23 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 19:36:54 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ class binary_tree
     
     
     //insertion
-    node_ptr     find_parent(node_ptr __tree, value_type& value);
+    node_ptr     find_parent(node_ptr __tree, value_type& value, bool &node_is_left);
     void         insert_node (Node *_tree, Node *new_node);
     
     //searching
@@ -196,6 +196,9 @@ template<
     >
 void    binary_tree<Key,T,Compare ,Allocator>::insert_node (Node *_tree, Node *new_node)
 {
+    node_ptr node;
+    bool     left;
+
     if (!__tree_root)
     {
         __size++;
@@ -204,13 +207,7 @@ void    binary_tree<Key,T,Compare ,Allocator>::insert_node (Node *_tree, Node *n
         _end->left = __tree_root;
         return;
     }
-    if (new_node->data.first < _tree->data.first && !_tree->left) { _tree->set_node_to_left(new_node); __size++; return;};
-    if (new_node->data.first > _tree->data.first && !_tree->right) { _tree->set_node_to_right(new_node); __size++; return;};
-    
-    if (new_node->data.first < _tree->data.first)
-        insert_node(_tree->left, new_node);
-    else
-        insert_node(_tree->right, new_node);
+    node = find_parent(node, new_node->data, );
 }
 
 
