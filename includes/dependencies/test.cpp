@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 18:41:39 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 20:58:56 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,22 @@
 #include <memory>
 #include <iostream>
 
-typedef ft::binary_tree <int, int, std::less<int> ,std::allocator<int> > bst;
+
+template <typename T>
+class comp
+{
+private:
+    std::less<T> key_cmp;
+    
+public:
+    
+    bool operator () (const T& a, const T& b)const
+    {
+        return key_cmp()(a < b);
+    }
+};
+typedef ft::binary_tree <int, int, comp<int>() ,std::allocator<int> > bst;
+
 int main ()
 {
     bst a;

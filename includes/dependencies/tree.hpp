@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 20:03:12 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 20:59:03 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class binary_tree
     typedef     Key                                     key_type;
     typedef     T                                       mapped_type;
     typedef 	ft::pair<const key_type,mapped_type>    value_type;
-    typedef     Compare                                 key_compare;
+    typedef     Compare                                 value_compare;
     typedef     size_t                                  size_type;
     
     typedef     Node<value_type>                            Node;
@@ -104,12 +104,13 @@ class binary_tree
 
 
     Node                                            *__tree_root;
+    
     private:
     Node                                            *_begin;
     Node                                            *_end;
     size_type                                       __size;
     allocator_type                                  __allocat;
-    key_compare                                     value_cmp;
+    value_compare                                   value_cmp;
 };
 
 
