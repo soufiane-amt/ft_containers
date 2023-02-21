@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 18:14:57 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 19:33:23 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ class binary_tree
     typedef     Compare                                 key_compare;
     typedef     size_t                                  size_type;
     
-    typedef     Node<value_type>        Node;
+    typedef     Node<value_type>                            Node;
+    typedef     Node*                                       node_ptr;
     typedef     typename Allocator::template rebind<Node>::other          allocator_type;
     
 
     //iterator      
-    typedef     tree_iterator<Node*>                    iterator;
-    // typedef     const_tree_iterator<const Node*>        const_iterator;
+    typedef     tree_iterator<node_ptr>                    iterator;
+    // typedef     const_tree_iterator<const node_ptr>        const_iterator;
 
     
     Node   *create_node(value_type value){  Node   *new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
@@ -68,6 +69,7 @@ class binary_tree
     
     
     //insertion
+    node_ptr     find_parent(node_ptr __tree, value_type& value);
     void         insert_node (Node *_tree, Node *new_node);
     
     //searching
@@ -75,9 +77,9 @@ class binary_tree
     
 
     //tarverseNodes
-    void        tarverseNodesInOrder(Node *_tree, void (*func)(Node*));
-    void        tarverseNodesPreOrder(Node *_tree, void (*func)(Node*));
-    void        tarverseNodesPostOrder(Node *_tree, void (*func)(Node*));
+    void        tarverseNodesInOrder(Node *_tree, void (*func)(node_ptr));
+    void        tarverseNodesPreOrder(Node *_tree, void (*func)(node_ptr));
+    void        tarverseNodesPostOrder(Node *_tree, void (*func)(node_ptr));
     
     
     size_type   size() const{   return (__size);}
@@ -107,6 +109,7 @@ class binary_tree
     Node                                            *_end;
     size_type                                       __size;
     allocator_type                                  __allocat;
+    key_compare                                     value_cmp;
 };
 
 
@@ -153,6 +156,37 @@ binary_tree<Key,T,Compare ,Allocator> & binary_tree<Key,T,Compare ,Allocator>::o
     (void)copy;
 }
 
+
+template<
+    class Key,
+    class T,
+    class Compare ,
+    class Allocator 
+    >
+typename binary_tree<Key,T,Compare ,Allocator>::node_ptr     
+binary_tree<Key,T,Compare ,Allocator>::find_parent(node_ptr __tree, value_type& value, bool &node_is_left)
+{
+    if (!__tree)
+        return (nullptr);
+    while (true)
+    {
+        if (value_cmp()(__tree->data, value))//if __tree->data < value
+        {
+            node_is_left = false;
+            if (!__tree->right)
+                return (__tree);
+            __tree = __tree->right;
+        }
+        else if (value_cmp()(value, __tree->data))
+        {
+            node_is_left = true;
+            if (!__tree->left)
+                return (__tree);
+            __tree = __tree->left;
+        }
+    }
+    return (nullptr);
+}
 
 template<
     class Key,
@@ -208,7 +242,7 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(Node *_tree, void (*func)(Node*))
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(Node *_tree, void (*func)(node_ptr))
 {
     if (!_tree)
         return;
@@ -226,7 +260,7 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPreOrder(Node *_tree, void (*func)(Node*))
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPreOrder(Node *_tree, void (*func)(node_ptr))
 {
     if (!_tree)
         return;
@@ -242,7 +276,7 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(Node *_tree, void (*func)(Node*))
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(Node *_tree, void (*func)(node_ptr))
 {
     if (!_tree)
         return;
