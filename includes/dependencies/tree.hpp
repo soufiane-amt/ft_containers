@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 18:01:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 18:14:57 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ class binary_tree
     
 
     // iterator
-    iterator                begin(){    return (iterator(__tree_root->find_first_node(__tree_root)));}
+    iterator                begin(){    return (iterator(max_left(__tree_root)));}
     // const_iterator          begin() const{    return (const_iterator(__tree_root->find_first_node(__tree_root)));};
 
     iterator                end(){    return (iterator(_end));}
@@ -101,8 +101,8 @@ class binary_tree
     
 
 
-    private:
     Node                                            *__tree_root;
+    private:
     Node                                            *_begin;
     Node                                            *_end;
     size_type                                       __size;
@@ -162,8 +162,6 @@ template<
     >
 void    binary_tree<Key,T,Compare ,Allocator>::insert_node (Node *_tree, Node *new_node)
 {
-    _begin      = nullptr;
-    _end        = nullptr;
     if (!__tree_root)
     {
         __size++;
