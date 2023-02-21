@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:01:41 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 15:57:16 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 15:45:39 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,11 @@ const_tree_iterator<T>&       const_tree_iterator<T>::operator++()
 {
     if (__node == __last_node)
     {
-        
-        __node = nullptr;
-        return *this;
+        while (__node->parent)
+            __node = __node->parent;
+        return (*this);
     }
-    if (!__node->parent)
+    if (!__node->has_parent())
     {
         __node = __node->right;
         while (__node->left)

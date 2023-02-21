@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 15:58:54 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 15:38:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ template<
     
     map( const map& other );
 
-    map&                               operator=( const map& other );
+    map&                                operator=( const map& other );
 
     //Capacity
     size_type                           size() const;
@@ -98,10 +98,10 @@ template<
     void                                clear();
 
     //iterators
-    iterator                begin();
-    const_iterator          begin() const;
-    iterator                end();
-    const_iterator          end() const;
+    iterator                            begin();
+    const_iterator                      begin() const;
+    iterator                            end();
+    const_iterator                      end() const;
     
     //reverse iterators
     // reverse_iterator       rbegin();
@@ -110,20 +110,19 @@ template<
     // const_reverse_iterator rend() const;
 
     //Observers:
-    key_compare                         key_comp() const;
-    value_compare                       value_comp() const;
-
+    key_compare                          key_comp() const;
+    value_compare                        value_comp() const
     //Operations:
-    iterator                            find (const key_type& k);
-    const_iterator                      find (const key_type& k) const;
-            
-    size_type                           count (const key_type& k) const;
-                
-    iterator                            lower_bound (const key_type& k);
-    const_iterator                      lower_bound (const key_type& k) const;
-                
-    iterator                            upper_bound (const key_type& k);
-    const_iterator                      upper_bound (const key_type& k) const;
+    iterator                             find (const key_type& k);
+    const_iterator                       find (const key_type& k) const;
+    
+    size_type                            count (const key_type& k) const;
+        
+    iterator                             lower_bound (const key_type& k);
+    const_iterator                       lower_bound (const key_type& k) const;
+        
+    iterator                             upper_bound (const key_type& k);
+    const_iterator                       upper_bound (const key_type& k) const;
 
     // pair<const_iterator,const_iterator> equal_range (const key_type& k) const;
     pair<iterator,iterator>             equal_range (const key_type& k);

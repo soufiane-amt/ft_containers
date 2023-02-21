@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 14:08:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 14:09:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,14 @@ struct Node
     Node*    get_root ()  {     Node    *node = this;while (node->parent)    node = node->parent;return (node);};
     
     bool    is_last_node () 
+    {
+        Node*   root = get_root();
+        bool    first_case = !this->parent && !this->right;
+        bool    second_case = this->parent && (this->parent->data < this->data) && !this->right && root->data < this->data ;
+        return (first_case || second_case);
+    }
+    
+    bool    is_first_node () 
     {
         Node*   root = get_root();
         bool    first_case = !this->parent && !this->right;

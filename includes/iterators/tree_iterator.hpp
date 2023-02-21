@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 14:07:39 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 15:53:09 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ tree_iterator<T>::tree_iterator():__node(0)
 template<class T>
 tree_iterator<T>::tree_iterator(const tree_iterator &other):__node ( other.base())
 {
-    // __last_node = other.find_last_node(__node);
-    // __first_node = other.find_first_node(__node);
+    __last_node = other.find_last_node(__node);
+    __first_node = other.find_first_node(__node);
 }
 
 
@@ -125,10 +125,10 @@ typename tree_iterator<T>::data_value_type_ref       tree_iterator<T>::operator*
 template<class T>
 tree_iterator<T>&       tree_iterator<T>::operator++()
 {
-    if (__node->is_last_node())
+    if (__node == __last_node)
     {
-        while (_node->parent)
-            _node = tmp->parent;
+        while (__node->parent)
+            __node = __node->parent;
         return (*this);
     }
     if (!__node->has_parent())
@@ -161,6 +161,11 @@ tree_iterator<T>        tree_iterator<T>::operator++(int)
 template<class T>
 tree_iterator<T>&       tree_iterator<T>::operator  --()
 {
+    if (__node == _end)
+    {
+        __node = find_last_node(__node);
+        return (*this);
+    }
     if (__node == __first_node)
     {
         __node = nullptr;
