@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 17:24:26 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 18:00:36 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ namespace ft
 {
     
 
-template <typename T, typename Allocator>
+template <typename T>
 struct Node
 {
-    typedef Allocator                               allocator_type;
     typedef T                                       data_value_type;
     typedef T&                                      data_value_type_ref;
 
@@ -108,11 +107,6 @@ struct Node
         bool    second_case = this->parent && (this->parent->data < this->data) && !this->right && root->data < this->data ;
         return (first_case || second_case);
     }
-
-    ~Node(){    _alloc.destroy(data);}
-    
-    private:
-    allocator_type _alloc;
 };
 
 /*            allocator.destroy(this->elements + i);
@@ -124,18 +118,12 @@ struct Node
 */
 
 
-template <typename U, typename V, typename Allocator > 
-void delete_node(Node<pair<U, V>, Allocator > *_node, Allocator allocator)
-{
-    allocator.destroy(_node);
-    allocator.deallocate(_node, 1);
-}
 
-template <typename T, typename Allocator>
-Node<T, Allocator>*
-Node<T, Allocator>::find_last_node(Node<T, Allocator>* _node) 
+template <typename T>
+Node<T>*
+Node<T>::find_last_node(Node<T>* _node) 
 {
-    Node<T, Allocator>* tmp = _node;
+    Node<T>* tmp = _node;
     while (tmp && tmp->parent)
         tmp = tmp->parent;
     while (tmp && tmp->right)
@@ -145,11 +133,11 @@ Node<T, Allocator>::find_last_node(Node<T, Allocator>* _node)
 
 
 
-template <typename T, typename Allocator>
-Node<T, Allocator>* 
-Node<T, Allocator>::find_first_node(Node<T, Allocator>* _node)  
+template <typename T>
+Node<T>* 
+Node<T>::find_first_node(Node<T>* _node)  
 {
-    Node<T, Allocator>* tmp = _node;
+    Node<T>* tmp = _node;
     while (tmp && tmp->parent)
         tmp = tmp->parent;
     while (tmp && tmp->left)
@@ -159,22 +147,22 @@ Node<T, Allocator>::find_first_node(Node<T, Allocator>* _node)
 
 
 
-template <typename T, typename Allocator>
-Node<T, Allocator>*   is_left_child(Node<T, Allocator>* node)
+template <typename T>
+Node<T>*   is_left_child(Node<T>* node)
 {
     return (node->parent->left == node);
 }
 
 
-template <typename T, typename Allocator>
-Node<T, Allocator>*   max_left(Node<T, Allocator>* node)
+template <typename T>
+Node<T>*   max_left(Node<T>* node)
 {
     while (node->left)
         node = node->left;
     return (node);
 }
-template <typename T, typename Allocator>
-Node<T, Allocator>*   max_right(Node<T, Allocator>* node)
+template <typename T>
+Node<T>*   max_right(Node<T>* node)
 {
     while (node->right)
         node = node->right;
@@ -182,8 +170,8 @@ Node<T, Allocator>*   max_right(Node<T, Allocator>* node)
 }
 
 
-template <typename T, typename Allocator>
-Node<T, Allocator>*   next_node(Node<T, Allocator>* node)
+template <typename T>
+Node<T>*   next_node(Node<T>* node)
 {
     if (!node)
         return (nullptr);
@@ -194,8 +182,8 @@ Node<T, Allocator>*   next_node(Node<T, Allocator>* node)
     return (node->parent);
 }
 
-template <typename T, typename Allocator>
-Node<T, Allocator>*   prev_node(Node<T, Allocator>* node)
+template <typename T>
+Node<T>*   prev_node(Node<T>* node)
 {
     if (!node)
         return (nullptr);
