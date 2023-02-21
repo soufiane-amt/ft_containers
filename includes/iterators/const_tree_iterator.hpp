@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:01:41 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 15:45:39 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 15:54:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typename const_tree_iterator<T>::data_value_type_const_ref       const_tree_iter
 }
 
 template<class T>
-const_tree_iterator<T>&       const_tree_iterator<T>::operator++()
+tree_iterator<T>&       tree_iterator<T>::operator++()
 {
     if (__node == __last_node)
     {
@@ -154,21 +154,26 @@ const_tree_iterator<T>&       const_tree_iterator<T>::operator++()
 }
 
 template<class T>
-const_tree_iterator<T>        const_tree_iterator<T>::operator++(int)  
+tree_iterator<T>        tree_iterator<T>::operator++(int)  
 {
-    const_tree_iterator<T> tmp (this->__node);
+    tree_iterator<T> tmp (this->__node);
     operator++();
     
     return (tmp); 
 }
 
 template<class T>
-const_tree_iterator<T>&       const_tree_iterator<T>::operator  --()
+tree_iterator<T>&       tree_iterator<T>::operator  --()
 {
+    if (__node == _end)
+    {
+        __node = find_last_node(__node);
+        return (*this);
+    }
     if (__node == __first_node)
     {
         __node = nullptr;
-        return;
+        return (*this);
     }
     if (!__node->left)
     {
@@ -186,14 +191,13 @@ const_tree_iterator<T>&       const_tree_iterator<T>::operator  --()
 }
 
 template<class T>
-const_tree_iterator<T>        const_tree_iterator<T>::operator--(int)
+tree_iterator<T>        tree_iterator<T>::operator--(int)
 {
-    const_tree_iterator<T> tmp (this->__node);
+    tree_iterator<T> tmp (this->__node);
     operator--();
     
     return (tmp);
 }
-
 
 
 template<class T>

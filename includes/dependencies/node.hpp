@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 14:09:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 16:50:49 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,54 @@ Node<T, Allocator>::find_first_node(Node<T, Allocator>* _node)
     return (tmp);
 }
 
+
+
+template <typename T, typename Allocator>
+Node<T, Allocator>*   is_left_child(Node<T, Allocator>* node)
+{
+    return (node->parent->left == node);
+}
+
+
+template <typename T, typename Allocator>
+Node<T, Allocator>*   max_left(Node<T, Allocator>* node)
+{
+    while (node->left)
+        node = node->left;
+    return (node);
+}
+template <typename T, typename Allocator>
+Node<T, Allocator>*   max_right(Node<T, Allocator>* node)
+{
+    while (node->right)
+        node = node->right;
+    return (node);
+}
+
+
+template <typename T, typename Allocator>
+Node<T, Allocator>*   next_node(Node<T, Allocator>* node)
+{
+    if (!node)
+        return (nullptr);
+    if (node->right)
+        return(max_left(node->right));
+    while (!is_left_child(node))
+        node = node->parent;
+    return (node->parent);
+}
+
+template <typename T, typename Allocator>
+Node<T, Allocator>*   prev_node(Node<T, Allocator>* node)
+{
+    if (!node)
+        return (nullptr);
+    if (node->left)
+        return(max_right(node->left));
+    while (is_left_child(node))
+        node = node->parent;
+    return (node->parent);
+}
 
 };
 
