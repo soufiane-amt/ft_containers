@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 16:50:49 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 17:24:26 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ struct Node
 
 
 template <typename U, typename V, typename Allocator > 
-void delete_node(Node<pair<U, V>, Allocator > *_node)
+void delete_node(Node<pair<U, V>, Allocator > *_node, Allocator allocator)
 {
     allocator.destroy(_node);
     allocator.deallocate(_node, 1);

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 18:18:49 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 17:49:36 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define TREE_HPP
 
 #include "../iterators/tree_iterator.hpp"
-#include "../iterators/const_tree_iterator.hpp"
+// #include "../iterators/const_tree_iterator.hpp"
 #include "node.hpp"
 
 
@@ -36,24 +36,25 @@ class binary_tree
     typedef     T                                       mapped_type;
     typedef 	ft::pair<const key_type,mapped_type>    value_type;
     typedef     Compare                                 key_compare;
-    typedef     Allocator                               allocator_type;
     typedef     size_t                                  size_type;
     
+    typedef     typename Allocator::template rebind<Node>::other          allocator_type;
     typedef     Node<value_type, allocator_type>        Node;
+    
 
     //iterator      
     typedef     tree_iterator<Node*>                    iterator;
-    typedef     const_tree_iterator<const Node*>        const_iterator;
+    // typedef     const_tree_iterator<const Node*>        const_iterator;
 
     
-    private:
     Node   *create_node(value_type value){  Node   *new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
                                                                         return (new_node);}
+    // private:
 
     public:
 
-    binary_tree(const   allocator_type& = allocator_type()): _begin(nullptr), __allocat(alloc) {    
-                                                         _end = create_node(value_type(key_type(), mapped_type())); __size = 0;}
+    binary_tree(const   allocator_type &alloc = allocator_type());
+        
     binary_tree(const binary_tree& copy);
     
     
@@ -83,10 +84,10 @@ class binary_tree
 
     // iterator
     iterator                begin(){    return (iterator(__tree_root->find_first_node(__tree_root)));}
-    const_iterator          begin() const{    return (const_iterator(__tree_root->find_first_node(__tree_root)));};
+    // const_iterator          begin() const{    return (const_iterator(__tree_root->find_first_node(__tree_root)));};
 
     iterator                end(){    return (iterator(_end));}
-    const_iterator          end() const{    return (const_iterator(_end));}
+    // const_iterator          end() const{    return (const_iterator(_end));}
 
 
     //deletion
@@ -115,7 +116,7 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type& = allocator_type()): __allocat(alloc)
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type& alloc ): __allocat(alloc)
 {
     _begin = create_node(value_type(key_type(), mapped_type()));
     _end = _begin;
@@ -165,18 +166,16 @@ void    binary_tree<Key,T,Compare ,Allocator>::insert_node (Node *_tree, Node *n
         __size++;
         __tree_root = new_node;
         __tree_root->parent = _end;
-        _end->right = __tree_root;
+        _end->left = __tree_root;
+        return;
     }
+    if (new_node->data.first < _tree->data.first && !_tree->left) { _tree->set_node_to_left(new_node); __size++; return;};
+    if (new_node->data.first > _tree->data.first && !_tree->right) { _tree->set_node_to_right(new_node); __size++; return;};
+    
+    if (new_node->data.first < _tree->data.first)
+        insert_node(_tree->left, new_node);
     else
-    {
-        if (new_node->data.first < _tree->data.first && !_tree->left) { _tree->set_node_to_left(new_node); __size++; return;};
-        if (new_node->data.first > _tree->data.first && !_tree->right) { _tree->set_node_to_right(new_node); __size++; return;};
-        
-        if (new_node->data.first < _tree->data.first)
-            insert_node(_tree->left, new_node);
-        else
-            insert_node(_tree->right, new_node);
-    }
+        insert_node(_tree->right, new_node);
 }
 
 
@@ -351,12 +350,12 @@ void    binary_tree<Key,T,Compare ,Allocator>::erase (iterator element)
 
 
 
-template <typename U, typename V, typename Allocator > 
-void    print_node (Node<pair<U, V>, Allocator > *_node)
-{
-    std::cout << _node << std::endl;
-    std::cout << "key : " << _node->data.first << " -- " << "value : " << _node->data.second << std::endl;
-}
+// template <typename U, typename V, typename Allocator > 
+// void    print_node (Node<pair<U, V>, Allocator > *_node)
+// {
+//     std::cout << _node << std::endl;
+//     std::cout << "key : " << _node->data.first << " -- " << "value : " << _node->data.second << std::endl;
+// }
 
 };
 
