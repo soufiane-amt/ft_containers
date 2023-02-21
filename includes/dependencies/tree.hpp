@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 21:12:49 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 21:26:11 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 namespace ft
 {
     //typedef typename _Alloc::template rebind<_Ty>::other _Alty;
-    
+
 template<
     class Key,
     class T,

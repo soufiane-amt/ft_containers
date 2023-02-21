@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 21:11:29 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 21:32:37 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,20 @@
 #include <memory>
 #include <iostream>
 
-
-template <typename T>
 class value_compare
 {
     
     protected:
-        std::less<T> comp;
+        typedef ft::pair<int, int>  value_type;
+        std::less<int> comp;
     public:
-        bool operator()(const T &_lhs, const T &_rhs) const
+        bool operator()(const value_type &_lhs, const value_type &_rhs) const
         {
             return comp(_lhs.first, _rhs.first);
         }
 };
 
-typedef ft::binary_tree <int, int, value_compare<int> ,std::allocator<int> > bst;
+typedef ft::binary_tree <int, int, value_compare ,std::allocator<int> > bst;
 
 int main ()
 {
