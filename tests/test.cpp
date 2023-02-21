@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:23:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 17:21:16 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 11:54:08 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@
 int main()
 {
 	std::map <int , int> m;
-	std::cout << m.begin()->first <<std::endl;
-	std::cout << m.end()->first <<std::endl;
+	m.insert (std::pair <int, int> (1, 2));
+	m.insert (std::pair <int, int> (2, 3));
+	m.insert (std::pair <int, int> (3, 4));
+	std::map <int , int>::iterator	it = m.begin();
+	--it;
+	std::cout << it->first <<std::endl;
 	return 0;
 }

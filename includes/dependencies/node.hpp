@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 17:10:51 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 14:04:22 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ struct Node
         this->right = node.right;
     }
     
-    bool operator>(const Node& node {    return (this->data > node.data); }
+    bool operator>(const Node& node) {    return (this->data > node.data); }
     
-    bool operator<(const Node& node {    return (this->data < node.data); }
+    bool operator<(const Node& node) {    return (this->data < node.data); }
     
     void        set_node_to_left (Node *_node){    this->left = _node; _node->parent = this;}
     void        set_node_to_right (Node *_node){    this->right = _node; _node->parent = this;}
@@ -87,10 +87,12 @@ struct Node
 
 
     
-    bool    is_leaf () {    return (!this->left && ! this->right);}
+    bool    is_leaf () {        return (!this->left && ! this->right);}
     bool    has_2_child () {    return (this->left &&   this->right);}
     bool    has_1_child () {    return (!is_leaf() && !has_2_child());}
-    bool    has_parent() {    return (this->parent != nullptr );}
+    bool    has_parent() {      return (this->parent != nullptr );}
+    Node*    parent ()  {Node    *node = this;while (node->parent)    node = node->parent;return (node);};
+    
     bool    is_last_node () 
     {
         bool    first_case = !this->parent && !this->right;

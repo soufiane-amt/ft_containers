@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 17:12:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/21 13:32:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ class tree_iterator
         iterator_type   __node;
         iterator_type   __first_node;
         iterator_type   __last_node;
-        
     };
 
 
@@ -126,15 +125,12 @@ typename tree_iterator<T>::data_value_type_ref       tree_iterator<T>::operator*
 template<class T>
 tree_iterator<T>&       tree_iterator<T>::operator++()
 {
-    if (__node->is_last_node())
-    {
-            
-    }
-    if (__node == __last_node)
-    {
-        __node = nullptr;
-        return *this;
-    }
+    // if (__node->is_last_node())
+    // {
+    //     while (_node->parent)
+    //         _node = tmp->parent;
+    //     return (*this);
+    // }
     if (!__node->has_parent())
     {
         __node = __node->right;
