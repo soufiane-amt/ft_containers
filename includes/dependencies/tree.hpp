@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 18:32:25 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 18:37:58 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,12 @@ class binary_tree
     
     // equal_range (const key_type& k) const
     // {
-    //     node_ptr to_find;
+        // node_ptr to_find;
 
-    //     to_find = this->find(k);
-    //     if (to_find)
-    //     {
-            
-    //     }
+        // to_find = this->find(k);
+        // if (to_find)
+        //     return make_pair(const_iterator(to_find), const_iterator(next_node(to_find)));
+        // return (make_pair(iterator(_end), iterator(next_node(_end))));
     // }
 
     pair<iterator,iterator>             
