@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 16:58:56 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 17:04:02 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,13 @@ int main ()
 {
     bst a;
     bool s;
+    ft::pair<bst::iterator,bool> p;
     for (size_t i = 0; i < 100; i++)
-        a.insert(ft::pair <const int, int> (i, 3));
+        p = a.insert(ft::pair <const int, int> (i, 3));
     
     for (bst::iterator it = a.begin(); it != a.end(); it++)
         std::cout << it->first << "---" << it->second << std::endl;
+    // ft::pair<bst::iterator,bool> p = a.insert(ft::pair <const int, int> (5, 45));
+    std::cout << p.first->first << "+++++" << p.first->second << std::endl;
+    std::cout << p.second << std::endl;
 }
