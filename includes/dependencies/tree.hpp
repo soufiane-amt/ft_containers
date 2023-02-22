@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 19:53:50 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 19:55:00 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,19 @@ class binary_tree
     
 
     private:
-    void    tarverseNodesPostOrder(node_ptr _tree, void (*func)(node_ptr));
-    node_ptr  create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
+    void            tarverseNodesPostOrder(node_ptr _tree, void (*func)(node_ptr));
+    
+    node_ptr        create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
                                                                       return (new_node);}
-    void delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
+    void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
 
-    node_ptr      find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
-    node_ptr      insert_node (node_ptr  new_node, bool& success);
+    node_ptr        find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
+    node_ptr        insert_node (node_ptr  new_node, bool& success);
+
+    void            delete_leaf (node_ptr  _node);
+    void            delete_1_child_parent (node_ptr  _node);
+    void            delete_2_child_parent (iterator element);
+    void            erase (iterator element);
 
     public:
     
@@ -214,10 +220,6 @@ class binary_tree
     // }
 
     //deletion
-    void    delete_leaf (node_ptr  _node);
-    void    delete_1_child_parent (node_ptr  _node);
-    void    delete_2_child_parent (iterator element);
-    void    erase (iterator element);
 
 /* ************************************************************************** */
                             // Destroy :
@@ -228,10 +230,10 @@ class binary_tree
     
     private:
     
-    node_ptr                                        __tree_root;
     node_ptr                                        __end;
     size_type                                       __size;
     node_allocator_type                             __allocat;
+    node_ptr                                        __tree_root;
     value_compare                                   __value_cmp;
 };
 
