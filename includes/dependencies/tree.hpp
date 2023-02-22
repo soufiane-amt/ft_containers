@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 17:58:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 18:16:43 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,16 +256,17 @@ template<
 typename binary_tree<Key,T,Compare ,Allocator>::Node   
 *binary_tree<Key,T,Compare ,Allocator>::find( key_type to_search)
 {
-    if (!__tree)
+    node_ptr  node = __tree_root;
+    if (!node)
         return (nullptr);
     while (true)
     {
-        if (value_cmp(__tree->data, value))//if __tree->data < value
-            __tree = __tree->right;
-        else if (value_cmp(value, __tree->data))
-            __tree = __tree->left;
+        if (value_cmp(node->data, to_search))//if __tree->data < value
+            node = node->right;
+        else if (value_cmp(to_search, node->data))
+            node = node->left;
         else
-            return (__tree);
+            return node;
     }
     return (nullptr);
 }
