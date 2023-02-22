@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 16:52:39 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:52:46 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,6 @@ binary_tree<Key,T,Compare ,Allocator>::insert_node ( node_ptr  new_node, bool& s
         return (new_node);
     }
     node = find_parent(__tree_root, new_node->data, left);
-    std::cout <<node->data.first << "----" << new_node->data.first << std::endl;
     if (keys_are_equal(node, new_node))
         return (node);
     success  = true;
