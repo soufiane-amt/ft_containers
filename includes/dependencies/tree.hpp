@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 19:43:09 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 19:49:27 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ class binary_tree
 
     typedef     Key                                     key_type;
     typedef     T                                       mapped_type;
-    typedef 	ft::pair<const key_type,mapped_type>    value_type;
     typedef     Compare                                 value_compare;
-    typedef     size_t                                  size_type;
+    typedef 	ft::pair<const key_type,mapped_type>    value_type;
+    typedef     Node<value_type>                        Node;
+    typedef     Node*                                   node_ptr ;
     
-    typedef     Allocator                                   allocator_type;
-    typedef     Node<value_type>                            Node;
-    typedef     Node*                                       node_ptr ;
+    typedef     size_t                                  size_type;
+    typedef     Allocator                               allocator_type;
     typedef     typename Allocator::template rebind<Node>::other          node_allocator_type;
     
     //iterator      
@@ -51,24 +51,25 @@ class binary_tree
     
     node_ptr  create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
                                                                       return (new_node);}
-    
     void delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
 
     private:
     void    tarverseNodesPostOrder(node_ptr _tree, void (*func)(node_ptr));
 
     public:
+    
+/* ************************************************************************** */
+                            // Costructors :
+/* ************************************************************************** */
 
     binary_tree(const value_compare& comp =  value_compare(std::less<int>()),
                   const node_allocator_type& alloc = node_allocator_type());
-        
     binary_tree(const binary_tree& copy);
-    
     
     binary_tree& operator=(const binary_tree& copy);
    
     node_ptr  get_tree() const {  return (__tree_root);}
-    
+
     
     //insertion
     node_ptr      find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
