@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 17:53:13 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 17:58:04 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ class binary_tree
 
     
     //searching
-    node_ptr  find(node_ptr  _tree, key_type to_search);
+    node_ptr  find( key_type to_search);
     
 
     //tarverseNodes
@@ -254,16 +254,18 @@ template<
     class Allocator 
     >
 typename binary_tree<Key,T,Compare ,Allocator>::Node   
-*binary_tree<Key,T,Compare ,Allocator>::find(node_ptr  _tree, key_type to_search)
+*binary_tree<Key,T,Compare ,Allocator>::find( key_type to_search)
 {
-    if (_tree)
+    if (!__tree)
+        return (nullptr);
+    while (true)
     {
-        if (_tree->data.first == to_search) { return (_tree);};
-        
-        if (to_search < _tree->data.first)
-            find(_tree->left, to_search);
+        if (value_cmp(__tree->data, value))//if __tree->data < value
+            __tree = __tree->right;
+        else if (value_cmp(value, __tree->data))
+            __tree = __tree->left;
         else
-            find(_tree->right, to_search);
+            return (__tree);
     }
     return (nullptr);
 }
