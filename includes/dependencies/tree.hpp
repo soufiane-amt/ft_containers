@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 16:36:25 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:50:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ class binary_tree
         iterator    it =  insert_node (new_node, success);
         return (make_pair(it, success));
     }
-    iterator                            insert (iterator position, const_reference val);
+    iterator                            insert (iterator position, value_type&  val);
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last);
 
@@ -216,16 +216,20 @@ binary_tree<Key,T,Compare ,Allocator>::insert_node ( node_ptr  new_node, bool& s
     node_ptr  node;
     bool     left;
 
+    success = false;
     if (!__tree_root)
     {
         __size++;
         __tree_root = new_node;
         __tree_root->parent = _end;
         _end->left = __tree_root;
-        return;
+        success  = true;
+
+        return (new_node);
     }
     node = find_parent(__tree_root, new_node->data, left);
-    if (node->data == new_node->data)
+    std::cout <<node->data.first << "----" << new_node->data.first << std::endl;
+    if (keys_are_equal(node->data, new_node->data))
         return (node);
     success  = true;
     if(left)

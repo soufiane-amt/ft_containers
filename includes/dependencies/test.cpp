@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 16:22:28 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:47:53 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ typedef ft::binary_tree <int, int, value_compare ,std::allocator<int> > bst;
 int main ()
 {
     bst a;
-    
+    bool s;
     // for (size_t i = 0; i < 10; i++)
     //     a.insert_node(a.create_node( ft::pair <const int, int> (i, 3)));
-    a.insert_node(a.create_node( ft::pair <const int, int> (2, 3)));
-    a.insert_node(a.create_node( ft::pair <const int, int> (2, 5)));
+    a.insert_node(a.create_node( ft::pair <const int, int> (2, 3)), s);
+    std::cout << s << std::endl;
+    a.insert_node(a.create_node( ft::pair <const int, int> (2, 5)), s);
+    std::cout << s << std::endl;
     
-    for (bst::iterator it = a.begin(); it != a.end(); it++)
-        std::cout << it->first << "---" << it->second << std::endl;
+    // for (bst::iterator it = a.begin(); it != a.end(); it++)
+    //     std::cout << it->first << "---" << it->second << std::endl;
 }
