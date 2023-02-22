@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 15:58:20 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:52:31 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,12 @@ Node<T>*   prev_node(Node<T>* node)
         node = node->parent;
     return (node->parent);
 }
+
+
+template <class T>
+  bool keys_are_equal (const Node<T>* node1 , const Node<T>* node2 )
+{ return node1->data.first==node2->data.first; }
+
 
 
 };

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 15:54:40 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 16:50:33 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:51:14 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,6 @@ template <class T1, class T2>
   bool operator>= (const pair<T1,T2>& p1, const pair<T1,T2>& p2)
 { return !(p1<p2); }
 
-
-template <class T1, class T2>
-  bool keys_are_equal (const pair<T1,T2>& p1, const pair<T1,T2>& p2)
-{ return p1.first==p2.first; }
 
 
 
