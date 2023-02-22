@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 19:49:27 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 19:53:50 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,15 @@ class binary_tree
     // typedef     const_tree_iterator<const node_ptr >        const_iterator;
 
     
+
+    private:
+    void    tarverseNodesPostOrder(node_ptr _tree, void (*func)(node_ptr));
     node_ptr  create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
                                                                       return (new_node);}
     void delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
 
-    private:
-    void    tarverseNodesPostOrder(node_ptr _tree, void (*func)(node_ptr));
+    node_ptr      find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
+    node_ptr      insert_node (node_ptr  new_node, bool& success);
 
     public:
     
@@ -65,16 +68,24 @@ class binary_tree
     binary_tree(const value_compare& comp =  value_compare(std::less<int>()),
                   const node_allocator_type& alloc = node_allocator_type());
     binary_tree(const binary_tree& copy);
-    
+
+/* ************************************************************************** */
+                            // Overload func :
+/* ************************************************************************** */
+
     binary_tree& operator=(const binary_tree& copy);
-   
+
+/* ************************************************************************** */
+                            // Getters :
+/* ************************************************************************** */
+
     node_ptr  get_tree() const {  return (__tree_root);}
 
     
-    //insertion
-    node_ptr      find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
-    node_ptr      insert_node (node_ptr  new_node, bool& success);
-    
+/* ************************************************************************** */
+                            // Insertion :
+/* ************************************************************************** */
+
     pair<iterator,bool>                 insert (const value_type& val)
     {
         bool        success;
@@ -94,21 +105,28 @@ class binary_tree
         
     }
 
-    
-    //searching
+/* ************************************************************************** */
+                            // Searching :
+/* ************************************************************************** */
+
     node_ptr  find( key_type to_search);
     
+/* ************************************************************************** */
+                            // Capacity :
+/* ************************************************************************** */
 
     size_type   size() const{   return (__size);}
-    void        clear();
-    
+
+/* ************************************************************************** */
+                            // Iterators :
+/* ************************************************************************** */
+
     // iterator
     iterator                begin(){    return (iterator(max_left(__tree_root)));}
     // const_iterator          begin() const{    return (const_iterator(__tree_root->find_first_node(__tree_root)));};
 
-    iterator                end(){    return (iterator(_end));}
-    // const_iterator          end() const{    return (const_iterator(_end));}
-
+    iterator                end(){    return (iterator(__end));}
+    // const_iterator          end() const{    return (const_iterator(__end));}
 
     pair<iterator,iterator>             
     equal_range (const key_type& k)
@@ -118,7 +136,7 @@ class binary_tree
         to_find = this->find(k);
         if (to_find)
             return make_pair(iterator(to_find), iterator(next_node(to_find)));
-        return (make_pair(iterator(_end), iterator(next_node(_end))));
+        return (make_pair(iterator(__end), iterator(next_node(__end))));
     }
     
     // pair<const_iterator,const_iterator> 
@@ -129,7 +147,7 @@ class binary_tree
         // to_find = this->find(k);
         // if (to_find)
         //     return make_pair(const_iterator(to_find), const_iterator(next_node(to_find)));
-        // return (make_pair(iterator(_end), iterator(next_node(_end))));
+        // return (make_pair(iterator(__end), iterator(next_node(__end))));
     // }
 
     iterator lower_bound( const Key& key )
@@ -138,14 +156,14 @@ class binary_tree
 
         while (node)
         {
-            if (!value_cmp(node->data, key))//if __tree->data >= value
+            if (!__value_cmp(node->data, key))//if __tree->data >= value
                 return iterator (node);
-            else if (value_cmp(key, node->data))
+            else if (__value_cmp(key, node->data))
                 node = node->left;
             else
                 node = node->right;
         }
-        return (iterator(_end));
+        return (iterator(__end));
     }
     // const_iterator lower_bound( const Key& key ) const
     // {
@@ -153,14 +171,14 @@ class binary_tree
 
         // while (node)
         // {
-        //     if (!value_cmp(node->data, to_search))//if __tree->data >= value
+        //     if (!__value_cmp(node->data, to_search))//if __tree->data >= value
         //         return const_iterator (node);
-        //     else if (value_cmp(to_search, node->data))
+        //     else if (__value_cmp(to_search, node->data))
         //         node = node->left;
         //     else
         //         node = node->right;
         // }
-        // return (const_iterator(_end));
+        // return (const_iterator(__end));
     // }
 
 
@@ -170,14 +188,14 @@ class binary_tree
 
         while (node)
         {
-            if (value_cmp(node->data, key))//if __tree->data < value
+            if (__value_cmp(node->data, key))//if __tree->data < value
                 return iterator (node);
-            else if (value_cmp(key, node->data))
+            else if (__value_cmp(key, node->data))
                 node = node->left;
             else
                 node = node->right;
         }
-        return (iterator(_end));
+        return (iterator(__end));
     }
     // const_iterator upper_bound( const Key& key ) const;
     // {
@@ -185,14 +203,14 @@ class binary_tree
 
     //     while (node)
     //     {
-    //         if (value_cmp(node->data, to_search))//if __tree->data < value
+    //         if (__value_cmp(node->data, to_search))//if __tree->data < value
     //             return iterator (node);
-    //         else if (value_cmp(to_search, node->data))
+    //         else if (__value_cmp(to_search, node->data))
     //             node = node->left;
     //         else
     //             node = node->right;
     //     }
-    //     return (iterator(_end));
+    //     return (iterator(__end));
     // }
 
     //deletion
@@ -200,16 +218,21 @@ class binary_tree
     void    delete_1_child_parent (node_ptr  _node);
     void    delete_2_child_parent (iterator element);
     void    erase (iterator element);
-    
 
-    ~binary_tree() {this->clear();  delete_node (_end); };
-    node_ptr                                         __tree_root;
+/* ************************************************************************** */
+                            // Destroy :
+/* ************************************************************************** */
+
+    void        clear();
+    ~binary_tree() {this->clear();  delete_node (__end); };
     
     private:
-    node_ptr                                         _end;
+    
+    node_ptr                                        __tree_root;
+    node_ptr                                        __end;
     size_type                                       __size;
-    node_allocator_type                                  __allocat;
-    value_compare                                   value_cmp;
+    node_allocator_type                             __allocat;
+    value_compare                                   __value_cmp;
 };
 
 
@@ -222,9 +245,9 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const value_compare& cmp, const   node_allocator_type& alloc ): value_cmp(cmp), __allocat(alloc), __tree_root(nullptr)
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const value_compare& cmp, const   node_allocator_type& alloc ): __value_cmp(cmp), __allocat(alloc), __tree_root(nullptr)
 {
-    _end = create_node(value_type(key_type(), mapped_type()));
+    __end = create_node(value_type(key_type(), mapped_type()));
     __size = 0;
 }
 
@@ -269,14 +292,14 @@ binary_tree<Key,T,Compare ,Allocator>::find_parent(node_ptr  __tree, value_type&
         return (nullptr);
     while (true)
     {
-        if (value_cmp(__tree->data, value))//if __tree->data < value
+        if (__value_cmp(__tree->data, value))//if __tree->data < value
         {
             node_is_left = false;
             if (!__tree->right)
                 return (__tree);
             __tree = __tree->right;
         }
-        else if (value_cmp(value, __tree->data))
+        else if (__value_cmp(value, __tree->data))
         {
             node_is_left = true;
             if (!__tree->left)
@@ -306,8 +329,8 @@ binary_tree<Key,T,Compare ,Allocator>::insert_node ( node_ptr  new_node, bool& s
     {
         __size++;
         __tree_root = new_node;
-        __tree_root->parent = _end;
-        _end->left = __tree_root;
+        __tree_root->parent = __end;
+        __end->left = __tree_root;
         success  = true;
 
         return (new_node);
@@ -337,9 +360,9 @@ typename binary_tree<Key,T,Compare ,Allocator>::Node
 
     while (node)
     {
-        if (value_cmp(node->data, to_search))//if __tree->data < value
+        if (__value_cmp(node->data, to_search))//if __tree->data < value
             node = node->right;
-        else if (value_cmp(to_search, node->data))
+        else if (__value_cmp(to_search, node->data))
             node = node->left;
         else
             return node;
