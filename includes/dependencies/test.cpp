@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 17:04:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 17:42:06 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,28 @@ typedef ft::binary_tree <int, int, value_compare ,std::allocator<int> > bst;
     // std::cout << ptr->data.first << "<--->" << ptr->data.second << std::endl;
 // }
 
+// int main ()
+// {
+    // bst a;
+    // bool s;
+    // ft::pair<bst::iterator,bool> p;
+    // for (size_t i = 0; i < 100; i++)
+        // p = a.insert(ft::pair <const int, int> (i, 3));
+    // 
+    // for (bst::iterator it = a.begin(); it != a.end(); it++)
+        // std::cout << it->first << "---" << it->second << std::endl;
+    // ft::pair<bst::iterator,bool> p = a.insert(ft::pair <const int, int> (5, 45));
+    // std::cout << p.first->first << "+++++" << p.first->second << std::endl;
+    // std::cout << p.second << std::endl;
+// }
+
+#include <map>
 int main ()
 {
-    bst a;
-    bool s;
-    ft::pair<bst::iterator,bool> p;
-    for (size_t i = 0; i < 100; i++)
-        p = a.insert(ft::pair <const int, int> (i, 3));
-    
-    for (bst::iterator it = a.begin(); it != a.end(); it++)
+    std::map <int, int> m;
+    for (size_t i = 0; i < 10; i++)
+        m.insert(std::pair <const int, int> (i, 3));
+    m.insert(m.begin(), std::pair <const int, int> (122, 3));
+    for (std::map <int, int> ::iterator it = m.begin(); it != m.end(); it++)
         std::cout << it->first << "---" << it->second << std::endl;
-    // ft::pair<bst::iterator,bool> p = a.insert(ft::pair <const int, int> (5, 45));
-    std::cout << p.first->first << "+++++" << p.first->second << std::endl;
-    std::cout << p.second << std::endl;
 }
