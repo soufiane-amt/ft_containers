@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 14:58:00 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 15:55:46 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const value_compare& cmp, const   allocator_type& alloc ): value_cmp(cmp), __allocat(alloc)
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const value_compare& cmp, const   allocator_type& alloc ): value_cmp(cmp), __allocat(alloc), __tree_root(nullptr)
 {
     _begin = create_node(value_type(key_type(), mapped_type()));
     _end = _begin;
@@ -211,9 +211,15 @@ void    binary_tree<Key,T,Compare ,Allocator>::insert_node (Node *_tree, Node *n
     }
     node = find_parent(_tree, new_node->data, left);
     if(left)
+    {
         node->left = new_node;
+        new_node->parent = node;
+    }
     else
+    {
         node->right = new_node;
+        new_node->parent = node;
+    }
 }
 
 

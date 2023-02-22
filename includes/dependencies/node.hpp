@@ -6,13 +6,14 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 19:33:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 15:46:36 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_HPP
 #define NODE_HPP
 
+#include <iostream>
 #include "../dependencies/utility.hpp"
 
 namespace ft
@@ -146,10 +147,10 @@ Node<T>::find_first_node(Node<T>* _node)
 }
 
 
-
 template <typename T>
-Node<T>*   is_left_child(Node<T>* node)
+bool   is_left_child(Node<T>* node)
 {
+    std::cout <<  "----" << node->data.first << std::endl;
     return (node->parent->left == node);
 }
 

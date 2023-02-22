@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 14:59:06 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 15:55:54 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int main ()
     a.insert_node(a.__tree_root, a.create_node( ft::pair <int, int> (4, 3)));
     a.insert_node(a.__tree_root, a.create_node( ft::pair <int, int> (5, 3)));
     a.insert_node(a.__tree_root, a.create_node( ft::pair <int, int> (1, 3)));
-    bst::iterator it = a.begin();
-    std::cout << it->first << std::endl;
+    for (bst::iterator it = a.begin(); it != a.end(); it++)
+        std::cout << it->first << std::endl;
 }
