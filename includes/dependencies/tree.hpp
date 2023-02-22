@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 19:24:30 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 19:25:41 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ class binary_tree
     
     void delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
 
-    // private:
+    private:
+    void    tarverseNodesPostOrder(node_ptr _tree, void (*func)(node_ptr));
 
     public:
 
@@ -64,7 +65,6 @@ class binary_tree
     
     
     binary_tree& operator=(const binary_tree& copy);
-    ~binary_tree(){}
    
     node_ptr  get_tree() const {  return (__tree_root);}
     
@@ -200,7 +200,7 @@ class binary_tree
     void    erase (iterator element);
     
 
-    ~binary_tree() {this->clear();  delete_node (_end)};
+    ~binary_tree() {this->clear();  delete_node (_end); };
     node_ptr                                         __tree_root;
     
     private:
