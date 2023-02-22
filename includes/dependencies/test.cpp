@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 18:20:18 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 18:31:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int main ()
     my_map.insert(std::pair<int, std::string>(2, "qdfux"));
     my_map.insert(std::pair<int, std::string>(2, "qfeux"));
     my_map.insert(std::pair<int, std::string>(2, "qwux"));
-    std::pair<std::map<int, std::string>::iterator, std::map<int, std::string>::iterator> range = my_map.equal_range(2);
+    // std::pair<std::map<int, std::string>::iterator, std::map<int, std::string>::iterator> range = make_pair(iterator(nullptr), iterator(next_node(nullptr)));
     // for (std::map<int, std::string>::iterator it = range.first; it != range.second; ++it) {
     //     std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
     // }
