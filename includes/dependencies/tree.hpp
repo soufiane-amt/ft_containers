@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 18:16:43 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 18:26:52 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,18 @@ class binary_tree
     iterator                end(){    return (iterator(_end));}
     // const_iterator          end() const{    return (const_iterator(_end));}
 
+    pair<const_iterator,const_iterator> 
+    
+    equal_range (const key_type& k) const
+    {
+        node_ptr to_find;
+
+        to_find = this->find(k);
+        if (to)
+    }
+
+    pair<iterator,iterator>             
+    equal_range (const key_type& k);
 
     //deletion
     void    delete_leaf (node_ptr  _node);
@@ -259,7 +271,7 @@ typename binary_tree<Key,T,Compare ,Allocator>::Node
     node_ptr  node = __tree_root;
     if (!node)
         return (nullptr);
-    while (true)
+    while (node)
     {
         if (value_cmp(node->data, to_search))//if __tree->data < value
             node = node->right;
