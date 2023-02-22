@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 16:56:36 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:58:56 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,26 @@ class value_compare
 
 typedef ft::binary_tree <int, int, value_compare ,std::allocator<int> > bst;
 
+// int main ()
+// {
+    // bst a;
+    // bool s;
+    // for (size_t i = 0; i < 10; i++)
+        // a.insert_node(a.create_node( ft::pair <const int, int> (i, 3)), s);
+    // 
+    // for (bst::iterator it = a.begin(); it != a.end(); it++)
+        // std::cout << it->first << "---" << it->second << std::endl;
+    // ft::Node<ft::pair <const int, int > >* ptr  = a.insert_node(a.create_node( ft::pair <const int, int> (5, 5)), s);
+    // std::cout << ptr->data.first << "<--->" << ptr->data.second << std::endl;
+// }
+
 int main ()
 {
     bst a;
     bool s;
-    for (size_t i = 0; i < 10; i++)
-        a.insert_node(a.create_node( ft::pair <const int, int> (i, 3)), s);
+    for (size_t i = 0; i < 100; i++)
+        a.insert(ft::pair <const int, int> (i, 3));
     
     for (bst::iterator it = a.begin(); it != a.end(); it++)
         std::cout << it->first << "---" << it->second << std::endl;
-    ft::Node<ft::pair <const int, int > >* ptr  = a.insert_node(a.create_node( ft::pair <const int, int> (5, 5)), s);
-    std::cout << ptr->data.first << "<--->" << ptr->data.second << std::endl;
 }
