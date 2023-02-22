@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 21:26:11 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 14:58:00 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ class binary_tree
 
 {
     public:
+
     typedef     Key                                     key_type;
     typedef     T                                       mapped_type;
     typedef 	ft::pair<const key_type,mapped_type>    value_type;
@@ -42,7 +43,6 @@ class binary_tree
     typedef     Node*                                       node_ptr;
     typedef     typename Allocator::template rebind<Node>::other          allocator_type;
     
-
     //iterator      
     typedef     tree_iterator<node_ptr>                    iterator;
     // typedef     const_tree_iterator<const node_ptr>        const_iterator;
@@ -57,7 +57,8 @@ class binary_tree
 
     public:
 
-    binary_tree(const   allocator_type &alloc = allocator_type());
+    binary_tree(const value_compare& comp =  value_compare(std::less<int>()),
+                  const allocator_type& alloc = allocator_type());
         
     binary_tree(const binary_tree& copy);
     
@@ -123,7 +124,7 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const   allocator_type& alloc ): __allocat(alloc)
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const value_compare& cmp, const   allocator_type& alloc ): value_cmp(cmp), __allocat(alloc)
 {
     _begin = create_node(value_type(key_type(), mapped_type()));
     _end = _begin;
@@ -171,14 +172,14 @@ binary_tree<Key,T,Compare ,Allocator>::find_parent(node_ptr __tree, value_type& 
         return (nullptr);
     while (true)
     {
-        if (value_cmp()(__tree->data, value))//if __tree->data < value
+        if (value_cmp(__tree->data, value))//if __tree->data < value
         {
             node_is_left = false;
             if (!__tree->right)
                 return (__tree);
             __tree = __tree->right;
         }
-        else if (value_cmp()(value, __tree->data))
+        else if (value_cmp(value, __tree->data))
         {
             node_is_left = true;
             if (!__tree->left)
