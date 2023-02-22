@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 20:59:33 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 21:02:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ class binary_tree
     iterator                            insert (iterator position, value_type&  val)
     {
         node_ptr pos = position.base();
-        insert_node()
+        node_ptr    new_node = create_node (val);
+        return (iterator(insert_node(pos, new_node, bool())));
     }
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last)
