@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 18:45:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 18:48:49 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,9 @@ class binary_tree
 
         while (node)
         {
-            if (!value_cmp(node->data, to_search))//if __tree->data >= value
+            if (!value_cmp(node->data, key))//if __tree->data >= value
                 return iterator (node);
-            else if (value_cmp(to_search, node->data))
+            else if (value_cmp(key, node->data))
                 node = node->left;
             else
                 node = node->right;
@@ -155,8 +155,37 @@ class binary_tree
     }
     // const_iterator lower_bound( const Key& key ) const
     // {
-        
+        //node_ptr  node = __tree_root;
+
+        // while (node)
+        // {
+        //     if (!value_cmp(node->data, to_search))//if __tree->data >= value
+        //         return const_iterator (node);
+        //     else if (value_cmp(to_search, node->data))
+        //         node = node->left;
+        //     else
+        //         node = node->right;
+        // }
+        // return (const_iterator(_end));
     // }
+
+
+    iterator upper_bound( const Key& key )
+    {
+        node_ptr  node = __tree_root;
+
+        while (node)
+        {
+            if (value_cmp(node->data, to_search))//if __tree->data < value
+                return iterator (node);
+            else if (value_cmp(to_search, node->data))
+                node = node->left;
+            else
+                node = node->right;
+        }
+        return (iterator(_end));
+    }
+    // const_iterator upper_bound( const Key& key ) const;
 
     //deletion
     void    delete_leaf (node_ptr  _node);
