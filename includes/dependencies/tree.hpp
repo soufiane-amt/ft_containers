@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 15:55:46 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 15:57:18 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,15 +211,9 @@ void    binary_tree<Key,T,Compare ,Allocator>::insert_node (Node *_tree, Node *n
     }
     node = find_parent(_tree, new_node->data, left);
     if(left)
-    {
-        node->left = new_node;
-        new_node->parent = node;
-    }
+        node->set_node_to_left(new_node);
     else
-    {
-        node->right = new_node;
-        new_node->parent = node;
-    }
+        node->set_node_to_right(new_node);
 }
 
 
