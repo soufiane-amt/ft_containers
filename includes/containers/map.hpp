@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/21 15:38:29 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:30:04 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ template<
 
         //Modifiers
 
-    value_type                          insert (const value_type& val);
+    pair<iterator,bool>                  insert (const value_type& val);
 
     iterator                            insert (iterator position, const_reference val);
     
@@ -222,7 +222,7 @@ map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 }
 
 template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::value_type
+pair<typename iterator,bool> 
 map<Key, T, Compare, Allocator>::insert (const value_type& val)
 {
     

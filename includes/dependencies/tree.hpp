@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 16:06:16 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:36:25 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ class binary_tree
     typedef     size_t                                  size_type;
     
     typedef     Node<value_type>                            Node;
-    typedef     Node*                                       node_ptr;
+    typedef     Node*                                       node_ptr ;
     typedef     typename Allocator::template rebind<Node>::other          allocator_type;
     
     //iterator      
-    typedef     tree_iterator<node_ptr>                    iterator;
-    // typedef     const_tree_iterator<const node_ptr>        const_iterator;
+    typedef     tree_iterator<node_ptr >                    iterator;
+    // typedef     const_tree_iterator<const node_ptr >        const_iterator;
 
     
-    Node   *create_node(value_type value){  Node   *new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
+    node_ptr  create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
                                                                       return (new_node);}
     
-    void delete_node(Node *_node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
+    void delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
 
     // private:
 
@@ -66,21 +66,33 @@ class binary_tree
     binary_tree& operator=(const binary_tree& copy);
     ~binary_tree(){}
    
-    Node   *get_tree() const {  return (__tree_root);}
+    node_ptr  get_tree() const {  return (__tree_root);}
     
     
     //insertion
-    node_ptr     find_parent(node_ptr __tree, value_type& value, bool &node_is_left);
-    void         insert_node (Node *new_node);
+    node_ptr      find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
+    node_ptr      insert_node (node_ptr  new_node, bool& success);
+    
+    pair<iterator,bool>                 insert (const value_type& val)
+    {
+        bool        success;
+        node_ptr    new_node = create_node (val);
+        iterator    it =  insert_node (new_node, success);
+        return (make_pair(it, success));
+    }
+    iterator                            insert (iterator position, const_reference val);
+    template <class InputIterator> 
+    void                                insert (InputIterator first, InputIterator last);
+
     
     //searching
-    Node   *find(Node *_tree, key_type to_search);
+    node_ptr  find(node_ptr  _tree, key_type to_search);
     
 
     //tarverseNodes
-    void        tarverseNodesInOrder(Node *_tree, void (*func)(node_ptr));
-    void        tarverseNodesPreOrder(Node *_tree, void (*func)(node_ptr));
-    void        tarverseNodesPostOrder(Node *_tree, void (*func)(node_ptr));
+    void        tarverseNodesInOrder(node_ptr  _tree, void (*func)(node_ptr ));
+    void        tarverseNodesPreOrder(node_ptr  _tree, void (*func)(node_ptr ));
+    void        tarverseNodesPostOrder(node_ptr  _tree, void (*func)(node_ptr ));
     
     
     size_type   size() const{   return (__size);}
@@ -97,18 +109,18 @@ class binary_tree
 
 
     //deletion
-    void    delete_leaf (Node   * _node);
-    void    delete_1_child_parent (Node   * _node);
+    void    delete_leaf (node_ptr  _node);
+    void    delete_1_child_parent (node_ptr  _node);
     void    delete_2_child_parent (iterator element);
     void    erase (iterator element);
     
 
 
-    Node                                            *__tree_root;
+    node_ptr                                         __tree_root;
     
     private:
-    Node                                            *_begin;
-    Node                                            *_end;
+    node_ptr                                         _begin;
+    node_ptr                                         _end;
     size_type                                       __size;
     allocator_type                                  __allocat;
     value_compare                                   value_cmp;
@@ -165,8 +177,8 @@ template<
     class Compare ,
     class Allocator 
     >
-typename binary_tree<Key,T,Compare ,Allocator>::node_ptr     
-binary_tree<Key,T,Compare ,Allocator>::find_parent(node_ptr __tree, value_type& value, bool &node_is_left)
+typename binary_tree<Key,T,Compare ,Allocator>::node_ptr      
+binary_tree<Key,T,Compare ,Allocator>::find_parent(node_ptr  __tree, value_type& value, bool &node_is_left)
 {
     if (!__tree)
         return (nullptr);
@@ -186,8 +198,10 @@ binary_tree<Key,T,Compare ,Allocator>::find_parent(node_ptr __tree, value_type& 
                 return (__tree);
             __tree = __tree->left;
         }
+        else
+            break;
     }
-    return (nullptr);
+    return (__tree);
 }
 
 template<
@@ -196,9 +210,10 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::insert_node ( Node *new_node)
+typename binary_tree<Key,T,Compare ,Allocator>::node_ptr 
+binary_tree<Key,T,Compare ,Allocator>::insert_node ( node_ptr  new_node, bool& success)
 {
-    node_ptr node;
+    node_ptr  node;
     bool     left;
 
     if (!__tree_root)
@@ -210,10 +225,14 @@ void    binary_tree<Key,T,Compare ,Allocator>::insert_node ( Node *new_node)
         return;
     }
     node = find_parent(__tree_root, new_node->data, left);
+    if (node->data == new_node->data)
+        return (node);
+    success  = true;
     if(left)
         node->set_node_to_left(new_node);
     else
         node->set_node_to_right(new_node);
+    return (new_node);
 }
 
 
@@ -224,7 +243,7 @@ template<
     class Allocator 
     >
 typename binary_tree<Key,T,Compare ,Allocator>::Node   
-*binary_tree<Key,T,Compare ,Allocator>::find(Node *_tree, key_type to_search)
+*binary_tree<Key,T,Compare ,Allocator>::find(node_ptr  _tree, key_type to_search)
 {
     if (_tree)
     {
@@ -245,7 +264,7 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(Node *_tree, void (*func)(node_ptr))
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesInOrder(node_ptr  _tree, void (*func)(node_ptr ))
 {
     if (!_tree)
         return;
@@ -263,7 +282,7 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPreOrder(Node *_tree, void (*func)(node_ptr))
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPreOrder(node_ptr  _tree, void (*func)(node_ptr ))
 {
     if (!_tree)
         return;
@@ -279,7 +298,7 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(Node *_tree, void (*func)(node_ptr))
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(node_ptr  _tree, void (*func)(node_ptr ))
 {
     if (!_tree)
         return;
@@ -311,7 +330,7 @@ template<
     class T,
     class Compare ,
     class Allocator >
-void    binary_tree<Key,T,Compare ,Allocator>::delete_leaf (Node   * _node)
+void    binary_tree<Key,T,Compare ,Allocator>::delete_leaf (node_ptr  _node)
 {    
     if (_node->parent->left == _node)
         _node->parent->left = nullptr;
@@ -327,9 +346,9 @@ template<
     class Compare ,
     class Allocator >
 
-void    binary_tree<Key,T,Compare ,Allocator>::delete_1_child_parent (Node   * _node)
+void    binary_tree<Key,T,Compare ,Allocator>::delete_1_child_parent (node_ptr  _node)
 {
-    Node   *child;
+    node_ptr child;
 
     child = _node->right ? _node->right : _node->left;
     if (_node->parent)
@@ -352,8 +371,8 @@ template<
 
 void    binary_tree<Key,T,Compare ,Allocator>::delete_2_child_parent (iterator element)
 {
-    Node   *_node =  element.base();
-    Node   *_next_node =  (++element).base();
+    node_ptr _node =  element.base();
+    node_ptr _next_node =  (++element).base();
     (*_node).swap(*_next_node);
     if (_node ->has_1_child())
         delete_1_child_parent(_node);
@@ -371,7 +390,7 @@ template<
 void    binary_tree<Key,T,Compare ,Allocator>::erase (iterator element)
 {
     iterator e = element;
-    Node   *_node  = e.base();
+    node_ptr _node  = e.base();
     if (_node && !_node->parent)
         this->__tree_root  = (++e).base();
     // std::cout << "self " << _node->data.first << std::endl;
