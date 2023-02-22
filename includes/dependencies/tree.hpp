@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 18:37:58 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 18:45:04 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,17 +115,6 @@ class binary_tree
     iterator                end(){    return (iterator(_end));}
     // const_iterator          end() const{    return (const_iterator(_end));}
 
-    // pair<const_iterator,const_iterator> 
-    
-    // equal_range (const key_type& k) const
-    // {
-        // node_ptr to_find;
-
-        // to_find = this->find(k);
-        // if (to_find)
-        //     return make_pair(const_iterator(to_find), const_iterator(next_node(to_find)));
-        // return (make_pair(iterator(_end), iterator(next_node(_end))));
-    // }
 
     pair<iterator,iterator>             
     equal_range (const key_type& k)
@@ -137,6 +126,37 @@ class binary_tree
             return make_pair(iterator(to_find), iterator(next_node(to_find)));
         return (make_pair(iterator(_end), iterator(next_node(_end))));
     }
+    
+    // pair<const_iterator,const_iterator> 
+    // equal_range (const key_type& k) const
+    // {
+        // node_ptr to_find;
+
+        // to_find = this->find(k);
+        // if (to_find)
+        //     return make_pair(const_iterator(to_find), const_iterator(next_node(to_find)));
+        // return (make_pair(iterator(_end), iterator(next_node(_end))));
+    // }
+
+    iterator lower_bound( const Key& key )
+    {
+        node_ptr  node = __tree_root;
+
+        while (node)
+        {
+            if (!value_cmp(node->data, to_search))//if __tree->data >= value
+                return iterator (node);
+            else if (value_cmp(to_search, node->data))
+                node = node->left;
+            else
+                node = node->right;
+        }
+        return (iterator(_end));
+    }
+    // const_iterator lower_bound( const Key& key ) const
+    // {
+        
+    // }
 
     //deletion
     void    delete_leaf (node_ptr  _node);
@@ -279,8 +299,7 @@ typename binary_tree<Key,T,Compare ,Allocator>::Node
 *binary_tree<Key,T,Compare ,Allocator>::find( key_type to_search)
 {
     node_ptr  node = __tree_root;
-    if (!node)
-        return (nullptr);
+
     while (node)
     {
         if (value_cmp(node->data, to_search))//if __tree->data < value
