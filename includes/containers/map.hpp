@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 20:42:09 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 21:06:16 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,32 @@ template<
     public:
     friend class binary_tree<Key, T, Compare, Allocator>;
     
-    typedef     Key                                 key_type;
-    typedef     T                                   mapped_type;
-    typedef 	pair<const key_type,mapped_type>    value_type;
-    typedef     Compare                             key_compare;
+    typedef     Key                                          key_type;
+    typedef     T                                            mapped_type;
+    typedef 	pair<const key_type,mapped_type>             value_type;
+    typedef     Compare                                      key_compare;
     typedef     std::less<pair<const key_type,mapped_type> > value_compare;
+    typedef     Allocator                                    allocator_type;
+    typedef     value_type&                                  reference;
+    typedef     value_type*	                                 pointer;
+    typedef     size_t                                       size_type;
+    typedef     ptrdiff_t                                    difference_type;
     
-    //value_compare
-    typedef     Allocator                           allocator_type;
-    typedef     value_type&                         reference;
-    typedef     const  value_type&                  const_reference;
-    typedef     value_type*	                        pointer;
-    typedef     const pointer                       const_pointer;
-    typedef     size_t                              size_type;
-    typedef     ptrdiff_t                           difference_type;
-
     typedef     tree_node<value_type, allocator_type>  tree_node;
     typedef     tree_node*                          tree_node_pointer;
+
+    //value_compare
+    typedef     const  value_type&                  const_reference;
+    typedef     const pointer                       const_pointer;
     typedef     const tree_node*                    tree_node_const_pointer;
-    typedef     binary_tree<Key, T, key_compare, allocator_type > binary_tree;
+
 
     /*Iterators*/
     typedef typename              ft::tree_iterator<tree_node_pointer>                iterator;
     typedef typename              ft::const_tree_iterator<tree_node_const_pointer>    const_iterator;
+    
+    typedef     binary_tree<Key, T, key_compare, allocator_type > binary_tree;
+    
     
     /*reverse_iterator*/
     // typedef typename              reverse_iterator<iterator >            reverse_iterator;
