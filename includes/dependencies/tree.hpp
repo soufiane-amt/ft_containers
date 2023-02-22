@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 19:25:41 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 19:43:09 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ class binary_tree
     typedef     Compare                                 value_compare;
     typedef     size_t                                  size_type;
     
+    typedef     Allocator                                   allocator_type;
     typedef     Node<value_type>                            Node;
     typedef     Node*                                       node_ptr ;
-    typedef     typename Allocator::template rebind<Node>::other          allocator_type;
+    typedef     typename Allocator::template rebind<Node>::other          node_allocator_type;
     
     //iterator      
     typedef     tree_iterator<node_ptr >                    iterator;
@@ -59,7 +60,7 @@ class binary_tree
     public:
 
     binary_tree(const value_compare& comp =  value_compare(std::less<int>()),
-                  const allocator_type& alloc = allocator_type());
+                  const node_allocator_type& alloc = node_allocator_type());
         
     binary_tree(const binary_tree& copy);
     
@@ -206,7 +207,7 @@ class binary_tree
     private:
     node_ptr                                         _end;
     size_type                                       __size;
-    allocator_type                                  __allocat;
+    node_allocator_type                                  __allocat;
     value_compare                                   value_cmp;
 };
 
@@ -220,7 +221,7 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const value_compare& cmp, const   allocator_type& alloc ): value_cmp(cmp), __allocat(alloc), __tree_root(nullptr)
+binary_tree<Key,T,Compare ,Allocator>::binary_tree(const value_compare& cmp, const   node_allocator_type& alloc ): value_cmp(cmp), __allocat(alloc), __tree_root(nullptr)
 {
     _end = create_node(value_type(key_type(), mapped_type()));
     __size = 0;
