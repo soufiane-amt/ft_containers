@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 16:52:46 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 17:53:13 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,15 @@ class binary_tree
     }
     iterator                            insert (iterator position, value_type&  val);
     template <class InputIterator> 
-    void                                insert (InputIterator first, InputIterator last);
+    void                                insert (InputIterator first, InputIterator last)
+    {
+        while (first != last)
+        {
+            insert(*first);
+            first++;
+        }
+        
+    }
 
     
     //searching
