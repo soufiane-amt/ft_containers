@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 16:30:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 20:42:09 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ template< class Key, class T, class Compare , class Allocator  >
 template <typename InputIt>
 map<Key, T, Compare, Allocator>::map( InputIt first, InputIt last,
          const key_compare& comp ,
-         const allocator_type& alloc  )
+         const allocator_type& alloc  ):
 {
     (void)comp;
     (void)alloc;

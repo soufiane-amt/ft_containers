@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 19:55:00 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 20:59:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ class binary_tree
     void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
 
     node_ptr        find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
-    node_ptr        insert_node (node_ptr  new_node, bool& success);
+    node_ptr        insert_node (node_ptr start_node, node_ptr  new_node, bool& success);
 
     void            delete_leaf (node_ptr  _node);
     void            delete_1_child_parent (node_ptr  _node);
@@ -96,10 +96,14 @@ class binary_tree
     {
         bool        success;
         node_ptr    new_node = create_node (val);
-        iterator    it =  insert_node (new_node, success);
+        iterator    it =  insert_node (__tree_root, new_node, success);
         return (make_pair(it, success));
     }
-    iterator                            insert (iterator position, value_type&  val);
+    iterator                            insert (iterator position, value_type&  val)
+    {
+        node_ptr pos = position.base();
+        insert_node()
+    }
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last)
     {
@@ -321,23 +325,23 @@ template<
     class Allocator 
     >
 typename binary_tree<Key,T,Compare ,Allocator>::node_ptr 
-binary_tree<Key,T,Compare ,Allocator>::insert_node ( node_ptr  new_node, bool& success)
+binary_tree<Key,T,Compare ,Allocator>::insert_node (node_ptr start_node, node_ptr  new_node, bool& success)
 {
     node_ptr  node;
     bool     left;
 
     success = false;
-    if (!__tree_root)
+    if (!start_node)
     {
         __size++;
-        __tree_root = new_node;
-        __tree_root->parent = __end;
-        __end->left = __tree_root;
+        start_node = new_node;
+        start_node->parent = __end;
+        __end->left = start_node;
         success  = true;
 
         return (new_node);
     }
-    node = find_parent(__tree_root, new_node->data, left);
+    node = find_parent(start_node, new_node->data, left);
     if (keys_are_equal(node, new_node))
         return (node);
     success  = true;
