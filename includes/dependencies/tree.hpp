@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 18:55:54 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 19:24:30 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,9 @@ class binary_tree
     node_ptr  find( key_type to_search);
     
 
-    //tarverseNodes
-    void        tarverseNodesInOrder(node_ptr  _tree, void (*func)(node_ptr ));
-    void        tarverseNodesPreOrder(node_ptr  _tree, void (*func)(node_ptr ));
-    void        tarverseNodesPostOrder(node_ptr  _tree, void (*func)(node_ptr ));
-    
-    
     size_type   size() const{   return (__size);}
-
     void        clear();
     
-
     // iterator
     iterator                begin(){    return (iterator(max_left(__tree_root)));}
     // const_iterator          begin() const{    return (const_iterator(__tree_root->find_first_node(__tree_root)));};
@@ -176,9 +168,9 @@ class binary_tree
 
         while (node)
         {
-            if (value_cmp(node->data, to_search))//if __tree->data < value
+            if (value_cmp(node->data, key))//if __tree->data < value
                 return iterator (node);
-            else if (value_cmp(to_search, node->data))
+            else if (value_cmp(key, node->data))
                 node = node->left;
             else
                 node = node->right;
@@ -208,7 +200,7 @@ class binary_tree
     void    erase (iterator element);
     
 
-
+    ~binary_tree() {this->clear();  delete_node (_end)};
     node_ptr                                         __tree_root;
     
     private:
@@ -359,10 +351,26 @@ template<
     class Key,
     class T,
     class Compare ,
+    class Allocator 
+    >
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(Node *_tree, void (*func)(node_ptr))
+{
+    if (!_tree)
+        return;
+    tarverseNodesPreOrder(_tree->right, func);
+    tarverseNodesPreOrder(_tree->left, func);
+    func(_tree);
+}
+
+
+template<
+    class Key,
+    class T,
+    class Compare ,
     class Allocator >
 void    binary_tree<Key,T,Compare ,Allocator>::clear()
 {
-    
+    tarverseNodesPostOrder(this->__tree_root, &delete_node);
     __size      = 0;
     __tree_root = nullptr;
 }

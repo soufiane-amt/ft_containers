@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 18:31:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/22 19:07:26 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,12 @@
 #include <map>
 int main ()
 {
-    std::map<int, std::string> my_map;
-    my_map.insert(std::pair<int, std::string>(1, "foo"));
-    my_map.insert(std::pair<int, std::string>(2, "bar"));
-    my_map.insert(std::pair<int, std::string>(3, "baz"));
-    my_map.insert(std::pair<int, std::string>(2, "qux"));
-    my_map.insert(std::pair<int, std::string>(2, "qdfux"));
-    my_map.insert(std::pair<int, std::string>(2, "qfeux"));
-    my_map.insert(std::pair<int, std::string>(2, "qwux"));
-    // std::pair<std::map<int, std::string>::iterator, std::map<int, std::string>::iterator> range = make_pair(iterator(nullptr), iterator(next_node(nullptr)));
-    // for (std::map<int, std::string>::iterator it = range.first; it != range.second; ++it) {
-    //     std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
-    // }
-        std::cout << "Key: " << range.second->first << ", Value: " << range.second->second << std::endl;
-    
+    std::map<int, int> my_map;
+    my_map.insert(std::pair<int, int>(1, 45));
+    my_map.insert(std::pair<int, int>(2, 45));
+    my_map.insert(std::pair<int, int>(3, 45));
+    my_map.clear();
+    for (std::map<int, int>::iterator it = my_map.begin(); it != my_map.end(); ++it) {
+        std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
+    }
 }
