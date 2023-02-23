@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 16:10:37 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 16:14:02 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,10 +241,22 @@ define_new_parents_for_to_delete_and_successor (Node<T>* to_delete, Node<T>* suc
         fatherOfSuccessor->left = to_delete;
     else
         fatherOfSuccessor->right = to_delete;
-
 }
 
-
+template <class T>
+void 
+define_new_childer_for_to_delete_and_successor(Node<T>* to_delete, Node<T>* successor)
+{
+    swap(to_delete->left, successor->left);
+    swap(to_delete->right, successor->right);
+    
+    to_delete->left ->parent = to_delete;
+    successor->left ->parent = successor;
+    
+    to_delete->right ->parent = to_delete;
+    successor->right ->parent = successor;
+    
+}
 
 
 };
