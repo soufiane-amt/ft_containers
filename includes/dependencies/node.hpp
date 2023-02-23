@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 16:14:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 16:25:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,94 @@ namespace ft
 {
     
 
+
+
+
+//swap arsenal
+template <class Node>
+struct swap_arsenal
+{
+    typedef Node* node_ptr;
+    
+      
+    void 
+    define_successor_fatherOfToDelete_relation (node_ptr to_delete, node_ptr successor , node_ptr fatherOfToDelete )
+    { 
+        successor->parent = fatherOfToDelete;
+        if (is_left_child(to_delete))
+            fatherOfToDelete->left = successor;
+        else
+            fatherOfToDelete->right = successor;
+    }
+    
+    void 
+    define_successor_bro_relation (node_ptr to_delete, node_ptr successor )
+    {
+        node_ptr broNdToSuccessor;
+    
+        if (is_left_child(successor))
+            successor->right = to_delete->right; 
+        else
+            successor->left = to_delete->left;
+        broNdToSuccessor->parent = successor;
+    }
+    
+    void 
+    define_successor_to_delete_node_relation (node_ptr to_delete, node_ptr successor )
+    {
+        if (is_left_child(successor))
+            successor->left = to_delete;
+        else
+            successor->right = to_delete;
+        to_delete->parent = successor;
+    }
+    
+    void 
+    define_to_delete_new_childen_relation (node_ptr to_delete, node_ptr left,  node_ptr right)
+    {
+        to_delete->set_node_to_left (left);
+        to_delete->set_node_to_left (right);
+    }
+    
+    
+    void 
+    define_new_parents_for_to_delete_and_successor (node_ptr to_delete, node_ptr successor)
+    {
+        node_ptr fatherOfToDelete = to_delete->parent;
+        node_ptr fatherOfSuccessor= successor->parent;
+        bool     successor_is_left_child = is_left_child(successor);
+    
+        successor->parent = fatherOfToDelete;
+        if (is_left_child(to_delete))
+            fatherOfToDelete->left = successor;
+        else
+            fatherOfToDelete->right = successor;
+    
+        to_delete->parent = fatherOfSuccessor;
+        if (successor_is_left_child)
+            fatherOfSuccessor->left = to_delete;
+        else
+            fatherOfSuccessor->right = to_delete;
+    }
+    
+    void 
+    define_new_childer_for_to_delete_and_successor(node_ptr to_delete, node_ptr successor)
+    {
+        swap(to_delete->left, successor->left);
+        swap(to_delete->right, successor->right);
+        
+        to_delete->left ->parent = to_delete;
+        successor->left ->parent = successor;
+        
+        to_delete->right ->parent = to_delete;
+        successor->right ->parent = successor;
+        
+    }
+};
+
+
 template <typename T>
-struct Node
+struct Node : public swap_arsenal<Node<T> >
 {
     
     typedef T                                       data_value_type;
@@ -177,86 +263,6 @@ template <class T>
 
 
 
-//swap arsenal
-template <class T>
-void 
-define_successor_fatherOfToDelete_relation (Node<T>* to_delete, Node<T>* successor , Node<T>* fatherOfToDelete )
-{ 
-    successor->parent = fatherOfToDelete;
-    if (is_left_child(to_delete))
-        fatherOfToDelete->left = successor;
-    else
-        fatherOfToDelete->right = successor;
-}
-
-template <class T>
-void 
-define_successor_bro_relation (Node<T>* to_delete, Node<T>* successor )
-{
-    Node<T>* broNdToSuccessor;
-
-    if (is_left_child(successor))
-        successor->right = to_delete->right; 
-    else
-        successor->left = to_delete->left;
-    broNdToSuccessor->parent = successor;
-}
-
-template <class T>
-void 
-define_successor_to_delete_node_relation (Node<T>* to_delete, Node<T>* successor )
-{
-    if (is_left_child(successor))
-        successor->left = to_delete;
-    else
-        successor->right = to_delete;
-    to_delete->parent = successor;
-}
-
-template <class T>
-void 
-define_to_delete_new_childen_relation (Node<T>* to_delete, Node<T>* left,  Node<T>* right)
-{
-    to_delete->set_node_to_left (left);
-    to_delete->set_node_to_left (right);
-}
-
-
-template <class T>
-void 
-define_new_parents_for_to_delete_and_successor (Node<T>* to_delete, Node<T>* successor)
-{
-    Node<T>* fatherOfToDelete = to_delete->parent
-    Node<T>* fatherOfSuccessor= successor->parent
-    bool     successor_is_left_child = is_left_child(successor);
-
-    successor->parent = fatherOfToDelete;
-    if (is_left_child(to_delete))
-        fatherOfToDelete->left = successor;
-    else
-        fatherOfToDelete->right = successor;
-
-    to_delete->parent = fatherOfSuccessor;
-    if (successor_is_left_child)
-        fatherOfSuccessor->left = to_delete;
-    else
-        fatherOfSuccessor->right = to_delete;
-}
-
-template <class T>
-void 
-define_new_childer_for_to_delete_and_successor(Node<T>* to_delete, Node<T>* successor)
-{
-    swap(to_delete->left, successor->left);
-    swap(to_delete->right, successor->right);
-    
-    to_delete->left ->parent = to_delete;
-    successor->left ->parent = successor;
-    
-    to_delete->right ->parent = to_delete;
-    successor->right ->parent = successor;
-    
-}
 
 
 };
