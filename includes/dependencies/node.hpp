@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 16:25:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 16:45:51 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,37 +29,38 @@ struct swap_arsenal
 {
     typedef Node* node_ptr;
     
-      
+    protected:
+
     void 
-    define_successor_fatherOfToDelete_relation (node_ptr to_delete, node_ptr successor , node_ptr fatherOfToDelete )
+    define_NodeB_parentOfNodeA_relation (node_ptr to_delete, node_ptr NodeB , node_ptr parentOfNodeA )
     { 
-        successor->parent = fatherOfToDelete;
+        NodeB->parent = parentOfNodeA;
         if (is_left_child(to_delete))
-            fatherOfToDelete->left = successor;
+            parentOfNodeA->left = NodeB;
         else
-            fatherOfToDelete->right = successor;
+            parentOfNodeA->right = NodeB;
     }
     
     void 
-    define_successor_bro_relation (node_ptr to_delete, node_ptr successor )
+    define_NodeB_bro_relation (node_ptr to_delete, node_ptr NodeB )
     {
-        node_ptr broNdToSuccessor;
+        node_ptr broNdToNodeB;
     
-        if (is_left_child(successor))
-            successor->right = to_delete->right; 
+        if (is_left_child(NodeB))
+            NodeB->right = to_delete->right; 
         else
-            successor->left = to_delete->left;
-        broNdToSuccessor->parent = successor;
+            NodeB->left = to_delete->left;
+        broNdToNodeB->parent = NodeB;
     }
     
     void 
-    define_successor_to_delete_node_relation (node_ptr to_delete, node_ptr successor )
+    define_NodeB_to_delete_node_relation (node_ptr to_delete, node_ptr NodeB )
     {
-        if (is_left_child(successor))
-            successor->left = to_delete;
+        if (is_left_child(NodeB))
+            NodeB->left = to_delete;
         else
-            successor->right = to_delete;
-        to_delete->parent = successor;
+            NodeB->right = to_delete;
+        to_delete->parent = NodeB;
     }
     
     void 
@@ -69,41 +70,54 @@ struct swap_arsenal
         to_delete->set_node_to_left (right);
     }
     
-    
-    void 
-    define_new_parents_for_to_delete_and_successor (node_ptr to_delete, node_ptr successor)
+
+    void    swap_relatives(node_ptr to_delete, node_ptr NodeB)
     {
-        node_ptr fatherOfToDelete = to_delete->parent;
-        node_ptr fatherOfSuccessor= successor->parent;
-        bool     successor_is_left_child = is_left_child(successor);
-    
-        successor->parent = fatherOfToDelete;
-        if (is_left_child(to_delete))
-            fatherOfToDelete->left = successor;
-        else
-            fatherOfToDelete->right = successor;
-    
-        to_delete->parent = fatherOfSuccessor;
-        if (successor_is_left_child)
-            fatherOfSuccessor->left = to_delete;
-        else
-            fatherOfSuccessor->right = to_delete;
+        node_ptr NodeB_left  = NodeB->left;
+        node_ptr NodeB_right = NodeB->right;
+
+        define_NodeB_parentOfNodeA_relation (to_delete, NodeB ,  to_delete->parent);
+        define_NodeB_bro_relation (to_delete, NodeB );
+        define_NodeB_to_delete_node_relation (to_delete, NodeB );
+        define_to_delete_new_childen_relation (to_delete, NodeB_left,  NodeB_right);
+
     }
     
     void 
-    define_new_childer_for_to_delete_and_successor(node_ptr to_delete, node_ptr successor)
+    define_new_parents_for_to_delete_and_NodeB (node_ptr to_delete, node_ptr NodeB)
     {
-        swap(to_delete->left, successor->left);
-        swap(to_delete->right, successor->right);
+        node_ptr parentOfNodeA = to_delete->parent;
+        node_ptr parentOfNodeB= NodeB->parent;
+        bool     NodeB_is_left_child = is_left_child(NodeB);
+    
+        NodeB->parent = parentOfNodeA;
+        if (is_left_child(to_delete))
+            parentOfNodeA->left = NodeB;
+        else
+            parentOfNodeA->right = NodeB;
+    
+        to_delete->parent = parentOfNodeB;
+        if (NodeB_is_left_child)
+            parentOfNodeB->left = to_delete;
+        else
+            parentOfNodeB->right = to_delete;
+    }
+    
+    void 
+    define_new_childer_for_to_delete_and_NodeB(node_ptr to_delete, node_ptr NodeB)
+    {
+        swap(to_delete->left, NodeB->left);
+        swap(to_delete->right, NodeB->right);
         
         to_delete->left ->parent = to_delete;
-        successor->left ->parent = successor;
+        NodeB->left ->parent = NodeB;
         
         to_delete->right ->parent = to_delete;
-        successor->right ->parent = successor;
+        NodeB->right ->parent = NodeB;
         
     }
 };
+
 
 
 template <typename T>
@@ -145,6 +159,8 @@ struct Node : public swap_arsenal<Node<T> >
 
     void    swap(Node& x)
     {
+        if (nodes_are_relatives (this, &x))
+            
     }
 
 
@@ -170,15 +186,8 @@ struct Node : public swap_arsenal<Node<T> >
         bool    second_case = this->parent && (this->parent->data < this->data) && !this->right && root->data < this->data ;
         return (first_case || second_case);
     }
+    
 };
-
-/*            allocator.destroy(this->elements + i);
-        allocator.deallocate(this->elements, _v_capacity);
-
-
-            this->elements = allocator.allocate (this->_v_size);
-        allocator.construct(this->elements + i, x[i]);
-*/
 
 
 
@@ -260,6 +269,15 @@ Node<T>*   prev_node(Node<T>* node)
 template <class T>
   bool keys_are_equal (const Node<T>* node1 , const Node<T>* node2 )
 { return node1->data.first==node2->data.first; }
+
+
+
+
+template <class T>
+  bool nodes_are_relatives (const Node<T>* node , const Node<T>* node_seccessor )
+{   
+    return (node->left == node_seccessor || node->right == node_seccessor); 
+}
 
 
 
