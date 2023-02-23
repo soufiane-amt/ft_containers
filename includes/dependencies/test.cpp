@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 17:47:01 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 17:50:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <functional>
 #include <memory>
 #include <iostream>
+#include <map>
 
 
 class value_compare
@@ -42,10 +43,6 @@ int main ()
         a.insert_node(a.__tree_root, a.create_node(ft::make_pair(i, 3)), s);
     for (bst::iterator it = a.begin(); it != a.end(); it++)
         std::cout << it->first << "---" << it->second << std::endl;
-    while (1)
-    {
-        /* code */
-    }
     
 }
 

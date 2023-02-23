@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 17:46:21 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 17:53:24 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ class binary_tree
 /* ************************************************************************** */
 
     void        clear();
-    ~binary_tree() {this->clear();  delete_node (__end); };
+    ~binary_tree() {       this->clear();  delete_node (__end); };
     
     node_ptr                                        __tree_root;
     private:
@@ -352,7 +352,7 @@ void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(Node *_tre
         return;
     tarverseNodesPostOrder(_tree->right, func);
     tarverseNodesPostOrder(_tree->left, func);
-    (this->*func)(__tree_root);
+    (this->*func)(_tree);
 }
 
 
