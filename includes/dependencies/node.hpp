@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 15:27:33 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 15:49:24 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,13 +180,13 @@ template <class T>
 //swap arsenal
 template <class T>
 void 
-define_successor_grandPa_relation (Node<T>* to_delete, Node<T>* successor , Node<T>* grandPa )
+define_successor_fatherOfToDelete_relation (Node<T>* to_delete, Node<T>* successor , Node<T>* fatherOfToDelete )
 { 
-    successor->parent = grandPa;
+    successor->parent = fatherOfToDelete;
     if (is_left_child(to_delete))
-        grandPa->left = successor;
+        fatherOfToDelete->left = successor;
     else
-        grandPa->right = successor;
+        fatherOfToDelete->right = successor;
 }
 
 template <class T>
@@ -219,6 +219,18 @@ define_to_delete_new_childen_relation (Node<T>* to_delete, Node<T>* left,  Node<
 {
     to_delete->set_node_to_left (left);
     to_delete->set_node_to_left (right);
+}
+
+
+template <class T>
+void 
+A (Node<T>* to_delete, Node<T>* successor)
+{
+    Node<T>* fatherOfToDelete = to_delete->parent
+
+    define_successor_grandPa_relation(to_delete, successor, fatherOfToDelete);
+    successor->parent = fatherOfToDelete;
+    to_delete->parent = successor;
 }
 
 
