@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 16:52:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 14:18:21 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ namespace ft
 template <typename T>
 struct Node
 {
+    
     typedef T                                       data_value_type;
     typedef T&                                      data_value_type_ref;
 
@@ -58,31 +59,6 @@ struct Node
 
     void    swap(Node& x)
     {
-        //the Goal of the next two conditions is to make the parent 
-        //of the swapped node point to the new node
-        if (this->parent)
-        {
-            if (this->parent->right == this)
-                this->parent->right = &x;
-            else if (this->parent->left == this)
-                this->parent->left = &x;
-        }
-        if (x.parent && this != x.parent)
-        {
-            if (x.parent->right == &x)
-                x.parent->right =  this;
-            else if (x.parent->left == &x)
-                x.parent->left =  this;
-        }
-        if (this->right && this->right != &x)
-            this->right->parent = &x;
-        if (this->left && this->left != &x)
-            this->left->parent = &x;
-        std::swap(this->parent, x.parent);
-        if (this->left != &x)
-            std::swap(this->left, x.left);
-        if (this->right != &x)
-            std::swap(this->right, x.right);
     }
 
 
@@ -199,6 +175,18 @@ template <class T>
   bool keys_are_equal (const Node<T>* node1 , const Node<T>* node2 )
 { return node1->data.first==node2->data.first; }
 
+
+
+template <class T>
+void 
+define_successor_grandPa_relation (Node<T>* to_delete, Node<T>* successor , Node<T>* grandPa )
+{ 
+    successor->parent = grandPa;
+    if (is_left_child(to_delete))
+        grandPa->left = successor;
+    else
+        grandPa->left = successor;
+}
 
 
 };

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 12:00:15 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 13:54:31 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 namespace ft
 {
-    //typedef typename _Alloc::template rebind<_Ty>::other _Alty;
 
 template<
     class Key,
@@ -46,7 +45,6 @@ class binary_tree
     
     //iterator      
     typedef     tree_iterator<node_ptr >                    iterator;
-    // typedef     const_tree_iterator<const node_ptr >        const_iterator;
 
     
 
@@ -139,10 +137,8 @@ class binary_tree
 
     // iterator
     iterator                begin(){    return (iterator(max_left(__tree_root)));}
-    // const_iterator          begin() const{    return (const_iterator(__tree_root->find_first_node(__tree_root)));};
 
     iterator                end(){    return (iterator(__end));}
-    // const_iterator          end() const{    return (const_iterator(__end));}
 
     pair<iterator,iterator>             
     equal_range (const key_type& k)
@@ -155,16 +151,6 @@ class binary_tree
         return (make_pair(iterator(__end), iterator(next_node(__end))));
     }
     
-    // pair<const_iterator,const_iterator> 
-    // equal_range (const key_type& k) const
-    // {
-        // node_ptr to_find;
-
-        // to_find = this->find(k);
-        // if (to_find)
-        //     return make_pair(const_iterator(to_find), const_iterator(next_node(to_find)));
-        // return (make_pair(iterator(__end), iterator(next_node(__end))));
-    // }
 
     iterator lower_bound( const Key& key )
     {
@@ -181,21 +167,6 @@ class binary_tree
         }
         return (iterator(__end));
     }
-    // const_iterator lower_bound( const Key& key ) const
-    // {
-        //node_ptr  node = __tree_root;
-
-        // while (node)
-        // {
-        //     if (!__value_cmp(node->data, to_search))//if __tree->data >= value
-        //         return const_iterator (node);
-        //     else if (__value_cmp(to_search, node->data))
-        //         node = node->left;
-        //     else
-        //         node = node->right;
-        // }
-        // return (const_iterator(__end));
-    // }
 
 
     iterator upper_bound( const Key& key )
@@ -213,21 +184,6 @@ class binary_tree
         }
         return (iterator(__end));
     }
-    // const_iterator upper_bound( const Key& key ) const;
-    // {
-    //     node_ptr  node = __tree_root;
-
-    //     while (node)
-    //     {
-    //         if (__value_cmp(node->data, to_search))//if __tree->data < value
-    //             return iterator (node);
-    //         else if (__value_cmp(to_search, node->data))
-    //             node = node->left;
-    //         else
-    //             node = node->right;
-    //     }
-    //     return (iterator(__end));
-    // }
 
     //deletion
 
@@ -504,3 +460,49 @@ void    binary_tree<Key,T,Compare ,Allocator>::erase (iterator element)
 };
 
 #endif
+
+    // typedef     const_tree_iterator<const node_ptr >        const_iterator;
+    // const_iterator          begin() const{    return (const_iterator(__tree_root->find_first_node(__tree_root)));};
+    // const_iterator          end() const{    return (const_iterator(__end));}
+    // pair<const_iterator,const_iterator> 
+    // equal_range (const key_type& k) const
+    // {
+        // node_ptr to_find;
+
+        // to_find = this->find(k);
+        // if (to_find)
+        //     return make_pair(const_iterator(to_find), const_iterator(next_node(to_find)));
+        // return (make_pair(iterator(__end), iterator(next_node(__end))));
+    // }
+
+    // const_iterator lower_bound( const Key& key ) const
+    // {
+        //node_ptr  node = __tree_root;
+
+        // while (node)
+        // {
+        //     if (!__value_cmp(node->data, to_search))//if __tree->data >= value
+        //         return const_iterator (node);
+        //     else if (__value_cmp(to_search, node->data))
+        //         node = node->left;
+        //     else
+        //         node = node->right;
+        // }
+        // return (const_iterator(__end));
+    // }
+
+    // const_iterator upper_bound( const Key& key ) const;
+    // {
+    //     node_ptr  node = __tree_root;
+
+    //     while (node)
+    //     {
+    //         if (__value_cmp(node->data, to_search))//if __tree->data < value
+    //             return iterator (node);
+    //         else if (__value_cmp(to_search, node->data))
+    //             node = node->left;
+    //         else
+    //             node = node->right;
+    //     }
+    //     return (iterator(__end));
+    // }
