@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 16:45:51 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 16:46:34 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,87 +32,87 @@ struct swap_arsenal
     protected:
 
     void 
-    define_NodeB_parentOfNodeA_relation (node_ptr to_delete, node_ptr NodeB , node_ptr parentOfNodeA )
+    define_NodeB_parentOfNodeA_relation (node_ptr NodeA, node_ptr NodeB , node_ptr parentOfNodeA )
     { 
         NodeB->parent = parentOfNodeA;
-        if (is_left_child(to_delete))
+        if (is_left_child(NodeA))
             parentOfNodeA->left = NodeB;
         else
             parentOfNodeA->right = NodeB;
     }
     
     void 
-    define_NodeB_bro_relation (node_ptr to_delete, node_ptr NodeB )
+    define_NodeB_bro_relation (node_ptr NodeA, node_ptr NodeB )
     {
         node_ptr broNdToNodeB;
     
         if (is_left_child(NodeB))
-            NodeB->right = to_delete->right; 
+            NodeB->right = NodeA->right; 
         else
-            NodeB->left = to_delete->left;
+            NodeB->left = NodeA->left;
         broNdToNodeB->parent = NodeB;
     }
     
     void 
-    define_NodeB_to_delete_node_relation (node_ptr to_delete, node_ptr NodeB )
+    define_NodeB_NodeA_node_relation (node_ptr NodeA, node_ptr NodeB )
     {
         if (is_left_child(NodeB))
-            NodeB->left = to_delete;
+            NodeB->left = NodeA;
         else
-            NodeB->right = to_delete;
-        to_delete->parent = NodeB;
+            NodeB->right = NodeA;
+        NodeA->parent = NodeB;
     }
     
     void 
-    define_to_delete_new_childen_relation (node_ptr to_delete, node_ptr left,  node_ptr right)
+    define_NodeA_new_childen_relation (node_ptr NodeA, node_ptr left,  node_ptr right)
     {
-        to_delete->set_node_to_left (left);
-        to_delete->set_node_to_left (right);
+        NodeA->set_node_to_left (left);
+        NodeA->set_node_to_left (right);
     }
     
 
-    void    swap_relatives(node_ptr to_delete, node_ptr NodeB)
+    void    swap_relatives(node_ptr NodeA, node_ptr NodeB)
     {
         node_ptr NodeB_left  = NodeB->left;
         node_ptr NodeB_right = NodeB->right;
 
-        define_NodeB_parentOfNodeA_relation (to_delete, NodeB ,  to_delete->parent);
-        define_NodeB_bro_relation (to_delete, NodeB );
-        define_NodeB_to_delete_node_relation (to_delete, NodeB );
-        define_to_delete_new_childen_relation (to_delete, NodeB_left,  NodeB_right);
+        define_NodeB_parentOfNodeA_relation (NodeA, NodeB ,  NodeA->parent);
+        define_NodeB_bro_relation (NodeA, NodeB );
+        define_NodeB_NodeA_node_relation (NodeA, NodeB );
+        define_NodeA_new_childen_relation (NodeA, NodeB_left,  NodeB_right);
 
     }
     
     void 
-    define_new_parents_for_to_delete_and_NodeB (node_ptr to_delete, node_ptr NodeB)
+    define_new_parents_for_NodeA_and_NodeB (node_ptr NodeA, node_ptr NodeB)
     {
-        node_ptr parentOfNodeA = to_delete->parent;
+        node_ptr parentOfNodeA = NodeA->parent;
         node_ptr parentOfNodeB= NodeB->parent;
         bool     NodeB_is_left_child = is_left_child(NodeB);
     
         NodeB->parent = parentOfNodeA;
-        if (is_left_child(to_delete))
+        if (is_left_child(NodeA))
             parentOfNodeA->left = NodeB;
         else
             parentOfNodeA->right = NodeB;
     
-        to_delete->parent = parentOfNodeB;
+        NodeA->parent = parentOfNodeB;
         if (NodeB_is_left_child)
-            parentOfNodeB->left = to_delete;
+            parentOfNodeB->left = NodeA;
         else
-            parentOfNodeB->right = to_delete;
+            parentOfNodeB->right = NodeA;
     }
     
     void 
-    define_new_childer_for_to_delete_and_NodeB(node_ptr to_delete, node_ptr NodeB)
+    define_new_childer_for_NodeA_and_NodeB(node_ptr NodeA, node_ptr NodeB)
     {
-        swap(to_delete->left, NodeB->left);
-        swap(to_delete->right, NodeB->right);
+        swap(NodeA->left, NodeB->left);
+        swap(NodeA->right, NodeB->right);
         
-        to_delete->left ->parent = to_delete;
+        NodeA->left ->parent = NodeA;
         NodeB->left ->parent = NodeB;
         
-        to_delete->right ->parent = to_delete;
+        NodeA->right ->parent = NodeA;
         NodeB->right ->parent = NodeB;
         
     }
