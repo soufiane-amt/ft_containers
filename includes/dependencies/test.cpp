@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 17:59:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 18:30:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int main ()
     bst a;
     bool s;
 
-
-    for (size_t i = 0; i < 10; i++)
-        a.insert(ft::make_pair(i, 3));
-    // for (bst::iterator it = a.begin(); it != a.end(); it++)
-    bst::iterator it = a.end();
-    it--;
+    srand (time(NULL));
+    for (size_t i = 0; i < 100; i++)
+        a.insert(ft::make_pair(rand()%1000000000, 3));
+    
+    
+    for (bst::iterator it = a.begin(); it != a.end(); it++)
         std::cout << it->first << "---" << it->second << std::endl;
     
 }
