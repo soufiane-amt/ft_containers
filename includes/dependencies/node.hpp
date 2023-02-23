@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 18:04:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 18:48:54 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,14 @@ struct swap_arsenal
         swap(NodeA->left, NodeB->left);
         swap(NodeA->right, NodeB->right);
         
-        NodeA->left ->parent = NodeA;
-        NodeB->left ->parent = NodeB;
-        
-        NodeA->right ->parent = NodeA;
-        NodeB->right ->parent = NodeB;
-        
+        if (NodeA->left)
+            NodeA->left ->parent = NodeA;
+        if (NodeB->left)
+            NodeB->left ->parent = NodeB;
+        if (NodeA->right)
+            NodeA->right ->parent = NodeA;
+        if (NodeB->right)
+            NodeB->right ->parent = NodeB;
     }
     
     void    swap_non_relatives(node_ptr NodeA, node_ptr NodeB)
@@ -160,8 +162,8 @@ struct Node : public swap_arsenal<Node<T> >
     
     bool operator<(const Node& node) {    return (this->data < node.data); }
     
-    void        set_node_to_left (Node *_node){    this->left = _node; _node->parent = this;}
-    void        set_node_to_right (Node *_node){    this->right = _node; _node->parent = this;}
+    void        set_node_to_left (Node *_node){     this->left = _node; if (!_node)return; _node->parent = this;}
+    void        set_node_to_right (Node *_node){     this->right = _node; if (!_node)return; _node->parent = this;}
 
 
     Node   *find_last_node(Node   * _node) ;

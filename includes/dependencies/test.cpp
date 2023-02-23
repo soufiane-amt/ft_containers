@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 18:30:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 19:04:47 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,20 @@ class value_compare
         }
 };
 
+
 typedef ft::binary_tree <int, int, value_compare ,std::allocator<int> > bst;
+
+void    print_node(bst::iterator node)
+{
+    std::cout << "Key: "<< node->first  << std::endl;
+    if (node.base()->parent)
+        std::cout << "parent: "<< node.base()->parent->data.first  << std::endl;
+    if (node.base()->left)
+        std::cout << "left: "<< node.base()->left->data.first  << std::endl;
+    if (node.base()->right)
+        std::cout << "right: "<< node.base()->right->data.first  << std::endl;
+    std::cout << "--------------\n";
+}
 
 int main ()
 {
@@ -39,12 +52,24 @@ int main ()
     bool s;
 
     srand (time(NULL));
-    for (size_t i = 0; i < 100; i++)
-        a.insert(ft::make_pair(rand()%1000000000, 3));
+    for (size_t i = 1; i < 4; i++)
+        a.insert(ft::make_pair(i, 3));
     
-    
-    for (bst::iterator it = a.begin(); it != a.end(); it++)
-        std::cout << it->first << "---" << it->second << std::endl;
+    bst::iterator it = a.begin(); 
+    bst::iterator it1 = ++(a.begin()); 
+    // std::cout << it->first << " ----- " << it1->first << std::endl;
+    print_node (it);
+    print_node (it1);
+
+    it.base()->swap ((it1).base());
+
+    std::cout << "\n\n###################\n\n";
+    print_node (it);
+    print_node (it1);
+
+    std::cout << it->first << " ----- " << it1->first << std::endl;
+    // for (bst::iterator it = a.begin(); it != a.end(); it++)
+    //     std::cout << it->first << "---" << it->second << std::endl;
     
 }
 
