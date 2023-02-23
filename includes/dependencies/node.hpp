@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 14:40:52 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 14:47:01 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ template <class T>
 
 
 
+//swap arsenal
 template <class T>
 void 
 define_successor_grandPa_relation (Node<T>* to_delete, Node<T>* successor , Node<T>* grandPa )
@@ -199,6 +200,17 @@ define_successor_bro_relation (Node<T>* to_delete, Node<T>* successor )
     else
         successor->left = to_delete->left;
     broNdToSuccessor->parent = successor;
+}
+
+template <class T>
+void 
+define_successor_to_delete_relation (Node<T>* to_delete, Node<T>* successor )
+{
+    if (is_left_child(successor))
+        successor->left = to_delete;
+    else
+        successor->right = to_delete;
+    to_delete->parent = successor;
 }
 
 
