@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 16:46:34 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 16:48:08 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,16 @@ struct swap_arsenal
         NodeB->right ->parent = NodeB;
         
     }
+    
+    void    swap_non_relatives(node_ptr NodeA, node_ptr NodeB)
+    {
+        node_ptr NodeB_left  = NodeB->left;
+        node_ptr NodeB_right = NodeB->right;
+
+        define_new_parents_for_NodeA_and_NodeB  (NodeA, NodeB);
+        define_new_childer_for_NodeA_and_NodeB  (NodeA, NodeB);
+    }
+
 };
 
 
