@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 14:54:12 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 15:27:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ define_successor_grandPa_relation (Node<T>* to_delete, Node<T>* successor , Node
     if (is_left_child(to_delete))
         grandPa->left = successor;
     else
-        grandPa->left = successor;
+        grandPa->right = successor;
 }
 
 template <class T>
@@ -220,6 +220,9 @@ define_to_delete_new_childen_relation (Node<T>* to_delete, Node<T>* left,  Node<
     to_delete->set_node_to_left (left);
     to_delete->set_node_to_left (right);
 }
+
+
+
 
 };
 
