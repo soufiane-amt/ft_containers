@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 18:48:54 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 20:13:06 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ struct swap_arsenal
     define_NodeA_new_childen_relation (node_ptr NodeA, node_ptr left,  node_ptr right)
     {
         NodeA->set_node_to_left (left);
-        NodeA->set_node_to_left (right);
+        NodeA->set_node_to_right (right);
     }
     
 
@@ -75,6 +75,9 @@ struct swap_arsenal
     {
         node_ptr NodeB_left  = NodeB->left;
         node_ptr NodeB_right = NodeB->right;
+        
+        node_ptr NodeA_left  = NodeA->left;
+        node_ptr NodeA_right = NodeA->right;
 
         define_NodeB_parentOfNodeA_relation (NodeA, NodeB ,  NodeA->parent);
         define_NodeB_bro_relation (NodeA, NodeB );
