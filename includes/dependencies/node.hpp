@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 15:49:24 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 16:10:37 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,13 +224,24 @@ define_to_delete_new_childen_relation (Node<T>* to_delete, Node<T>* left,  Node<
 
 template <class T>
 void 
-A (Node<T>* to_delete, Node<T>* successor)
+define_new_parents_for_to_delete_and_successor (Node<T>* to_delete, Node<T>* successor)
 {
     Node<T>* fatherOfToDelete = to_delete->parent
+    Node<T>* fatherOfSuccessor= successor->parent
+    bool     successor_is_left_child = is_left_child(successor);
 
-    define_successor_grandPa_relation(to_delete, successor, fatherOfToDelete);
     successor->parent = fatherOfToDelete;
-    to_delete->parent = successor;
+    if (is_left_child(to_delete))
+        fatherOfToDelete->left = successor;
+    else
+        fatherOfToDelete->right = successor;
+
+    to_delete->parent = fatherOfSuccessor;
+    if (successor_is_left_child)
+        fatherOfSuccessor->left = to_delete;
+    else
+        fatherOfSuccessor->right = to_delete;
+
 }
 
 
