@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 14:47:01 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 14:54:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ define_successor_bro_relation (Node<T>* to_delete, Node<T>* successor )
 
 template <class T>
 void 
-define_successor_to_delete_relation (Node<T>* to_delete, Node<T>* successor )
+define_successor_to_delete_node_relation (Node<T>* to_delete, Node<T>* successor )
 {
     if (is_left_child(successor))
         successor->left = to_delete;
@@ -213,6 +213,13 @@ define_successor_to_delete_relation (Node<T>* to_delete, Node<T>* successor )
     to_delete->parent = successor;
 }
 
+template <class T>
+void 
+define_to_delete_new_childen_relation (Node<T>* to_delete, Node<T>* left,  Node<T>* right)
+{
+    to_delete->set_node_to_left (left);
+    to_delete->set_node_to_left (right);
+}
 
 };
 
