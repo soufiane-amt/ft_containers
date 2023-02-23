@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 21:02:33 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 12:00:15 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,15 @@ class binary_tree
     node_ptr        create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
                                                                       return (new_node);}
     void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
+    void            delete_leaf (node_ptr  _node);
+    void            delete_1_child_parent (node_ptr  _node);
+    void            delete_2_child_parent (iterator element);
 
     node_ptr        find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
     node_ptr        insert_node (node_ptr start_node, node_ptr  new_node, bool& success);
 
-    void            delete_leaf (node_ptr  _node);
-    void            delete_1_child_parent (node_ptr  _node);
-    void            delete_2_child_parent (iterator element);
     void            erase (iterator element);
+    iterator        erase( iterator first, iterator last );
 
     public:
     
@@ -102,9 +103,13 @@ class binary_tree
     iterator                            insert (iterator position, value_type&  val)
     {
         node_ptr pos = position.base();
+        if (!find(val->first))
+            pos = __end;
         node_ptr    new_node = create_node (val);
         return (iterator(insert_node(pos, new_node, bool())));
     }
+
+
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last)
     {
@@ -478,9 +483,6 @@ void    binary_tree<Key,T,Compare ,Allocator>::erase (iterator element)
     node_ptr _node  = e.base();
     if (_node && !_node->parent)
         this->__tree_root  = (++e).base();
-    // std::cout << "self " << _node->data.first << std::endl;
-    // std::cout << "right " << _node->right->data.first << std::endl;
-    // std::cout << "left " << _node->left->data.first << std::endl;
     if (_node->is_leaf())
         delete_leaf(_node);
     else if (_node ->has_1_child())
