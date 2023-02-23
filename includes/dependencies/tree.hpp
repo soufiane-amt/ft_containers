@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 17:53:24 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 17:58:43 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ class binary_tree
 
     
 
-    node_ptr        insert_node (node_ptr& start_node, node_ptr  new_node, bool& success);
-    node_ptr        create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
                                                                       return (new_node);}
     private:
+    node_ptr        insert_node (node_ptr& start_node, node_ptr  new_node, bool& success);
+    node_ptr        create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
     void            tarverseNodesPostOrder(node_ptr _tree, void (binary_tree<Key,T,Compare ,Allocator>::*func)(node_ptr));
     
     void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
@@ -194,12 +194,12 @@ class binary_tree
     void        clear();
     ~binary_tree() {       this->clear();  delete_node (__end); };
     
-    node_ptr                                        __tree_root;
     private:
     
     node_ptr                                        __end;
     size_type                                       __size;
     node_allocator_type                             __allocat;
+    node_ptr                                        __tree_root;
     value_compare                                   __value_cmp;
 };
 
