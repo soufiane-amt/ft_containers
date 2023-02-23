@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 16:49:29 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 17:21:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,6 @@ struct Node : public swap_arsenal<Node<T> >
             swap_relatives (this, x);
         else
             swap_non_relatives(this, x);
-            
     }
 
 

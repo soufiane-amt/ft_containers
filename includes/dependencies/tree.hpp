@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 13:54:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 17:46:21 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,18 @@ class binary_tree
 
     
 
-    private:
-    void            tarverseNodesPostOrder(node_ptr _tree, void (*func)(node_ptr));
-    
+    node_ptr        insert_node (node_ptr& start_node, node_ptr  new_node, bool& success);
     node_ptr        create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
                                                                       return (new_node);}
+    private:
+    void            tarverseNodesPostOrder(node_ptr _tree, void (binary_tree<Key,T,Compare ,Allocator>::*func)(node_ptr));
+    
     void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
     void            delete_leaf (node_ptr  _node);
     void            delete_1_child_parent (node_ptr  _node);
     void            delete_2_child_parent (iterator element);
 
     node_ptr        find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
-    node_ptr        insert_node (node_ptr start_node, node_ptr  new_node, bool& success);
 
     void            erase (iterator element);
     iterator        erase( iterator first, iterator last );
@@ -194,12 +194,12 @@ class binary_tree
     void        clear();
     ~binary_tree() {this->clear();  delete_node (__end); };
     
+    node_ptr                                        __tree_root;
     private:
     
     node_ptr                                        __end;
     size_type                                       __size;
     node_allocator_type                             __allocat;
-    node_ptr                                        __tree_root;
     value_compare                                   __value_cmp;
 };
 
@@ -287,10 +287,11 @@ template<
     class Allocator 
     >
 typename binary_tree<Key,T,Compare ,Allocator>::node_ptr 
-binary_tree<Key,T,Compare ,Allocator>::insert_node (node_ptr start_node, node_ptr  new_node, bool& success)
+binary_tree<Key,T,Compare ,Allocator>::insert_node (node_ptr& start_node, node_ptr  new_node, bool& success)
 {
     node_ptr  node;
     bool     left;
+
 
     success = false;
     if (!start_node)
@@ -300,7 +301,6 @@ binary_tree<Key,T,Compare ,Allocator>::insert_node (node_ptr start_node, node_pt
         start_node->parent = __end;
         __end->left = start_node;
         success  = true;
-
         return (new_node);
     }
     node = find_parent(start_node, new_node->data, left);
@@ -346,13 +346,13 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(Node *_tree, void (*func)(node_ptr))
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(Node *_tree, void (binary_tree<Key,T,Compare ,Allocator>::*func)(node_ptr))
 {
     if (!_tree)
         return;
-    tarverseNodesPreOrder(_tree->right, func);
-    tarverseNodesPreOrder(_tree->left, func);
-    func(_tree);
+    tarverseNodesPostOrder(_tree->right, func);
+    tarverseNodesPostOrder(_tree->left, func);
+    (this->*func)(__tree_root);
 }
 
 
@@ -363,7 +363,7 @@ template<
     class Allocator >
 void    binary_tree<Key,T,Compare ,Allocator>::clear()
 {
-    tarverseNodesPostOrder(this->__tree_root, &delete_node);
+    tarverseNodesPostOrder(this->__tree_root, &binary_tree::delete_node);
     __size      = 0;
     __tree_root = nullptr;
 }
