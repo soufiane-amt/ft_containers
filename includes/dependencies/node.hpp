@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 20:17:17 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/23 21:09:41 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,36 +32,39 @@ struct swap_arsenal
     protected:
 
     void 
-    define_NodeB_parentOfNodeA_relation (node_ptr NodeA, node_ptr NodeB , node_ptr parentOfNodeA )
+    define_NodeB_parentOfNodeA_relation (node_ptr NodeA, node_ptr NodeB , node_ptr parentOfNodeA , const bool& NodeA_is_left_child)
     { 
         NodeB->parent = parentOfNodeA;
-        if (is_left_child(NodeA))
+        if (NodeA_is_left_child)
             parentOfNodeA->left = NodeB;
         else
             parentOfNodeA->right = NodeB;
+
     }
     
     void 
-    define_NodeB_bro_relation (node_ptr NodeA, node_ptr NodeB )
+    define_NodeB_bro_relation (node_ptr NodeA, node_ptr NodeB , const bool& NodeB_is_left_child)
     {
-        node_ptr broNdToNodeB;
-    
-        if (is_left_child(NodeB))
+        std::cout << NodeB->data.first << std::endl;
+        if (NodeB_is_left_child)
         {
             NodeB->right = NodeA->right; 
-            NodeB->right->parent = NodeB; 
+            if (NodeB->right)
+                NodeB->right->parent = NodeB; 
         }
         else
         {
             NodeB->left = NodeA->left;
-            NodeB->left->parent = NodeB;
+            if (NodeB->left)
+                NodeB->left->parent = NodeB;
         }
+
     }
     
     void 
-    define_NodeB_NodeA_node_relation (node_ptr NodeA, node_ptr NodeB )
+    define_NodeB_NodeA_node_relation (node_ptr NodeA, node_ptr NodeB , const bool& NodeB_is_left_child)
     {
-        if (is_left_child(NodeB))
+        if (NodeB_is_left_child)
             NodeB->left = NodeA;
         else
             NodeB->right = NodeA;
@@ -76,6 +79,8 @@ struct swap_arsenal
     }
     
 
+
+
     void    swap_relatives(node_ptr NodeA, node_ptr NodeB)
     {
         node_ptr NodeB_left  = NodeB->left;
@@ -84,10 +89,13 @@ struct swap_arsenal
         node_ptr NodeA_left  = NodeA->left;
         node_ptr NodeA_right = NodeA->right;
 
-        define_NodeB_parentOfNodeA_relation (NodeA, NodeB ,  NodeA->parent);
-        define_NodeB_bro_relation (NodeA, NodeB );
-        define_NodeB_NodeA_node_relation (NodeA, NodeB );
+        bool NodeAisLeftChild = is_left_child (NodeA);
+        bool NodeBisLeftChild = is_left_child (NodeB);
+        define_NodeB_parentOfNodeA_relation (NodeA, NodeB ,  NodeA->parent, NodeAisLeftChild);
+        define_NodeB_bro_relation (NodeA, NodeB, NodeBisLeftChild );
+        define_NodeB_NodeA_node_relation (NodeA, NodeB , NodeBisLeftChild);
         define_NodeA_new_childen_relation (NodeA, NodeB_left,  NodeB_right);
+        std::cout <<  "++++++++++++" << NodeB->parent->data.first << std::endl;
 
     }
     
