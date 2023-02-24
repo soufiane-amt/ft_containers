@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 11:43:00 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 11:54:26 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int main ()
     ++i;
     ++i;
     ++i;
-    print_node (bst::iterator (a.find (5)));
     // for (bst::iterator i = a.begin() ; i != a.end() ; i++)
     //     print_node (i);
     // print_node (i);

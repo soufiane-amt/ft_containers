@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 10:53:27 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 12:04:42 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,26 @@ class binary_tree
 /* ************************************************************************** */
 
     size_type   size() const{   return (__size);}
+
+
+/* ************************************************************************** */
+                            // Iterators :
+/* ************************************************************************** */
+
+    void erase (iterator position)
+    {
+        node_ptr PosPtr = position.base();
+        while (PosPtr->has_2_child())
+            PosPtr->swap_for_deletion (next_node(PosPtr));
+        if (PosPtr->has_1_child())
+            delete_1_child_parent (PosPtr);
+        else
+            delete_leaf (PosPtr);
+    }
+    
+    size_type erase (const key_type& k);
+    void erase (iterator first, iterator last);
+
 
 /* ************************************************************************** */
                             // Iterators :
