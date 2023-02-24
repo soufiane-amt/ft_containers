@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:37:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:40:18 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ template<
                             // Observers= :
 /* ************************************************************************** */
 
-    key_compare                          key_comp() const;
-    value_compare                        value_comp() const;
+    key_compare                          key_comp() const {    return (_comp);}
+    value_compare                        value_comp() const{        return (_v_cmp);};
 
 /* ************************************************************************** */
                             // Operations= :
@@ -251,15 +251,6 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::key_compare
 map<Key, T, Compare, Allocator>::key_comp() const
 {
-    return (_comp);
-}
-
-
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::value_compare
-map<Key, T, Compare, Allocator>::value_comp() const
-{
-    return (_v_cmp);
 }
 
 // template< class Key, class T, class Compare , class Allocator  > 
