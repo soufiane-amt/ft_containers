@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 16:33:34 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 16:37:32 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,14 @@ template<
 
     explicit 
     map( const key_compare& key_comp =  key_compare(),
-                  const allocator_type& alloc = allocator_type() );
+                  const allocator_type& alloc = allocator_type() ):__key_comp(key_comp), __allocator(alloc){}
+
     template< class InputIt >
     map( InputIt first, InputIt last,
          const key_compare& key_comp = key_compare(),
-         const allocator_type& alloc = allocator_type() ); 
+         const allocator_type& alloc = allocator_type() ):__key_comp(key_comp), __allocator(alloc){   insert (first, last);}
+         
+    
     map( const map& other );
 
 /* ************************************************************************** */
@@ -167,26 +170,6 @@ template<
     value_compare               __value_cmp;
 };
 
-
-
-template< class Key, class T, class Compare , class Allocator  > 
-map<Key, T, Compare, Allocator>::map(const key_compare& key_comp, const allocator_type& alloc):__key_comp(key_comp), __allocator(alloc)
-{
-}
-
-
-template< class Key, class T, class Compare , class Allocator  > 
-template <typename InputIt>
-map<Key, T, Compare, Allocator>::map( InputIt first, InputIt last,
-         const key_compare& key_comp ,
-         const allocator_type& alloc  ):__key_comp(key_comp), __allocator(alloc)
-{
-    while (first != last)
-    {
-        insert (*first);
-        first++;
-    }
-}
 
 template< class Key, class T, class Compare , class Allocator  > 
 map<Key, T, Compare, Allocator>::map( const map& other )
