@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 14:32:52 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 14:52:34 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ class binary_tree
         erase (iterator (nodeToFind));
         return (nodeToFind != nullptr);
     }
+    
     void erase (iterator first, iterator last)
     {
         iterator next_element = first;
@@ -161,7 +162,8 @@ class binary_tree
             erase (next_element);
             next_element = first;
         }
-        if (!__size)    __tree_root = __end;
+        // std::cout << __size <<std::endl;
+        if (!__size){     __tree_root = __end;}
     }
 
 
@@ -249,7 +251,7 @@ template<
     >
 binary_tree<Key,T,Compare ,Allocator>::binary_tree(const value_compare& cmp, const   node_allocator_type& alloc ): __value_cmp(cmp), __allocat(alloc), __tree_root(nullptr)
 {
-    __end = create_node(value_type(key_type(), mapped_type()));
+    __end = create_node(value_type(55, 55));
     __size = 0;
 }
 
@@ -345,6 +347,8 @@ binary_tree<Key,T,Compare ,Allocator>::insert_node (node_ptr& start_node, node_p
         node->set_node_to_left(new_node);
     else
         node->set_node_to_right(new_node);
+        __size++;
+
     return (new_node);
 }
 

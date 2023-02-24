@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 14:23:16 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 14:51:57 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,14 @@ int main ()
 // {
 //     std::map <int , int > a;
 //     // for (size_t i = 0; i < 100; i++)
-//         a.insert(std::pair <const int, int> (1, 3));
-//         a.insert(std::pair <const int, int> (1, 4));
-//         a.insert(std::pair <const int, int> (1, 33));
-//     std::cout << a.erase (2) << std::endl;
+//     a.insert(std::make_pair(5, 3));
+//     a.insert(std::make_pair(1, 3));
+//     a.insert(std::make_pair(6, 3));
+
+//     for (std::map <int , int >::iterator i = a.begin() ; i != a.end() ; i++)
+//         std::cout << i->first << std::endl;
+//     std::cout << "\n\n###################\n\n";
+//     a.erase(a.begin(), a.end());
+//     for (std::map <int , int >::iterator i = a.begin() ; i != a.end() ; i++)
+//         std::cout << i->first << std::endl;
 // }

@@ -77,6 +77,18 @@
         "regex": "cpp",
         "unordered_set": "cpp",
         "valarray": "cpp",
-        "__functional_base_03": "cpp"
+        "__functional_base_03": "cpp",
+        "cfenv": "cpp",
+        "cinttypes": "cpp",
+        "clocale": "cpp",
+        "condition_variable": "cpp",
+        "csetjmp": "cpp",
+        "csignal": "cpp",
+        "fstream": "cpp",
+        "future": "cpp",
+        "numeric": "cpp",
+        "random": "cpp",
+        "scoped_allocator": "cpp",
+        "typeindex": "cpp"
     }
 }
