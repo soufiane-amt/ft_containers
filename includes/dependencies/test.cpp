@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 13:58:29 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 14:07:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void    print_node(bst::iterator node)
 
 
 
-int main ()
+/*int main ()
 {
     bst a;
     bool s;
@@ -75,7 +75,7 @@ int main ()
     for (bst::iterator i = a.begin() ; i != a.end() ; i++)
         print_node (i);
     std::cout << "\n\n###################\n\n";
-    a.erase(--(--a.end()));
+    a.erase(5);
     for (bst::iterator i = a.begin() ; i != a.end() ; i++)
         print_node (i);
     // print_node (i);
@@ -83,19 +83,14 @@ int main ()
     // for (bst::iterator it = a.begin(); it != a.end(); it++)
     //     std::cout << it->first << "---" << it->second << std::endl;
     
-}
+}*/
 
-// int main ()
-// {
-    // bst a;
-    // bool s;
-    // ft::pair<bst::iterator,bool> p;
+int main ()
+{
+    std::map <int , int > a;
     // for (size_t i = 0; i < 100; i++)
-        // p = a.insert(ft::pair <const int, int> (i, 3));
-    // 
-    // for (bst::iterator it = a.begin(); it != a.end(); it++)
-        // std::cout << it->first << "---" << it->second << std::endl;
-    // ft::pair<bst::iterator,bool> p = a.insert(ft::pair <const int, int> (5, 45));
-    // std::cout << p.first->first << "+++++" << p.first->second << std::endl;
-    // std::cout << p.second << std::endl;
-// }
+        a.insert(std::pair <const int, int> (1, 3));
+        a.insert(std::pair <const int, int> (1, 4));
+        a.insert(std::pair <const int, int> (1, 33));
+    std::cout << a.erase (2) << std::endl;
+}
