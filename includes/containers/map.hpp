@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:35:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:37:23 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,13 @@ template<
 
 
 /* ************************************************************************** */
-                            // Capacity= :
+                            // Element access= :
 /* ************************************************************************** */
 
-    //Element access:                   
     mapped_type&                        operator[] (const key_type& k);
 
-        //Modifiers
-
 /* ************************************************************************** */
-                            // Capacity= :
+                            // Modifiers= :
 /* ************************************************************************** */
 
     pair<iterator,bool>                  insert (const value_type& val){    return (_tree->insert(val));}
@@ -116,10 +113,8 @@ template<
     void                                clear() {   _tree.clear(); }
 
 /* ************************************************************************** */
-                            // Capacity= :
+                            // iterators= :
 /* ************************************************************************** */
-
-    //iterators
     iterator                            begin(){    return (iterator(_tree.begin()));}
     // const_iterator                      begin() const;
     iterator                            end(){return (iterator(_tree.end()));}
@@ -132,18 +127,16 @@ template<
     // const_reverse_iterator rend() const;
 
 /* ************************************************************************** */
-                            // Capacity= :
+                            // Observers= :
 /* ************************************************************************** */
 
-    //Observers:
     key_compare                          key_comp() const;
     value_compare                        value_comp() const;
 
 /* ************************************************************************** */
-                            // Capacity= :
+                            // Operations= :
 /* ************************************************************************** */
 
-    //Operations:
     iterator                             find (const key_type& k);
     // const_iterator                       find (const key_type& k) const;
     
@@ -161,9 +154,8 @@ template<
     allocator_type                      get_allocator() const;
     
 /* ************************************************************************** */
-                            // Capacity= :
+                            // Destructor= :
 /* ************************************************************************** */
-
     ~map();
 
     private:
