@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 18:03:01 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:26:16 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,14 @@ class binary_tree
 /* ************************************************************************** */
 
     void        clear();
+
+    void        swap (binary_tree &x)
+    {
+        swap (__end, x.__end);
+        swap (__size, x.__size);
+        swap (__allocat, x.__allocat);
+        swap (__value_cmp, x.__value_cmp);
+    }
     ~binary_tree() {       this->clear();  delete_node (__end); };
     
     node_ptr                                        __tree_root;
