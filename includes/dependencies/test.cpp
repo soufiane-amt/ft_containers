@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 16:46:39 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 20:36:20 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,51 +51,51 @@ void    print_node(Iterator node)
 
 
 
-// int main ()
-// {
-//     bst a;
-//     bool s;
-
-//     srand (time(NULL));
-//     // for (size_t i = 1; i < 4; i++)
-//         a.insert(ft::make_pair(5, 3));
-//         a.insert(ft::make_pair(1, 3));
-//         a.insert(ft::make_pair(6, 3));
-    
-//     // bst::iterator it = ++a.begin(); 
-//     // bst::iterator it1 = ++(++(a.begin())); 
-//     // // std::cout << it->first << " ----- " << it1->first << std::endl;
-//     // print_node (it);
-//     // print_node (it1);
-
-//     // it.base()->swap_for_deletion ((it1).base());
-//     // a.__tree_root = (it1).base();
-
-//     // print_node (it);
-//     // bst::iterator i = a.begin() ;
-
-//     for (bst::iterator i = a.begin() ; i != a.end() ; i++)
-//         print_node (i);
-//     std::cout << "\n\n###################\n\n";
-//     a.erase(a.begin(), a.end());
-    
-//     for (bst::iterator i = a.begin() ; i != a.end() ; i++)
-//         print_node (i);
-//     // print_node (i);
-
-//     // for (bst::iterator it = a.begin(); it != a.end(); it++)
-//     //     std::cout << it->first << "---" << it->second << std::endl;
-    
-// }
-
 int main ()
 {
-    std::map <int , int > a;
-    a.insert(std::make_pair(5, 3));
-    a.insert(std::make_pair(1, 3));
-    a.insert(std::make_pair(6, 3));
+    bst a;
+    bool s;
 
-    std::map <int , int > b (a);
-    for (std::map <int , int >::iterator i = b.begin(); i != b.end(); i++)
-        std::cout << i->first << std::endl;
+    srand (time(NULL));
+    // for (size_t i = 1; i < 4; i++)
+        a.insert(ft::make_pair(5, 3));
+        a.insert(ft::make_pair(1, 3));
+        a.insert(ft::make_pair(6, 3));
+    
+    // bst::iterator it = ++a.begin(); 
+    // bst::iterator it1 = ++(++(a.begin())); 
+    // // std::cout << it->first << " ----- " << it1->first << std::endl;
+    // print_node (it);
+    // print_node (it1);
+
+    // it.base()->swap_for_deletion ((it1).base());
+    // a.__tree_root = (it1).base();
+
+    // print_node (it);
+    // bst::iterator i = a.begin() ;
+
+    for (bst::iterator i = a.begin() ; i != a.end() ; i++)
+        print_node (i);
+    std::cout << "\n\n###################\n\n";
+    a.erase(a.begin(), a.end());
+    
+    for (bst::iterator i = a.begin() ; i != a.end() ; i++)
+        print_node (i);
+    // print_node (i);
+
+    // for (bst::iterator it = a.begin(); it != a.end(); it++)
+    //     std::cout << it->first << "---" << it->second << std::endl;
+    
 }
+
+// int main ()
+// {
+//     std::map <int , int > a;
+//     a.insert(std::make_pair(5, 3));
+//     a.insert(std::make_pair(1, 3));
+//     a.insert(std::make_pair(6, 3));
+
+//     std::map <int , int > b (a);
+//     for (std::map <int , int >::iterator i = b.begin(); i != b.end(); i++)
+//         std::cout << i->first << std::endl;
+// }
