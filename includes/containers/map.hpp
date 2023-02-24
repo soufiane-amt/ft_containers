@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:25:21 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:28:47 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ template<
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last){   _tree->insert(first, last);}
     
-    iterator                            erase (iterator position);
+    iterator                            erase (iterator position) { return (_tree->erase(position));}
     iterator                            erase (iterator first, iterator last);
     size_type                           erase (const key_type& k);
     
@@ -211,16 +211,6 @@ map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 // }
 
 
-template< class Key, class T, class Compare , class Allocator  > 
-template <class InputIterator> 
-void    map<Key, T, Compare, Allocator>::insert (InputIterator first, InputIterator last)
-{
-    while (first != last)
-    {
-        _tree.insert_node(_tree.__tree_root, _tree.create_node(*first));
-        first++;
-    }
-}
 
 
 template< class Key, class T, class Compare , class Allocator  > 
@@ -252,18 +242,6 @@ map<Key, T, Compare, Allocator>::value_comp() const
 {
     return (_v_cmp);
 }
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::iterator  
-map<Key, T, Compare, Allocator>::erase (iterator position)
-{
-    iterator    next_2_pos = position;
-    iterator    next_2_posl = ++position;
-    
-    _tree.delete_random_node(next_2_pos);
-
-    return (next_2_posl);
-}
-
 
 // template< class Key, class T, class Compare , class Allocator  > 
 // typename map<Key, T, Compare, Allocator>::iterator                            
