@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 18:17:39 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:19:39 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ map<Key, T, Compare, Allocator>::at (const key_type& k)
 {
     binary_tree   *node = __tree.find(k);
     if (!node)
-        return (__tree.insert (value_type(k, mapped_type()))->second);
+        throw std::out_of_range ("Error: at member function is out of range!");
     return (node->data.second);
 }
 
@@ -207,7 +207,7 @@ map<Key, T, Compare, Allocator>::at (const key_type& k) const
 {
     binary_tree   *node = __tree.find(k);
     if (!node)
-        return (__tree.insert (value_type(k, mapped_type()))->second);
+        throw std::out_of_range ("Error: at member function is out of range!");
     return (node->data.second);
 }
 
