@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 18:23:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:29:56 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ template<
     iterator                            erase (iterator first, iterator last){  return (__tree->erase(first,  last));    }
     size_type                           erase (const key_type& k){  return (__tree->erase(k));    }
     
-    void                                swap (map& x) { __tree->swap (x)}
+    void                                swap (map& x) { __tree->swap (x);}
     void                                clear() {   __tree.clear(); }
 
 /* ************************************************************************** */
@@ -161,7 +161,7 @@ template<
 /* ************************************************************************** */
                             // Destructor= :
 /* ************************************************************************** */
-    ~map();
+    ~map(){}
 
     private:
     //all the member functions of the __tree have to be friends and private 
@@ -173,11 +173,6 @@ template<
 };
 
 
-
-template< class Key, class T, class Compare , class Allocator  > 
-map<Key, T, Compare, Allocator>::~map()
-{
-}
 
 
 template< class Key, class T, class Compare , class Allocator  > 
@@ -209,15 +204,6 @@ map<Key, T, Compare, Allocator>::at (const key_type& k) const
     if (!node)
         throw std::out_of_range ("Error: at member function is out of range!");
     return (node->data.second);
-}
-
-
-template< class Key, class T, class Compare , class Allocator  > 
-void map<Key, T, Compare, Allocator>::swap (map& x)
-{
-    std::swap(__tree, x.__tree);
-    std::swap(this->_v_size, x._v_size);
-    std::swap(this->allocator, x.allocator);
 }
 
 }

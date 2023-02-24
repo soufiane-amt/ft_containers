@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 18:26:16 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:34:46 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,9 +239,9 @@ class binary_tree
     }
     ~binary_tree() {       this->clear();  delete_node (__end); };
     
-    node_ptr                                        __tree_root;
     private:
     
+    node_ptr                                        __tree_root;
     node_ptr                                        __end;
     size_type                                       __size;
     node_allocator_type                             __allocat;
