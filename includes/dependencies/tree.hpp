@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:46:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 17:59:32 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,10 @@ template<
     >
 binary_tree<Key,T,Compare ,Allocator> & binary_tree<Key,T,Compare ,Allocator>::operator=(const binary_tree& copy)
 {
-    (void)copy;
+    this->clear();
+    __value_cmp = copy.__value_cmp;
+    __allocat   = copy.__allocat;
+    insert (copy.begin(), copy.end());
 }
 
 
