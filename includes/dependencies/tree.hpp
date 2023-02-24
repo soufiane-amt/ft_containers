@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 12:04:42 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 12:07:53 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ class binary_tree
 
     node_ptr        find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
 
-    void            erase (iterator element);
-    iterator        erase( iterator first, iterator last );
 
     public:
     
@@ -447,25 +445,6 @@ void    binary_tree<Key,T,Compare ,Allocator>::delete_2_child_parent (iterator e
 }
 
 
-template<
-    class Key,
-    class T,
-    class Compare ,
-    class Allocator >
-
-void    binary_tree<Key,T,Compare ,Allocator>::erase (iterator element)
-{
-    iterator e = element;
-    node_ptr _node  = e.base();
-    if (_node && !_node->parent)
-        this->__tree_root  = (++e).base();
-    if (_node->is_leaf())
-        delete_leaf(_node);
-    else if (_node ->has_1_child())
-        delete_1_child_parent(_node);
-    else  
-        delete_2_child_parent(element);
-}
 
 
 

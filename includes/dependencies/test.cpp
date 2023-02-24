@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 11:54:26 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 12:08:56 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,13 @@ int main ()
     // print_node (it);
     // print_node (it1);
 
-    it.base()->swap_for_deletion ((it1).base());
     a.__tree_root = (it1).base();
 
     std::cout << "\n\n###################\n\n";
-    // print_node (it);
-    bst::iterator i = a.begin() ;
-    ++i;
-    ++i;
-    ++i;
-    // for (bst::iterator i = a.begin() ; i != a.end() ; i++)
-    //     print_node (i);
+
+    for (bst::iterator i = a.begin() ; i != a.end() ; i++)
+        std::cout << i->first << std::endl;
+        // print_node (i);
     // print_node (i);
 
     // for (bst::iterator it = a.begin(); it != a.end(); it++)
