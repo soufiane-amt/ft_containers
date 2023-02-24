@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 18:56:42 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 19:00:46 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ namespace ft
 
 
 template<
-    class Key,
-    class T,
+    class iterator,
     class NodeAllocator 
     >
 class deletion_arsenal
 {
-    node_allocator_type                             __allocat;
+    typedef NodeAllocator                             nd_allocator;
 
     protected:
     void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
@@ -39,6 +38,60 @@ class deletion_arsenal
     void            delete_2_child_parent (iterator element);
 
 };
+
+template<
+    class iterator,
+    class NodeAllocator 
+    >
+void    deletion_arsenal<class iterator, class NodeAllocator >::delete_leaf (node_ptr  _node)
+{    
+    if (_node->parent->left == _node)
+        _node->parent->left = nullptr;
+    else
+        _node->parent->right = nullptr;
+
+    delete_node(_node);
+}
+
+template<
+    class iterator,
+    class NodeAllocator 
+    >
+
+void    deletion_arsenal<class iterator, class NodeAllocator >::delete_1_child_parent (node_ptr  _node)
+{
+    node_ptr child;
+
+    child = _node->right ? _node->right : _node->left;
+    if (_node->parent)
+    {
+        if (_node->parent->left == _node)
+            _node->parent->left = child;
+        else
+            _node->parent->right = child;
+    }
+    child->parent = _node->parent;
+
+    delete_node(_node);
+}
+
+template<
+    class iterator,
+    class NodeAllocator 
+    >
+
+void    deletion_arsenal<class iterator, class NodeAllocator >::delete_2_child_parent (iterator element)
+{
+    node_ptr _node =  element.base();
+    node_ptr _next_node =  (++element).base();
+    (*_node).swap(*_next_node);
+    if (_node ->has_1_child())
+        delete_1_child_parent(_node);
+    else if (_node->is_leaf())
+        delete_leaf(_node);
+}
+
+
 
 
 template<
@@ -440,63 +493,6 @@ void    binary_tree<Key,T,Compare ,Allocator>::clear()
     __tree_root = nullptr;
 }
 
-
-
-
-template<
-    class Key,
-    class T,
-    class Compare ,
-    class Allocator >
-void    binary_tree<Key,T,Compare ,Allocator>::delete_leaf (node_ptr  _node)
-{    
-    if (_node->parent->left == _node)
-        _node->parent->left = nullptr;
-    else
-        _node->parent->right = nullptr;
-
-    delete_node(_node);
-}
-
-template<
-    class Key,
-    class T,
-    class Compare ,
-    class Allocator >
-
-void    binary_tree<Key,T,Compare ,Allocator>::delete_1_child_parent (node_ptr  _node)
-{
-    node_ptr child;
-
-    child = _node->right ? _node->right : _node->left;
-    if (_node->parent)
-    {
-        if (_node->parent->left == _node)
-            _node->parent->left = child;
-        else
-            _node->parent->right = child;
-    }
-    child->parent = _node->parent;
-
-    delete_node(_node);
-}
-
-template<
-    class Key,
-    class T,
-    class Compare ,
-    class Allocator >
-
-void    binary_tree<Key,T,Compare ,Allocator>::delete_2_child_parent (iterator element)
-{
-    node_ptr _node =  element.base();
-    node_ptr _next_node =  (++element).base();
-    (*_node).swap(*_next_node);
-    if (_node ->has_1_child())
-        delete_1_child_parent(_node);
-    else if (_node->is_leaf())
-        delete_leaf(_node);
-}
 
 
 
