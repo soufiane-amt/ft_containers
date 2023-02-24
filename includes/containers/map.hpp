@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 21:06:16 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:16:53 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,19 @@ template<
     typedef     size_t                                       size_type;
     typedef     ptrdiff_t                                    difference_type;
     
-    typedef     tree_node<value_type, allocator_type>  tree_node;
-    typedef     tree_node*                          tree_node_pointer;
+    typedef     binary_tree<key_type, mapped_type, key_compare, allocator_type>  binary_tree;
+    typedef     binary_tree*                          binary_tree_pointer;
 
     //value_compare
     typedef     const  value_type&                  const_reference;
     typedef     const pointer                       const_pointer;
-    typedef     const tree_node*                    tree_node_const_pointer;
+    typedef     const binary_tree*                    binary_tree_const_pointer;
 
 
     /*Iterators*/
-    typedef typename              ft::tree_iterator<tree_node_pointer>                iterator;
-    typedef typename              ft::const_tree_iterator<tree_node_const_pointer>    const_iterator;
+    typedef typename              ft::tree_iterator<binary_tree_pointer>                iterator;
+    // typedef typename              ft::const_tree_iterator<binary_tree_const_pointer>    const_iterator;
     
-    typedef     binary_tree<Key, T, key_compare, allocator_type > binary_tree;
     
     
     /*reverse_iterator*/
@@ -77,18 +76,18 @@ template<
     map&                                operator=( const map& other );
 
     //Capacity
-    size_type                           size() const;
-    size_type                           max_size() const;
-    bool                                empty() const;
+    size_type                           size() const{   return (_tree.size());}
+    size_type                           max_size() const{   return (_allocat.max_size());}
+    bool                                empty() const{  return (!size());}
 
     //Element access:                   
     mapped_type&                        operator[] (const key_type& k);
 
         //Modifiers
 
-    pair<iterator,bool>                  insert (const value_type& val);
+    pair<iterator,bool>                  insert (const value_type& val){    return (_tree->insert(val));}
 
-    iterator                            insert (iterator position, const_reference val);
+    iterator                            insert (iterator position, const_reference val){ }
     
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last);
@@ -102,9 +101,9 @@ template<
 
     //iterators
     iterator                            begin();
-    const_iterator                      begin() const;
+    // const_iterator                      begin() const;
     iterator                            end();
-    const_iterator                      end() const;
+    // const_iterator                      end() const;
     
     //reverse iterators
     // reverse_iterator       rbegin();
@@ -114,18 +113,18 @@ template<
 
     //Observers:
     key_compare                          key_comp() const;
-    value_compare                        value_comp() const
+    value_compare                        value_comp() const;
     //Operations:
     iterator                             find (const key_type& k);
-    const_iterator                       find (const key_type& k) const;
+    // const_iterator                       find (const key_type& k) const;
     
     size_type                            count (const key_type& k) const;
         
     iterator                             lower_bound (const key_type& k);
-    const_iterator                       lower_bound (const key_type& k) const;
+    // const_iterator                       lower_bound (const key_type& k) const;
         
     iterator                             upper_bound (const key_type& k);
-    const_iterator                       upper_bound (const key_type& k) const;
+    // const_iterator                       upper_bound (const key_type& k) const;
 
     // pair<const_iterator,const_iterator> equal_range (const key_type& k) const;
     pair<iterator,iterator>             equal_range (const key_type& k);
@@ -155,21 +154,21 @@ template< class Key, class T, class Compare , class Allocator  >
 template <typename InputIt>
 map<Key, T, Compare, Allocator>::map( InputIt first, InputIt last,
          const key_compare& comp ,
-         const allocator_type& alloc  ):
+         const allocator_type& alloc  )
 {
     (void)comp;
     (void)alloc;
     while (first != last)
-        insert (*first);
+    insert (*first);
 }
 
 template< class Key, class T, class Compare , class Allocator  > 
 map<Key, T, Compare, Allocator>::map( const map& other )
 {
-    for (const_iterator it = other.begin(); it != other.end() ; it++)
-        insert(end(), *it);
-    _allocat = other._allocat;
-    _comp = other._comp;
+    // for (const_iterator it = other.begin(); it != other.end() ; it++)
+    //     insert(end(), *it);
+    // _allocat = other._allocat;
+    // _comp = other._comp;
 }
 
 
@@ -183,34 +182,12 @@ template< class Key, class T, class Compare , class Allocator  >
 map<Key, T, Compare, Allocator>&    
 map<Key, T, Compare, Allocator>::operator=( const map& other )
 {
-    clear();
-    for (const_iterator it = other.begin(); it != other.end() ; it++)
-        insert(end(), *it);
-    _allocat = other._allocat;
-    _comp = other._comp;
+    // clear();
+    // for (const_iterator it = other.begin(); it != other.end() ; it++)
+    //     insert(end(), *it);
+    // _allocat = other._allocat;
+    // _comp = other._comp;
     return (*this);
-}
-
-
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::size_type
-map<Key, T, Compare, Allocator>::size() const
-{
-    return (_tree.size());
-}
-
-
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::size_type
-map<Key, T, Compare, Allocator>::max_size() const
-{
-    return (_allocat.max_size());
-}
-
-template< class Key, class T, class Compare , class Allocator  > 
-bool   map<Key, T, Compare, Allocator>::empty() const
-{
-    return (!size());
 }
 
 
@@ -218,30 +195,21 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 {
-    tree_node   *node = _tree.search_node( _tree.get_tree(), k);
+    binary_tree   *node = _tree.search_node( _tree.get_tree(), k);
     if (!node)
         insert (pair<key_type, mapped_type >(k, mapped_type()) );//this insert is wrong
     return (node->data.second);
 }
 
-template< class Key, class T, class Compare , class Allocator  > 
-pair<typename iterator,bool> 
-map<Key, T, Compare, Allocator>::insert (const value_type& val)
-{
+// template< class Key, class T, class Compare , class Allocator  > 
+// pair<typename iterator,bool> 
+// map<Key, T, Compare, Allocator>::insert (const value_type& val)
+// {
     
-    _tree.insert_node(_tree.__tree_root, _tree.create_node(val));
-    return (val);
-}
+//     _tree.insert_node(_tree.__tree_root, _tree.create_node(val));
+//     return (val);
+// }
 
-
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::iterator 
-map<Key, T, Compare, Allocator>::insert (iterator position, const_reference val)
-{
-    (void)position;
-    _tree.insert_node(_tree.__tree_root, _tree.create_node(val));
-    return (position);
-}
 
 template< class Key, class T, class Compare , class Allocator  > 
 template <class InputIterator> 
