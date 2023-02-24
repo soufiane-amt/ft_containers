@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:37:23 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:37:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ template<
                             // Modifiers= :
 /* ************************************************************************** */
 
-    pair<iterator,bool>                  insert (const value_type& val){    return (_tree->insert(val));}
-
+    pair<iterator,bool>                 insert (const value_type& val){    return (_tree->insert(val));}
     iterator                            insert (iterator position, const_reference val){    return (_tree->insert(position, val)); }
     
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last){   _tree->insert(first, last);}
+    
     
     iterator                            erase (iterator position) { return (_tree->erase(position));}
     iterator                            erase (iterator first, iterator last){  return (_tree->erase(first,  last));    }
