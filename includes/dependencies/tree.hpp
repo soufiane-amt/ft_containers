@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 14:52:34 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 14:54:18 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ class binary_tree
             next_element = first;
         }
         // std::cout << __size <<std::endl;
-        if (!__size){     __tree_root = __end;}
+        if (!__size){     __tree_root = nullptr;}
     }
 
 
