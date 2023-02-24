@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 13:52:38 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 14:00:38 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ struct swap_arsenal
     void 
     define_NodeB_bro_relation (node_ptr NodeA, node_ptr NodeB , const bool& NodeB_is_left_child)
     {
-        std::cout << NodeB->data.first << std::endl;
         if (NodeB_is_left_child)
         {
             NodeB->right = NodeA->right; 
@@ -98,7 +97,6 @@ struct swap_arsenal
         define_NodeB_bro_relation (NodeA, NodeB, NodeBisLeftChild );
         define_NodeB_NodeA_node_relation (NodeA, NodeB , NodeBisLeftChild);
         define_NodeA_new_childen_relation (NodeA, NodeB_left,  NodeB_right);
-        std::cout <<  "++++++++++++" << NodeB->parent->data.first << std::endl;
 
     }
     

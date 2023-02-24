@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 13:56:52 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 13:58:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int main ()
     // for (size_t i = 1; i < 4; i++)
         a.insert(ft::make_pair(5, 3));
         a.insert(ft::make_pair(1, 3));
-        a.insert(ft::make_pair(10, 3));
         a.insert(ft::make_pair(6, 3));
     
     // bst::iterator it = ++a.begin(); 
@@ -76,7 +75,7 @@ int main ()
     for (bst::iterator i = a.begin() ; i != a.end() ; i++)
         print_node (i);
     std::cout << "\n\n###################\n\n";
-    a.erase(--a.end());
+    a.erase(--(--a.end()));
     for (bst::iterator i = a.begin() ; i != a.end() ; i++)
         print_node (i);
     // print_node (i);
