@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:16:53 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:17:25 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,21 +303,7 @@ map<Key, T, Compare, Allocator>::end ()
 
 
 
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::const_iterator 
-map<Key, T, Compare, Allocator>::begin () const
-{
-    
-    return (const_iterator(_tree.begin()));
-}
 
-
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::const_iterator 
-map<Key, T, Compare, Allocator>::end ()const
-{
-    return (const_iterator(_tree.end()));
-}
 
 
 
