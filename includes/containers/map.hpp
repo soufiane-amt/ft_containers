@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 18:03:39 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:04:37 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ template<
                             // operator= :
 /* ************************************************************************** */
 
-    map&                                operator=( const map& other ){  __tree = other->__tree;   insert (other.begin(), other.end());}
+    map&                                operator=( const map& other ){      this->__tree = other.__tree;    return (*this);}
 
 
 /* ************************************************************************** */
@@ -175,15 +175,6 @@ template<
 template< class Key, class T, class Compare , class Allocator  > 
 map<Key, T, Compare, Allocator>::~map()
 {
-}
-
-
-template< class Key, class T, class Compare , class Allocator  > 
-map<Key, T, Compare, Allocator>&    
-map<Key, T, Compare, Allocator>::operator=( const map& other )
-{
-    this->__tree = other.__tree;
-    return (*this);
 }
 
 
