@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:24:50 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:25:21 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ template<
     iterator                            insert (iterator position, const_reference val){    return (_tree->insert(position, val)); }
     
     template <class InputIterator> 
-    void                                insert (InputIterator first, InputIterator last);
+    void                                insert (InputIterator first, InputIterator last){   _tree->insert(first, last);}
     
     iterator                            erase (iterator position);
     iterator                            erase (iterator first, iterator last);
