@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 14:21:00 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 14:32:52 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ class binary_tree
             delete_1_child_parent (PosPtr);
         else
             delete_leaf (PosPtr);
+        __size--;
     }
     
     size_type erase (const key_type& k)
@@ -153,11 +154,14 @@ class binary_tree
     }
     void erase (iterator first, iterator last)
     {
+        iterator next_element = first;
         while (first != last)
         {
-            erase (first);
-            first++;
+            ++first;
+            erase (next_element);
+            next_element = first;
         }
+        if (!__size)    __tree_root = __end;
     }
 
 
