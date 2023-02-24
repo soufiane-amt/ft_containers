@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 08:47:34 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 11:43:00 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <functional>
 #include <memory>
 #include <iostream>
+#include <algorithm>
 #include <map>
 
 
@@ -46,6 +47,8 @@ void    print_node(bst::iterator node)
     std::cout << "--------------\n";
 }
 
+
+
 int main ()
 {
     bst a;
@@ -60,16 +63,23 @@ int main ()
     
     bst::iterator it = ++a.begin(); 
     bst::iterator it1 = ++(++(a.begin())); 
-    // std::cout << it->first << " ----- " << it1->first << std::endl;
-    print_node (it);
-    print_node (it1);
+    // // std::cout << it->first << " ----- " << it1->first << std::endl;
+    // print_node (it);
+    // print_node (it1);
 
     it.base()->swap_for_deletion ((it1).base());
+    a.__tree_root = (it1).base();
 
     std::cout << "\n\n###################\n\n";
-    print_node (it);
-    print_node (it1++);
-    // print_node (--it1);
+    // print_node (it);
+    bst::iterator i = a.begin() ;
+    ++i;
+    ++i;
+    ++i;
+    print_node (bst::iterator (a.find (5)));
+    // for (bst::iterator i = a.begin() ; i != a.end() ; i++)
+    //     print_node (i);
+    // print_node (i);
 
     // for (bst::iterator it = a.begin(); it != a.end(); it++)
     //     std::cout << it->first << "---" << it->second << std::endl;
