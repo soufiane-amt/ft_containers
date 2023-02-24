@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:17:25 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:23:02 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ template<
     typedef     binary_tree*                          binary_tree_pointer;
 
     //value_compare
-    typedef     const  value_type&                  const_reference;
-    typedef     const pointer                       const_pointer;
-    typedef     const binary_tree*                    binary_tree_const_pointer;
+    typedef     const value_type&                  const_reference;
+    typedef     const pointer                      const_pointer;
+    typedef     const binary_tree*                 binary_tree_const_pointer;
 
 
     /*Iterators*/
@@ -78,7 +78,7 @@ template<
     //Capacity
     size_type                           size() const{   return (_tree.size());}
     size_type                           max_size() const{   return (_allocat.max_size());}
-    bool                                empty() const{  return (!size());}
+    bool                                empty() const{  return (_tree.size() != 0);}
 
     //Element access:                   
     mapped_type&                        operator[] (const key_type& k);
@@ -195,9 +195,9 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 {
-    binary_tree   *node = _tree.search_node( _tree.get_tree(), k);
+    binary_tree   *node = _tree.find(k);
     if (!node)
-        insert (pair<key_type, mapped_type >(k, mapped_type()) );//this insert is wrong
+        _tree.insert (value_type(k, mapped_type()) );
     return (node->data.second);
 }
 
