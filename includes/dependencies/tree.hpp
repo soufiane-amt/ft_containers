@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 18:34:46 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:43:39 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ template<
     >
 binary_tree<Key,T,Compare ,Allocator>::binary_tree(const value_compare& cmp, const   node_allocator_type& alloc ): __value_cmp(cmp), __allocat(alloc), __tree_root(nullptr)
 {
-    __end = create_node(value_type(55, 55));
+    __end = create_node(value_type(key_type(), mapped_type()));
     __size = 0;
 }
 
@@ -274,9 +274,8 @@ template<
     >
 binary_tree<Key,T,Compare ,Allocator>::binary_tree(const binary_tree& copy)
 {
-    __tree_root = copy.__tree_root;
-    this->__size = copy.__size;
     __allocat = copy.__allocat;
+    insert (other.begin(), other.end());
 }
 
 

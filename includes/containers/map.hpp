@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 18:29:56 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:40:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ template<
          const allocator_type& alloc = allocator_type() ):__key_comp(key_comp), __allocator(alloc){   insert (first, last);}
          
     
-    map( const map& other ) :__tree(other->__tree){   insert (other.begin(), other.end());}
+    map( const map& other ) :__tree(other->__tree){   }
 
 /* ************************************************************************** */
                             // operator= :
