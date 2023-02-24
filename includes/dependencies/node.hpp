@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 10:50:41 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 13:52:38 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 #include <iostream>
 #include "../dependencies/utility.hpp"
-
 namespace ft
 {
-    
-
+//     template<
+//     class Key,
+//     class T,
+//     class Compare,
+//     class Allocator 
+//     >
 
 
 
@@ -160,6 +163,7 @@ struct Node : public swap_arsenal<Node<T> >
     Node   *right;
     T       data;
     
+
     Node(T d = T()): data(d)
     {
         this->parent = nullptr;
@@ -185,15 +189,6 @@ struct Node : public swap_arsenal<Node<T> >
     Node   *find_last_node(Node   * _node) ;
     Node   *find_first_node(Node   * _node) ;
 
-    void    swap_for_deletion(Node* x)
-    {
-        if (nodes_are_relatives (this, x))
-            this->swap_relatives (this, x);
-        else
-            this->swap_non_relatives(this, x);
-    }
-
-
     
     bool    is_leaf () {        return (!this->left && ! this->right);}
     bool    has_2_child () {    return (this->left &&   this->right);}
@@ -217,6 +212,16 @@ struct Node : public swap_arsenal<Node<T> >
         return (first_case || second_case);
     }
     
+    void    swap_for_deletion(Node* x, Node*& root)
+    {
+        if (nodes_are_relatives (this, x))
+            this->swap_relatives (this, x);
+        else
+            this->swap_non_relatives(this, x);
+        root = (root == this) ? x : root;
+    }
+
+
 };
 
 

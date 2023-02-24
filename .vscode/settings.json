@@ -71,6 +71,12 @@
         "queue": "cpp",
         "set": "cpp",
         "iomanip": "cpp",
-        "__memory": "cpp"
+        "__memory": "cpp",
+        "filesystem": "cpp",
+        "forward_list": "cpp",
+        "regex": "cpp",
+        "unordered_set": "cpp",
+        "valarray": "cpp",
+        "__functional_base_03": "cpp"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 12:07:53 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 13:52:28 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 namespace ft
 {
 
+
 template<
     class Key,
     class T,
@@ -28,7 +29,6 @@ template<
     class Allocator 
     >
 class binary_tree
-
 {
     public:
 
@@ -60,7 +60,7 @@ class binary_tree
     void            delete_2_child_parent (iterator element);
 
     node_ptr        find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
-
+    
 
     public:
     
@@ -138,7 +138,7 @@ class binary_tree
     {
         node_ptr PosPtr = position.base();
         while (PosPtr->has_2_child())
-            PosPtr->swap_for_deletion (next_node(PosPtr));
+            PosPtr->swap_for_deletion (next_node(PosPtr), __tree_root);
         if (PosPtr->has_1_child())
             delete_1_child_parent (PosPtr);
         else
