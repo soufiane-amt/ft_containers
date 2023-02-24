@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 14:54:18 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:06:06 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,8 @@ class binary_tree
 /* ************************************************************************** */
 
     // iterator
-    iterator                begin(){    return (iterator(max_left(__tree_root)));}
+    iterator                begin(){    if (!__tree_root)   return (iterator(__end));
+                                        return (iterator(max_left(__tree_root)));}
 
     iterator                end(){    return (iterator(__end));}
 
