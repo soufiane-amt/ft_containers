@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 19:04:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 08:47:34 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,25 @@ int main ()
     bool s;
 
     srand (time(NULL));
-    for (size_t i = 1; i < 4; i++)
-        a.insert(ft::make_pair(i, 3));
+    // for (size_t i = 1; i < 4; i++)
+        a.insert(ft::make_pair(5, 3));
+        a.insert(ft::make_pair(1, 3));
+        a.insert(ft::make_pair(10, 3));
+        a.insert(ft::make_pair(6, 3));
     
-    bst::iterator it = a.begin(); 
-    bst::iterator it1 = ++(a.begin()); 
+    bst::iterator it = ++a.begin(); 
+    bst::iterator it1 = ++(++(a.begin())); 
     // std::cout << it->first << " ----- " << it1->first << std::endl;
     print_node (it);
     print_node (it1);
 
-    it.base()->swap ((it1).base());
+    it.base()->swap_for_deletion ((it1).base());
 
     std::cout << "\n\n###################\n\n";
     print_node (it);
-    print_node (it1);
+    print_node (it1++);
+    // print_node (--it1);
 
-    std::cout << it->first << " ----- " << it1->first << std::endl;
     // for (bst::iterator it = a.begin(); it != a.end(); it++)
     //     std::cout << it->first << "---" << it->second << std::endl;
     

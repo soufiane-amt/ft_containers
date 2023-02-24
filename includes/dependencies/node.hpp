@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/23 21:09:41 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 08:42:34 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ struct Node : public swap_arsenal<Node<T> >
     Node   *find_last_node(Node   * _node) ;
     Node   *find_first_node(Node   * _node) ;
 
-    void    swap(Node* x)
+    void    swap_for_deletion(Node* x)
     {
         if (nodes_are_relatives (this, x))
             this->swap_relatives (this, x);
