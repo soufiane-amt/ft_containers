@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:40:18 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:50:30 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,19 +137,19 @@ template<
                             // Operations= :
 /* ************************************************************************** */
 
-    iterator                             find (const key_type& k);
+    iterator                             find (const key_type& k) { return (iterator (_tree->find(k)));  }
     // const_iterator                       find (const key_type& k) const;
     
-    size_type                            count (const key_type& k) const;
+    size_type                            count (const key_type& k) const {  return (_tree->find(k) != nullptr); }
         
-    iterator                             lower_bound (const key_type& k);
+    iterator                             lower_bound (const key_type& k) {  return (_tree->lower_bound (k));    }
     // const_iterator                       lower_bound (const key_type& k) const;
         
-    iterator                             upper_bound (const key_type& k);
+    iterator                             upper_bound (const key_type& k) {  return (_tree->upper_bound(k));}
     // const_iterator                       upper_bound (const key_type& k) const;
 
-    // pair<const_iterator,const_iterator> equal_range (const key_type& k) const;
-    pair<iterator,iterator>             equal_range (const key_type& k);
+    // pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (_tree->equal_range(k)); }
+    pair<iterator,iterator>             equal_range (const key_type& k) {   return (_tree->equal_range(k)); }
 
     allocator_type                      get_allocator() const;
     
@@ -247,12 +247,6 @@ void map<Key, T, Compare, Allocator>::swap (map& x)
 }
 
 
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::key_compare
-map<Key, T, Compare, Allocator>::key_comp() const
-{
-}
-
 // template< class Key, class T, class Compare , class Allocator  > 
 // typename map<Key, T, Compare, Allocator>::iterator                            
 // map<Key, T, Compare, Allocator>::find (const key_type& k)
@@ -267,12 +261,6 @@ map<Key, T, Compare, Allocator>::key_comp() const
     
 // }
 
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::size_type 
-map<Key, T, Compare, Allocator>::count (const key_type& k) const
-{
-    return (_tree.search(_tree.get_tree(), k) != nullptr);
-}
 
 
 // iterator                            lower_bound (const key_type& k);
