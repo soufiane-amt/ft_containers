@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:28:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:29:44 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ template<
     void                                insert (InputIterator first, InputIterator last){   _tree->insert(first, last);}
     
     iterator                            erase (iterator position) { return (_tree->erase(position));}
-    iterator                            erase (iterator first, iterator last);
-    size_type                           erase (const key_type& k);
+    iterator                            erase (iterator first, iterator last){  return (_tree->erase(first,  last));    }
+    size_type                           erase (const key_type& k){  return (_tree->erase(k));    }
     
     void                                swap (map& x);
     void                                clear();
