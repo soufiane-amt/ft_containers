@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:50:30 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:51:54 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ template<
     // pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (_tree->equal_range(k)); }
     pair<iterator,iterator>             equal_range (const key_type& k) {   return (_tree->equal_range(k)); }
 
-    allocator_type                      get_allocator() const;
+    allocator_type                      get_allocator() const{      return (_allocat);  };
     
 /* ************************************************************************** */
                             // Destructor= :
@@ -226,15 +226,6 @@ map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
     return (node->data.second);
 }
 
-// template< class Key, class T, class Compare , class Allocator  > 
-// pair<typename iterator,bool> 
-// map<Key, T, Compare, Allocator>::insert (const value_type& val)
-// {
-    
-//     _tree.insert_node(_tree.__tree_root, _tree.create_node(val));
-//     return (val);
-// }
-
 
 
 
@@ -244,34 +235,6 @@ void map<Key, T, Compare, Allocator>::swap (map& x)
     std::swap(_tree, x._tree);
     std::swap(this->_v_size, x._v_size);
     std::swap(this->allocator, x.allocator);
-}
-
-
-// template< class Key, class T, class Compare , class Allocator  > 
-// typename map<Key, T, Compare, Allocator>::iterator                            
-// map<Key, T, Compare, Allocator>::find (const key_type& k)
-// {
-    
-// }
-
-// template< class Key, class T, class Compare , class Allocator  > 
-// typename map<Key, T, Compare, Allocator>::const_iterator                     
-// map<Key, T, Compare, Allocator>::find (const key_type& k) const
-// {
-    
-// }
-
-
-
-// iterator                            lower_bound (const key_type& k);
-// const_iterator                      lower_bound (const key_type& k) const;
-
-
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::allocator_type 
-map<Key, T, Compare, Allocator>::get_allocator() const
-{
-    return (_allocat);
 }
 
 }
