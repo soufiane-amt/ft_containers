@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 14:57:33 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:53:06 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ namespace ft
 
 //swap arsenal
 template <class Node>
-struct swap_arsenal
+struct swap_deletion_arsenal
 {
     typedef Node* node_ptr;
     
@@ -150,7 +150,7 @@ struct swap_arsenal
 
 
 template <typename T>
-struct Node : public swap_arsenal<Node<T> >
+struct Node : public swap_deletion_arsenal<Node<T> >
 {
     
     typedef T                                       data_value_type;

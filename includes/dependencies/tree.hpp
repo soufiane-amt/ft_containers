@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 18:43:39 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:56:42 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,25 @@
 
 namespace ft
 {
+
+
+
+template<
+    class Key,
+    class T,
+    class NodeAllocator 
+    >
+class deletion_arsenal
+{
+    node_allocator_type                             __allocat;
+
+    protected:
+    void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
+    void            delete_leaf (node_ptr  _node);
+    void            delete_1_child_parent (node_ptr  _node);
+    void            delete_2_child_parent (iterator element);
+
+};
 
 
 template<
@@ -275,7 +294,7 @@ template<
 binary_tree<Key,T,Compare ,Allocator>::binary_tree(const binary_tree& copy)
 {
     __allocat = copy.__allocat;
-    insert (other.begin(), other.end());
+    insert (copy.begin(), copy.end());
 }
 
 
