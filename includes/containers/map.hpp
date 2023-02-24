@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 18:04:37 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:07:47 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 {
     binary_tree   *node = __tree.find(k);
     if (!node)
-        __tree.insert (value_type(k, mapped_type()) );
+        __tree.insert (value_type(k, mapped_type()))->second;
     return (node->data.second);
 }
 
