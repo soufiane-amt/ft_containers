@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 19:50:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 20:31:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,18 @@ void    deletion_arsenal<NodePtr, iterator, NodeAllocator >::delete_2_child_pare
 
 
 
+template<class BST>
+class bst_traits
+{
+    public:
+    typedef typename BST::node_ptr node_ptr;
+    typedef typename BST::node_allocator_type node_allocator_type;
+    typedef typename BST::iterator iterator;
+};
+
+/*: public deletion_arsenal <typename std::allocator_traits<Allocator>::template rebind_traits<Node>::pointer, 
+                                                    iterator, 
+                                                    node_allocator_type>*/
 
 template<
     class Key,
@@ -103,7 +115,9 @@ template<
     class Compare,
     class Allocator 
     >
-class binary_tree
+class binary_tree : public deletion_arsenal <typename bst_traits<binary_tree<  Key, T, Compare, Allocator > >::node_ptr,
+                     typename bst_traits<binary_tree<  Key, T, Compare, Allocator > >::iterator,
+                             typename bst_traits<binary_tree<  Key, T, Compare, Allocator > >::node_allocator_type>
 {
     public:
 
