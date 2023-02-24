@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 20:35:32 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 21:17:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,29 @@
 namespace ft
 {
 
-
+template<class Key, class T, class Compare, class Allocator> class binary_tree;
 /* ***************************************************************************************************************/
    ///////////////////                        Deletion_Arsenal :                             ///////////////////
 /* ***************************************************************************************************************/
+template<class BST>
+class bst_traits
+{
+    public:
+    typedef typename BST::node_ptr node_ptr;
+    typedef typename BST::node_allocator_type node_allocator_type;
+    typedef typename BST::iterator iterator;
+
+    
+};
 
 template<
-    class NodePtr,
-    class iterator,
-    class NodeAllocator
+    class BST
     >
 class deletion_arsenal
 {
-    typedef NodeAllocator                             nd_allocator;
-    typedef NodePtr                                   node_ptr;
+    typedef typename bst_traits<BST>::node_allocator_type   nd_allocator;
+    typedef typename bst_traits<BST>::node_ptr   node_ptr;
+    typedef typename bst_traits<BST>::iterator   iterator;
 
     nd_allocator __allocat;
     protected:
@@ -45,11 +54,8 @@ class deletion_arsenal
 
 };
 
-template< class NodePtr,
-    class iterator,
-    class NodeAllocator 
-    >
-void    deletion_arsenal<NodePtr, iterator, NodeAllocator >::delete_leaf (node_ptr  _node)
+template<class BST>
+void    deletion_arsenal<BST >::delete_leaf (node_ptr  _node)
 {    
     if (_node->parent->left == _node)
         _node->parent->left = nullptr;
@@ -59,12 +65,9 @@ void    deletion_arsenal<NodePtr, iterator, NodeAllocator >::delete_leaf (node_p
     delete_node(_node);
 }
 
-template< class NodePtr,
-    class iterator,
-    class NodeAllocator 
-    >
+template<class BST>
 
-void    deletion_arsenal<NodePtr, iterator, NodeAllocator >::delete_1_child_parent (node_ptr  _node)
+void    deletion_arsenal<BST >::delete_1_child_parent (node_ptr  _node)
 {
     node_ptr child;
 
@@ -81,12 +84,9 @@ void    deletion_arsenal<NodePtr, iterator, NodeAllocator >::delete_1_child_pare
     delete_node(_node);
 }
 
-template< class NodePtr,
-    class iterator,
-    class NodeAllocator 
-    >
+template<class BST>
 
-void    deletion_arsenal<NodePtr, iterator, NodeAllocator >::delete_2_child_parent (iterator element)
+void    deletion_arsenal<BST >::delete_2_child_parent (iterator element)
 {
     node_ptr _node =  element.base();
     node_ptr _next_node =  (++element).base();
@@ -104,14 +104,6 @@ void    deletion_arsenal<NodePtr, iterator, NodeAllocator >::delete_2_child_pare
 /* ***************************************************************************************************************/
 
 
-template<class BST>
-class bst_traits
-{
-    public:
-    typedef typename BST::node_ptr node_ptr;
-    typedef typename BST::node_allocator_type node_allocator_type;
-    typedef typename BST::iterator iterator;
-};
 
 /*: public deletion_arsenal <typename std::allocator_traits<Allocator>::template rebind_traits<Node>::pointer, 
                                                     iterator, 
@@ -127,9 +119,7 @@ template<
     class Compare,
     class Allocator 
     >
-class binary_tree : public deletion_arsenal <typename bst_traits<binary_tree<  Key, T, Compare, Allocator > >::node_ptr,
-                     typename bst_traits<binary_tree<  Key, T, Compare, Allocator > >::iterator,
-                             typename bst_traits<binary_tree<  Key, T, Compare, Allocator > >::node_allocator_type>
+class binary_tree : public deletion_arsenal<binary_tree<Key, T, Compare, Allocator> >
 {
     public:
 
