@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:51:54 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 16:33:34 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ template<
 
     /*Iterators*/
     typedef typename              ft::tree_iterator<binary_tree_pointer>                iterator;
-    // typedef typename              ft::const_tree_iterator<binary_tree_const_pointer>    const_iterator;
+    // typedef typename              ft::const__tree_iterator<binary_tree_const_pointer>    const_iterator;
     
     
     
@@ -65,11 +65,11 @@ template<
 /* ************************************************************************** */
 
     explicit 
-    map( const key_compare& comp =  key_compare(),
+    map( const key_compare& key_comp =  key_compare(),
                   const allocator_type& alloc = allocator_type() );
     template< class InputIt >
     map( InputIt first, InputIt last,
-         const key_compare& comp = key_compare(),
+         const key_compare& key_comp = key_compare(),
          const allocator_type& alloc = allocator_type() ); 
     map( const map& other );
 
@@ -83,9 +83,9 @@ template<
 /* ************************************************************************** */
                             // Capacity= :
 /* ************************************************************************** */
-    size_type                           size() const{   return (_tree.size());}
-    size_type                           max_size() const{   return (_allocat.max_size());}
-    bool                                empty() const{  return (_tree.size() != 0);}
+    size_type                           size() const{   return (__tree.size());}
+    size_type                           max_size() const{   return (__allocator.max_size());}
+    bool                                empty() const{  return (__tree.size() != 0);}
 
 
 /* ************************************************************************** */
@@ -98,26 +98,26 @@ template<
                             // Modifiers= :
 /* ************************************************************************** */
 
-    pair<iterator,bool>                 insert (const value_type& val){    return (_tree->insert(val));}
-    iterator                            insert (iterator position, const_reference val){    return (_tree->insert(position, val)); }
+    pair<iterator,bool>                 insert (const value_type& val){    return (__tree->insert(val));}
+    iterator                            insert (iterator position, const_reference val){    return (__tree->insert(position, val)); }
     
     template <class InputIterator> 
-    void                                insert (InputIterator first, InputIterator last){   _tree->insert(first, last);}
+    void                                insert (InputIterator first, InputIterator last){   __tree->insert(first, last);}
     
     
-    iterator                            erase (iterator position) { return (_tree->erase(position));}
-    iterator                            erase (iterator first, iterator last){  return (_tree->erase(first,  last));    }
-    size_type                           erase (const key_type& k){  return (_tree->erase(k));    }
+    iterator                            erase (iterator position) { return (__tree->erase(position));}
+    iterator                            erase (iterator first, iterator last){  return (__tree->erase(first,  last));    }
+    size_type                           erase (const key_type& k){  return (__tree->erase(k));    }
     
     void                                swap (map& x);
-    void                                clear() {   _tree.clear(); }
+    void                                clear() {   __tree.clear(); }
 
 /* ************************************************************************** */
                             // iterators= :
 /* ************************************************************************** */
-    iterator                            begin(){    return (iterator(_tree.begin()));}
+    iterator                            begin(){    return (iterator(__tree.begin()));}
     // const_iterator                      begin() const;
-    iterator                            end(){return (iterator(_tree.end()));}
+    iterator                            end(){return (iterator(__tree.end()));}
     // const_iterator                      end() const;
     
     //reverse iterators
@@ -130,28 +130,28 @@ template<
                             // Observers= :
 /* ************************************************************************** */
 
-    key_compare                          key_comp() const {    return (_comp);}
-    value_compare                        value_comp() const{        return (_v_cmp);};
+    key_compare                          key__key_comp() const {    return (__key_comp);}
+    value_compare                        value__key_comp() const{        return (__value_cmp);};
 
 /* ************************************************************************** */
                             // Operations= :
 /* ************************************************************************** */
 
-    iterator                             find (const key_type& k) { return (iterator (_tree->find(k)));  }
+    iterator                             find (const key_type& k) { return (iterator (__tree->find(k)));  }
     // const_iterator                       find (const key_type& k) const;
     
-    size_type                            count (const key_type& k) const {  return (_tree->find(k) != nullptr); }
+    size_type                            count (const key_type& k) const {  return (__tree->find(k) != nullptr); }
         
-    iterator                             lower_bound (const key_type& k) {  return (_tree->lower_bound (k));    }
+    iterator                             lower_bound (const key_type& k) {  return (__tree->lower_bound (k));    }
     // const_iterator                       lower_bound (const key_type& k) const;
         
-    iterator                             upper_bound (const key_type& k) {  return (_tree->upper_bound(k));}
+    iterator                             upper_bound (const key_type& k) {  return (__tree->upper_bound(k));}
     // const_iterator                       upper_bound (const key_type& k) const;
 
-    // pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (_tree->equal_range(k)); }
-    pair<iterator,iterator>             equal_range (const key_type& k) {   return (_tree->equal_range(k)); }
+    // pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (__tree->equal_range(k)); }
+    pair<iterator,iterator>             equal_range (const key_type& k) {   return (__tree->equal_range(k)); }
 
-    allocator_type                      get_allocator() const{      return (_allocat);  };
+    allocator_type                      get_allocator() const{      return (__allocator);  };
     
 /* ************************************************************************** */
                             // Destructor= :
@@ -159,32 +159,33 @@ template<
     ~map();
 
     private:
-    //all the member functions of the _tree have to be friends and private 
-    binary_tree                 _tree;
-    key_compare                 _comp;
-    value_compare               _v_cmp;
-    allocator_type              _allocat;
+    //all the member functions of the __tree have to be friends and private 
+    
+    binary_tree                 __tree;
+    key_compare                 __key_comp;
+    allocator_type              __allocator;
+    value_compare               __value_cmp;
 };
 
 
 
 template< class Key, class T, class Compare , class Allocator  > 
-map<Key, T, Compare, Allocator>::map(const key_compare& comp, const allocator_type& alloc)
+map<Key, T, Compare, Allocator>::map(const key_compare& key_comp, const allocator_type& alloc):__key_comp(key_comp), __allocator(alloc)
 {
-    (void)comp;(void)alloc;
 }
 
 
 template< class Key, class T, class Compare , class Allocator  > 
 template <typename InputIt>
 map<Key, T, Compare, Allocator>::map( InputIt first, InputIt last,
-         const key_compare& comp ,
-         const allocator_type& alloc  )
+         const key_compare& key_comp ,
+         const allocator_type& alloc  ):__key_comp(key_comp), __allocator(alloc)
 {
-    (void)comp;
-    (void)alloc;
     while (first != last)
-    insert (*first);
+    {
+        insert (*first);
+        first++;
+    }
 }
 
 template< class Key, class T, class Compare , class Allocator  > 
@@ -192,8 +193,8 @@ map<Key, T, Compare, Allocator>::map( const map& other )
 {
     // for (const_iterator it = other.begin(); it != other.end() ; it++)
     //     insert(end(), *it);
-    // _allocat = other._allocat;
-    // _comp = other._comp;
+    // __allocator = other.__allocator;
+    // __key_comp = other.__key_comp;
 }
 
 
@@ -210,8 +211,8 @@ map<Key, T, Compare, Allocator>::operator=( const map& other )
     // clear();
     // for (const_iterator it = other.begin(); it != other.end() ; it++)
     //     insert(end(), *it);
-    // _allocat = other._allocat;
-    // _comp = other._comp;
+    // __allocator = other.__allocator;
+    // __key_comp = other.__key_comp;
     return (*this);
 }
 
@@ -220,9 +221,9 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 {
-    binary_tree   *node = _tree.find(k);
+    binary_tree   *node = __tree.find(k);
     if (!node)
-        _tree.insert (value_type(k, mapped_type()) );
+        __tree.insert (value_type(k, mapped_type()) );
     return (node->data.second);
 }
 
@@ -232,7 +233,7 @@ map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 template< class Key, class T, class Compare , class Allocator  > 
 void map<Key, T, Compare, Allocator>::swap (map& x)
 {
-    std::swap(_tree, x._tree);
+    std::swap(__tree, x.__tree);
     std::swap(this->_v_size, x._v_size);
     std::swap(this->allocator, x.allocator);
 }
