@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:30:20 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:32:31 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ template<
     void                                clear() {   _tree.clear(); }
 
     //iterators
-    iterator                            begin();
+    iterator                            begin(){    return (iterator(_tree.begin()));}
     // const_iterator                      begin() const;
-    iterator                            end();
+    iterator                            end(){return (iterator(_tree.end()));}
     // const_iterator                      end() const;
     
     //reverse iterators
@@ -257,26 +257,6 @@ map<Key, T, Compare, Allocator>::count (const key_type& k) const
 {
     return (_tree.search(_tree.get_tree(), k) != nullptr);
 }
-
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::iterator 
-map<Key, T, Compare, Allocator>::begin ()
-{
-    return (iterator(_tree.begin()));
-}
-
-
-template< class Key, class T, class Compare , class Allocator  > 
-typename map<Key, T, Compare, Allocator>::iterator 
-map<Key, T, Compare, Allocator>::end ()
-{
-    return (iterator(_tree.end()));
-}
-
-
-
-
-
 
 
 // iterator                            lower_bound (const key_type& k);
