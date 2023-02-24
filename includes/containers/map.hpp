@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 15:32:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:35:19 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,30 +60,46 @@ template<
     // typedef typename              reverse_iterator<const_iterator >      const_reverse_iterator;
 
 
-//ft::map<char, foo<float>, std::__1::less<char>,
-//      std::__1::allocator<ft::pair<const char, foo<float> > > >::const_iterator
+/* ************************************************************************** */
+                            // Costructors :
+/* ************************************************************************** */
 
-    explicit map( const key_compare& comp =  key_compare(),
+    explicit 
+    map( const key_compare& comp =  key_compare(),
                   const allocator_type& alloc = allocator_type() );
-    
     template< class InputIt >
     map( InputIt first, InputIt last,
          const key_compare& comp = key_compare(),
-         const allocator_type& alloc = allocator_type() );
-    
+         const allocator_type& alloc = allocator_type() ); 
     map( const map& other );
+
+/* ************************************************************************** */
+                            // operator= :
+/* ************************************************************************** */
 
     map&                                operator=( const map& other );
 
-    //Capacity
+
+/* ************************************************************************** */
+                            // Capacity= :
+/* ************************************************************************** */
     size_type                           size() const{   return (_tree.size());}
     size_type                           max_size() const{   return (_allocat.max_size());}
     bool                                empty() const{  return (_tree.size() != 0);}
+
+
+/* ************************************************************************** */
+                            // Capacity= :
+/* ************************************************************************** */
 
     //Element access:                   
     mapped_type&                        operator[] (const key_type& k);
 
         //Modifiers
+
+/* ************************************************************************** */
+                            // Capacity= :
+/* ************************************************************************** */
 
     pair<iterator,bool>                  insert (const value_type& val){    return (_tree->insert(val));}
 
@@ -99,6 +115,10 @@ template<
     void                                swap (map& x);
     void                                clear() {   _tree.clear(); }
 
+/* ************************************************************************** */
+                            // Capacity= :
+/* ************************************************************************** */
+
     //iterators
     iterator                            begin(){    return (iterator(_tree.begin()));}
     // const_iterator                      begin() const;
@@ -111,9 +131,18 @@ template<
     // reverse_iterator       rend();
     // const_reverse_iterator rend() const;
 
+/* ************************************************************************** */
+                            // Capacity= :
+/* ************************************************************************** */
+
     //Observers:
     key_compare                          key_comp() const;
     value_compare                        value_comp() const;
+
+/* ************************************************************************** */
+                            // Capacity= :
+/* ************************************************************************** */
+
     //Operations:
     iterator                             find (const key_type& k);
     // const_iterator                       find (const key_type& k) const;
@@ -130,6 +159,10 @@ template<
     pair<iterator,iterator>             equal_range (const key_type& k);
 
     allocator_type                      get_allocator() const;
+    
+/* ************************************************************************** */
+                            // Capacity= :
+/* ************************************************************************** */
 
     ~map();
 
