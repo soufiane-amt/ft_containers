@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 16:05:34 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 16:06:23 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -355,6 +355,21 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 node = node->right;
         }
         return (iterator(__end));
+    }
+    const_iterator upper_bound( const Key& key )const
+    {
+        node_ptr  node = __tree_root;
+
+        while (node)
+        {
+            if (__value_cmp(node->data, key))//if __tree->data < value
+                return const_iterator (node);
+            else if (__value_cmp(key, node->data))
+                node = node->left;
+            else
+                node = node->right;
+        }
+        return (const_iterator(__end));
     }
 
     //deletion
