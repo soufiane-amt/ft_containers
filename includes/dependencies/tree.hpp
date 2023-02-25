@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 21:17:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 09:59:04 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ template<class Key, class T, class Compare, class Allocator> class binary_tree;
 /* ***************************************************************************************************************/
    ///////////////////                        Deletion_Arsenal :                             ///////////////////
 /* ***************************************************************************************************************/
+
 template<class BST>
 class bst_traits
 {
@@ -32,8 +33,6 @@ class bst_traits
     typedef typename BST::node_ptr node_ptr;
     typedef typename BST::node_allocator_type node_allocator_type;
     typedef typename BST::iterator iterator;
-
-    
 };
 
 template<
@@ -41,6 +40,7 @@ template<
     >
 class deletion_arsenal
 {
+    public:
     typedef typename bst_traits<BST>::node_allocator_type   nd_allocator;
     typedef typename bst_traits<BST>::node_ptr   node_ptr;
     typedef typename bst_traits<BST>::iterator   iterator;
@@ -314,7 +314,6 @@ class binary_tree : public deletion_arsenal<binary_tree<Key, T, Compare, Allocat
     }
 
     //deletion
-
 /* ************************************************************************** */
                             // Destroy :
 /* ************************************************************************** */
@@ -574,3 +573,32 @@ void    binary_tree<Key,T,Compare ,Allocator>::clear()
     //     }
     //     return (iterator(__end));
     // }
+
+
+/*./../containers/../dependencies/tree.hpp:33:27: error: no type named 'node_ptr' in 'ft::binary_tree<int, int,
+      value_compare, std::__1::allocator<int> >'
+    typedef typename BST::node_ptr node_ptr;
+            ~~~~~~~~~~~~~~^~~~~~~~
+./../containers/../dependencies/tree.hpp:44:22: note: in instantiation of template class
+      'ft::bst_traits<ft::binary_tree<int, int, value_compare, std::__1::allocator<int> > >' requested here
+    typedef typename bst_traits<BST>::node_allocator_type   nd_allocator;
+                     ^
+./../containers/../dependencies/tree.hpp:122:28: note: in instantiation of template class
+      'ft::deletion_arsenal<ft::binary_tree<int, int, value_compare, std::__1::allocator<int> > >' requested
+      here
+class binary_tree : public deletion_arsenal<binary_tree<Key, T, Compare, Allocator> >
+                           ^
+test.cpp:56:9: note: in instantiation of template class 'ft::binary_tree<int, int, value_compare,
+      std::__1::allocator<int> >' requested here
+    bst a;
+        ^
+In file included from test.cpp:13:
+./../containers/../dependencies/tree.hpp:34:27: error: no type named 'node_allocator_type' in
+      'ft::binary_tree<int, int, value_compare, std::__1::allocator<int> >'
+    typedef typename BST::node_allocator_type node_allocator_type;
+            ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+./../containers/../dependencies/tree.hpp:35:27: error: no type named 'iterator' in 'ft::binary_tree<int, int,
+      value_compare, std::__1::allocator<int> >'
+    typedef typename BST::iterator iterator;
+            ~~~~~~~~~~~~~~^~~~~~~~
+3 errors generated.*/
