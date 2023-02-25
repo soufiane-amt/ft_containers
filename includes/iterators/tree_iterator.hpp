@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 11:42:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 14:41:47 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ class tree_iterator
         iterator_type       find_last_node(iterator_type _node) ;
         iterator_type       find_first_node(iterator_type _node) ;
 
-    template<
-    class Key,
-    class T,
-    class Compare,
-    class Allocator 
-    >
-    friend  class binary_tree;
+        template<
+        class Key,
+        class T,
+        class Compare,
+        class Allocator 
+        >
+        friend  class binary_tree;
     private:
         iterator_type   __node;
         iterator_type   __first_node;
