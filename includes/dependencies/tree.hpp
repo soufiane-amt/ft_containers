@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 11:18:50 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 11:24:47 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ template<
     >
 class binary_tree : public deletion_arsenal< Node <ft::pair<const Key, T>  >*, 
                                                     tree_iterator < Node <ft::pair<const Key, T>  >*>, 
-                                                            typename Allocator::template rebind<Node <ft::pair<const Key, T>  >*>::other >
+                                                            typename Allocator::template rebind<Node <ft::pair<const Key, T>  > >::other >
 {
     public:
 
