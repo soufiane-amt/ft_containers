@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 11:25:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 14:37:24 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,71 @@
 namespace ft
 {
 
-// template<class Key, class T, class Compare, class Allocator> class binary_tree;
+template<class Key, class T, class Compare, class Allocator> class binary_tree;
 /* ***************************************************************************************************************/
    ///////////////////                        Deletion_Arsenal :                             ///////////////////
 /* ***************************************************************************************************************/
 
+// template<class BST>
+// class bst_traits
+// {
+//     public:
+//     typedef typename BST::node_ptr node_ptr;
+//     typedef typename BST::node_allocator_type node_allocator_type;
+//     typedef typename BST::iterator iterator;
+// };
+
 template<
-    class NodePtr, class Iterator, class Allocator
+    class Key,
+    class T,
+    class Allocator 
+    >
+class traits_tree
+{
+    public:
+        typedef     Key                                                 key_type;
+        typedef     T                                                   mapped_type;
+        typedef 	ft::pair<const key_type,mapped_type>                value_type;
+        typedef     Node<value_type>                                    Node;
+        typedef     Node*                                               node_ptr ;
+        typedef     tree_iterator<node_ptr >                            iterator;
+        typedef     typename Allocator::template rebind<Node>::other    node_allocator_type;
+};
+
+
+template<
+    class BST
     >
 class deletion_arsenal
 {
     public:
-    typedef Allocator    nd_allocator;
-    typedef NodePtr      node_ptr;
-    typedef Iterator     iterator;
+    typedef typename BST::node_allocator_type   nd_allocator;
+    typedef typename BST::node_ptr   node_ptr;
+    typedef typename BST::iterator   iterator;
 
+    nd_allocator __allocat;
     protected:
     void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
     void            delete_leaf (node_ptr  _node);
-    void            delete_1_child_parent (node_ptr  _node);
+    void            delete_1_child_parent (node_ptr  _node, node_ptr& root);
     void            delete_2_child_parent (iterator element);
 
-    private:
-    nd_allocator __allocat;
 };
 
-template<class NodePtr, class Iterator, class Allocator>
-void    deletion_arsenal<NodePtr, Iterator, Allocator>::delete_leaf (node_ptr  _node)
+template<class BST>
+void    deletion_arsenal<BST >::delete_leaf (node_ptr  _node)
 {    
     if (_node->parent->left == _node)
         _node->parent->left = nullptr;
     else
         _node->parent->right = nullptr;
 
-    // delete_node(_node);
+    delete_node(_node);
 }
 
-template<class NodePtr, class Iterator, class Allocator>
-void    deletion_arsenal<NodePtr, Iterator, Allocator>::delete_1_child_parent (node_ptr  _node)
+template<class BST>
+
+void    deletion_arsenal<BST >::delete_1_child_parent (node_ptr  _node, node_ptr& root)
 {
     node_ptr child;
 
@@ -71,13 +98,14 @@ void    deletion_arsenal<NodePtr, Iterator, Allocator>::delete_1_child_parent (n
             _node->parent->right = child;
     }
     child->parent = _node->parent;
-
+    if (_node == root)
+        root = child;
     delete_node(_node);
 }
 
-template<class NodePtr, class Iterator, class Allocator>
+template<class BST>
 
-void    deletion_arsenal<NodePtr, Iterator, Allocator>::delete_2_child_parent (iterator element)
+void    deletion_arsenal<BST >::delete_2_child_parent (iterator element)
 {
     node_ptr _node =  element.base();
     node_ptr _next_node =  (++element).base();
@@ -104,28 +132,30 @@ void    deletion_arsenal<NodePtr, Iterator, Allocator>::delete_2_child_parent (i
    ///////////////////                        Binary_tree :                                    ///////////////////
 /* ***************************************************************************************************************/
 
+
 template<
     class Key,
     class T,
     class Compare,
     class Allocator 
     >
-class binary_tree : public deletion_arsenal< Node <ft::pair<const Key, T>  >*, 
-                                                    tree_iterator < Node <ft::pair<const Key, T>  >*>, 
-                                                            typename Allocator::template rebind<Node <ft::pair<const Key, T>  > >::other >
+class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 {
     public:
 
-    typedef     Key                                     key_type;
-    typedef     T                                       mapped_type;
-    typedef     Compare                                 value_compare;
-    typedef 	ft::pair<const key_type,mapped_type>    value_type;
-    typedef     Node<value_type>                        Node;
-    typedef     Node*                                   node_ptr ;
+    typedef  traits_tree<Key, T, Allocator>         base_traits;
+    typedef  deletion_arsenal<traits_tree<Key, T, Allocator> >         base_del;
+
+    typedef typename base_traits::key_type                   key_type;
+    typedef typename base_traits::mapped_type                mapped_type;
+    typedef typename base_traits::value_type                 value_type;
+    typedef typename base_traits::Node                       Node;
+    typedef typename base_traits::node_ptr                   node_ptr ;
+    typedef typename base_traits::node_allocator_type        node_allocator_type;
     
     typedef     size_t                                  size_type;
     typedef     Allocator                               allocator_type;
-    typedef     typename Allocator::template rebind<Node>::other          node_allocator_type;
+    typedef     Compare                                 value_compare;
     
     //iterator      
     typedef     tree_iterator<node_ptr >                    iterator;
@@ -138,10 +168,10 @@ class binary_tree : public deletion_arsenal< Node <ft::pair<const Key, T>  >*,
     node_ptr        insert_node (node_ptr& start_node, node_ptr  new_node, bool& success);
     void            tarverseNodesPostOrder(node_ptr _tree, void (binary_tree<Key,T,Compare ,Allocator>::*func)(node_ptr));
     
-    // void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
-    // void            delete_leaf (node_ptr  _node);
-    // void            delete_1_child_parent (node_ptr  _node);
-    // void            delete_2_child_parent (iterator element);
+    void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
+    void            delete_leaf (node_ptr  _node);
+    void            delete_1_child_parent (node_ptr  _node);
+    void            delete_2_child_parent (iterator element);
 
     node_ptr        find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
     
@@ -224,9 +254,9 @@ class binary_tree : public deletion_arsenal< Node <ft::pair<const Key, T>  >*,
         while (PosPtr->has_2_child())
             PosPtr->swap_for_deletion (next_node(PosPtr), __tree_root);
         if (PosPtr->has_1_child())
-            this->delete_1_child_parent (PosPtr);
+            base_del::delete_1_child_parent (PosPtr, this->__tree_root);
         else
-            this->delete_leaf (PosPtr);
+            base_del::delete_leaf (PosPtr);
         __size--;
     }
     
@@ -320,7 +350,7 @@ class binary_tree : public deletion_arsenal< Node <ft::pair<const Key, T>  >*,
         swap (__allocat, x.__allocat);
         swap (__value_cmp, x.__value_cmp);
     }
-    ~binary_tree() {       this->clear();  this->delete_node (__end); };
+    ~binary_tree() {       this->clear();  delete_node (__end); };
     
     private:
     
@@ -456,8 +486,8 @@ template<
     class Compare ,
     class Allocator 
     >
-typename binary_tree<Key,T,Compare ,Allocator>::Node   
-*binary_tree<Key,T,Compare ,Allocator>::find( key_type to_search)
+typename binary_tree<Key,T,Compare ,Allocator>::node_ptr  
+binary_tree<Key,T,Compare ,Allocator>::find( key_type to_search)
 {
     node_ptr  node = __tree_root;
     value_type to_search_value  = make_pair(to_search, key_type());
@@ -482,12 +512,13 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(Node *_tree, void (binary_tree<Key,T,Compare ,Allocator>::*func)(node_ptr))
+void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(node_ptr _tree, void (binary_tree<Key,T,Compare ,Allocator>::*func)(node_ptr))
 {
     if (!_tree)
         return;
     tarverseNodesPostOrder(_tree->right, func);
     tarverseNodesPostOrder(_tree->left, func);
+    std::cout << "-----\n" ;
     (this->*func)(_tree);
 }
 

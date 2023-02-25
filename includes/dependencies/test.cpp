@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 11:43:17 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 14:37:42 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,21 @@ int main ()
     // bst::iterator i = a.begin() ;
 
     for (bst::iterator i = a.begin() ; i != a.end() ; i++)
+    {
+        std::cout << i.base()<< std::endl;
         print_node (i);
+    }
     std::cout << "\n\n###################\n\n";
-    a.erase(++a.begin() , a.end());
+    a.erase(++(++a.begin()) , a.end());
     
     for (bst::iterator i = a.begin() ; i != a.end() ; i++)
+    {
+        std::cout << i.base()<< std::endl;
         print_node (i);
+    }
+
+    // for (bst::iterator i = a.begin() ; i != a.end() ; i++)
+    //     print_node (i);
     // print_node (i);
 
     // for (bst::iterator it = a.begin(); it != a.end(); it++)
