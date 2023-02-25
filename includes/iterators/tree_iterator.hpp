@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 14:50:01 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 14:50:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ class tree_iterator
     
         data_value_type_ptr                 operator->();
         const_data_value_type_ptr           operator->() const;
-
-        iterator_type       find_last_node(iterator_type _node) ;
-        iterator_type       find_first_node(iterator_type _node) ;
 
         template<
         class Key,
@@ -184,33 +181,6 @@ typename tree_iterator<T>::const_data_value_type_ptr   tree_iterator<T>::operato
     return (&__node->data);
 }
 
-
-//
-template<class T>  
-typename tree_iterator<T>::iterator_type   
-tree_iterator<T>::find_last_node(iterator_type _node) 
-{
-    iterator_type tmp = _node;
-    while (tmp && tmp->parent)
-        tmp = tmp->parent;
-    while (tmp && tmp->right)
-        tmp = tmp->right;
-    return (tmp);
-}
-
-
-
-template<class T>
-typename tree_iterator<T>::iterator_type 
-tree_iterator<T>::find_first_node(iterator_type _node)  
-{
-    iterator_type tmp = _node;
-    while (tmp && tmp->parent)
-        tmp = tmp->parent;
-    while (tmp && _node->left)
-        tmp = tmp->left;
-    return (tmp);
-}
 
 
 
