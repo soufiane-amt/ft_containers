@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 11:11:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 11:18:50 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,27 @@ namespace ft
 /* ***************************************************************************************************************/
 
 template<
-    class T
+    class NodePtr, class Iterator, class Allocator
     >
 class deletion_arsenal
 {
     public:
-    // typedef typename bst_traits<BST>::node_allocator_type   nd_allocator;
-    typedef T   node_ptr;
-    // typedef typename bst_traits<BST>::iterator   iterator;
+    typedef Allocator    nd_allocator;
+    typedef NodePtr      node_ptr;
+    typedef Iterator     iterator;
 
-    // nd_allocator __allocat;
     protected:
-    // void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
+    void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
     void            delete_leaf (node_ptr  _node);
-    // void            delete_1_child_parent (node_ptr  _node);
-    // void            delete_2_child_parent (iterator element);
+    void            delete_1_child_parent (node_ptr  _node);
+    void            delete_2_child_parent (iterator element);
 
+    private:
+    nd_allocator __allocat;
 };
 
-template<class BST>
-void    deletion_arsenal<BST >::delete_leaf (node_ptr  _node)
+template<class NodePtr, class Iterator, class Allocator>
+void    deletion_arsenal<NodePtr, Iterator, Allocator>::delete_leaf (node_ptr  _node)
 {    
     if (_node->parent->left == _node)
         _node->parent->left = nullptr;
@@ -56,37 +57,36 @@ void    deletion_arsenal<BST >::delete_leaf (node_ptr  _node)
     // delete_node(_node);
 }
 
-// template<class BST>
+template<class NodePtr, class Iterator, class Allocator>
+void    deletion_arsenal<NodePtr, Iterator, Allocator>::delete_1_child_parent (node_ptr  _node)
+{
+    node_ptr child;
 
-// void    deletion_arsenal<BST >::delete_1_child_parent (node_ptr  _node)
-// {
-//     node_ptr child;
+    child = _node->right ? _node->right : _node->left;
+    if (_node->parent)
+    {
+        if (_node->parent->left == _node)
+            _node->parent->left = child;
+        else
+            _node->parent->right = child;
+    }
+    child->parent = _node->parent;
 
-//     child = _node->right ? _node->right : _node->left;
-//     if (_node->parent)
-//     {
-//         if (_node->parent->left == _node)
-//             _node->parent->left = child;
-//         else
-//             _node->parent->right = child;
-//     }
-//     child->parent = _node->parent;
+    delete_node(_node);
+}
 
-//     delete_node(_node);
-// }
+template<class NodePtr, class Iterator, class Allocator>
 
-// template<class BST>
-
-// void    deletion_arsenal<BST >::delete_2_child_parent (iterator element)
-// {
-//     node_ptr _node =  element.base();
-//     node_ptr _next_node =  (++element).base();
-//     (*_node).swap(*_next_node);
-//     if (_node ->has_1_child())
-//         delete_1_child_parent(_node);
-//     else if (_node->is_leaf())
-//         delete_leaf(_node);
-// }
+void    deletion_arsenal<NodePtr, Iterator, Allocator>::delete_2_child_parent (iterator element)
+{
+    node_ptr _node =  element.base();
+    node_ptr _next_node =  (++element).base();
+    (*_node).swap(*_next_node);
+    if (_node ->has_1_child())
+        delete_1_child_parent(_node);
+    else if (_node->is_leaf())
+        delete_leaf(_node);
+}
 
 
 
@@ -110,7 +110,9 @@ template<
     class Compare,
     class Allocator 
     >
-class binary_tree : public deletion_arsenal< Node <ft::pair<const Key, T>  >* >
+class binary_tree : public deletion_arsenal< Node <ft::pair<const Key, T>  >*, 
+                                                    tree_iterator < Node <ft::pair<const Key, T>  >*>, 
+                                                            typename Allocator::template rebind<Node <ft::pair<const Key, T>  >*>::other >
 {
     public:
 
@@ -318,7 +320,7 @@ class binary_tree : public deletion_arsenal< Node <ft::pair<const Key, T>  >* >
         swap (__allocat, x.__allocat);
         swap (__value_cmp, x.__value_cmp);
     }
-    ~binary_tree() {       this->clear();  delete_node (__end); };
+    ~binary_tree() {       this->clear();  this->delete_node (__end); };
     
     private:
     
