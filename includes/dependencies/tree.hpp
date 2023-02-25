@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 14:37:24 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 14:40:04 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,22 @@ class deletion_arsenal
     nd_allocator __allocat;
     protected:
     void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
-    void            delete_leaf (node_ptr  _node);
+    void            delete_leaf (node_ptr  _node, node_ptr& root);
     void            delete_1_child_parent (node_ptr  _node, node_ptr& root);
     void            delete_2_child_parent (iterator element);
 
 };
 
 template<class BST>
-void    deletion_arsenal<BST >::delete_leaf (node_ptr  _node)
+void    deletion_arsenal<BST >::delete_leaf (node_ptr  _node, node_ptr& root)
 {    
     if (_node->parent->left == _node)
         _node->parent->left = nullptr;
     else
         _node->parent->right = nullptr;
 
+    if (_node == root)
+        root = nullptr;
     delete_node(_node);
 }
 
@@ -256,7 +258,7 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         if (PosPtr->has_1_child())
             base_del::delete_1_child_parent (PosPtr, this->__tree_root);
         else
-            base_del::delete_leaf (PosPtr);
+            base_del::delete_leaf (PosPtr, this->__tree_root);
         __size--;
     }
     
