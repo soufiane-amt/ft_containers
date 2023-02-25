@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 16:06:23 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 16:09:09 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -575,90 +575,6 @@ void    binary_tree<Key,T,Compare ,Allocator>::clear()
 
 
 
-
-
-// template <typename U, typename V, typename Allocator > 
-// void    print_node (Node<pair<U, V>, Allocator > *_node)
-// {
-//     std::cout << _node << std::endl;
-//     std::cout << "key : " << _node->data.first << " -- " << "value : " << _node->data.second << std::endl;
-// }
-
 };
 
 #endif
-
-    // typedef     const_tree_iterator<const node_ptr >        const_iterator;
-    // const_iterator          begin() const{    return (const_iterator(__tree_root->find_first_node(__tree_root)));};
-    // const_iterator          end() const{    return (const_iterator(__end));}
-    // pair<const_iterator,const_iterator> 
-    // equal_range (const key_type& k) const
-    // {
-        // node_ptr to_find;
-
-        // to_find = this->find(k);
-        // if (to_find)
-        //     return make_pair(const_iterator(to_find), const_iterator(next_node(to_find)));
-        // return (make_pair(iterator(__end), iterator(next_node(__end))));
-    // }
-
-    // const_iterator lower_bound( const Key& key ) const
-    // {
-        //node_ptr  node = __tree_root;
-
-        // while (node)
-        // {
-        //     if (!__value_cmp(node->data, to_search))//if __tree->data >= value
-        //         return const_iterator (node);
-        //     else if (__value_cmp(to_search, node->data))
-        //         node = node->left;
-        //     else
-        //         node = node->right;
-        // }
-        // return (const_iterator(__end));
-    // }
-
-    // const_iterator upper_bound( const Key& key ) const;
-    // {
-    //     node_ptr  node = __tree_root;
-
-    //     while (node)
-    //     {
-    //         if (__value_cmp(node->data, to_search))//if __tree->data < value
-    //             return iterator (node);
-    //         else if (__value_cmp(to_search, node->data))
-    //             node = node->left;
-    //         else
-    //             node = node->right;
-    //     }
-    //     return (iterator(__end));
-    // }
-
-
-/*./../containers/../dependencies/tree.hpp:33:27: error: no type named 'node_ptr' in 'ft::binary_tree<int, int,
-      value_compare, std::__1::allocator<int> >'
-    typedef typename BST::node_ptr node_ptr;
-            ~~~~~~~~~~~~~~^~~~~~~~
-./../containers/../dependencies/tree.hpp:44:22: note: in instantiation of template class
-      'ft::bst_traits<ft::binary_tree<int, int, value_compare, std::__1::allocator<int> > >' requested here
-    typedef typename bst_traits<BST>::node_allocator_type   nd_allocator;
-                     ^
-./../containers/../dependencies/tree.hpp:122:28: note: in instantiation of template class
-      'ft::deletion_arsenal<ft::binary_tree<int, int, value_compare, std::__1::allocator<int> > >' requested
-      here
-class binary_tree : public deletion_arsenal<binary_tree<Key, T, Compare, Allocator> >
-                           ^
-test.cpp:56:9: note: in instantiation of template class 'ft::binary_tree<int, int, value_compare,
-      std::__1::allocator<int> >' requested here
-    bst a;
-        ^
-In file included from test.cpp:13:
-./../containers/../dependencies/tree.hpp:34:27: error: no type named 'node_allocator_type' in
-      'ft::binary_tree<int, int, value_compare, std::__1::allocator<int> >'
-    typedef typename BST::node_allocator_type node_allocator_type;
-            ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
-./../containers/../dependencies/tree.hpp:35:27: error: no type named 'iterator' in 'ft::binary_tree<int, int,
-      value_compare, std::__1::allocator<int> >'
-    typedef typename BST::iterator iterator;
-            ~~~~~~~~~~~~~~^~~~~~~~
-3 errors generated.*/
