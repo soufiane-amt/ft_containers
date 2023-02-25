@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 19:21:05 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 19:30:10 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int main ()
     
         
     // bst::reverse_iterator i = a.rbegin() ;
-    std::cout << (*a.rbegin()).first<< std::endl;
-    // for (bst::reverse_iterator i = a.rbegin() ; i != a.rend() ; i++)
-    //     std::cout << (*i).data.first << std::endl;
+    // std::cout << (*a.rbegin()).first<< std::endl;
+    for (bst::reverse_iterator i = a.rbegin() ; i != a.rend() ; i++)
+        std::cout << (*i).first << std::endl;
 
     // for (bst::iterator i = a.begin() ; i != a.end() ; i++)
     //     print_node (i);
@@ -82,12 +82,13 @@ int main ()
 //     // std::cout << std::is_same<bla, int>::value << std::endl; // prints "true"
 
 //     std::map <int , int > a;
-//     (*a.rbegin()).
-//     // a.insert(std::make_pair(5, 3));
-//     // a.insert(std::make_pair(1, 3));
-//     // a.insert(std::make_pair(6, 3));
+//     a.insert(std::make_pair(5, 3));
+//     a.insert(std::make_pair(1, 3));
+//     a.insert(std::make_pair(6, 3));
+//     for (std::map <int , int >::reverse_iterator i = a.rbegin(); i != a.rend(); i++)
+//         std::cout << (*i).first << std::endl;
 
-//     // // for (std::map <int , int >::reverse_iterator i = a.rbegin(); i != a.rend(); i++)
+
 //     // //     std::cout << i->first << std::endl;
 //     // std::cout << (*a.rbegin()).first << std::endl;
 //     // // std::cout << a.rend() << std::endl;

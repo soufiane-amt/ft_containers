@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 17:44:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 19:29:49 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,7 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
 
 /* ************************************************************************** */
-                            // Iterators :
+                            // erase :
 /* ************************************************************************** */
 
     void erase (iterator position)
@@ -285,8 +285,8 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                                             return (const_iterator(__tree_root->find_first_node(__tree_root)));};
     const_iterator          end() const{    return (const_iterator(__end));}
 
-    reverse_iterator        rbegin(){ return reverse_iterator(--end());}
-    reverse_iterator        rend(){ return reverse_iterator(end());}
+    reverse_iterator        rbegin(){ return reverse_iterator(end());}
+    reverse_iterator        rend(){ return reverse_iterator(begin());}
 
     pair<iterator,iterator>             
     equal_range (const key_type& k)
