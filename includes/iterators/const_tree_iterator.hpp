@@ -48,6 +48,8 @@ class const_tree_iterator
         const_tree_iterator():__node(0){}
 
         
+        const_tree_iterator(const const_tree_iterator &other):__node ( other.__node){}
+
         const_tree_iterator(const non_const_iterator &other):__node ( other.base()){}
         
         
@@ -117,15 +119,15 @@ const_tree_iterator<T>        const_tree_iterator<T>::operator--(int)
 
 
 template< class Iterator1, class Iterator2 >
-bool operator==( const ft::const_tree_iterator<Iterator1>& iter1,
-                 const ft::const_tree_iterator<Iterator2>& iter2 )
+bool operator==( const  Iterator1& iter1,
+                 const  Iterator2& iter2 )
 {
     return (iter1.base() == iter2.base());
 }
 
-template< class Iterator1, class Iterator2 >
-bool operator!=( const ft::const_tree_iterator<Iterator1>& iter1,
-                 const ft::const_tree_iterator<Iterator2>& iter2 )
+template< class Iterator1, class Iterator2>
+bool operator!=( const  Iterator1& iter1,
+                 const  Iterator2& iter2 )
 {
     return (iter1.base() != iter2.base());
 }
