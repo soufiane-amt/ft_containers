@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/24 18:53:06 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:56:13 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ struct Node : public swap_deletion_arsenal<Node<T> >
 {
     
     typedef T                                       data_value_type;
+    typedef T*                                      data_value_type_point;
     typedef T&                                      data_value_type_ref;
 
     Node   *parent;

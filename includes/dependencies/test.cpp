@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 16:39:08 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:57:06 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,61 +51,45 @@ void    print_node(Iterator node)
 
 
 
-// int main ()
-// {
-//      bst a;
-//     bool s;
-
-//     srand (time(NULL));
-//     // for (size_t i = 1; i < 4; i++)
-//         a.insert(ft::make_pair(5, 3));
-//         a.insert(ft::make_pair(1, 3));
-//         a.insert(ft::make_pair(6, 3));
-    
-//     // bst::iterator it = ++a.begin(); 
-//     // bst::iterator it1 = ++(++(a.begin())); 
-//     // // std::cout << it->first << " ----- " << it1->first << std::endl;
-//     // print_node (it);
-//     // print_node (it1);
-
-//     // it.base()->swap_for_deletion ((it1).base());
-//     // a.__tree_root = (it1).base();
-
-//     // print_node (it);
-//     // bst::iterator i = a.begin() ;
-//     bst::iterator i = a.begin();
-//     for (bst::iterator i = a.begin() ; i != a.end() ; i++)
-//     {
-//         std::cout << i.base()<< std::endl;
-//         print_node (i);
-//     }
-//     std::cout << "\n\n###################\n\n";
-//     a.erase(++(++a.begin()) , a.end());
-    
-//     for (bst::iterator i = a.begin() ; i != a.end() ; i++)
-//     {
-//         std::cout << i.base()<< std::endl;
-//         print_node (i);
-//     }
-
-//     // for (bst::iterator i = a.begin() ; i != a.end() ; i++)
-//     //     print_node (i);
-//     // print_node (i);
-
-//     // for (bst::iterator it = a.begin(); it != a.end(); it++)
-//     //     std::cout << it->first << "---" << it->second << std::endl;
-    
-// }
-
 int main ()
 {
-    std::map <int , int > a;
-    a.insert(std::make_pair(5, 3));
-    a.insert(std::make_pair(1, 3));
-    a.insert(std::make_pair(6, 3));
+     bst a;
+    bool s;
 
-    // for (std::map <int , int >::reverse_iterator i = a.rbegin(); i != a.rend(); i++)
-    //     std::cout << i->first << std::endl;
-    std::map <int , int >::reverse_iterator i = a.rbegin() + 1;
+    a.insert(ft::make_pair(5, 3));
+    a.insert(ft::make_pair(1, 3));
+    a.insert(ft::make_pair(6, 3));
+    
+        
+    // bst::reverse_iterator i = a.rbegin() ;
+    // std::cout << a.rbegin() << std::endl;
+    // for (bst::reverse_iterator i = a.rbegin() ; i != a.rend() ; i++)
+    //     std::cout << (*i).data.first << std::endl;
+
+    // for (bst::iterator i = a.begin() ; i != a.end() ; i++)
+    //     print_node (i);
+    // print_node (i);
+
+    // for (bst::iterator it = a.begin(); it != a.end(); it++)
+    //     std::cout << it->first << "---" << it->second << std::endl;
     
 }
+
+// typedef int bla;
+// int main ()
+// {
+//     // bool l;
+//     // std::cout << std::is_same<bla, int>::value << std::endl; // prints "true"
+
+//     std::map <int , int > a;
+//     a.begin()->
+//     // a.insert(std::make_pair(5, 3));
+//     // a.insert(std::make_pair(1, 3));
+//     // a.insert(std::make_pair(6, 3));
+
+//     // // for (std::map <int , int >::reverse_iterator i = a.rbegin(); i != a.rend(); i++)
+//     // //     std::cout << i->first << std::endl;
+//     // std::cout << (*a.rbegin()).first << std::endl;
+//     // // std::cout << a.rend() << std::endl;
+    
+// }

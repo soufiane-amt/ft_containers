@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 16:32:09 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:56:38 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,17 @@ class tree_iterator
 {
     public:                                       
         typedef _ite                                                       iterator_type;
-        typedef typename iterator_traits<iterator_type>::iterator_category iterator_category;
+        typedef typename std::bidirectional_iterator_tag                   iterator_category;
         typedef typename iterator_traits<iterator_type>::value_type        value_type;
         typedef typename iterator_traits<iterator_type>::difference_type   difference_type;
-        typedef typename iterator_traits<iterator_type>::pointer           pointer;
-        typedef typename iterator_traits<iterator_type>::reference         reference;
+        typedef typename value_type::data_value_type_point               pointer;
+        
         typedef typename value_type::data_value_type                       data_value_type;
         
         typedef data_value_type*                                           data_value_type_ptr;
-        typedef data_value_type&                                           data_value_type_ref;
+        typedef data_value_type&                                           reference;
         
         typedef const data_value_type_ptr                                  const_data_value_type_ptr;
-        typedef const reference                                            const_reference;
-        typedef const pointer                                              const_pointer;
         
 
         private:
@@ -54,7 +52,7 @@ class tree_iterator
         
         iterator_type                  base() const    {   return (this->__node);}
         
-        data_value_type_ref            operator*() const {    return (__node->data);}
+        reference            operator*() const {    return (__node->data);}
         
         tree_iterator&                 operator++(){      this->__node = next_node(__node);   return (*this);}
         tree_iterator                  operator++(int);

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 15:57:23 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:50:22 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 #ifndef REVERSE_ITERATOR_HPP
 #define REVERSE_ITERATOR_HPP
 
+#include <iostream>
+
 #include <cstddef>
 #include <iterator>
 #include "../dependencies/utility.hpp"
+#include "../dependencies/node.hpp"
 namespace ft
 {
 
 template<class iter>
 class reverse_iterator
-    : public std::iterator<typename iterator_traits<iter>::iterator_category,
-                      typename iterator_traits<iter>::value_type,
-                      typename iterator_traits<iter>::difference_type,
-                      typename iterator_traits<iter>::pointer,
-                      typename iterator_traits<iter>::reference>
 
 {
 
@@ -34,9 +32,7 @@ class reverse_iterator
         typedef iter                                            iterator_type;
         typedef typename iterator_traits<iter>::difference_type difference_type;
         typedef typename iterator_traits<iter>::reference       reference;
-        typedef const typename iterator_traits<iter>::reference       const_reference;
         typedef typename iterator_traits<iter>::pointer         pointer;
-        typedef const typename iterator_traits<iter>::pointer         const_pointer;
 
         reverse_iterator();
         explicit reverse_iterator(iter x );
@@ -71,6 +67,7 @@ class reverse_iterator
 template<class iter>
 reverse_iterator<iter>::reverse_iterator():__iter()
 {
+    std::cout << std::is_same< ft::Node<ft::pair<const int, int> >::data_value_type_ref  , reverse_iterator<iter>::reference>::value << std::endl; // prints "true"
     
 }
 
@@ -105,7 +102,8 @@ typename reverse_iterator<iter>::reference       reverse_iterator<iter>::operato
 template<class iter>
 typename reverse_iterator<iter>::pointer   reverse_iterator<iter>::operator->() const
 {
-    return (std::addressof(operator*()));
+    iter tmp = this->__iter;
+    return &(*--tmp);
 }
 
 
