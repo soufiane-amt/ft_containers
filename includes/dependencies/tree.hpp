@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 16:34:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 16:43:44 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "../iterators/tree_iterator.hpp"
 #include "../iterators/const_tree_iterator.hpp"
+#include "../iterators/reverse_iterator.hpp"
 #include "node.hpp"
 
 
@@ -149,8 +150,8 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     typedef     tree_iterator<node_ptr >                    iterator;
     typedef     const_tree_iterator<node_ptr >              const_iterator;
 
-    typedef     reverse_iterator                            reverse_iterator;
-    typedef     const_reverse_iterator                      const_reverse_iterator;
+    // typedef     reverse_iterator<iterator>                  reverse_iterator;
+    // typedef     const_reverse_iterator <const_iterator>     const_reverse_iterator;
 
     private:
     node_ptr        create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
@@ -285,8 +286,8 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                                             return (const_iterator(__tree_root->find_first_node(__tree_root)));};
     const_iterator          end() const{    return (const_iterator(__end));}
 
-    reverse_iterator        rbegin();
-    const_reverse_iterator  rbegin() const;
+    // reverse_iterator        rbegin();
+    // const_reverse_iterator  rbegin() const;
 
     pair<iterator,iterator>             
     equal_range (const key_type& k)
