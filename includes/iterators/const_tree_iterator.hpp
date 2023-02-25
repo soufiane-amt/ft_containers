@@ -38,7 +38,7 @@ class const_tree_iterator
         typedef const data_value_type_ptr                                  const_data_value_type_ptr;
         typedef const reference                                            const_reference;
         typedef const pointer                                              const_pointer;
-        
+        typedef tree_iterator< iterator_type >                              non_const_iterator; 
 
         private:
         
@@ -48,10 +48,8 @@ class const_tree_iterator
         const_tree_iterator():__node(0){}
 
         
-        const_tree_iterator(const const_tree_iterator &other):__node ( other.__node){}
+        const_tree_iterator(const non_const_iterator &other):__node ( other.base()){}
         
-        const_tree_iterator&                 operator=(const const_tree_iterator &other){ __node = other.__node; }
-
         
         iterator_type                  base() const    {   return (this->__node);}
         

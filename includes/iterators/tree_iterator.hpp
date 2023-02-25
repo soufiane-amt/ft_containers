@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 15:01:13 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 15:22:06 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ class tree_iterator
         
         tree_iterator(const tree_iterator &other):__node ( other.__node){}
         
-        tree_iterator&                 operator=(const tree_iterator &other){ __node = other.__node; }
+        // tree_iterator&                 operator=(const tree_iterator &other){ __node = other.__node; }
 
         
         iterator_type                  base() const    {   return (this->__node);}
