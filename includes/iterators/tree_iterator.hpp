@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 14:56:46 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 14:58:50 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,27 @@ class tree_iterator
         
         tree_iterator(const tree_iterator &other):__node ( other.__node){}
         
-        tree_iterator&       operator=(const tree_iterator &other){ __node = other.__node; }
+        tree_iterator&                 operator=(const tree_iterator &other){ __node = other.__node; }
 
         
-        iterator_type           base() const    {   return (this->__node);}
+        iterator_type                  base() const    {   return (this->__node);}
         
         data_value_type_ref            operator*() const {    return (__node->data);}
         
-        tree_iterator&       operator++(){      this->__node = next_node(__node);   return (*this);}
-        tree_iterator        operator++(int);
-        
-        tree_iterator&       operator--(){      this->__node = prev_node(__node);   return (*this);}
-        tree_iterator        operator--(int);
-        
-        tree_iterator        operator+(difference_type) const;
-        tree_iterator        operator-(difference_type) const;
-        
-        template <class it>
-        tree_iterator&       operator=(const it&)  {    this->__node = other._node; return (*this);};
+        tree_iterator&                 operator++(){      this->__node = next_node(__node);   return (*this);}
+        tree_iterator                  operator++(int);
+                
+        tree_iterator&                 operator--(){      this->__node = prev_node(__node);   return (*this);}
+        tree_iterator                  operator--(int);
+                
+        tree_iterator                  operator+(difference_type) const;
+        tree_iterator                  operator-(difference_type) const;
+                    
+        // template <class it>
+        // tree_iterator&                 operator=(const it&)  {    this->__node = it.base(); return (*this);};
     
-        data_value_type_ptr                 operator->()    {    return (&__node->data);}
-        const_data_value_type_ptr           operator->() const  {    return (&__node->data);}
+        data_value_type_ptr            operator->()    {    return (&__node->data);}
+        const_data_value_type_ptr      operator->() const  {    return (&__node->data);}
 
         template<
         class Key,
