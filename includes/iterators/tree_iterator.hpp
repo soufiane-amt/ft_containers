@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/22 21:03:20 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 11:42:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 namespace ft 
 {
+
 template<class _ite>
 class tree_iterator
 {
@@ -37,14 +38,19 @@ class tree_iterator
         typedef const data_value_type_ptr                                  const_data_value_type_ptr;
         typedef const reference                                            const_reference;
         typedef const pointer                                              const_pointer;
+        
 
+        private:
+        
+        tree_iterator(iterator_type ptr);
+        
+        public:
         tree_iterator();
         
         tree_iterator(const tree_iterator &other);
         
         // tree_iterator(const const_tree_iterator &other);
         
-        tree_iterator(iterator_type ptr);
 
         iterator_type           base() const;
         
@@ -65,10 +71,19 @@ class tree_iterator
 
         iterator_type       find_last_node(iterator_type _node) ;
         iterator_type       find_first_node(iterator_type _node) ;
+
+    template<
+    class Key,
+    class T,
+    class Compare,
+    class Allocator 
+    >
+    friend  class binary_tree;
     private:
         iterator_type   __node;
         iterator_type   __first_node;
         iterator_type   __last_node;
+
     };
 
 
