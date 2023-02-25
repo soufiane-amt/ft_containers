@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 11:24:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 11:25:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,9 +224,9 @@ class binary_tree : public deletion_arsenal< Node <ft::pair<const Key, T>  >*,
         while (PosPtr->has_2_child())
             PosPtr->swap_for_deletion (next_node(PosPtr), __tree_root);
         if (PosPtr->has_1_child())
-            delete_1_child_parent (PosPtr);
+            this->delete_1_child_parent (PosPtr);
         else
-            delete_leaf (PosPtr);
+            this->delete_leaf (PosPtr);
         __size--;
     }
     
