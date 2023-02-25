@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 15:12:37 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 15:12:49 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ template<
     typedef     ptrdiff_t                                    difference_type;
     
     typedef     binary_tree<key_type, mapped_type, key_compare, allocator_type>  binary_tree;
-    // typedef     typename traits_tree <key_type, mapped_type, allocator_type>::node_ptr node_ptr;
 
-    //value_compare
     typedef     const value_type&                  const_reference;
     typedef     const pointer                      const_pointer;
     typedef     const binary_tree*                 binary_tree_const_pointer;

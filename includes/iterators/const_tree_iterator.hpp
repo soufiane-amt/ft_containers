@@ -33,7 +33,7 @@ class const_tree_iterator
         typedef typename value_type::data_value_type                       data_value_type;
         
         typedef data_value_type*                                           data_value_type_ptr;
-        typedef data_value_type&                                           data_value_type_ref;
+        typedef const data_value_type&                                           data_value_type_ref;
         
         typedef const data_value_type_ptr                                  const_data_value_type_ptr;
         typedef const reference                                            const_reference;
@@ -69,8 +69,8 @@ class const_tree_iterator
         // template <class it>
         // const_tree_iterator&                 operator=(const it&)  {    this->__node = it.base(); return (*this);};
     
-        data_value_type_ptr            operator->()    {    return (&__node->data);}
-        const_data_value_type_ptr      operator->() const  {    return (&__node->data);}
+        const_data_value_type_ptr            operator->()    {    return (&__node->data);}
+        const_data_value_type_ptr            operator->() const  {    return (&__node->data);}
 
         template<
         class Key,
