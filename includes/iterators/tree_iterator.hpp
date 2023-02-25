@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 14:41:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 14:50:01 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ class tree_iterator
         
         tree_iterator(const tree_iterator &other);
         
-        // tree_iterator(const const_tree_iterator &other);
-        
+        tree_iterator&       operator=(const tree_iterator &other);
 
+        
         iterator_type           base() const;
         
         data_value_type_ref            operator*() const;
@@ -81,8 +81,6 @@ class tree_iterator
         friend  class binary_tree;
     private:
         iterator_type   __node;
-        iterator_type   __first_node;
-        iterator_type   __last_node;
 
     };
 
@@ -112,12 +110,6 @@ template<class T>
 tree_iterator<T>::tree_iterator(iterator_type ptr)
 {
     this->__node = ptr;
-    if (__node)
-    {
-        __last_node = this->find_last_node(__node);
-        __first_node = this->find_first_node(__node);
-    }
-
 }
 
 
