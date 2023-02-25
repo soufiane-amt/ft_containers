@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 14:58:50 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 15:01:13 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #define TREE_ITERATOR_HPP
 
 #include "../dependencies/utility.hpp"
-// #include "const_tree_iterator.hpp"
 
 namespace ft 
 {
@@ -85,17 +84,6 @@ class tree_iterator
     };
 
 
-
-
-
-
-// template<class T>
-// tree_iterator<T>::tree_iterator(const ft::const_tree_iterator<T> &other):__node ( other.base())
-// {
-     
-// }
-
-
 template<class T>
 tree_iterator<T>::tree_iterator(iterator_type ptr)
 {
@@ -140,12 +128,6 @@ bool operator!=( const ft::tree_iterator<Iterator1>& iter1,
 {
     return (iter1.base() != iter2.base());
 }
-
-
-
-
-
-
 
 
 }

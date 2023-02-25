@@ -87,15 +87,6 @@ class const_tree_iterator
 
 
 
-
-
-// template<class T>
-// const_tree_iterator<T>::const_tree_iterator(const ft::const_const_tree_iterator<T> &other):__node ( other.base())
-// {
-     
-// }
-
-
 template<class T>
 const_tree_iterator<T>::const_tree_iterator(iterator_type ptr)
 {
@@ -140,12 +131,6 @@ bool operator!=( const ft::const_tree_iterator<Iterator1>& iter1,
 {
     return (iter1.base() != iter2.base());
 }
-
-
-
-
-
-
 
 
 }

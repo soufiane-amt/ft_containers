@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 14:40:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/25 15:10:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,18 @@
 #define TREE_HPP
 
 #include "../iterators/tree_iterator.hpp"
-// #include "../iterators/const_tree_iterator.hpp"
+#include "../iterators/const_tree_iterator.hpp"
 #include "node.hpp"
 
 
 namespace ft
 {
 
-template<class Key, class T, class Compare, class Allocator> class binary_tree;
 /* ***************************************************************************************************************/
    ///////////////////                        Deletion_Arsenal :                             ///////////////////
 /* ***************************************************************************************************************/
 
-// template<class BST>
-// class bst_traits
-// {
-//     public:
-//     typedef typename BST::node_ptr node_ptr;
-//     typedef typename BST::node_allocator_type node_allocator_type;
-//     typedef typename BST::iterator iterator;
-// };
 
-template<
-    class Key,
-    class T,
-    class Allocator 
-    >
-class traits_tree
-{
-    public:
-        typedef     Key                                                 key_type;
-        typedef     T                                                   mapped_type;
-        typedef 	ft::pair<const key_type,mapped_type>                value_type;
-        typedef     Node<value_type>                                    Node;
-        typedef     Node*                                               node_ptr ;
-        typedef     tree_iterator<node_ptr >                            iterator;
-        typedef     typename Allocator::template rebind<Node>::other    node_allocator_type;
-};
 
 
 template<
@@ -86,7 +61,6 @@ void    deletion_arsenal<BST >::delete_leaf (node_ptr  _node, node_ptr& root)
 }
 
 template<class BST>
-
 void    deletion_arsenal<BST >::delete_1_child_parent (node_ptr  _node, node_ptr& root)
 {
     node_ptr child;
@@ -106,7 +80,6 @@ void    deletion_arsenal<BST >::delete_1_child_parent (node_ptr  _node, node_ptr
 }
 
 template<class BST>
-
 void    deletion_arsenal<BST >::delete_2_child_parent (iterator element)
 {
     node_ptr _node =  element.base();
@@ -125,10 +98,23 @@ void    deletion_arsenal<BST >::delete_2_child_parent (iterator element)
 /* ***************************************************************************************************************/
 
 
+template<
+    class Key,
+    class T,
+    class Allocator 
+    >
+class traits_tree
+{
+    public:
+        typedef     Key                                                 key_type;
+        typedef     T                                                   mapped_type;
+        typedef 	ft::pair<const key_type,mapped_type>                value_type;
+        typedef     Node<value_type>                                    Node;
+        typedef     Node*                                               node_ptr ;
+        typedef     tree_iterator<node_ptr >                            iterator;
+        typedef     typename Allocator::template rebind<Node>::other    node_allocator_type;
+};
 
-/*: public deletion_arsenal <typename std::allocator_traits<Allocator>::template rebind_traits<Node>::pointer, 
-                                                    iterator, 
-                                                    node_allocator_type>*/
                                                     
 /* ***************************************************************************************************************/
    ///////////////////                        Binary_tree :                                    ///////////////////
@@ -161,6 +147,7 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     
     //iterator      
     typedef     tree_iterator<node_ptr >                    iterator;
+    typedef     const_tree_iterator<node_ptr >               const_iterator;
 
     
 
