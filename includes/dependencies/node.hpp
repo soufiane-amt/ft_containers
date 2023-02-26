@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 18:56:13 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/26 11:28:25 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ namespace ft
 template <class Node>
 struct swap_deletion_arsenal
 {
-    typedef Node* node_ptr;
-    
+    typedef Node*   node_ptr;
+
+
     protected:
 
     void 
@@ -156,12 +157,13 @@ struct Node : public swap_deletion_arsenal<Node<T> >
     typedef T                                       data_value_type;
     typedef T*                                      data_value_type_point;
     typedef T&                                      data_value_type_ref;
+    typedef bool                                    COLOR_TYPE;
 
-    Node   *parent;
-    Node   *left;
-    Node   *right;
-    T       data;
-    
+    Node            *parent;
+    Node            *left;
+    Node            *right;
+    T                data;
+    COLOR_TYPE       color;
 
     Node(T d = T()): data(d)
     {
