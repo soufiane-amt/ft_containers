@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 20:43:33 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/26 17:28:01 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,49 +50,36 @@ void    print_node(Iterator node)
 }
 
 
-
-// int main ()
-// {
-//      bst a;
-//     bool s;
-
-//     a.insert(ft::make_pair(5, 3));
-//     a.insert(ft::make_pair(1, 3));
-//     a.insert(ft::make_pair(6, 3));
-    
-        
-//     // bst::reverse_iterator i = a.rbegin() ;
-//     // std::cout << (*a.rbegin()).first<< std::endl;
-//     for (bst::reverse_iterator i = a.rbegin() ; i != a.rend() ; i++)
-//         std::cout << (*i).first << std::endl;
-
-//     // for (bst::iterator i = a.begin() ; i != a.end() ; i++)
-//     //     print_node (i);
-//     // print_node (i);
-
-//     // for (bst::iterator it = a.begin(); it != a.end(); it++)
-//     //     std::cout << it->first << "---" << it->second << std::endl;
-    
-// }
-
-// typedef int bla;
 int main ()
 {
-    // bool l;
-    // std::cout << std::is_same<bla, int>::value << std::endl; // prints "true"
+     bst a;
+    bool s;
 
-    std::map <int , int > a;
-    a.insert(std::make_pair(5, 3));
-    a.insert(std::make_pair(1, 3));
-    a.insert(std::make_pair(6, 3));
-    std::map <int , int >::iterator i = a.begin();
-    i =  a.begin();
-    // for (std::map <int , int >::reverse_iterator i = a.rbegin(); i != a.rend(); i++)
-    //     std::cout << (*i).first << std::endl;
-
-
-    // //     std::cout << i->first << std::endl;
-    // std::cout << (*a.rbegin()).first << std::endl;
-    // // std::cout << a.rend() << std::endl;
+    a.insert(ft::make_pair(5, 3));
+    a.insert(ft::make_pair(1, 3));
+    a.insert(ft::make_pair(6, 3));
+    
     
 }
+
+// typedef int bla;
+// int main ()
+// {
+//     // bool l;
+//     // std::cout << std::is_same<bla, int>::value << std::endl; // prints "true"
+
+//     std::map <int , int > a;
+//     a.insert(std::make_pair(5, 3));
+//     a.insert(std::make_pair(1, 3));
+//     a.insert(std::make_pair(6, 3));
+//     std::map <int , int >::iterator i = a.begin();
+//     i =  a.begin();
+//     // for (std::map <int , int >::reverse_iterator i = a.rbegin(); i != a.rend(); i++)
+//     //     std::cout << (*i).first << std::endl;
+
+
+//     // //     std::cout << i->first << std::endl;
+//     // std::cout << (*a.rbegin()).first << std::endl;
+//     // // std::cout << a.rend() << std::endl;
+    
+// }
