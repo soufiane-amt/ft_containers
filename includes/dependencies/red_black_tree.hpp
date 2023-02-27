@@ -27,8 +27,6 @@ namespace ft
 /* ***************************************************************************************************************/
 
 
-#define  BLACK 0;
-#define  RED   1;
 
 template<
     class BST
@@ -399,17 +397,40 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     
     void    RebalanceRedBlackTreeInsert (node_ptr new_node)
     {
+        bool nd_forms_triangle;
+
         if (is_black_node(new_node ->parent))
             return;
-        if (!is_black_node(new_node ->parent))
+        while ()
         {
-            if (parent_sibling_color(new_node) == BLACK)
+            node_ptr nd_uncle = node_uncle(new_node);
+
+            if (nd_uncle->color == RED )
+            {
+                ReColor (new_node);
+                ReColor (new_node->parent);
+                ReColor (nd_uncle);
+            }
+            else
+            {
+                nd_forms_triangle = node_is_triangle_form (new_node);
+                if (nd_forms_triangle == LEFT)
+                {
+                    rotate_right(new_node->parent);
+                }
+                else if (nd_forms_triangle == RIGHT)
+        }
+        
+    }
+/*        if (!is_black_node(new_node ->parent))
+        {
+            if (uncle_color(new_node) == BLACK)
                 //Do suitable rotations and recolor
             else
                 //Recolor parent and its sibling
+                //check if grandfather is not root then recolor
         }
-    }
-
+*/
 
 /* ************************************************************************** */
                             // Red Black tree helpers :

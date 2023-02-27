@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 16:24:35 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 18:23:37 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ namespace ft
 //     >
 
 
+#define  BLACK 0;
+#define  RED   1;
+
+#define  LEFT   2;
+#define  RIGHT  3;
 
 //swap arsenal
 template <class Node>
@@ -335,7 +340,7 @@ template <class T>
 
 
 template <class T>
-void Re_color (const Node<T>* node )
+void ReColor (const Node<T>* node )
 {   
     if(!node)
         return;
@@ -346,21 +351,27 @@ void Re_color (const Node<T>* node )
 }
 
 template <class T>
-typename Node<T>::NODE_COLOR parent_sibling_color (const Node<T>* node )
+Node<T>* node_uncle (const Node<T>* node )
 {  
     const Node<T>* node_parent = node->parent;
 
     if (is_left_child (node_parent))
-    {
-        if (is_black_node(node_parent->parent->right))
-            return (BLACK);
-        else
-            return (RED);
-    }
-    if (is_black_node(node_parent->parent->left))
-        return (BLACK);
-    else
-        return (RED);
+            return (node_parent->parent->right);
+    return (node_parent->parent->left);
+}
+
+template <class T>
+int new_node_forms_triangle (const Node<T>* node )
+{
+    bool node_left = is_left_child (node) ;
+    bool node_parent_left = is_left_child (node->parent) ;
+    bool node_gParent_left = is_left_child (node->parent->parent) ;
+
+    if (node_left && !node_parent_left && node_gParent_left)
+        return (LEFT);
+    if (!node_left && node_parent_left && !node_gParent_left)
+        return (RIGHT);
+    return (false);
 }
 
 
