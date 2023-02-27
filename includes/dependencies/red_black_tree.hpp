@@ -408,9 +408,9 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
             if (nd_uncle->color == RED )
             {
-                ReColor (new_node);
-                ReColor (new_node->parent);
                 ReColor (nd_uncle);
+                ReColor (new_node->parent);
+                ReColor (nd_uncle ->parent);
             }
             else
             {
