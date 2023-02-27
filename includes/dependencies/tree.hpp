@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 19:29:49 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 13:39:06 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,9 +392,80 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     }
     ~binary_tree() {       this->clear();  delete_node (__end); };
     
+
+
+
+/* ************************************************************************** */
+                            // Red Black tree helpers :
+/* ************************************************************************** */
+    void    rotate_left (node_ptr   x)
+    {
+        node_ptr    y = x->right;
+        node_ptr    p = x->parent;
+        node_ptr    a = x->left;
+        node_ptr    B = y->left;
+        node_ptr    L = y->right;
+
+
+        if (is_left_child (x))
+        {
+            p->left = y;
+            y->parent = p;
+            if (p == __end)
+                __tree_root = y;
+        }
+        else
+        {
+            p->right = y;
+            y->parent = p;
+        }
+        if (y)
+        {
+            y->left = x;
+            x->parent = y;
+        }
+        
+        x->right = B;
+        if (B)
+            B->parent = x;
+    }
+    
+    void    rotate_right (node_ptr   y)
+    {
+        node_ptr    x = y->left;
+        node_ptr    p = y->parent;
+        node_ptr    a = y->right;
+        node_ptr    B = x->right;
+        node_ptr    L = x->left;
+
+        if (is_left_child (y))
+        {
+            p->left = x;
+            x->parent = p;
+            if (p == __end)
+                __tree_root = x;
+        }
+        else
+        {
+            p->right = x;
+            x->parent = p;
+        }
+
+        if (x)
+        {
+            x->right = y;
+            y->parent = x;
+        }
+        y->left = B;
+        if (B)
+            B->parent = y;
+
+    }
+    
+
+    node_ptr                                        __tree_root;
     private:
     
-    node_ptr                                        __tree_root;
     node_ptr                                        __end;
     size_type                                       __size;
     node_allocator_type                             __allocat;
@@ -558,7 +629,6 @@ void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(node_ptr _
         return;
     tarverseNodesPostOrder(_tree->right, func);
     tarverseNodesPostOrder(_tree->left, func);
-    std::cout << "-----\n" ;
     (this->*func)(_tree);
 }
 

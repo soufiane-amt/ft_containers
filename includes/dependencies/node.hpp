@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/26 11:28:25 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 10:45:52 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,6 +313,18 @@ template <class T>
   bool nodes_are_relatives (const Node<T>* node , const Node<T>* node_seccessor )
 {   
     return (node->left == node_seccessor || node->right == node_seccessor); 
+}
+
+template <class T>
+  bool has_left_subtree (const Node<T>* node )
+{   
+    return (node ->left != nullptr);
+}
+
+template <class T>
+  bool has_right_subtree (const Node<T>* node )
+{   
+    return (node ->right != nullptr);
 }
 
 
