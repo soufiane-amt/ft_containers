@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 13:39:06 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 13:52:19 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -402,11 +402,14 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     {
         node_ptr    y = x->right;
         node_ptr    p = x->parent;
-        node_ptr    a = x->left;
-        node_ptr    B = y->left;
-        node_ptr    L = y->right;
-
-
+        node_ptr    B ;
+        node_ptr    L ;
+    
+        if (y)
+        {
+            B = y->left;
+            L = y->right;
+        }
         if (is_left_child (x))
         {
             p->left = y;
@@ -434,10 +437,14 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     {
         node_ptr    x = y->left;
         node_ptr    p = y->parent;
-        node_ptr    a = y->right;
-        node_ptr    B = x->right;
-        node_ptr    L = x->left;
+        node_ptr    B ;
+        node_ptr    L ;
 
+        if (x)
+        {
+            B = x->right;
+            L = x->left;
+        }
         if (is_left_child (y))
         {
             p->left = x;
@@ -450,7 +457,6 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             p->right = x;
             x->parent = p;
         }
-
         if (x)
         {
             x->right = y;
@@ -459,7 +465,6 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         y->left = B;
         if (B)
             B->parent = y;
-
     }
     
 
