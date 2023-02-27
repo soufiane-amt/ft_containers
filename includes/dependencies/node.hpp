@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 18:29:06 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 19:52:56 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ namespace ft
 //     >
 
 
-#define  BLACK 0;
-#define  RED   1;
+#define  BLACK 0
+#define  RED   1
 
-#define  LEFT   2;
-#define  RIGHT  3;
+#define  LEFT   2
+#define  RIGHT  3
 
 //swap arsenal
 template <class Node>

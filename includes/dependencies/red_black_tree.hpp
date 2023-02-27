@@ -402,7 +402,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
         if (is_black_node(new_node ->parent))
             return;
-        while ()
+        while (1)
         {
             nd_uncle = node_uncle(new_node);
 
@@ -437,8 +437,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     ReColor (orgParent);
                     ReColor (orgGParent);
                 }
+            }
         }
-        
     }
 /*        if (!is_black_node(new_node ->parent))
         {
