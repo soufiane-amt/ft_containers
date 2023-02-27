@@ -406,7 +406,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             if (parent_sibling_color(new_node) == BLACK)
                 //Do suitable rotations and recolor
             else
-                //Recolor 
+                //Recolor parent and its sibling
         }
     }
 
