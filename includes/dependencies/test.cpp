@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 19:52:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 20:35:16 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void    print_node(Iterator node)
         {
             NodePtr arr[1000000];
             size_t index = 1;
-            size_t height = 2 * log2(3);
+            size_t height = 2 * log2(10);
             
             arr[0] = _root;
             for (size_t j = 0 ; j < height; j++)
@@ -102,8 +102,8 @@ void    print_node(Iterator node)
                 padding(' ', pad);
                 if (arr[i])
                 {
-                    // if (arr[i]->color == RED)
-                        // std::cout << "\e[0;31m";
+                    if (arr[i]->color == RED)
+                        std::cout << "\e[0;31m";
                     std::cout << '(' << arr[i]->data.first << ')' << "\e[0m";
                 }
                 else
@@ -127,20 +127,15 @@ int main ()
         a.insert(ft::make_pair(35, 3));
         a.insert(ft::make_pair(15, 3));
         a.insert(ft::make_pair(5, 3));
-        // a.insert(ft::make_pair(32, 3));
+        a.insert(ft::make_pair(32, 3));
         // a.insert(ft::make_pair(25, 3));
         // a.insert(ft::make_pair(21, 3));
+    print_tree_2 (a.__tree_root);
         
-    // a.insert(ft::make_pair(1, 3));
-    // a.insert(ft::make_pair(6, 3));
-    print_tree_2 (a.__tree_root);
-    a.rotate_right (a.__tree_root->left);
-    print_tree_2 (a.__tree_root);
 
-    for ( bst::iterator i = a.begin(); i != a.end(); i++)
-    {
-        std::cout << i->first << std::endl;
-    }
+    // print_tree_2 (a.__tree_root);
+    // a.rotate_right (a.__tree_root->left);
+    // print_tree_2 (a.__tree_root);
     
 }
 

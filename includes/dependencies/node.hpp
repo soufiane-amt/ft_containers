@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 19:52:56 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 20:18:55 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ Node<T>::find_first_node(Node<T>* _node)
 
 
 template <typename T>
-bool   is_left_child(Node<T>* node)
+bool   is_left_child(const Node<T>* node)
 {
     return (node->parent->left == node);
 }
@@ -340,14 +340,14 @@ template <class T>
 
 
 template <class T>
-void ReColor (const Node<T>* node )
+void ReColor (Node<T>* node )
 {   
     if(!node)
         return;
     if (node->color == BLACK)
         node->color = RED;
     else
-        node->color = RED;
+        node->color = BLACK;
 }
 
 template <class T>
@@ -356,7 +356,7 @@ Node<T>* node_uncle (const Node<T>* node )
     const Node<T>* node_parent = node->parent;
 
     if (is_left_child (node_parent))
-            return (node_parent->parent->right);
+        return (node_parent->parent->right);
     return (node_parent->parent->left);
 }
 

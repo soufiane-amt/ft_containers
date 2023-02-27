@@ -201,6 +201,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         bool        success;
         node_ptr    new_node = create_node (val);
         iterator    it =  insert_node (__tree_root, new_node, success);
+        RebalanceRedBlackTreeInsert (new_node);
         return (make_pair(it, success));
     }
     iterator                            insert (iterator position, value_type&  val)
@@ -400,17 +401,20 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         node_ptr nd_uncle;
         bool nds_form;
 
+
+        // while (1)
+        // {
         if (is_black_node(new_node ->parent))
             return;
-        while (1)
-        {
             nd_uncle = node_uncle(new_node);
 
-            if (nd_uncle->color == RED )
+            if (nd_uncle && nd_uncle->color == RED )
             {
                 ReColor (nd_uncle);
                 ReColor (new_node->parent);
-                ReColor (nd_uncle ->parent);
+                if (__tree_root != nd_uncle ->parent)
+                    ReColor (nd_uncle ->parent);
+                RebalanceRedBlackTreeInsert(nd_uncle ->parent);
             }
             else
             {
@@ -438,7 +442,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     ReColor (orgGParent);
                 }
             }
-        }
+        // }
     }
 /*        if (!is_black_node(new_node ->parent))
         {
@@ -556,7 +560,7 @@ template<
     class Compare ,
     class Allocator 
     >
-RedBlack_tree<Key,T,Compare ,Allocator>::RedBlack_tree(const RedBlack_tree& copy)
+RedBlack_tree<Key,T,Compare ,Allocator>::RedBlack_tree(const RedBlack_tree& copy):__tree_root(nullptr)
 {
     __allocat = copy.__allocat;
     insert (copy.begin(), copy.end());
