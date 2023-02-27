@@ -419,6 +419,9 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     rotate_right(new_node->parent);
                 }
                 else if (nd_forms_triangle == RIGHT)
+                {
+                    rotate_left(new_node->parent);
+                }
         }
         
     }
