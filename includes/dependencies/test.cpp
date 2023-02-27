@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 13:46:54 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 13:54:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,11 @@ int main ()
     print_tree_2 (a.__tree_root);
     a.rotate_right (a.__tree_root->left);
     print_tree_2 (a.__tree_root);
+
+    for ( bst::iterator i = a.begin(); i != a.end(); i++)
+    {
+        std::cout << i->first << std::endl;
+    }
     
 }
 
