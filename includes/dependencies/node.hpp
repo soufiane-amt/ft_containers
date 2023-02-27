@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 20:51:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 21:15:49 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,7 +369,6 @@ int node_forms_triangle (const Node<T>* node )
 
     if (node_left && !node_parent_left && node_gParent_left)
         return (LEFT);
-    std::cout << "node_left"<< node_left <<  "node_parent_left" << node_parent_left<< "node_gParent_left" << node_gParent_left << std::endl;
     if (!node_left && node_parent_left && !node_gParent_left)
         return (RIGHT);
     return (0);
@@ -381,7 +380,7 @@ int node_forms_line (const Node<T>* node )
 {
     bool node_left = is_left_child (node) ;
     bool node_parent_left = is_left_child (node->parent) ;
-    bool node_gParent_left = is_left_child (node->parent->parent) ;
+    bool node_gParent_left = is_left_child (node->parent->parent);
 
     if (node_left && node_parent_left && node_gParent_left)
         return (LEFT);

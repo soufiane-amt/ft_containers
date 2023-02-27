@@ -413,23 +413,25 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 ReColor (nd_uncle);
                 ReColor (new_node->parent);
                 if (__tree_root != nd_uncle ->parent)
-                    ReColor (nd_uncle ->parent);
+                    ReColor (new_node->parent ->parent);
                 RebalanceRedBlackTreeInsert(nd_uncle ->parent);
             }
             else
             {
-                nds_form = node_forms_triangle (new_node);
-                    std::cout <<    "---nds_form" <<nds_form << std::endl;
+                nds_form = node_forms_triangle (new_node);// new node is not a leaf if the prev cond checked
                 if (nds_form == LEFT)
                 {
                     rotate_right(new_node->parent);
+                    rotate_left(new_node->parent);
                 }
                 else if (nds_form == RIGHT)
                 {
                     rotate_left(new_node->parent);
+                    rotate_right(new_node->parent);
                 }
 
                 nds_form = node_forms_line (new_node);
+                std::cout <<    "---nds_form" <<nds_form << std::endl;
 
                 if (nds_form)
                 {
