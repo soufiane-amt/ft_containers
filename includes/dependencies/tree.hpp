@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 13:52:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:10:57 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,7 +392,7 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     }
     ~binary_tree() {       this->clear();  delete_node (__end); };
     
-
+    void    RebalanceRedBlackTree ();
 
 
 /* ************************************************************************** */
