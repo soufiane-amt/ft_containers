@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 13:54:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:12:20 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class value_compare
 };
 
 
-typedef ft::binary_tree <int, int, value_compare ,std::allocator<int> > bst;
+typedef ft::RedBlack_tree <int, int, value_compare ,std::allocator<int> > bst;
 
 typedef ft::Node<ft::pair <const int, int> >*  NodePtr;
 

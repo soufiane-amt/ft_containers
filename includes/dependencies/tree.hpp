@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:34:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 15:10:57 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:12:46 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void    deletion_arsenal<BST >::delete_2_child_parent (iterator element)
 
 
 /* ***************************************************************************************************************/
-   ///////////////////                        Binary_tree_traits :                             ///////////////////
+   ///////////////////                        RedBlack_tree_traits :                             ///////////////////
 /* ***************************************************************************************************************/
 
 
@@ -118,7 +118,7 @@ class traits_tree
 
                                                     
 /* ***************************************************************************************************************/
-   ///////////////////                        Binary_tree :                                    ///////////////////
+   ///////////////////                        RedBlack_tree :                                    ///////////////////
 /* ***************************************************************************************************************/
 
 
@@ -128,7 +128,7 @@ template<
     class Compare,
     class Allocator 
     >
-class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
+class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 {
     public:
 
@@ -156,7 +156,7 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     node_ptr        create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
                                                                       return (new_node);}
     node_ptr        insert_node (node_ptr& start_node, node_ptr  new_node, bool& success);
-    void            tarverseNodesPostOrder(node_ptr _tree, void (binary_tree<Key,T,Compare ,Allocator>::*func)(node_ptr));
+    void            tarverseNodesPostOrder(node_ptr _tree, void (RedBlack_tree<Key,T,Compare ,Allocator>::*func)(node_ptr));
     
     void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
     void            delete_leaf (node_ptr  _node);
@@ -172,15 +172,15 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                             // Costructors :
 /* ************************************************************************** */
 
-    binary_tree(const value_compare& comp =  value_compare(std::less<int>()),
+    RedBlack_tree(const value_compare& comp =  value_compare(std::less<int>()),
                   const node_allocator_type& alloc = node_allocator_type());
-    binary_tree(const binary_tree& copy);
+    RedBlack_tree(const RedBlack_tree& copy);
 
 /* ************************************************************************** */
                             // Overload func :
 /* ************************************************************************** */
 
-    binary_tree& operator=(const binary_tree& copy);
+    RedBlack_tree& operator=(const RedBlack_tree& copy);
 
 /* ************************************************************************** */
                             // Getters :
@@ -383,16 +383,19 @@ class binary_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
     void        clear();
 
-    void        swap (binary_tree &x)
+    void        swap (RedBlack_tree &x)
     {
         swap (__end, x.__end);
         swap (__size, x.__size);
         swap (__allocat, x.__allocat);
         swap (__value_cmp, x.__value_cmp);
     }
-    ~binary_tree() {       this->clear();  delete_node (__end); };
+    ~RedBlack_tree() {       this->clear();  delete_node (__end); };
     
-    void    RebalanceRedBlackTree ();
+    void    RebalanceRedBlackTree ()
+    {
+        
+    }
 
 
 /* ************************************************************************** */
@@ -487,7 +490,7 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const value_compare& cmp, const   node_allocator_type& alloc ): __value_cmp(cmp), __allocat(alloc), __tree_root(nullptr)
+RedBlack_tree<Key,T,Compare ,Allocator>::RedBlack_tree(const value_compare& cmp, const   node_allocator_type& alloc ): __value_cmp(cmp), __allocat(alloc), __tree_root(nullptr)
 {
     __end = create_node(value_type(key_type(), mapped_type()));
     __size = 0;
@@ -501,7 +504,7 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator>::binary_tree(const binary_tree& copy)
+RedBlack_tree<Key,T,Compare ,Allocator>::RedBlack_tree(const RedBlack_tree& copy)
 {
     __allocat = copy.__allocat;
     insert (copy.begin(), copy.end());
@@ -514,7 +517,7 @@ template<
     class Compare ,
     class Allocator 
     >
-binary_tree<Key,T,Compare ,Allocator> & binary_tree<Key,T,Compare ,Allocator>::operator=(const binary_tree& copy)
+RedBlack_tree<Key,T,Compare ,Allocator> & RedBlack_tree<Key,T,Compare ,Allocator>::operator=(const RedBlack_tree& copy)
 {
     if (this != &copy)
     {
@@ -532,8 +535,8 @@ template<
     class Compare ,
     class Allocator 
     >
-typename binary_tree<Key,T,Compare ,Allocator>::node_ptr      
-binary_tree<Key,T,Compare ,Allocator>::find_parent(node_ptr  __tree, value_type& value, bool &node_is_left)
+typename RedBlack_tree<Key,T,Compare ,Allocator>::node_ptr      
+RedBlack_tree<Key,T,Compare ,Allocator>::find_parent(node_ptr  __tree, value_type& value, bool &node_is_left)
 {
     if (!__tree)
         return (nullptr);
@@ -565,8 +568,8 @@ template<
     class Compare ,
     class Allocator 
     >
-typename binary_tree<Key,T,Compare ,Allocator>::node_ptr 
-binary_tree<Key,T,Compare ,Allocator>::insert_node (node_ptr& start_node, node_ptr  new_node, bool& success)
+typename RedBlack_tree<Key,T,Compare ,Allocator>::node_ptr 
+RedBlack_tree<Key,T,Compare ,Allocator>::insert_node (node_ptr& start_node, node_ptr  new_node, bool& success)
 {
     node_ptr  node;
     bool     left;
@@ -602,8 +605,8 @@ template<
     class Compare ,
     class Allocator 
     >
-typename binary_tree<Key,T,Compare ,Allocator>::node_ptr  
-binary_tree<Key,T,Compare ,Allocator>::find( key_type to_search)
+typename RedBlack_tree<Key,T,Compare ,Allocator>::node_ptr  
+RedBlack_tree<Key,T,Compare ,Allocator>::find( key_type to_search)
 {
     node_ptr  node = __tree_root;
     value_type to_search_value  = make_pair(to_search, key_type());
@@ -628,7 +631,7 @@ template<
     class Compare ,
     class Allocator 
     >
-void    binary_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(node_ptr _tree, void (binary_tree<Key,T,Compare ,Allocator>::*func)(node_ptr))
+void    RedBlack_tree<Key,T,Compare ,Allocator>::tarverseNodesPostOrder(node_ptr _tree, void (RedBlack_tree<Key,T,Compare ,Allocator>::*func)(node_ptr))
 {
     if (!_tree)
         return;
@@ -643,9 +646,9 @@ template<
     class T,
     class Compare ,
     class Allocator >
-void    binary_tree<Key,T,Compare ,Allocator>::clear()
+void    RedBlack_tree<Key,T,Compare ,Allocator>::clear()
 {
-    tarverseNodesPostOrder(this->__tree_root, &binary_tree::delete_node);
+    tarverseNodesPostOrder(this->__tree_root, &RedBlack_tree::delete_node);
     __size      = 0;
     __tree_root = nullptr;
 }

@@ -78,7 +78,7 @@ class const_tree_iterator
         class Compare,
         class Allocator 
         >
-        friend  class binary_tree;
+        friend  class RedBlack_tree;
     private:
         iterator_type   __node;
 

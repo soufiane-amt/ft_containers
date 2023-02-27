@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 16:11:27 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:12:20 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ template<
 {
 
     public:
-    friend class binary_tree<Key, T, Compare, Allocator>;
     
     typedef     Key                                          key_type;
     typedef     T                                            mapped_type;
@@ -40,16 +39,16 @@ template<
     typedef     size_t                                       size_type;
     typedef     ptrdiff_t                                    difference_type;
     
-    typedef     binary_tree<key_type, mapped_type, key_compare, allocator_type>  binary_tree;
+    typedef     RedBlack_tree<key_type, mapped_type, key_compare, allocator_type>  RedBlack_tree;
 
     typedef     const value_type&                  const_reference;
     typedef     const pointer                      const_pointer;
-    typedef     const binary_tree*                 binary_tree_const_pointer;
+    typedef     const RedBlack_tree*                 RedBlack_tree_const_pointer;
 
 
     /*Iterators*/
-    typedef typename              binary_tree::iterator                iterator;
-    typedef typename              binary_tree::const_iterator         const_iterator;
+    typedef typename              RedBlack_tree::iterator                iterator;
+    typedef typename              RedBlack_tree::const_iterator         const_iterator;
     
     
     
@@ -163,7 +162,7 @@ template<
 
     private:
     
-    binary_tree                 __tree;
+    RedBlack_tree                 __tree;
     key_compare                 __key_comp;
     allocator_type              __allocator;
     value_compare               __value_cmp;
@@ -176,7 +175,7 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 {
-    binary_tree   *node = __tree.find(k);
+    RedBlack_tree   *node = __tree.find(k);
     if (!node)
         return (__tree.insert (value_type(k, mapped_type()))->second);
     return (node->data.second);
@@ -187,7 +186,7 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::at (const key_type& k)
 {
-    binary_tree   *node = __tree.find(k);
+    RedBlack_tree   *node = __tree.find(k);
     if (!node)
         throw std::out_of_range ("Error: at member function is out of range!");
     return (node->data.second);
@@ -197,7 +196,7 @@ template< class Key, class T, class Compare , class Allocator  >
 const typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::at (const key_type& k) const
 {
-    binary_tree   *node = __tree.find(k);
+    RedBlack_tree   *node = __tree.find(k);
     if (!node)
         throw std::out_of_range ("Error: at member function is out of range!");
     return (node->data.second);
