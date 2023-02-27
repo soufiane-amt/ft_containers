@@ -399,7 +399,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     void    RebalanceRedBlackTreeInsert (node_ptr new_node)
     {
         node_ptr nd_uncle;
-        bool nds_form;
+        int nds_form;
 
 
         // while (1)
@@ -419,10 +419,15 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             else
             {
                 nds_form = node_forms_triangle (new_node);
+                    std::cout <<    "---nds_form" <<nds_form << std::endl;
                 if (nds_form == LEFT)
+                {
                     rotate_right(new_node->parent);
+                }
                 else if (nds_form == RIGHT)
+                {
                     rotate_left(new_node->parent);
+                }
 
                 nds_form = node_forms_line (new_node);
 
