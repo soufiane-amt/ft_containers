@@ -155,11 +155,11 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     typedef     reverse_iterator<iterator>                  reverse_iterator;
 
     private:
-    node_ptr        create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
-                                                        new_node->color = RED;
+    node_ptr        create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));    new_node->color = RED;
                                                         if(!__tree_root)
-                                                        new_node->color = BLACK;
-                                                                      return (new_node);}
+                                                            new_node->color = BLACK;
+                                                        return (new_node);}
+                                                    
     node_ptr        insert_node (node_ptr& start_node, node_ptr  new_node, bool& success);
     void            tarverseNodesPostOrder(node_ptr _tree, void (RedBlack_tree<Key,T,Compare ,Allocator>::*func)(node_ptr));
     
@@ -397,9 +397,10 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     }
     ~RedBlack_tree() {       this->clear();  delete_node (__end); };
     
-    void    RebalanceRedBlackTreeInsert ()
+    void    RebalanceRedBlackTreeInsert (node_ptr new_node)
     {
-        
+        if (new_node ->parent->color == BLACK)
+            return;
     }
 
 

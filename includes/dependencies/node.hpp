@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 15:18:35 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:55:02 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,6 +327,29 @@ template <class T>
     return (node ->right != nullptr);
 }
 
+template <class T>
+  bool is_black_node (const Node<T>* node )
+{   
+    return (!node || node->color == BLACK);
+}
+
+template <class T>
+typename Node<T>::NODE_COLOR parent_sibling_color (const Node<T>* node )
+{  
+    // const Node<T>* node_parent = node->parent;
+
+    if (is_left_child (node))
+    {
+        if (is_black_node(node->parent->right))
+            return (BLACK);
+        else
+            return (RED);
+    }
+    if (is_black_node(node->parent->left))
+        return (BLACK);
+    else
+        return (RED);
+}
 
 
 
