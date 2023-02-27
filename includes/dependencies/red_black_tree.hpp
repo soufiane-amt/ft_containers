@@ -399,8 +399,15 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     
     void    RebalanceRedBlackTreeInsert (node_ptr new_node)
     {
-        if (new_node ->parent->color == BLACK)
+        if (is_black_node(new_node ->parent))
             return;
+        if (!is_black_node(new_node ->parent))
+        {
+            if (parent_sibling_color(new_node) == BLACK)
+                //Do suitable rotations and recolor
+            else
+                //Recolor 
+        }
     }
 
 

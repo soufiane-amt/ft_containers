@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 15:55:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 16:06:33 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,6 +331,18 @@ template <class T>
   bool is_black_node (const Node<T>* node )
 {   
     return (!node || node->color == BLACK);
+}
+
+
+template <class T>
+void Re_color (const Node<T>* node )
+{   
+    if(!node)
+        return;
+    if (node->color == BLACK)
+        node->color = RED;
+    else
+        node->color = RED;
 }
 
 template <class T>
