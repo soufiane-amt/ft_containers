@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 10:45:52 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:18:35 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,13 +157,13 @@ struct Node : public swap_deletion_arsenal<Node<T> >
     typedef T                                       data_value_type;
     typedef T*                                      data_value_type_point;
     typedef T&                                      data_value_type_ref;
-    typedef bool                                    COLOR_TYPE;
+    typedef bool                                    NODE_COLOR;
 
     Node            *parent;
     Node            *left;
     Node            *right;
     T                data;
-    COLOR_TYPE       color;
+    NODE_COLOR       color;
 
     Node(T d = T()): data(d)
     {

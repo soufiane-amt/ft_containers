@@ -27,7 +27,8 @@ namespace ft
 /* ***************************************************************************************************************/
 
 
-
+#define  BLACK 0;
+#define  RED   1;
 
 template<
     class BST
@@ -139,6 +140,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     typedef typename base_traits::mapped_type                mapped_type;
     typedef typename base_traits::value_type                 value_type;
     typedef typename base_traits::Node                       Node;
+    typedef typename Node::NODE_COLOR                        NODE_COLOR;
     typedef typename base_traits::node_ptr                   node_ptr ;
     typedef typename base_traits::node_allocator_type        node_allocator_type;
     
@@ -153,7 +155,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     typedef     reverse_iterator<iterator>                  reverse_iterator;
 
     private:
-    node_ptr        create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
+    node_ptr        create_node(value_type value, NODE_COLOR){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));
                                                                       return (new_node);}
     node_ptr        insert_node (node_ptr& start_node, node_ptr  new_node, bool& success);
     void            tarverseNodesPostOrder(node_ptr _tree, void (RedBlack_tree<Key,T,Compare ,Allocator>::*func)(node_ptr));
