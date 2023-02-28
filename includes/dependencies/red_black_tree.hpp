@@ -408,40 +408,35 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         // {
         if (is_black_node(new_node ->parent))
             return;
-            nd_uncle = node_uncle(new_node);
-
-            if (nd_uncle && nd_uncle->color == RED )
+        nd_uncle = node_uncle(new_node);
+        if (nd_uncle && nd_uncle->color == RED )
+        {
+            ReColor (nd_uncle);
+            ReColor (new_node->parent);
+            if (__tree_root != nd_uncle ->parent)
+                ReColor (new_node->parent ->parent);
+            RebalanceRedBlackTreeInsert(nd_uncle ->parent);
+        }
+        else
+        {
+            nds_form = node_forms_triangle (new_node);// new node is not a leaf if the prev cond checked
+            print_tree_2 (this->__tree_root, size());
+        
+            if (nds_form == LEFT)
             {
-                ReColor (nd_uncle);
-                ReColor (new_node->parent);
-                if (__tree_root != nd_uncle ->parent)
-                    ReColor (new_node->parent ->parent);
-                RebalanceRedBlackTreeInsert(nd_uncle ->parent);
+                rotate_right(new_node->parent);
+                rotate_left(new_node->parent); 
+                ReColor (new_node);
+                ReColor (new_node->left);
             }
-            else
+            else if (nds_form == RIGHT)
             {
-                // if (new_node->parent->left  && new_node->data.first == 25)
-                //     std::cout << "}}}" <<  new_node->parent->left->data.first << std::endl;
-                nds_form = node_forms_triangle (new_node);// new node is not a leaf if the prev cond checked
-                std::cout << nds_form << "After " << new_node->data.first << std::endl;
-                print_tree_2 (this->__tree_root, size());
-            
-                if (nds_form == LEFT)
-                {
-                    rotate_right(new_node->parent);
-                    rotate_left(new_node->parent);
-                    ReColor (new_node);
-                    ReColor (new_node->left);
-                }
-                else if (nds_form == RIGHT)
-                {
-                    rotate_left(new_node->parent);
-                    rotate_right(new_node->parent);
-                    ReColor (new_node);
-                    ReColor (new_node->right);
-                }
-
+                rotate_left(new_node->parent);
+                rotate_right(new_node->parent);
+                ReColor (new_node);
+                ReColor (new_node->right);
             }
+        }
         // }
     }
 /*        if (!is_black_node(new_node ->parent))

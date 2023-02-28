@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/28 09:48:11 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/28 10:26:38 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,9 @@ int main ()
         // a.insert(ft::make_pair(25, 3));
         // a.insert(ft::make_pair(21, 3));
     
-    for (bst::iterator i = a.begin(); i != a.end(); i++)
-        print_node (i.base());
-    // print_tree_2 (a.__tree_root, a.size());
+    // for (bst::iterator i = a.begin(); i != a.end(); i++)
+    //     print_node (i.base());
+    print_tree_2 (a.__tree_root, a.size());
 
 
     // print_tree_2 (a.__tree_root, a.size());
