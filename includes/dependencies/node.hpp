@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/28 14:08:15 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/28 18:29:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -362,9 +362,11 @@ Node<T>* node_uncle (const Node<T>* node )
 }
 
 template <class T>
-int node_forms_triangle (const Node<T>* node )
+int node_forms_triangle ( Node<T>* node )
 {
     bool node_left = is_left_child (node) ;
+    if (node == node->get_root())
+        return (false);
     bool node_parent_left = is_left_child (node->parent) ;
 
     if (node_left && !node_parent_left)
@@ -376,8 +378,10 @@ int node_forms_triangle (const Node<T>* node )
 
 
 template <class T>
-int node_forms_line (const Node<T>* node )
+int node_forms_line ( Node<T>* node )
 {
+    if (node == node->get_root())
+        return (false);
     bool node_left = is_left_child (node) ;
     bool node_parent_left = is_left_child (node->parent) ;
 
