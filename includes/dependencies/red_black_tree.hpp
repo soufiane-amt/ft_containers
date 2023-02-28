@@ -408,19 +408,27 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
     while (new_node != __tree_root )
     {
+        print_tree_2 (__tree_root, size());
+
         if ( is_black_node(new_node ->parent))
             return;
         nd_uncle = node_uncle(new_node);
         if (is_black_node(nd_uncle))
         {
             nds_form = node_forms_triangle (new_node);// new node is not a leaf if the prev cond checked
-                std::cout << new_node->data.first << "   " <<nds_form << std::endl;
+                // std::cout << new_node->data.first << "   " <<nds_form << std::endl;
             if (nds_form == LEFT)
             {
                 rotate_right(new_node->parent);
                 rotate_left(new_node->parent); 
                 ReColor (new_node);
                 ReColor (new_node->left);
+
+                std::cout << "rotate_right" << new_node->parent->data.first << std::endl;
+                std::cout << "rotate_left" << new_node->parent->data.first << std::endl; 
+                std::cout << "ReColor" <<new_node->data.first  << std::endl;
+                std::cout << "ReColor"  << new_node->left->data.first << std::endl;
+
             }
             else if (nds_form == RIGHT)
             {
@@ -428,6 +436,11 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 rotate_right(new_node->parent);
                 ReColor (new_node);
                 ReColor (new_node->right);
+                std::cout << "rotate_left" << new_node->parent->data.first << std::endl; 
+                std::cout << "rotate_right" << new_node->parent->data.first << std::endl;
+                std::cout << "ReColor" <<new_node->data.first  << std::endl;
+                std::cout << "ReColor"  << new_node->right->data.first << std::endl;
+
             }
 
             nds_form = node_forms_line (new_node);
@@ -436,18 +449,32 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 rotate_right(new_node->parent->parent);
                 ReColor (new_node->parent);
                 ReColor (new_node->parent->right);
+                std::cout << "rotate_right" << new_node->parent->parent->data.first << std::endl;
+                std::cout << "ReColor" <<new_node->data.first  <<  std::endl;
+                std::cout << "ReColor"  << new_node->parent->data.first << std::endl;
+
             }
             else if (nds_form == RIGHT)
             {
                 rotate_left(new_node->parent->parent);
                 ReColor (new_node->parent);
                 ReColor (new_node->parent->left);
+                std::cout << "rotate_left" << new_node->parent->parent->data.first << std::endl;
+                std::cout << "ReColor" <<new_node->parent->data.first  << std::endl;
+                std::cout << "ReColor"  << new_node->parent->left->data.first << std::endl;
+
             }
         }
         else if (nd_uncle && nd_uncle->color == RED )
         {
             if (__tree_root != new_node->parent->parent)
+            {
+                std::cout << "ReColor" <<new_node->parent->parent->data.first  << std::endl;
                 ReColor (new_node->parent->parent);
+            }
+            std::cout << "ReColor" <<new_node->parent->data.first  << std::endl;
+            std::cout << "ReColor" <<nd_uncle->data.first  << std::endl;
+
             ReColor (new_node->parent);
             ReColor (nd_uncle);
             new_node = nd_uncle->parent;
