@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/28 11:56:52 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/28 14:06:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,16 +120,15 @@ int main ()
      bst a;
     bool s;
     srand(time(nullptr));
-    for (size_t i = 1; i < 1000; i++)
-        a.insert(ft::make_pair(rand() % 10000000, 3));
-        // a.insert(ft::make_pair(43, 3));
-        // a.insert(ft::make_pair(43, 3));
-        // a.insert(ft::make_pair(35, 3));
-        // a.insert(ft::make_pair(7, 3));
-        // a.insert(ft::make_pair(27, 3));
-        // a.insert(ft::make_pair(4, 3));
-        // a.insert(ft::make_pair(25, 3));
-        // a.insert(ft::make_pair(41, 3));
+    // for (size_t i = 1; i < 20; i++)
+    //     a.insert(ft::make_pair(rand() % 1000, 3));
+        a.insert(ft::make_pair(756, 3));
+        a.insert(ft::make_pair(875, 3));
+        a.insert(ft::make_pair(892, 3));
+        a.insert(ft::make_pair(695, 3));
+        a.insert(ft::make_pair(206, 3));
+        a.insert(ft::make_pair(779, 3));
+        a.insert(ft::make_pair(810, 3));
         // a.insert(ft::make_pair(30, 3));
         // a.insert(ft::make_pair(36, 3));
         // a.insert(ft::make_pair(19, 3));
@@ -149,8 +148,8 @@ int main ()
 // 30
 // 36
 // 19
-    for (bst::iterator i = a.begin(); i != a.end(); i++)
-        print_node (i.base());
+    // for (bst::iterator i = a.begin(); i != a.end(); i++)
+    //     print_node (i.base());
     print_tree_2 (a.__tree_root, a.size());
 
 

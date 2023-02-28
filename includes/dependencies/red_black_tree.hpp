@@ -401,21 +401,25 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         node_ptr nd_uncle;
         int      nds_form;
 
-    // print_tree_2 (this->__tree_root, size());
-    while (new_node != __tree_root && !is_black_node(new_node ->parent))
+    while (new_node != __tree_root )
     {
+        if ( is_black_node(new_node ->parent))
+            return;
         nd_uncle = node_uncle(new_node);
         if (nd_uncle && nd_uncle->color == RED )
         {
             ReColor (nd_uncle);
-            ReColor (new_node->parent);
+            if (new_node->parent != __tree_root)
+                ReColor (new_node->parent);
             if (__tree_root != nd_uncle ->parent)
+            {
                 ReColor (new_node->parent ->parent);
+                new_node = new_node->parent;
+            }
             // print_tree_2 (this->__tree_root, size());
 
-            new_node = new_node->parent->parent;
         }
-        else
+        else 
         {
             nds_form = node_forms_triangle (new_node);// new node is not a leaf if the prev cond checked
             if (nds_form == LEFT)
@@ -433,7 +437,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 ReColor (new_node->right);
             }
             // print_tree_2 (this->__tree_root, size());
-            if (!nds_form )
+            if (!nds_form && new_node->parent->parent != __end)
             {
                 nds_form = node_forms_line (new_node);
                 //     std::cout << "{{{{{{{{{}}}}}}}}}\n";
