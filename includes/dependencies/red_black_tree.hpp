@@ -396,6 +396,11 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     }
     ~RedBlack_tree() {       this->clear();  delete_node (__end); };
     
+    // void    RebalanceRedBlackTreeInsert (node_ptr new_node)
+    // {
+
+    // }
+
     void    RebalanceRedBlackTreeInsert (node_ptr new_node)
     {
         node_ptr nd_uncle;
@@ -406,22 +411,10 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         if ( is_black_node(new_node ->parent))
             return;
         nd_uncle = node_uncle(new_node);
-        if (nd_uncle && nd_uncle->color == RED )
-        {
-            ReColor (nd_uncle);
-            if (new_node->parent != __tree_root)
-                ReColor (new_node->parent);
-            if (__tree_root != nd_uncle ->parent)
-            {
-                ReColor (new_node->parent ->parent);
-                new_node = new_node->parent;
-            }
-            // print_tree_2 (this->__tree_root, size());
-
-        }
-        else 
+        if (is_black_node(nd_uncle))
         {
             nds_form = node_forms_triangle (new_node);// new node is not a leaf if the prev cond checked
+                std::cout << new_node->data.first << "   " <<nds_form << std::endl;
             if (nds_form == LEFT)
             {
                 rotate_right(new_node->parent);
@@ -436,27 +429,65 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 ReColor (new_node);
                 ReColor (new_node->right);
             }
-            // print_tree_2 (this->__tree_root, size());
-            if (!nds_form && new_node->parent->parent != __end)
+
+            nds_form = node_forms_line (new_node);
+            if (nds_form == LEFT)
             {
-                nds_form = node_forms_line (new_node);
-                //     std::cout << "{{{{{{{{{}}}}}}}}}\n";
-                if (nds_form == LEFT)
-                {
-                    rotate_right(new_node->parent->parent);
-                    ReColor (new_node->parent);
-                    ReColor (new_node->parent->right);
-                }
-                else if (nds_form == RIGHT)
-                {
-                    rotate_left(new_node->parent->parent);
-                    ReColor (new_node->parent);
-                    ReColor (new_node->parent->left);
-                }
+                rotate_right(new_node->parent->parent);
+                ReColor (new_node->parent);
+                ReColor (new_node->parent->right);
+            }
+            else if (nds_form == RIGHT)
+            {
+                rotate_left(new_node->parent->parent);
+                ReColor (new_node->parent);
+                ReColor (new_node->parent->left);
             }
         }
-    }
-    }
+        else if (nd_uncle && nd_uncle->color == RED )
+        {
+            if (__tree_root != new_node->parent->parent)
+                ReColor (new_node->parent->parent);
+            ReColor (new_node->parent);
+            ReColor (nd_uncle);
+            new_node = nd_uncle->parent;
+        }
+        // else 
+        // {
+        //     nds_form = node_forms_triangle (new_node);// new node is not a leaf if the prev cond checked
+        //     if (nds_form == LEFT)
+        //     {
+        //         rotate_right(new_node->parent);
+        //         rotate_left(new_node->parent); 
+        //         ReColor (new_node);
+        //         ReColor (new_node->left);
+        //     }
+        //     else if (nds_form == RIGHT)
+        //     {
+        //         rotate_left(new_node->parent);
+        //         rotate_right(new_node->parent);
+        //         ReColor (new_node);
+        //         ReColor (new_node->right);
+        //     }
+        //     // print_tree_2 (this->__tree_root, size());
+        //     if (!nds_form && new_node->parent->parent != __end)
+        //     {
+        //         nds_form = node_forms_line (new_node);
+        //         //     std::cout << "{{{{{{{{{}}}}}}}}}\n";
+        //         if (nds_form == LEFT)
+        //         {
+        //             rotate_right(new_node->parent->parent);
+        //             ReColor (new_node->parent);
+        //             ReColor (new_node->parent->right);
+        //         }
+        //         else if (nds_form == RIGHT)
+        //         {
+        //             rotate_left(new_node->parent->parent);
+        //             ReColor (new_node->parent);
+        //             ReColor (new_node->parent->left);
+        //         }
+        }
+}
 
 /* ************************************************************************** */
                             // Red Black tree helpers :
