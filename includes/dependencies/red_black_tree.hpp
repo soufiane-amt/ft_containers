@@ -440,14 +440,13 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             nds_form = node_forms_line (new_node);// new node is not a leaf if the prev cond checked
             if (nds_form == LEFT)
             {
-                rotate_right(new_node->parent);
-                rotate_left(new_node->parent); 
-                ReColor (new_node);
-                ReColor (new_node->left);
+                rotate_right(new_node->parent->parent);
+                ReColor (new_node->parent);
+                ReColor (new_node->parent->right);
+                std::cout << "#####\n";
             }
             else if (nds_form == RIGHT)
             {
-                std::cout << "#####\n";
                 rotate_left(new_node->parent->parent);
                 ReColor (new_node->parent);
                 ReColor (new_node->parent->left);
