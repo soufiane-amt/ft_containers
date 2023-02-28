@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 21:34:34 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/28 10:05:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,11 +366,10 @@ int node_forms_triangle (const Node<T>* node )
 {
     bool node_left = is_left_child (node) ;
     bool node_parent_left = is_left_child (node->parent) ;
-    bool node_gParent_left = is_left_child (node->parent->parent) ;
 
-    if (node_left && !node_parent_left && node_gParent_left)
+    if (node_left && !node_parent_left)
         return (LEFT);
-    if (!node_left && node_parent_left && !node_gParent_left)
+    if (!node_left && node_parent_left)
         return (RIGHT);
     return (0);
 }
@@ -426,11 +425,11 @@ typedef ft::Node<ft::pair <const int, int> >*  NodePtr;
             find_node_next(root->right, lvl-1, arr, indx);
         }
 
- void print_tree_2(NodePtr _root)
+ void print_tree_2(NodePtr _root, int size)
         {
             NodePtr arr[1000000];
             size_t index = 1;
-            size_t height = 2 * log2(10);
+            size_t height = 2 * log2(size);
             
             arr[0] = _root;
             for (size_t j = 0 ; j < height; j++)

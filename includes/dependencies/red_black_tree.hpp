@@ -402,7 +402,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         int nds_form;
 
         std::cout << nds_form << " Before << \n" << new_node->data.first << std::endl;
-        print_tree_2 (this->__tree_root);
+        print_tree_2 (this->__tree_root, size());
 
         // while (1)
         // {
@@ -420,9 +420,11 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             }
             else
             {
+                // if (new_node->parent->left  && new_node->data.first == 25)
+                //     std::cout << "}}}" <<  new_node->parent->left->data.first << std::endl;
                 nds_form = node_forms_triangle (new_node);// new node is not a leaf if the prev cond checked
                 std::cout << nds_form << "After " << new_node->data.first << std::endl;
-                print_tree_2 (this->__tree_root);
+                print_tree_2 (this->__tree_root, size());
             
                 if (nds_form == LEFT)
                 {

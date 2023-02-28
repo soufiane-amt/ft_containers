@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 21:33:09 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/28 09:48:11 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ typedef ft::RedBlack_tree <int, int, value_compare ,std::allocator<int> > bst;
 typedef ft::Node<ft::pair <const int, int> >*  NodePtr;
 
 
-template <typename Iterator>
-void    print_node(Iterator node)
+template <typename Node_ptr>
+void    print_node(Node_ptr node)
 {
-    std::cout << "Key: "<< node->first  << std::endl;
-    if (node.base()->parent)
-        std::cout << "parent: "<< node.base()->parent->data.first  << std::endl;
-    if (node.base()->left)
-        std::cout << "left: "<< node.base()->left->data.first  << std::endl;
-    if (node.base()->right)
-        std::cout << "right: "<< node.base()->right->data.first  << std::endl;
+    std::cout << "Key: "<< node->data.first  << std::endl;
+    if (node->parent)
+        std::cout << "parent: "<< node->parent->data.first  << std::endl;
+    if (node->left)
+        std::cout << "left: "<< node->left->data.first  << std::endl;
+    if (node->right)
+        std::cout << "right: "<< node->right->data.first  << std::endl;
     std::cout << "--------------\n";
 }
 
@@ -130,12 +130,15 @@ int main ()
         a.insert(ft::make_pair(25, 3));
         // a.insert(ft::make_pair(25, 3));
         // a.insert(ft::make_pair(21, 3));
-    print_tree_2 (a.__tree_root);
-        
+    
+    for (bst::iterator i = a.begin(); i != a.end(); i++)
+        print_node (i.base());
+    // print_tree_2 (a.__tree_root, a.size());
 
-    // print_tree_2 (a.__tree_root);
+
+    // print_tree_2 (a.__tree_root, a.size());
     // a.rotate_right (a.__tree_root->left);
-    // print_tree_2 (a.__tree_root);
+    // print_tree_2 (a.__tree_root, a.size());
     
 }
 
