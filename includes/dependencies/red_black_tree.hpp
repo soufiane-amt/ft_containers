@@ -432,21 +432,23 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 ReColor (new_node);
                 ReColor (new_node->right);
             }
-            print_tree_2 (this->__tree_root, size());
-
-            nds_form = node_forms_line (new_node);
-                std::cout << "{{{{{{{{{}}}}}}}}}\n";
-            if (nds_form == LEFT)
+            // print_tree_2 (this->__tree_root, size());
+            if (!nds_form)
             {
-                rotate_right(new_node->parent->parent);
-                ReColor (new_node->parent);
-                ReColor (new_node->parent->right);
-            }
-            else if (nds_form == RIGHT)
-            {
-                rotate_left(new_node->parent->parent);
-                ReColor (new_node->parent);
-                ReColor (new_node->parent->left);
+                nds_form = node_forms_line (new_node);
+                //     std::cout << "{{{{{{{{{}}}}}}}}}\n";
+                if (nds_form == LEFT)
+                {
+                    rotate_right(new_node->parent->parent);
+                    ReColor (new_node->parent);
+                    ReColor (new_node->parent->right);
+                }
+                else if (nds_form == RIGHT)
+                {
+                    rotate_left(new_node->parent->parent);
+                    ReColor (new_node->parent);
+                    ReColor (new_node->parent->left);
+                }
             }
         }
     }
