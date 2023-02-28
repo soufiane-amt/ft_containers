@@ -404,8 +404,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         std::cout << nds_form << " Before << \n" << new_node->data.first << std::endl;
         print_tree_2 (this->__tree_root, size());
 
-        // while (1)
-        // {
+    while (1)
+    {
         if (is_black_node(new_node ->parent))
             return;
         nd_uncle = node_uncle(new_node);
@@ -415,13 +415,14 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             ReColor (new_node->parent);
             if (__tree_root != nd_uncle ->parent)
                 ReColor (new_node->parent ->parent);
-            RebalanceRedBlackTreeInsert(nd_uncle ->parent);
+            // RebalanceRedBlackTreeInsert(new_node->parent->parent);
+            new_node = new_node->parent->parent;
         }
         else
         {
             nds_form = node_forms_triangle (new_node);// new node is not a leaf if the prev cond checked
             print_tree_2 (this->__tree_root, size());
-        
+            std::cout <<  "-----" << new_node->data.first << std::endl;
             if (nds_form == LEFT)
             {
                 rotate_right(new_node->parent);
@@ -436,8 +437,23 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 ReColor (new_node);
                 ReColor (new_node->right);
             }
+            nds_form = node_forms_line (new_node);// new node is not a leaf if the prev cond checked
+            if (nds_form == LEFT)
+            {
+                rotate_right(new_node->parent);
+                rotate_left(new_node->parent); 
+                ReColor (new_node);
+                ReColor (new_node->left);
+            }
+            else if (nds_form == RIGHT)
+            {
+                std::cout << "#####\n";
+                rotate_left(new_node->parent->parent);
+                ReColor (new_node->parent);
+                ReColor (new_node->parent->left);
+            }
         }
-        // }
+    }
     }
 /*        if (!is_black_node(new_node ->parent))
         {

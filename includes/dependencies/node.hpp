@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/28 10:05:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/28 10:45:19 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -380,11 +380,10 @@ int node_forms_line (const Node<T>* node )
 {
     bool node_left = is_left_child (node) ;
     bool node_parent_left = is_left_child (node->parent) ;
-    bool node_gParent_left = is_left_child (node->parent->parent);
 
-    if (node_left && node_parent_left && node_gParent_left)
+    if (node_left && node_parent_left)
         return (LEFT);
-    if (!node_left && !node_parent_left && !node_gParent_left)
+    if (!node_left && !node_parent_left )
         return (RIGHT);
     return (false);
 }
