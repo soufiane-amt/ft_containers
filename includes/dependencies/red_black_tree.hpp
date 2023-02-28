@@ -442,6 +442,9 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 std::cout << "ReColor"  << new_node->right->data.first << std::endl;
 
             }
+            else
+            {
+            print_tree_2 (__tree_root, size());
 
             nds_form = node_forms_line (new_node);
             if (nds_form == LEFT)
@@ -463,6 +466,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 std::cout << "ReColor" <<new_node->parent->data.first  << std::endl;
                 std::cout << "ReColor"  << new_node->parent->left->data.first << std::endl;
 
+            }
             }
         }
         else if (nd_uncle && nd_uncle->color == RED )

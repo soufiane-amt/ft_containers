@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/28 16:35:12 by samajat          ###   ########.fr       */
+/*   Updated: 2023/02/28 17:14:08 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,12 +120,12 @@ int main ()
      bst a;
     bool s;
     srand(time(nullptr));
-    for (size_t i = 1; i < 20; i++)
-        a.insert(ft::make_pair(rand() % 1000, 3));
+    for (size_t i = 1; i < 7; i++)
+        a.insert(ft::make_pair(rand() % 20, 3));
         // a.insert(ft::make_pair(8, 3));
-        // a.insert(ft::make_pair(18, 3));
-        // a.insert(ft::make_pair(5, 3));
-        // a.insert(ft::make_pair(15, 3));
+        // a.insert(ft::make_pair(11, 3));
+        // a.insert(ft::make_pair(10, 3));
+        // a.insert(ft::make_pair(2, 3));
         // a.insert(ft::make_pair(17, 3));
         // a.insert(ft::make_pair(25, 3));
         // a.insert(ft::make_pair(40, 3));
