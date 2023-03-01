@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:21:24 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:22:26 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ template<
     typedef     Node<value_type>                             Node;
     typedef     Node*                                        node_ptr;
     
+    class value_compare
+    {
+        public:
+            key_compare comp;
+            value_compare(key_compare c) : comp(c) {}
+        public:
+            bool operator()(const value_type &a, const value_type &b) const
+            {
+                return comp(a.first, b.first);
+            }
+    };
+
 
     typedef     const value_type&                  const_reference;
     typedef     const pointer                      const_pointer;
@@ -56,20 +68,6 @@ template<
     // typedef typename              reverse_iterator<iterator >            reverse_iterator;
     // typedef typename              reverse_iterator<const_iterator >      const_reverse_iterator;
 
-
-    class value_compare
-    {
-        // friend class map;
-        
-        protected:
-            key_compare comp;
-            value_compare(key_compare c) : comp(c) {}
-        public:
-            bool operator()(const value_type &_lhs, const value_type &_rhs) const
-            {
-                return comp(_lhs.first, _rhs.first);
-            }
-    };
 
     private:
     
