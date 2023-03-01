@@ -397,7 +397,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     
 
 
-    iterator lower_bound( const mapped_type& _value )
+    iterator lower_bound( const value_type& _value )
     {
         node_ptr  node = __tree_root;
 
@@ -413,7 +413,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         return (iterator(__end));
     }
 
-    const_iterator lower_bound( const mapped_type& _value ) const
+    const_iterator lower_bound( const value_type& _value ) const
     {
         node_ptr  node = __tree_root;
 
@@ -430,7 +430,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     }
 
 
-    iterator upper_bound( const mapped_type& _value )
+    iterator upper_bound( const value_type& _value )
     {
         node_ptr  node = __tree_root;
 
@@ -445,7 +445,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         }
         return (iterator(__end));
     }
-    const_iterator upper_bound( const mapped_type& _value )const
+    const_iterator upper_bound( const value_type& _value )const
     {
         node_ptr  node = __tree_root;
 
