@@ -280,8 +280,9 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             }
             else if (is_black_node(node_sibling) && is_black_node (node_sibling->left) &&  is_black_node (node_sibling->right))
             {
-                if (_node->parent->color == RED)
-                    _node->parent->color = BLACK;
+                node_ptr node_parent = _node->parent;
+                if (node_parent->color == RED)
+                    node_parent->color = BLACK;
 
                 base_del::delete_leaf (_node, this->__tree_root);
             }
