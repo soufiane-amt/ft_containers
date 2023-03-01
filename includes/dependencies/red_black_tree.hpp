@@ -271,9 +271,9 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         print_tree_2 (this->__tree_root, this->size());
         node_ptr node_sibl = node_sibling (_node);
 
-        while (1)
+        while (_node != __tree_root)
         {
-            print_tree_2 (this->__tree_root, this->size());
+            // print_tree_2 (this->__tree_root, this->size());
 
             if (_node->is_leaf () && _node->color == RED)
             {
@@ -292,9 +292,10 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     node_parent->color = BLACK;//if node_parent is black you have now DB
                     return;
                 }
-                // _node = node_parent;
+                _node = node_parent;
+                node_sibl = node_sibling (_node);
             }
-            else if (node_sibl->color == RED)
+            if (node_sibl->color == RED)
             {
                 // base_del::delete_leaf (_node, this->__tree_root);
                 ft::swap (_node->parent->color, node_sibl->color);
@@ -303,6 +304,14 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 else
                     rotate_right (_node->parent);
                 node_sibl = node_sibling (_node);
+            }
+            bool    node_is_left = is_left_child(_node);
+            node_ptr node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
+            node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
+
+            if (is_black_node(node_sibl) && is_black_node (node_far_sibl_child) && node_near_sibl_child->color == RED )
+            {
+                ft::swap (node_near_sibl_child->color, node_sibl->color);
             }
 
         }
