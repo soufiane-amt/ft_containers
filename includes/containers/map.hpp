@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:28:17 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:33:58 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ template<
     
     
     /*reverse_iterator*/
-    // typedef typename              reverse_iterator<iterator >            reverse_iterator;
-    // typedef typename              reverse_iterator<const_iterator >      const_reverse_iterator;
+    typedef typename              ft::reverse_iterator<iterator >            reverse_iterator;
+    typedef typename              ft::reverse_iterator<const_iterator >      const_reverse_iterator;
 
 
     private:
@@ -133,16 +133,16 @@ template<
 /* ************************************************************************** */
                             // iterators= :
 /* ************************************************************************** */
-    iterator                            begin(){    return (iterator(__tree.begin()));}
-    const_iterator                      begin() const{      return (const_iterator(__tree.begin()));};
-    iterator                            end(){return (iterator(__tree.end()));}
-    const_iterator                      end() const{return (const_iterator(__tree.end()));}
+    iterator                            begin(){    return (__tree.begin());}
+    const_iterator                      begin() const{      return (__tree.begin());};
+    iterator                            end(){return (__tree.end());}
+    const_iterator                      end() const{return (__tree.end());}
     
-    //reverse iterators
-    // reverse_iterator       rbegin();
-    // const_reverse_iterator rbegin() const;
-    // reverse_iterator       rend();
-    // const_reverse_iterator rend() const;
+    // reverse iterators
+    reverse_iterator       rbegin(){    return (__tree.rbegin());}
+    const_reverse_iterator rbegin() const{      return (__tree.rbegin());};
+    reverse_iterator       rend(){return (__tree.rend());}
+    const_reverse_iterator rend()  const{return (__tree.rend());}
 
 /* ************************************************************************** */
                             // Observers= :
