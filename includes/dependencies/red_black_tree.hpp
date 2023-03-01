@@ -385,7 +385,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     }
     
     pair<const_iterator,const_iterator>             
-    equal_range (const key_type& k) const
+    equal_range (const mapped_type& k) const
     {
         node_ptr to_find;
 
@@ -397,15 +397,15 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     
 
 
-    iterator lower_bound( const Key& key )
+    iterator lower_bound( const mapped_type& key )
     {
         node_ptr  node = __tree_root;
 
         while (node)
         {
-            if (!__value_cmp(node->data, key))//if __tree->data >= value
+            if (!__value_cmp(node->data, _value))//if __tree->data >= value
                 return iterator (node);
-            else if (__value_cmp(key, node->data))
+            else if (__value_cmp(_value, node->data))
                 node = node->left;
             else
                 node = node->right;
@@ -413,15 +413,15 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         return (iterator(__end));
     }
 
-    const_iterator lower_bound( const Key& key ) const
+    const_iterator lower_bound( const mapped_type& key ) const
     {
         node_ptr  node = __tree_root;
 
         while (node)
         {
-            if (!__value_cmp(node->data, key))//if __tree->data >= value
+            if (!__value_cmp(node->data, _value))//if __tree->data >= value
                 return const_iterator (node);
-            else if (__value_cmp(key, node->data))
+            else if (__value_cmp(_value, node->data))
                 node = node->left;
             else
                 node = node->right;
@@ -430,30 +430,30 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     }
 
 
-    iterator upper_bound( const Key& key )
+    iterator upper_bound( const mapped_type& key )
     {
         node_ptr  node = __tree_root;
 
         while (node)
         {
-            if (__value_cmp(node->data, key))//if __tree->data < value
+            if (__value_cmp(node->data, _value))//if __tree->data < value
                 return iterator (node);
-            else if (__value_cmp(key, node->data))
+            else if (__value_cmp(_value, node->data))
                 node = node->left;
             else
                 node = node->right;
         }
         return (iterator(__end));
     }
-    const_iterator upper_bound( const Key& key )const
+    const_iterator upper_bound( const mapped_type& key )const
     {
         node_ptr  node = __tree_root;
 
         while (node)
         {
-            if (__value_cmp(node->data, key))//if __tree->data < value
+            if (__value_cmp(node->data, _value))//if __tree->data < value
                 return const_iterator (node);
-            else if (__value_cmp(key, node->data))
+            else if (__value_cmp(_value, node->data))
                 node = node->left;
             else
                 node = node->right;
