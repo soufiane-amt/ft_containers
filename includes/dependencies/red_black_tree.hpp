@@ -271,6 +271,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         print_tree_2 (this->__tree_root, this->size());
         node_ptr node_sibl = node_sibling (_node);
 
+        node_ptr to_delete_node = _node;
         if (_node->is_leaf () && _node->color == RED)
         {
             base_del::delete_leaf (_node, this->__tree_root);
@@ -286,7 +287,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 if (_node == __tree_root)
                     return;
                 node_ptr node_parent = _node->parent;
-                base_del::delete_leaf (_node, this->__tree_root);
+                if (_node ==  to_delete_node)
+                    base_del::delete_leaf (_node, this->__tree_root);
 
                 ReColor (node_sibl);
                 if (node_parent->color == RED)
@@ -299,6 +301,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     _node = node_parent;
                     node_sibl = node_sibling (_node);
                 }
+                if (_node == __tree_root)
+                    return;
                 print_tree_2 (this->__tree_root, this->size());
 
             }
