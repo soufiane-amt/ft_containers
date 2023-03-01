@@ -168,6 +168,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
     node_ptr        find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
     
+    void            make_node_leaf (node_ptr PosPtr){            while (!PosPtr->is_leaf())  
+                                                                        PosPtr->swap_for_deletion (next_node(PosPtr), __tree_root);}
 
     public:
     
@@ -246,12 +248,14 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     void erase (iterator position)
     {
         node_ptr PosPtr = position.base();
-        while (PosPtr->has_2_child())
-            PosPtr->swap_for_deletion (next_node(PosPtr), __tree_root);
-        if (PosPtr->has_1_child())
-            base_del::delete_1_child_parent (PosPtr, this->__tree_root);
-        else
-            base_del::delete_leaf (PosPtr, this->__tree_root);
+        make_node_leaf (PosPtr);
+        //there is a case when you input max element seg happens 
+        //there is a case when you input  non existing value seg happens
+
+        // if (PosPtr->has_1_child())
+        //     base_del::delete_1_child_parent (PosPtr, this->__tree_root);
+        // else
+        //     base_del::delete_leaf (PosPtr, this->__tree_root);
         __size--;
     }
     

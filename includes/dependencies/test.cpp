@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 10:00:49 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 10:29:00 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,19 @@ int main ()
     // {
         int b = rand() % 5000;
         // std::cout << "a.insert(ft::make_pair("<< b<< ", 3));" <<std::endl;
-        a.insert(ft::make_pair(5, 3) );
-        a.insert(ft::make_pair(3, 3) );
-        a.insert(ft::make_pair(2, 3) );
-        a.insert(ft::make_pair(6, 3) );
+        a.insert(ft::make_pair(10, 3) );
+        a.insert(ft::make_pair(20, 3) );
+        a.insert(ft::make_pair(7, 3) );
+        // a.insert(ft::make_pair(2, 3) );
+        // a.insert(ft::make_pair(9, 3) );
+        // a.insert(ft::make_pair(25, 3) );
+        // a.insert(ft::make_pair(40, 3) );
+        // a.insert(ft::make_pair(38, 3) );
     // }
     
     print_tree_2 (a.__tree_root, a.size());
-    a.erase (6);
+    // print_node ()
+    a.erase (40);
     print_tree_2 (a.__tree_root, a.size());
 }
 
