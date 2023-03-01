@@ -290,6 +290,17 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     node_parent->color = BLACK;//if node_parent is black you have now DB
                     return;
                 }
+                // _node = node_parent;
+            }
+            else if (node_sibl->color == RED)
+            {
+                // base_del::delete_leaf (_node, this->__tree_root);
+                swap (_node->color, sib->parent->);
+                if (is_left_child(_node))
+                    rotate_right (_node->parent);
+                else
+                    rotate_left (_node->parent);
+                node_sibl = node_sibling (_node);
             }
 
         }
