@@ -242,6 +242,15 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                             // erase :
 /* ************************************************************************** */
 
+    void        insert_test (const value_type& val, bool color)
+    {
+        bool l;
+        node_ptr    new_node = create_node (val);
+        new_node->color = color;
+        insert_node (__tree_root, new_node, l);
+        __size++;
+
+    }
     void erase (iterator position)
     {
         node_ptr PosPtr = position.base();
@@ -259,6 +268,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     
     void    RebalanceRedBlackTreeDelete (node_ptr _node)
     {
+        print_tree_2 (this->__tree_root, this->size());
+
         while (1 )
         {
             if (_node->is_leaf () && _node->color == RED)
