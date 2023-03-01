@@ -269,7 +269,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     void    RebalanceRedBlackTreeDelete (node_ptr _node)
     {
         print_tree_2 (this->__tree_root, this->size());
-        node_ptr node_sibling = node_sibling (node);
+        node_ptr node_sibl = node_sibling (_node);
 
         while (1)
         {
@@ -278,13 +278,18 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 base_del::delete_leaf (_node, this->__tree_root);
                 return;
             }
-            else if (is_black_node(node_sibling) && is_black_node (node_sibling->left) &&  is_black_node (node_sibling->right))
+            else if (is_black_node(node_sibl) && is_black_node (node_sibl->left) &&  is_black_node (node_sibl->right))
             {
+                std::cout << "#########\n";
                 node_ptr node_parent = _node->parent;
-                if (node_parent->color == RED)
-                    node_parent->color = BLACK;
-
                 base_del::delete_leaf (_node, this->__tree_root);
+
+                ReColor (node_sibl);
+                if (node_parent->color == RED)
+                {
+                    node_parent->color = BLACK;//if node_parent is black you have now DB
+                    return;
+                }
             }
 
         }

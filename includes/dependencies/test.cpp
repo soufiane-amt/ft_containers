@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 11:29:49 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 12:44:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ int main ()
     
     
     print_tree_2 (a.__tree_root, a.size());
-    a.erase (20);
+    a.erase (15);
     print_tree_2 (a.__tree_root, a.size());
 }
 
