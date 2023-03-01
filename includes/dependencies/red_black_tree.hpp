@@ -615,9 +615,17 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     }
     
 
-    node_ptr                                        __tree_root;
+        template<
+        class K,
+        class V,
+        class C,
+        class A 
+        >
+        friend  class map;
+
     private:
     
+    node_ptr                                        __tree_root;
     node_ptr                                        __end;
     size_type                                       __size;
     node_allocator_type                             __allocat;

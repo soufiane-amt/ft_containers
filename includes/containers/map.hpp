@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:33:58 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:34:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,10 @@ template<
     const_iterator                      end() const{return (__tree.end());}
     
     // reverse iterators
-    reverse_iterator       rbegin(){    return (__tree.rbegin());}
-    const_reverse_iterator rbegin() const{      return (__tree.rbegin());};
-    reverse_iterator       rend(){return (__tree.rend());}
-    const_reverse_iterator rend()  const{return (__tree.rend());}
+    reverse_iterator                    rbegin(){    return (__tree.rbegin());}
+    const_reverse_iterator              rbegin() const{      return (__tree.rbegin());};
+    reverse_iterator                    rend(){return (__tree.rend());}
+    const_reverse_iterator              rend()  const{return (__tree.rend());}
 
 /* ************************************************************************** */
                             // Observers= :
