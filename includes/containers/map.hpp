@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 17:56:09 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:08:05 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,6 @@ template<
     private:
     
     RedBlack_tree                 __tree;
-    key_compare                 __key_comp;
-    allocator_type              __allocator;
-    value_compare               __value_cmp;
 
 /* ************************************************************************** */
                             // Costructors :
@@ -90,7 +87,7 @@ template<
     template< class InputIt >
     map( InputIt first, InputIt last,
          const key_compare& key_comp = key_compare(),
-         const allocator_type& alloc = allocator_type() ):__key_comp(key_comp), __allocator(alloc){   insert (first, last);}
+         const allocator_type& alloc = allocator_type() ):__tree(key_comp, alloc){   insert (first, last);}
          
     
     map( const map& other ) :__tree(other->__tree){   }
@@ -106,7 +103,7 @@ template<
                             // Capacity= :
 /* ************************************************************************** */
     size_type                           size() const{   return (__tree.size());}
-    size_type                           max_size() const{   return (__allocator.max_size());}
+    size_type                           max_size() const{   return (__tree.max_size());}
     bool                                empty() const{  return (__tree.size() != 0);}
 
 
@@ -154,8 +151,8 @@ template<
                             // Observers= :
 /* ************************************************************************** */
 
-    key_compare                          key__key_comp() const {    return (__key_comp);}
-    value_compare                        value__key_comp() const{        return (__value_cmp);};
+    key_compare                          key__key_comp() const {    return (key_compare());}
+    value_compare                        value__key_comp() const{        return (value_compare());};
 
 /* ************************************************************************** */
                             // Operations= :
@@ -175,7 +172,7 @@ template<
     pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (__tree->equal_range(k)); }
     pair<iterator,iterator>             equal_range (const key_type& k) {   return (__tree->equal_range(k)); }
 
-    allocator_type                      get_allocator() const{      return (__allocator);  };
+    allocator_type                      get_allocator() const{      return (allocator_type());  };
     
 /* ************************************************************************** */
                             // Destructor= :
@@ -191,9 +188,9 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 {
-    node_ptr   *node = __tree.find(k);
+    node_ptr   node = __tree.find(k);
     if (!node)
-        return (__tree.insert (value_type(k, mapped_type()))->second);
+        return (__tree.insert (value_type(k, mapped_type())).first->second);
     return (node->data.second);
 }
 
