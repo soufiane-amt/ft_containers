@@ -301,21 +301,21 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     _node = node_parent;
                     node_sibl = node_sibling (_node);
                 }
-                if (_node == __tree_root)
-                    return;
                 print_tree_2 (this->__tree_root, this->size());
 
             }
-            // if (node_sibl && node_sibl->color == RED)
-            // {
-            //     // base_del::delete_leaf (_node, this->__tree_root);
-            //     ft::swap (_node->parent->color, node_sibl->color);
-            //     if (is_left_child(_node))
-            //         rotate_left (_node->parent);
-            //     else
-            //         rotate_right (_node->parent);
-            //     node_sibl = node_sibling (_node);
-            // }
+            if (_node == __tree_root)
+                return;
+
+            if (node_sibl && node_sibl->color == RED)
+            {
+                ft::swap (_node->parent->color, node_sibl->color);
+                if (is_left_child(_node))
+                    rotate_left (_node->parent);
+                else
+                    rotate_right (_node->parent);
+                node_sibl = node_sibling (_node);
+            }
             // bool    node_is_left = is_left_child(_node);
             // node_ptr node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
             // node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
