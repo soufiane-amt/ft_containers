@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 12:44:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 13:06:20 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,13 @@ int main ()
         // std::cout << "a.insert(ft::make_pair("<< b<< ", 3));" <<std::endl;
         a.insert_test (ft::make_pair(10, 3), BLACK);
         a.insert_test (ft::make_pair(5, 3), BLACK);
-        a.insert_test (ft::make_pair(20, 3), RED);
+        a.insert_test (ft::make_pair(20, 3), BLACK);
         a.insert_test (ft::make_pair(15, 3), BLACK);
-        a.insert_test (ft::make_pair(30, 3), BLACK);
-        // a.insert_test (ft::make_pair(25, 3), BLACK);
-        // a.insert_test (ft::make_pair(40, 3), RED);
-        // a.insert_test (ft::make_pair(50, 3), BLACK);
-        // a.insert_test (ft::make_pair(35, 3), BLACK);
+        a.insert_test (ft::make_pair(30, 3), RED);
+        a.insert_test (ft::make_pair(1, 3), BLACK);
+        a.insert_test (ft::make_pair(7, 3), BLACK);
+        a.insert_test (ft::make_pair(40, 3), BLACK);
+        a.insert_test (ft::make_pair(25, 3), BLACK);
         // a.insert_test (ft::make_pair(38, 3), RED);
         
         

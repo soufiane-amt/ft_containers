@@ -273,6 +273,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
         while (1)
         {
+            print_tree_2 (this->__tree_root, this->size());
+
             if (_node->is_leaf () && _node->color == RED)
             {
                 base_del::delete_leaf (_node, this->__tree_root);
@@ -295,11 +297,11 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             else if (node_sibl->color == RED)
             {
                 // base_del::delete_leaf (_node, this->__tree_root);
-                swap (_node->color, sib->parent->);
+                ft::swap (_node->parent->color, node_sibl->color);
                 if (is_left_child(_node))
-                    rotate_right (_node->parent);
-                else
                     rotate_left (_node->parent);
+                else
+                    rotate_right (_node->parent);
                 node_sibl = node_sibling (_node);
             }
 
