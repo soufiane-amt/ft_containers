@@ -269,14 +269,23 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     void    RebalanceRedBlackTreeDelete (node_ptr _node)
     {
         print_tree_2 (this->__tree_root, this->size());
+        node_ptr node_sibling = node_sibling (node);
 
-        while (1 )
+        while (1)
         {
             if (_node->is_leaf () && _node->color == RED)
             {
                 base_del::delete_leaf (_node, this->__tree_root);
                 return;
             }
+            else if (is_black_node(node_sibling) && is_black_node (node_sibling->left) &&  is_black_node (node_sibling->right))
+            {
+                if (_node->parent->color == RED)
+                    _node->parent->color = BLACK;
+
+                base_del::delete_leaf (_node, this->__tree_root);
+            }
+
         }
         
     }
@@ -696,7 +705,7 @@ template<
     class Compare ,
     class Allocator 
     >
-typename RedBlack_tree<Key,T,Compare ,Allocator>::node_ptr  
+typename RedBlack_tree<Key,T,Compare ,Allocator>::node_ptr   ///$$$$$$$$$$$$$$ find seg falt when it is given non existing element
 RedBlack_tree<Key,T,Compare ,Allocator>::find( key_type to_search)
 {
     node_ptr  node = __tree_root;

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 10:43:34 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 11:37:37 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,6 +361,18 @@ Node<T>* node_uncle (const Node<T>* node )
     if (is_left_child (node_parent))
         return (node_parent->parent->right);
     return (node_parent->parent->left);
+}
+
+
+
+template <class T>
+Node<T>* node_sibling (const Node<T>* node )
+{ 
+    const Node<T>* node_parent = node->parent;
+
+    if (is_left_child (node))
+        return (node_parent->right);
+    return (node_parent->left);
 }
 
 template <class T>

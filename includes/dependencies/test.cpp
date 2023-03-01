@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 11:06:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 11:29:49 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,14 @@ int main ()
         // std::cout << "a.insert(ft::make_pair("<< b<< ", 3));" <<std::endl;
         a.insert_test (ft::make_pair(10, 3), BLACK);
         a.insert_test (ft::make_pair(5, 3), BLACK);
+        a.insert_test (ft::make_pair(20, 3), RED);
+        a.insert_test (ft::make_pair(15, 3), BLACK);
         a.insert_test (ft::make_pair(30, 3), BLACK);
-        a.insert_test (ft::make_pair(2, 3), BLACK);
-        a.insert_test (ft::make_pair(9, 3), BLACK);
-        a.insert_test (ft::make_pair(25, 3), BLACK);
-        a.insert_test (ft::make_pair(40, 3), RED);
-        a.insert_test (ft::make_pair(50, 3), BLACK);
-        a.insert_test (ft::make_pair(35, 3), BLACK);
-        a.insert_test (ft::make_pair(38, 3), RED);
+        // a.insert_test (ft::make_pair(25, 3), BLACK);
+        // a.insert_test (ft::make_pair(40, 3), RED);
+        // a.insert_test (ft::make_pair(50, 3), BLACK);
+        // a.insert_test (ft::make_pair(35, 3), BLACK);
+        // a.insert_test (ft::make_pair(38, 3), RED);
         
         
         // a.insert(ft::make_pair(10, 3) );
@@ -151,10 +151,9 @@ int main ()
     // }
     
     
-    print_node (a.find (38));
     print_tree_2 (a.__tree_root, a.size());
-    a.erase (30);
-    // print_tree_2 (a.__tree_root, a.size());
+    a.erase (20);
+    print_tree_2 (a.__tree_root, a.size());
 }
 
 // int    func (bool & b)
