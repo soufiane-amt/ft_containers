@@ -312,6 +312,11 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             if (is_black_node(node_sibl) && is_black_node (node_far_sibl_child) && node_near_sibl_child->color == RED )
             {
                 ft::swap (node_near_sibl_child->color, node_sibl->color);
+                if (node_is_left)
+                    rotate_right (node_sibl);
+                else
+                    rotate_left (node_sibl);
+
             }
 
         }
