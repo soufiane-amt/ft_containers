@@ -661,6 +661,9 @@ template<
 RedBlack_tree<Key,T,Compare ,Allocator>::RedBlack_tree(const RedBlack_tree& copy):__tree_root(nullptr), __value_cmp (copy.__value_cmp)
 {
     __allocat = copy.__allocat;
+    __end = create_node(value_type(key_type(), mapped_type()));
+    __size = 0;
+
     insert (copy.begin(), copy.end());
 }
 
