@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:22:26 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:24:21 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ template<
     
     class value_compare
     {
+        key_compare comp;
         public:
-            key_compare comp;
             value_compare(key_compare c) : comp(c) {}
         public:
             bool operator()(const value_type &a, const value_type &b) const
@@ -87,7 +87,7 @@ template<
          const allocator_type& alloc = allocator_type() ):__tree(key_comp, alloc){   insert (first, last);}
          
     
-    map( const map& other ) :__tree(other->__tree){   }
+    map( const map& other ) :__tree(other.__tree){   }
 
 /* ************************************************************************** */
                             // operator= :
