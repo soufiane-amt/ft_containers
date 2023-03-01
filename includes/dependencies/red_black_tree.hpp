@@ -767,7 +767,7 @@ typename RedBlack_tree<Key,T,Compare ,Allocator>::node_ptr   ///$$$$$$$$$$$$$$ f
 RedBlack_tree<Key,T,Compare ,Allocator>::find( key_type to_search) const
 {
     node_ptr  node = __tree_root;
-    value_type to_search_value  = make_pair(to_search, key_type());
+    value_type to_search_value  = ft::make_pair(to_search, mapped_type());
 
     while (node)
     {
