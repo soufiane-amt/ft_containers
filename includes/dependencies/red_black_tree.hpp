@@ -316,32 +316,32 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     rotate_right (_node->parent);
                 node_sibl = node_sibling (_node);
             }
-            // bool    node_is_left = is_left_child(_node);
-            // node_ptr node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
-            // node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
+            bool    node_is_left = is_left_child(_node);
+            node_ptr node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
+            node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
 
-            // if (is_black_node(node_sibl) && is_black_node (node_far_sibl_child) && node_near_sibl_child->color == RED )
-            // {
-            //     ft::swap (node_near_sibl_child->color, node_sibl->color);
-            //     if (node_is_left)
-            //         rotate_right (node_sibl);
-            //     else
-            //         rotate_left (node_sibl);
-            //     node_sibl = node_sibling (_node);
-            // }
-            // node_is_left = is_left_child(_node);
-            // node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
+            if (is_black_node(node_sibl) && is_black_node (node_far_sibl_child) && node_near_sibl_child->color == RED )
+            {
+                ft::swap (node_near_sibl_child->color, node_sibl->color);
+                if (node_is_left)
+                    rotate_right (node_sibl);
+                else
+                    rotate_left (node_sibl);
+                node_sibl = node_sibling (_node);
+            }
+            node_is_left = is_left_child(_node);
+            node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
 
-            // if (is_black_node(node_sibl) && node_far_sibl_child->color == RED)
-            // {
-            //     ft::swap (_node->parent->color, node_sibl->color);
-            //     if (is_left_child(_node))
-            //         rotate_left (_node->parent);
-            //     else
-            //         rotate_right (_node->parent);
-            //     ReColor(node_far_sibl_child);
-            //     return;
-            // }
+            if (is_black_node(node_sibl) && node_far_sibl_child->color == RED)
+            {
+                ft::swap (_node->parent->color, node_sibl->color);
+                if (is_left_child(_node))
+                    rotate_left (_node->parent);
+                else
+                    rotate_right (_node->parent);
+                ReColor(node_far_sibl_child);
+                return;
+            }
 
         }
         

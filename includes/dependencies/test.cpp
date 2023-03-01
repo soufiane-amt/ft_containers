@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 16:50:32 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 16:58:01 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,13 +138,13 @@ int main ()
         
         a.insert_test (ft::make_pair(10, 3), BLACK);
         a.insert_test (ft::make_pair(5, 3), BLACK);
-        a.insert_test (ft::make_pair(20, 3), BLACK);
-        a.insert_test (ft::make_pair(15, 3), BLACK);
-        a.insert_test (ft::make_pair(30, 3), RED);
+        a.insert_test (ft::make_pair(30, 3), BLACK);
         a.insert_test (ft::make_pair(1, 3), BLACK);
         a.insert_test (ft::make_pair(7, 3), BLACK);
-        a.insert_test (ft::make_pair(25, 3), BLACK);
+        a.insert_test (ft::make_pair(25, 3), RED);
         a.insert_test (ft::make_pair(40, 3), BLACK);
+        a.insert_test (ft::make_pair(20, 3), BLACK);
+        a.insert_test (ft::make_pair(28, 3), BLACK);
 
         // a.insert(ft::make_pair(10, 3) );
         // a.insert(ft::make_pair(5, 3) );
@@ -162,7 +162,7 @@ int main ()
     
     
     print_tree_2 (a.__tree_root, a.size());
-    a.erase (15);
+    a.erase (1);
     print_tree_2 (a.__tree_root, a.size());
 
 }
