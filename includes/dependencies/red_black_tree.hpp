@@ -409,10 +409,6 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
     while (new_node != __tree_root )
     {
-
-        // print_tree_2 (__tree_root, size());
-        // std::cout << "------------------------------------------------------------------------------------------------------------------------------------\n";
-
         if ( is_black_node(new_node ->parent))
             return;
         nd_uncle = node_uncle(new_node);
@@ -462,6 +458,11 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             new_node = nd_uncle->parent;
         }
         }
+}
+
+void    RebalanceRedBlackTreeDelete (node_ptr new_node)
+{
+    // if ()
 }
 
 /* ************************************************************************** */

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/28 18:51:11 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 10:00:49 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,30 +120,19 @@ int main ()
      bst a;
     bool s;
     srand(time(nullptr));
-    for (size_t i = 1; i < 200; i++)
-    {
+    // for (size_t i = 1; i < 20; i++)
+    // {
         int b = rand() % 5000;
-        std::cout << "a.insert(ft::make_pair("<< b<< ", 3));" <<std::endl;
-        a.insert(ft::make_pair(b, 3) );
-    }
-// a.insert(ft::make_pair(17, 3));
-// a.insert(ft::make_pair(38, 3));
-// a.insert(ft::make_pair(0, 3));
-// a.insert(ft::make_pair(43, 3));
-// a.insert(ft::make_pair(46, 3));
-// a.insert(ft::make_pair(31, 3));
-// a.insert(ft::make_pair(36, 3));
-// a.insert(ft::make_pair(45, 3));
-// a.insert(ft::make_pair(19, 3));
-     // for (bst::iterator i = a.begin(); i != a.end(); i++)
-    //     print_node (i.base());
-    print_tree_2 (a.__tree_root, a.size());
-
-
-    // print_tree_2 (a.__tree_root, a.size());
-    // a.rotate_right (a.__tree_root->left);
-    // print_tree_2 (a.__tree_root, a.size());
+        // std::cout << "a.insert(ft::make_pair("<< b<< ", 3));" <<std::endl;
+        a.insert(ft::make_pair(5, 3) );
+        a.insert(ft::make_pair(3, 3) );
+        a.insert(ft::make_pair(2, 3) );
+        a.insert(ft::make_pair(6, 3) );
+    // }
     
+    print_tree_2 (a.__tree_root, a.size());
+    a.erase (6);
+    print_tree_2 (a.__tree_root, a.size());
 }
 
 // int    func (bool & b)

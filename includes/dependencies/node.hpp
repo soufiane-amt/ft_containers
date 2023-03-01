@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/28 18:29:29 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 09:58:57 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,11 +221,13 @@ struct Node : public swap_deletion_arsenal<Node<T> >
     
     void    swap_for_deletion(Node* x, Node*& root)
     {
+        // swap(x->color, this->color);
         if (nodes_are_relatives (this, x))
             this->swap_relatives (this, x);
         else
             this->swap_non_relatives(this, x);
         root = (root == this) ? x : root;
+        
     }
 
 
