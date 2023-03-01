@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:08:05 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:21:24 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ template<
     typedef     Node<value_type>                             Node;
     typedef     Node*                                        node_ptr;
     
-    typedef     RedBlack_tree<key_type, mapped_type, key_compare, allocator_type>  RedBlack_tree;
 
     typedef     const value_type&                  const_reference;
     typedef     const pointer                      const_pointer;
-    typedef     const RedBlack_tree*                 RedBlack_tree_const_pointer;
 
+    typedef     RedBlack_tree<key_type, mapped_type, value_compare, allocator_type>  RedBlack_tree;
 
     /*Iterators*/
     typedef typename              RedBlack_tree::iterator                iterator;
@@ -82,7 +81,7 @@ template<
     public:
     explicit 
     map( const key_compare& key_comp =  key_compare(),
-                  const allocator_type& alloc = allocator_type() ):__tree(key_comp, alloc){}
+                  const allocator_type& alloc = allocator_type() ):__tree(value_compare(key_comp), alloc){}
 
     template< class InputIt >
     map( InputIt first, InputIt last,
