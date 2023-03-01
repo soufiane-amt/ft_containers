@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:27:28 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:28:17 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,18 +116,18 @@ template<
                             // Modifiers= :
 /* ************************************************************************** */
 
-    pair<iterator,bool>                 insert (const value_type& val){    return (__tree->insert(val));}
-    iterator                            insert (iterator position, const_reference val){    return (__tree->insert(position, val)); }
+    pair<iterator,bool>                 insert (const value_type& val){    return (__tree.insert(val));}
+    iterator                            insert (iterator position, const_reference val){    return (__tree.insert(position, val)); }
     
     template <class InputIterator> 
-    void                                insert (InputIterator first, InputIterator last){   __tree->insert(first, last);}
+    void                                insert (InputIterator first, InputIterator last){   __tree.insert(first, last);}
     
     
-    iterator                            erase (iterator position) { return (__tree->erase(position));}
-    iterator                            erase (iterator first, iterator last){  return (__tree->erase(first,  last));    }
-    size_type                           erase (const key_type& k){  return (__tree->erase(k));    }
+    iterator                            erase (iterator position) { return (__tree.erase(position));}
+    iterator                            erase (iterator first, iterator last){  return (__tree.erase(first,  last));    }
+    size_type                           erase (const key_type& k){  return (__tree.erase(k));    }
     
-    void                                swap (map& x) { __tree->swap (x);}
+    void                                swap (map& x) { __tree.swap (x);}
     void                                clear() {   __tree.clear(); }
 
 /* ************************************************************************** */
@@ -155,19 +155,19 @@ template<
                             // Operations= :
 /* ************************************************************************** */
 
-    iterator                             find (const key_type& k) { return (iterator (__tree->find(k)));  }
-    const_iterator                       find (const key_type& k) const {   return (const_iterator (__tree->find(k)));};
+    iterator                             find (const key_type& k) { return (iterator (__tree.find(k)));  }
+    const_iterator                       find (const key_type& k) const {   return (const_iterator (__tree.find(k)));};
     
-    size_type                            count (const key_type& k) const {  return (__tree->find(k) != nullptr); }
+    size_type                            count (const key_type& k) const {  return (__tree.find(k) != nullptr); }
         
-    iterator                             lower_bound (const key_type& k) {  return (__tree->lower_bound (k));    }
-    const_iterator                       lower_bound (const key_type& k) const{  return (__tree->lower_bound (k));    };
+    iterator                             lower_bound (const key_type& k) {  return (__tree.lower_bound (k));    }
+    const_iterator                       lower_bound (const key_type& k) const{  return (__tree.lower_bound (k));    };
         
-    iterator                             upper_bound (const key_type& k) {  return (__tree->upper_bound(k));}
-    const_iterator                       upper_bound (const key_type& k) const{  return (__tree->upper_bound(k));}
+    iterator                             upper_bound (const key_type& k) {  return (__tree.upper_bound(k));}
+    const_iterator                       upper_bound (const key_type& k) const{  return (__tree.upper_bound(k));}
 
-    pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (__tree->equal_range(k)); }
-    pair<iterator,iterator>             equal_range (const key_type& k) {   return (__tree->equal_range(k)); }
+    pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (__tree.equal_range(k)); }
+    pair<iterator,iterator>             equal_range (const key_type& k) {   return (__tree.equal_range(k)); }
 
     allocator_type                      get_allocator() const{      return (allocator_type());  };
     
