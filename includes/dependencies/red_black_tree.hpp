@@ -206,11 +206,15 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     }
     iterator                            insert (iterator position, value_type&  val)
     {
+        bool        success;
         node_ptr pos = position.base();
         if (!find(val->first))
             pos = __end;
         node_ptr    new_node = create_node (val);
-        return (iterator(insert_node(pos, new_node, bool())));
+        iterator    it = insert_node(pos, new_node, success);
+        if (success)
+            RebalanceRedBlackTreeInsert (new_node);
+        return (it);
     }
 
 

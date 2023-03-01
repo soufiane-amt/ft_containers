@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 16:58:01 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 17:13:02 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,33 +136,33 @@ int main ()
         // a.insert_test (ft::make_pair(38, 3), RED);
         
         
-        a.insert_test (ft::make_pair(10, 3), BLACK);
-        a.insert_test (ft::make_pair(5, 3), BLACK);
-        a.insert_test (ft::make_pair(30, 3), BLACK);
-        a.insert_test (ft::make_pair(1, 3), BLACK);
-        a.insert_test (ft::make_pair(7, 3), BLACK);
-        a.insert_test (ft::make_pair(25, 3), RED);
-        a.insert_test (ft::make_pair(40, 3), BLACK);
-        a.insert_test (ft::make_pair(20, 3), BLACK);
-        a.insert_test (ft::make_pair(28, 3), BLACK);
+        // a.insert_test (ft::make_pair(10, 3), BLACK);
+        // a.insert_test (ft::make_pair(5, 3), BLACK);
+        // a.insert_test (ft::make_pair(30, 3), BLACK);
+        // a.insert_test (ft::make_pair(1, 3), BLACK);
+        // a.insert_test (ft::make_pair(7, 3), BLACK);
+        // a.insert_test (ft::make_pair(25, 3), RED);
+        // a.insert_test (ft::make_pair(40, 3), BLACK);
+        // a.insert_test (ft::make_pair(20, 3), BLACK);
+        // a.insert_test (ft::make_pair(28, 3), BLACK);
 
-        // a.insert(ft::make_pair(10, 3) );
-        // a.insert(ft::make_pair(5, 3) );
-        // a.insert(ft::make_pair(30, 3) );
-        // a.insert(ft::make_pair(40, 3) );
-        // a.insert(ft::make_pair(25, 3) );
-        // a.insert(ft::make_pair(2, 3) );
-        // a.insert(ft::make_pair(35, 3) );
-        // a.insert(ft::make_pair(38, 3) );
-        // a.insert(ft::make_pair(50, 3) );
-        // a.insert(ft::make_pair(36, 3) );
-        // a.insert(ft::make_pair(37, 3) );
-        // a.insert(ft::make_pair(38, 3) );
+        a.insert(ft::make_pair(10, 3) );
+        a.insert(ft::make_pair(5, 3) );
+        a.insert(ft::make_pair(30, 3) );
+        a.insert(ft::make_pair(40, 3) );
+        a.insert(ft::make_pair(25, 3) );
+        a.insert(ft::make_pair(2, 3) );
+        a.insert(ft::make_pair(35, 3) );
+        a.insert(ft::make_pair(38, 3) );
+        a.insert(ft::make_pair(50, 3) );
+        a.insert(ft::make_pair(36, 3) );
+        a.insert(ft::make_pair(37, 3) );
+        a.insert(ft::make_pair(38, 3) );
     // }
     
     
     print_tree_2 (a.__tree_root, a.size());
-    a.erase (1);
+    a.erase (30);
     print_tree_2 (a.__tree_root, a.size());
 
 }
