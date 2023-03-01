@@ -240,6 +240,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 /* ************************************************************************** */
 
     size_type   size() const{   return (__size);}
+    size_type                           max_size() const{   return (__allocat.max_size());}
 
 
 /* ************************************************************************** */
