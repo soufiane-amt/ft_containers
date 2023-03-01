@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:50:58 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 19:57:30 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,8 @@ template<
                             // Observers= :
 /* ************************************************************************** */
 
-    key_compare                          key__key_comp() const {    return (key_compare());}
-    value_compare                        value__key_comp() const{        return (value_compare());};
+    key_compare                          key_comp() const {    return (key_compare());}
+    value_compare                        value_comp() const{        return (value_compare());};
 
 /* ************************************************************************** */
                             // Operations= :
