@@ -165,9 +165,17 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
     node_ptr        find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
     
-    void            make_node_leaf (node_ptr PosPtr){            while (!PosPtr->is_leaf())  
-                                                                        PosPtr->swap_for_deletion (next_node(PosPtr), __tree_root);}
-
+    void            make_node_leaf (node_ptr PosPtr)
+    {
+        node_ptr next_nod;
+        while (!PosPtr->is_leaf())  
+        {
+                next_nod = next_node(PosPtr);
+                if (next_nod ==  __end && PosPtr ->left)
+                    next_nod = PosPtr ->left;
+                PosPtr->swap_for_deletion (next_nod, __tree_root);
+        }
+    }
     public:
     
 /* ************************************************************************** */

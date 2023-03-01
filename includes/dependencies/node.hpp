@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 20:24:14 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 21:15:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,6 @@ struct Node : public swap_deletion_arsenal<Node<T> >
         else
             this->swap_non_relatives(this, x);
         root = (root == this) ? x : root;
-        
     }
 
 

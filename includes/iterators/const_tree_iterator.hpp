@@ -72,6 +72,13 @@ class const_tree_iterator
         const_data_value_type_ptr            operator->()    {    return (&__node->data);}
         const_data_value_type_ptr            operator->() const  {    return (&__node->data);}
 
+        bool operator==(const_tree_iterator const & rhs) const {
+            return (__node == rhs.__node);
+        }
+        bool operator!=(const_tree_iterator const & rhs) const {
+            return (__node != rhs.__node);
+        }
+
         template<
         class Key,
         class T,
@@ -126,19 +133,6 @@ const_tree_iterator<T>        const_tree_iterator<T>::operator--(int)
 //non members
 
 
-template< class Iterator1, class Iterator2 >
-bool operator==( const  Iterator1& iter1,
-                 const  Iterator2& iter2 )
-{
-    return (iter1.base() == iter2.base());
-}
-
-template< class Iterator1, class Iterator2>
-bool operator!=( const  Iterator1& iter1,
-                 const Iterator2& iter2 )
-{
-    return (iter1.base() != iter2.base());
-}
 
 
 }
