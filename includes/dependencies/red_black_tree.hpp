@@ -202,7 +202,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         iterator    it =  insert_node (__tree_root, new_node, success);
         if (success)
             RebalanceRedBlackTreeInsert (new_node);
-        return (make_pair(it, success));
+        return (ft::make_pair(it, success));
     }
     iterator                            insert (iterator position, value_type&  val)
     {
@@ -256,17 +256,18 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         __size++;
 
     }
-    void erase (iterator position)
+    iterator erase (iterator position)
     {
         node_ptr PosPtr = position.base();
+        iterator    successor = next_node(PosPtr);
         make_node_leaf (PosPtr);
         RebalanceRedBlackTreeDelete (PosPtr);
         __size--;
+        return (successor);
     }
     
     void    RebalanceRedBlackTreeDelete (node_ptr _node)
     {
-        print_tree_2 (this->__tree_root, this->size());
         node_ptr node_sibl = node_sibling (_node);
 
         node_ptr to_delete_node = _node;
@@ -296,7 +297,6 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     _node = node_parent;
                     node_sibl = node_sibling (_node);
                 }
-                print_tree_2 (this->__tree_root, this->size());
             }
             if (_node == __tree_root)
                 return;
