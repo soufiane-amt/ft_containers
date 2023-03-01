@@ -174,7 +174,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                             // Costructors :
 /* ************************************************************************** */
 
-    RedBlack_tree(const value_compare& comp =  value_compare(std::less<int>()),
+    RedBlack_tree(const value_compare& comp =  value_compare(),
                   const node_allocator_type& alloc = node_allocator_type());
     RedBlack_tree(const RedBlack_tree& copy);
 
@@ -351,7 +351,6 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             erase (next_element);
             next_element = first;
         }
-        // std::cout << __size <<std::endl;
         if (!__size){     __tree_root = nullptr;}
     }
 

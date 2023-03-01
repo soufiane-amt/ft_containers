@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 15:14:55 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 17:56:09 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ template<
     typedef     T                                            mapped_type;
     typedef 	pair<const key_type,mapped_type>             value_type;
     typedef     Compare                                      key_compare;
-    typedef     std::less<pair<const key_type,mapped_type> > value_compare;
     typedef     Allocator                                    allocator_type;
     typedef     value_type&                                  reference;
     typedef     value_type*	                                 pointer;
     typedef     size_t                                       size_type;
     typedef     ptrdiff_t                                    difference_type;
+    typedef     Node<value_type>                             Node;
+    typedef     Node*                                        node_ptr;
     
     typedef     RedBlack_tree<key_type, mapped_type, key_compare, allocator_type>  RedBlack_tree;
 
@@ -57,13 +58,34 @@ template<
     // typedef typename              reverse_iterator<const_iterator >      const_reverse_iterator;
 
 
+    class value_compare
+    {
+        // friend class map;
+        
+        protected:
+            key_compare comp;
+            value_compare(key_compare c) : comp(c) {}
+        public:
+            bool operator()(const value_type &_lhs, const value_type &_rhs) const
+            {
+                return comp(_lhs.first, _rhs.first);
+            }
+    };
+
+    private:
+    
+    RedBlack_tree                 __tree;
+    key_compare                 __key_comp;
+    allocator_type              __allocator;
+    value_compare               __value_cmp;
+
 /* ************************************************************************** */
                             // Costructors :
 /* ************************************************************************** */
-
+    public:
     explicit 
     map( const key_compare& key_comp =  key_compare(),
-                  const allocator_type& alloc = allocator_type() ):__key_comp(key_comp), __allocator(alloc){}
+                  const allocator_type& alloc = allocator_type() ):__tree(key_comp, alloc){}
 
     template< class InputIt >
     map( InputIt first, InputIt last,
@@ -160,12 +182,6 @@ template<
 /* ************************************************************************** */
     ~map(){}
 
-    private:
-    
-    RedBlack_tree                 __tree;
-    key_compare                 __key_comp;
-    allocator_type              __allocator;
-    value_compare               __value_cmp;
 };
 
 
@@ -175,7 +191,7 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 {
-    RedBlack_tree   *node = __tree.find(k);
+    node_ptr   *node = __tree.find(k);
     if (!node)
         return (__tree.insert (value_type(k, mapped_type()))->second);
     return (node->data.second);

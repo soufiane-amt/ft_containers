@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 17:13:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 17:38:16 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <algorithm>
 #include <map>
 #include "../containers/map.hpp"
+#include "../containers/vector.hpp"
 
 #include <math.h>
 
@@ -115,57 +116,59 @@ void    print_node(Node_ptr node)
 //             (void)arr;
 //         }
 
-int main ()
-{
-     bst a;
-    bool s;
-    srand(time(nullptr));
-    // for (size_t i = 1; i < 20; i++)
-    // {
-        int b = rand() % 5000;
-        // std::cout << "a.insert(ft::make_pair("<< b<< ", 3));" <<std::endl;
-        // a.insert_test (ft::make_pair(10, 3), BLACK);
-        // a.insert_test (ft::make_pair(5, 3), BLACK);
-        // a.insert_test (ft::make_pair(20, 3), RED);
-        // a.insert_test (ft::make_pair(15, 3), BLACK);
-        // a.insert_test (ft::make_pair(30, 3), BLACK);
-        // a.insert_test (ft::make_pair(25, 3), BLACK);
-        // a.insert_test (ft::make_pair(40, 3), RED);
-        // a.insert_test (ft::make_pair(50, 3), BLACK);
-        // a.insert_test (ft::make_pair(35, 3), BLACK);
-        // a.insert_test (ft::make_pair(38, 3), RED);
+// int main ()
+// {
+
+//     ft::vector <int> v ;
+//      bst a;
+//     bool s;
+//     srand(time(nullptr));
+//     // for (size_t i = 1; i < 20; i++)
+//     // {
+//         int b = rand() % 5000;
+//         // std::cout << "a.insert(ft::make_pair("<< b<< ", 3));" <<std::endl;
+//         // a.insert_test (ft::make_pair(10, 3), BLACK);
+//         // a.insert_test (ft::make_pair(5, 3), BLACK);
+//         // a.insert_test (ft::make_pair(20, 3), RED);
+//         // a.insert_test (ft::make_pair(15, 3), BLACK);
+//         // a.insert_test (ft::make_pair(30, 3), BLACK);
+//         // a.insert_test (ft::make_pair(25, 3), BLACK);
+//         // a.insert_test (ft::make_pair(40, 3), RED);
+//         // a.insert_test (ft::make_pair(50, 3), BLACK);
+//         // a.insert_test (ft::make_pair(35, 3), BLACK);
+//         // a.insert_test (ft::make_pair(38, 3), RED);
         
         
-        // a.insert_test (ft::make_pair(10, 3), BLACK);
-        // a.insert_test (ft::make_pair(5, 3), BLACK);
-        // a.insert_test (ft::make_pair(30, 3), BLACK);
-        // a.insert_test (ft::make_pair(1, 3), BLACK);
-        // a.insert_test (ft::make_pair(7, 3), BLACK);
-        // a.insert_test (ft::make_pair(25, 3), RED);
-        // a.insert_test (ft::make_pair(40, 3), BLACK);
-        // a.insert_test (ft::make_pair(20, 3), BLACK);
-        // a.insert_test (ft::make_pair(28, 3), BLACK);
+//         // a.insert_test (ft::make_pair(10, 3), BLACK);
+//         // a.insert_test (ft::make_pair(5, 3), BLACK);
+//         // a.insert_test (ft::make_pair(30, 3), BLACK);
+//         // a.insert_test (ft::make_pair(1, 3), BLACK);
+//         // a.insert_test (ft::make_pair(7, 3), BLACK);
+//         // a.insert_test (ft::make_pair(25, 3), RED);
+//         // a.insert_test (ft::make_pair(40, 3), BLACK);
+//         // a.insert_test (ft::make_pair(20, 3), BLACK);
+//         // a.insert_test (ft::make_pair(28, 3), BLACK);
 
-        a.insert(ft::make_pair(10, 3) );
-        a.insert(ft::make_pair(5, 3) );
-        a.insert(ft::make_pair(30, 3) );
-        a.insert(ft::make_pair(40, 3) );
-        a.insert(ft::make_pair(25, 3) );
-        a.insert(ft::make_pair(2, 3) );
-        a.insert(ft::make_pair(35, 3) );
-        a.insert(ft::make_pair(38, 3) );
-        a.insert(ft::make_pair(50, 3) );
-        a.insert(ft::make_pair(36, 3) );
-        a.insert(ft::make_pair(37, 3) );
-        a.insert(ft::make_pair(38, 3) );
-    // }
+//         a.insert(ft::make_pair(10, 3) );
+//         a.insert(ft::make_pair(5, 3) );
+//         a.insert(ft::make_pair(30, 3) );
+//         a.insert(ft::make_pair(40, 3) );
+//         a.insert(ft::make_pair(25, 3) );
+//         a.insert(ft::make_pair(2, 3) );
+//         a.insert(ft::make_pair(35, 3) );
+//         a.insert(ft::make_pair(38, 3) );
+//         a.insert(ft::make_pair(50, 3) );
+//         a.insert(ft::make_pair(36, 3) );
+//         a.insert(ft::make_pair(37, 3) );
+//         a.insert(ft::make_pair(38, 3) );
+//     // }
     
     
-    print_tree_2 (a.__tree_root, a.size());
-    a.erase (30);
-    print_tree_2 (a.__tree_root, a.size());
+//     print_tree_2 (a.__tree_root, a.size());
+//     a.erase (30);
+//     print_tree_2 (a.__tree_root, a.size());
 
-}
+// }
 
 // int    func (bool & b)
 // {
@@ -181,9 +184,8 @@ int main ()
 // }
 
 // // typedef int bla;
-// int main ()
-// {
-//     bool lol; 
-//     if (func(lol) && print (lol))
-//         std::cout << "done\n";
-// }
+int main ()
+{
+    ft::map <int, int> m;
+    m[4] = 55;
+}
