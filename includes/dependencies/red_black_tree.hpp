@@ -162,9 +162,6 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     void            tarverseNodesPostOrder(node_ptr _tree, void (RedBlack_tree<Key,T,Compare ,Allocator>::*func)(node_ptr));
     
     void            delete_node(node_ptr  _node){    __allocat.destroy(_node);   __allocat.deallocate(_node, 1);}
-    void            delete_leaf (node_ptr  _node);
-    void            delete_1_child_parent (node_ptr  _node);
-    void            delete_2_child_parent (iterator element);
 
     node_ptr        find_parent(node_ptr  __tree, value_type& value, bool &node_is_left);
     
@@ -249,6 +246,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     {
         node_ptr PosPtr = position.base();
         make_node_leaf (PosPtr);
+        RebalanceRedBlackTreeDelete (PosPtr);
         //there is a case when you input max element seg happens 
         //there is a case when you input  non existing value seg happens
 
@@ -259,6 +257,19 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         __size--;
     }
     
+    void    RebalanceRedBlackTreeDelete (node_ptr _node)
+    {
+        while (1 )
+        {
+            if (_node->is_leaf () && _node->color == RED)
+            {
+                base_del::delete_leaf (_node, this->__tree_root);
+                return;
+            }
+        }
+        
+    }
+
     size_type erase (const key_type& k)
     {
         node_ptr nodeToFind = find(k);
@@ -464,10 +475,6 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         }
 }
 
-void    RebalanceRedBlackTreeDelete (node_ptr new_node)
-{
-    // if ()
-}
 
 /* ************************************************************************** */
                             // Red Black tree helpers :
