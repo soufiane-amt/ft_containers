@@ -271,66 +271,73 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         print_tree_2 (this->__tree_root, this->size());
         node_ptr node_sibl = node_sibling (_node);
 
-        while (_node != __tree_root)
+        if (_node->is_leaf () && _node->color == RED)
         {
-            // print_tree_2 (this->__tree_root, this->size());
+            base_del::delete_leaf (_node, this->__tree_root);
+            return;
+        }
 
-            if (_node->is_leaf () && _node->color == RED)
+        while (_node->color == BLACK)
+        {
+            // print_tree_2 (çthis->__tree_root, this->size());
+
+            if (is_black_node(node_sibl) && is_black_node (node_sibl->left) &&  is_black_node (node_sibl->right))
             {
-                base_del::delete_leaf (_node, this->__tree_root);
-                return;
-            }
-            else if (is_black_node(node_sibl) && is_black_node (node_sibl->left) &&  is_black_node (node_sibl->right))
-            {
-                std::cout << "#########\n";
+                if (_node == __tree_root)
+                    return;
                 node_ptr node_parent = _node->parent;
                 base_del::delete_leaf (_node, this->__tree_root);
 
                 ReColor (node_sibl);
                 if (node_parent->color == RED)
                 {
-                    node_parent->color = BLACK;//if node_parent is black you have now DB
+                    ReColor(node_parent) ;//if node_parent is black you have now DB
                     return;
                 }
-                _node = node_parent;
-                node_sibl = node_sibling (_node);
-            }
-            if (node_sibl->color == RED)
-            {
-                // base_del::delete_leaf (_node, this->__tree_root);
-                ft::swap (_node->parent->color, node_sibl->color);
-                if (is_left_child(_node))
-                    rotate_left (_node->parent);
                 else
-                    rotate_right (_node->parent);
-                node_sibl = node_sibling (_node);
-            }
-            bool    node_is_left = is_left_child(_node);
-            node_ptr node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
-            node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
+                {
+                    _node = node_parent;
+                    node_sibl = node_sibling (_node);
+                }
+                print_tree_2 (this->__tree_root, this->size());
 
-            if (is_black_node(node_sibl) && is_black_node (node_far_sibl_child) && node_near_sibl_child->color == RED )
-            {
-                ft::swap (node_near_sibl_child->color, node_sibl->color);
-                if (node_is_left)
-                    rotate_right (node_sibl);
-                else
-                    rotate_left (node_sibl);
-                node_sibl = node_sibling (_node);
             }
-            node_is_left = is_left_child(_node);
-            node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
+            // if (node_sibl && node_sibl->color == RED)
+            // {
+            //     // base_del::delete_leaf (_node, this->__tree_root);
+            //     ft::swap (_node->parent->color, node_sibl->color);
+            //     if (is_left_child(_node))
+            //         rotate_left (_node->parent);
+            //     else
+            //         rotate_right (_node->parent);
+            //     node_sibl = node_sibling (_node);
+            // }
+            // bool    node_is_left = is_left_child(_node);
+            // node_ptr node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
+            // node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
 
-            if (is_black_node(node_sibl) && node_far_sibl_child->color == RED)
-            {
-                ft::swap (_node->parent->color, node_sibl->color);
-                if (is_left_child(_node))
-                    rotate_left (_node->parent);
-                else
-                    rotate_right (_node->parent);
-                ReColor(node_far_sibl_child);
-                return;
-            }
+            // if (is_black_node(node_sibl) && is_black_node (node_far_sibl_child) && node_near_sibl_child->color == RED )
+            // {
+            //     ft::swap (node_near_sibl_child->color, node_sibl->color);
+            //     if (node_is_left)
+            //         rotate_right (node_sibl);
+            //     else
+            //         rotate_left (node_sibl);
+            //     node_sibl = node_sibling (_node);
+            // }
+            // node_is_left = is_left_child(_node);
+            // node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
+
+            // if (is_black_node(node_sibl) && node_far_sibl_child->color == RED)
+            // {
+            //     ft::swap (_node->parent->color, node_sibl->color);
+            //     if (is_left_child(_node))
+            //         rotate_left (_node->parent);
+            //     else
+            //         rotate_right (_node->parent);
+            //     ReColor(node_far_sibl_child);
+            //     return;
+            // }
 
         }
         
