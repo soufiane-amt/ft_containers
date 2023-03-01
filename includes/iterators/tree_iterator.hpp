@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/27 15:12:20 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:29:44 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,14 @@ class tree_iterator
         class Allocator 
         >
         friend  class RedBlack_tree;
+        
+        template<
+        class Key,
+        class T,
+        class Compare,
+        class Allocator 
+        >
+        friend  class map;
     private:
         iterator_type   __node;
 

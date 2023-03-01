@@ -79,6 +79,14 @@ class const_tree_iterator
         class Allocator 
         >
         friend  class RedBlack_tree;
+        
+        template<
+        class Key,
+        class T,
+        class Compare,
+        class Allocator 
+        >
+        friend  class map;
     private:
         iterator_type   __node;
 
