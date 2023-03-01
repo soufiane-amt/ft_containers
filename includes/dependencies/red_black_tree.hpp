@@ -233,7 +233,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                             // Searching :
 /* ************************************************************************** */
 
-    node_ptr  find( key_type to_search);
+    node_ptr  find( key_type to_search) const;
     
 /* ************************************************************************** */
                             // Capacity :
@@ -759,7 +759,7 @@ template<
     class Allocator 
     >
 typename RedBlack_tree<Key,T,Compare ,Allocator>::node_ptr   ///$$$$$$$$$$$$$$ find seg falt when it is given non existing element
-RedBlack_tree<Key,T,Compare ,Allocator>::find( key_type to_search)
+RedBlack_tree<Key,T,Compare ,Allocator>::find( key_type to_search) const
 {
     node_ptr  node = __tree_root;
     value_type to_search_value  = make_pair(to_search, key_type());
