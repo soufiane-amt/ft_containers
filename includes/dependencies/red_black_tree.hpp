@@ -343,7 +343,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         return (nodeToFind != nullptr);
     }
     
-    void erase (iterator first, iterator last)
+    iterator erase (iterator first, iterator last)
     {
         iterator next_element = first;
         while (first != last)
@@ -353,6 +353,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             next_element = first;
         }
         if (!__size){     __tree_root = nullptr;}
+        return (next_element);
     }
 
 

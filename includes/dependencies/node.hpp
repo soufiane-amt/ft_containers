@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 20:09:50 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 20:24:14 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,10 @@ struct swap_deletion_arsenal
         node_ptr NodeB_left  = NodeB->left;
         node_ptr NodeB_right = NodeB->right;
         
-        node_ptr NodeA_right = NodeA->right;
 
         bool NodeAisLeftChild = is_left_child (NodeA);
         bool NodeBisLeftChild = is_left_child (NodeB);
-        define_NodeB_parentOfNodeA_relation (NodeA, NodeB ,  NodeA->parent, NodeAisLeftChild);
+        define_NodeB_parentOfNodeA_relation ( NodeB ,  NodeA->parent, NodeAisLeftChild);
         define_NodeB_bro_relation (NodeA, NodeB, NodeBisLeftChild );
         define_NodeB_NodeA_node_relation (NodeA, NodeB , NodeBisLeftChild);
         define_NodeA_new_childen_relation (NodeA, NodeB_left,  NodeB_right);
@@ -129,8 +128,8 @@ struct swap_deletion_arsenal
     void 
     define_new_childer_for_NodeA_and_NodeB(node_ptr NodeA, node_ptr NodeB)
     {
-        swap(NodeA->left, NodeB->left);
-        swap(NodeA->right, NodeB->right);
+        ft::swap(NodeA->left, NodeB->left);
+        ft::swap(NodeA->right, NodeB->right);
         
         if (NodeA->left)
             NodeA->left ->parent = NodeA;
@@ -144,9 +143,6 @@ struct swap_deletion_arsenal
     
     void    swap_non_relatives(node_ptr NodeA, node_ptr NodeB)
     {
-        node_ptr NodeB_left  = NodeB->left;
-        node_ptr NodeB_right = NodeB->right;
-
         define_new_parents_for_NodeA_and_NodeB  (NodeA, NodeB);
         define_new_childer_for_NodeA_and_NodeB  (NodeA, NodeB);
     }
