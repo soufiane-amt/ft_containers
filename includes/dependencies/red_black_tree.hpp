@@ -381,7 +381,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         to_find = this->find(k);
         if (to_find)
             return make_pair(iterator(to_find), iterator(next_node(to_find)));
-        return (make_pair(iterator(__end), iterator(next_node(__end))));
+        return (make_pair(iterator(__end), iterator(__end)));
     }
     
     pair<const_iterator,const_iterator>             
@@ -391,8 +391,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
         to_find = this->find(k);
         if (to_find)
-            return make_pair(iterator(to_find), iterator(next_node(to_find)));
-        return (make_pair(const_iterator(__end), const_iterator(next_node(__end))));
+            return make_pair(const_iterator(to_find), const_iterator(next_node(to_find)));
+        return (make_pair(const_iterator(__end), const_iterator(__end)));
     }
     
 
