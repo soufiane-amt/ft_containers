@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:23:11 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:27:16 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ void    print_node(Node_ptr node)
 int main ()
 {
     ft::map <int, int> m;
-    m[4] = 55;
+    m.at(4);
     ft::map <int, int> b(m);
+    b =m;
 }

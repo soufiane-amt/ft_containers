@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:24:21 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:27:28 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ template<
 /* ************************************************************************** */
                             // Capacity= :
 /* ************************************************************************** */
-    size_type                           size() const{   return (__tree.size());}
+    size_type                           size() const{   return (__tree.__size);}
     size_type                           max_size() const{   return (__tree.max_size());}
     bool                                empty() const{  return (__tree.size() != 0);}
 
@@ -196,7 +196,7 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::at (const key_type& k)
 {
-    RedBlack_tree   *node = __tree.find(k);
+    node_ptr   node = __tree.find(k);
     if (!node)
         throw std::out_of_range ("Error: at member function is out of range!");
     return (node->data.second);
@@ -206,7 +206,7 @@ template< class Key, class T, class Compare , class Allocator  >
 const typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::at (const key_type& k) const
 {
-    RedBlack_tree   *node = __tree.find(k);
+    node_ptr   node = __tree.find(k);
     if (!node)
         throw std::out_of_range ("Error: at member function is out of range!");
     return (node->data.second);
