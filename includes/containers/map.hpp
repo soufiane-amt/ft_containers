@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:34:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:49:38 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,11 +160,10 @@ template<
     
     size_type                            count (const key_type& k) const {  return (__tree.find(k) != nullptr); }
         
-    iterator                             lower_bound (const key_type& k) {  return (__tree.lower_bound (k));    }
-    const_iterator                       lower_bound (const key_type& k) const{  return (__tree.lower_bound (k));    };
+    iterator                             lower_bound (const key_type& k) {  return (__tree.lower_bound (make_pair(k, mapped_value()) ));    }
+    const_iterator                       lower_bound (const key_type& k) const{  return (__tree.lower_bound (make k));    };
         
-    iterator                             upper_bound (const key_type& k) {  return (__tree.upper_bound(k));}
-    const_iterator                       upper_bound (const key_type& k) const{  return (__tree.upper_bound(k));}
+    iterator                             upper_bound (const key_type& k) {  return (__tree.upper_bound(make_pair(k, mapped_value()) ));}_pair( , mapped_value())    const_iterator                       upper_bound (const key_type& k) const{  return (__tree.upper_bound(make k));}
 
     pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (__tree.equal_range(k)); }
     pair<iterator,iterator>             equal_range (const key_type& k) {   return (__tree.equal_range(k)); }
