@@ -312,7 +312,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             bool    node_is_left = is_left_child(_node);
             node_ptr node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
             node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
-            if (is_black_node(node_sibl) && is_black_node (node_far_sibl_child) && node_near_sibl_child->color == RED )
+            if (is_black_node(node_sibl) && is_black_node (node_far_sibl_child) && !is_black_node (node_near_sibl_child) )
             {
                 ft::swap (node_near_sibl_child->color, node_sibl->color);
                 if (node_is_left)
@@ -323,7 +323,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             }
             node_is_left = is_left_child(_node);
             node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
-            if (is_black_node(node_sibl) && node_far_sibl_child->color == RED)
+            if (is_black_node(node_sibl) && !is_black_node(node_far_sibl_child))
             {
                 ft::swap (_node->parent->color, node_sibl->color);
                 if (is_left_child(_node))
