@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 11:37:37 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:58:30 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ struct swap_deletion_arsenal
     protected:
 
     void 
-    define_NodeB_parentOfNodeA_relation (node_ptr NodeA, node_ptr NodeB , node_ptr parentOfNodeA , const bool& NodeA_is_left_child)
+    define_NodeB_parentOfNodeA_relation ( node_ptr NodeB , node_ptr parentOfNodeA , const bool& NodeA_is_left_child)
     { 
         NodeB->parent = parentOfNodeA;
         if (NodeA_is_left_child)

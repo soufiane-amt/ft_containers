@@ -548,7 +548,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     {
         node_ptr    y = x->right;
         node_ptr    p = x->parent;
-        node_ptr    B ;
+        node_ptr    B  = nullptr;
         node_ptr    L ;
     
         if (y)
@@ -584,7 +584,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     {
         node_ptr    x = y->left;
         node_ptr    p = y->parent;
-        node_ptr    B ;
+        node_ptr    B = nullptr ;
         node_ptr    L ;
 
         if (x)
@@ -643,8 +643,9 @@ template<
     class Compare ,
     class Allocator 
     >
-RedBlack_tree<Key,T,Compare ,Allocator>::RedBlack_tree(const value_compare & value_cmp, const   node_allocator_type& alloc ): __value_cmp(value_cmp), __allocat(alloc), __tree_root(nullptr)
+RedBlack_tree<Key,T,Compare ,Allocator>::RedBlack_tree(const value_compare & value_cmp, const   node_allocator_type& alloc ):  __allocat(alloc),__value_cmp(value_cmp)
 {
+    __tree_root = nullptr;
     __end = create_node(value_type(key_type(), mapped_type()));
     __size = 0;
 }
