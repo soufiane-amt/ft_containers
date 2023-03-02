@@ -412,58 +412,75 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
     iterator lower_bound( const value_type& _value )
     {
-        node_ptr  node = max_left (__tree_root);
+        node_ptr  node = __tree_root;
+        node_ptr  to_ret = __end;
 
-        while (node != __end)
+        while (node)
         {
             if (!__value_cmp(node->data, _value))
-                return iterator (node);
-            node = next_node(node);
+            {
+                to_ret = node;
+                node = node->right;
+            }
+            else
+                node = node->left;
         }
-        return (iterator(node));
+        return (iterator(to_ret));
     }
 
     const_iterator lower_bound( const value_type& _value ) const
     {
-        node_ptr  node = max_left (__tree_root);
+        node_ptr  node = __tree_root;
+        node_ptr  to_ret = __end;
 
-        while (node != __end)
+        while (node)
         {
             if (!__value_cmp(node->data, _value))
-                return iterator (node);
-            node = next_node(node);
+            {
+                to_ret = node;
+                node = node->left;
+            }
+            else
+                node = node->right;
         }
-        return (iterator(node));
-
-
+        return (const_iterator(to_ret));
     }
+
 
     iterator upper_bound( const value_type& _value )
     {
-        node_ptr  node = max_left (__tree_root);
+        node_ptr  node = __tree_root;
 
-        while (node != __end)
+        while (node)
         {
-            if (__value_cmp(_value,node->data))//if __tree->data < value
+            if (__value_cmp(node->data, _value))//if __tree->data < value
                 return iterator (node);
-            node = next_node(node);
+            else if (__value_cmp(_value, node->data))
+                node = node->left;
+            else
+                node = node->right;
         }
         return (iterator(__end));
-
     }
+
     const_iterator upper_bound( const value_type& _value )const
     {
-        node_ptr  node = max_left (__tree_root);
+        node_ptr  node = __tree_root;
+        node_ptr  to_ret = __end;
 
-        while (node != __end)
+        while (node)
         {
-            if (__value_cmp(_value,node->data))//if __tree->data < value
-                return iterator (node);
-            node = next_node(node);
+            if (__value_cmp(_value, node->data))
+            {
+                to_ret = node;
+                node = node->left;
+            }
+            else
+                node = node->right;
         }
-        return (iterator(__end));
-
+        return (const_iterator(to_ret));
     }
+
     //deletion
 /* ************************************************************************** */
                             // Destroy :

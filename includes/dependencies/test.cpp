@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 13:42:23 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 15:14:20 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,17 +184,19 @@ void    print_node(Node_ptr node)
 // }
 
 // // typedef int bla;
+#define NAME_SPACE ft
 #include <iterator>
 int main ()
 {
-    ft::map <int, int, std::greater<int> > m;
-    m.insert (ft::pair<int, int >(1, 4));
-    m.insert (ft::pair<int, int >(5, 4));
-    m.insert (ft::pair<int, int >(9, 4));
-    m.insert (ft::pair<int, int >(2, 4));
+    NAME_SPACE::map <int, int, std::greater<int> > m;
+    m.insert (NAME_SPACE::pair<int, int >(1, 4));
+    m.insert (NAME_SPACE::pair<int, int >(5, 4));
+    m.insert (NAME_SPACE::pair<int, int >(9, 4));
+    m.insert (NAME_SPACE::pair<int, int >(2, 4));
+    std::cout <<m.lower_bound(-1)->first << std::endl;
     // m.insert (ft::pair <int, int > (4, 4));
     // m.insert (ft::pair <int, int > (4, 4));
     // m.insert (ft::pair <int, int > (4, 4));
-    for ( ft::map <int, int, std::greater<int> >::iterator i = m.begin(); i != m.end(); i++)
-        std::cout << i->first << std::endl;
+    // for ( ft::map <int, int, std::greater<int> >::iterator i = m.begin(); i != m.end(); i++)
+    //     std::cout << i->first << std::endl;
 }
