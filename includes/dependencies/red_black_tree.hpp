@@ -217,13 +217,17 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     {
         bool        success;
         node_ptr pos = position.base();
-        if (!find(position->first))
+        iterator    it;
+        if (position != __end && !find(position->first))
             pos = __end;
-        else if (__value_cmp(*position, val))
+        if (position !=__end && __value_cmp((*position), val))
             pos = __tree_root;
 
         node_ptr    new_node = create_node (val);
-        iterator    it = insert_node(pos, new_node, success);
+        if (__size)
+            it = insert_node(pos, new_node, success);
+        else
+            it = insert_node(__tree_root, new_node, success);
         if (success)
             RebalanceRedBlackTreeInsert (new_node);
         return (it);
@@ -761,6 +765,8 @@ RedBlack_tree<Key,T,Compare ,Allocator>::insert_node (node_ptr& start_node, node
         success  = true;
         return (new_node);
     }
+    if (start_node == __end)
+        start_node--;
     node = find_parent(start_node, new_node->data, left);
     if (keys_are_equal(node, new_node))
         return (node);
