@@ -212,11 +212,11 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             RebalanceRedBlackTreeInsert (new_node);
         return (ft::make_pair(it, success));
     }
-    iterator                            insert (iterator position, value_type&  val)
+    iterator                            insert (iterator position, const value_type&  val)
     {
         bool        success;
         node_ptr pos = position.base();
-        if (!find(val->first))
+        if (!find(val.first))
             pos = __end;
         node_ptr    new_node = create_node (val);
         iterator    it = insert_node(pos, new_node, success);
