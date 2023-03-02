@@ -479,10 +479,11 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
     void        swap (RedBlack_tree &x)
     {
-        swap (__end, x.__end);
-        swap (__size, x.__size);
-        swap (__allocat, x.__allocat);
-        swap (__value_cmp, x.__value_cmp);
+        std::swap (__end, x.__end);
+        std::swap (__size, x.__size);
+        std::swap (__tree_root, x.__tree_root);
+        std::swap (__allocat, x.__allocat);
+        std::swap (__value_cmp, x.__value_cmp);
     }
     ~RedBlack_tree() {       this->clear();  delete_node (__end); };
     

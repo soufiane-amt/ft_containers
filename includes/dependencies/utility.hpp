@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 11:28:11 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 11:38:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,18 +155,6 @@ struct enable_if<true, T>
 
 
 
-//pair
-
-template <class T>
-void swap( T& a,   T& b)
-{
-    T tmp(a);
-
-    a = b;
-    b = tmp;
-}
-
-
 template <class InputIterator1, class InputIterator2>  
 bool equal (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
 {
@@ -220,6 +208,16 @@ bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, Input
     return (first2!=last2);
 }
 
+template <class T>
+void swap( T& a,   T& b)
+{
+    T tmp(a);
+
+    a = b;
+    b = tmp;
+}
 
 }
+
+
 #endif

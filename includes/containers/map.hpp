@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 11:29:30 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 11:45:47 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ template<
     iterator                            erase (iterator first, iterator last){  return (__tree.erase(first,  last));    }
     size_type                           erase (const key_type& k){  return (__tree.erase(k));    }
     
-    void                                swap (map& x) { __tree.swap (x);}
+    void                                swap (map& x) { __tree.swap (x.__tree);}
     void                                clear() {   __tree.clear(); }
 
 /* ************************************************************************** */
@@ -215,6 +215,10 @@ map<Key, T, Compare, Allocator>::at (const key_type& k) const
 }
 
 
+
+
+
+
 template< class Key, class T, class Compare, class Alloc >
 bool operator==( const map<Key, T, Compare, Alloc>& lhs,
                  const map<Key, T, Compare, Alloc>& rhs )
@@ -233,7 +237,7 @@ template< class Key, class T, class Compare, class Alloc >
 bool operator<( const map<Key, T, Compare, Alloc>& lhs,
                 const map<Key, T, Compare, Alloc>& rhs )
 {
-    return (std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin()));
+    return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 }
 
 template< class Key, class T, class Compare, class Alloc >
@@ -258,7 +262,15 @@ bool operator<=( const map<Key, T, Compare, Alloc>& lhs,
 {
    return (!(lhs > rhs));
 }
-                 
+
+
+template< class Key, class T, class Compare, class Alloc >
+void swap( map<Key, T, Compare, Alloc>& lhs ,
+            map<Key, T, Compare, Alloc>& rhs)
+{
+    lhs.swap (rhs);
+}
+       
                 
 
 }
