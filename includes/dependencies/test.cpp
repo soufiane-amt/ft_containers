@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:27:55 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 13:00:14 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,9 @@ void    print_node(Node_ptr node)
 int main ()
 {
     ft::map <int, int> m;
-    m.at(4);
-    ft::map <int, int> b(m);
-    b =m;
-    m.find (4);
+    // m.insert (ft::pair <int, int > (4, 4));
+    // m.insert (ft::pair <int, int > (4, 4));
+    // m.insert (ft::pair <int, int > (4, 4));
+    ft::map <int, int>::const_reverse_iterator iter = m.rbegin();
+    std::cout << "key: " << iter->first << " | value: " << iter->second << std::endl;
 }

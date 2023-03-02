@@ -151,6 +151,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     typedef     const_tree_iterator<node_ptr >              const_iterator;
 
     typedef     reverse_iterator<iterator>                  reverse_iterator;
+    typedef     ft::reverse_iterator<const_iterator>            const_reverse_iterator;
 
     private:
     node_ptr        create_node(value_type value){  node_ptr  new_node; new_node = __allocat.allocate (1);   __allocat.construct(new_node, Node(value));    new_node->color = RED;
@@ -381,6 +382,9 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
 
     reverse_iterator        rbegin(){ return reverse_iterator(end());}
     reverse_iterator        rend(){ return reverse_iterator(begin());}
+
+    const_reverse_iterator        rbegin() const { return const_reverse_iterator(end());}
+    const_reverse_iterator        rend() const { return const_reverse_iterator(begin());}
 
     pair<iterator,iterator>             
     equal_range (const key_type& k)
