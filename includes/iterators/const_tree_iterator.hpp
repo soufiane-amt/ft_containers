@@ -28,15 +28,14 @@ class const_tree_iterator
         typedef typename iterator_traits<iterator_type>::iterator_category iterator_category;
         typedef typename iterator_traits<iterator_type>::value_type        value_type;
         typedef typename iterator_traits<iterator_type>::difference_type   difference_type;
-        typedef typename iterator_traits<iterator_type>::pointer           pointer;
-        typedef typename iterator_traits<iterator_type>::reference         reference;
+        typedef const typename value_type::const_data_value_type_point     pointer;
         typedef typename value_type::data_value_type                       data_value_type;
+        typedef  const data_value_type&                                  reference;
         
         typedef data_value_type*                                           data_value_type_ptr;
         typedef const data_value_type&                                           data_value_type_ref;
         
         typedef const data_value_type_ptr                                  const_data_value_type_ptr;
-        typedef const reference                                            const_reference;
         typedef const pointer                                              const_pointer;
         typedef tree_iterator< iterator_type >                              non_const_iterator; 
 

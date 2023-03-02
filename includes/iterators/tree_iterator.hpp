@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 11:02:29 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 15:57:40 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class tree_iterator
         typedef typename std::bidirectional_iterator_tag                   iterator_category;
         typedef typename iterator_traits<iterator_type>::value_type        value_type;
         typedef typename iterator_traits<iterator_type>::difference_type   difference_type;
-        typedef typename value_type::data_value_type_point               pointer;
+        typedef typename value_type::data_value_type_point                 pointer;
         
         typedef typename value_type::data_value_type                       data_value_type;
         

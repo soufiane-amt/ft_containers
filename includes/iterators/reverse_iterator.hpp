@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 18:50:22 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 16:13:10 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ class reverse_iterator
         reverse_iterator& operator-=(difference_type n);
 
     private:
-        iter   __iter;
+        iterator_type   __iter;
     };
 
 
@@ -67,7 +67,6 @@ class reverse_iterator
 template<class iter>
 reverse_iterator<iter>::reverse_iterator():__iter()
 {
-    std::cout << std::is_same< ft::Node<ft::pair<const int, int> >::data_value_type_ref  , reverse_iterator<iter>::reference>::value << std::endl; // prints "true"
     
 }
 
@@ -75,6 +74,7 @@ template<class iter>
 template< class U >
 reverse_iterator<iter>::reverse_iterator( const reverse_iterator<U>& other ):__iter(other.base())
 {
+    std::cout << std::is_same< ft::Node<ft::pair<const int, int> >::data_value_type_point  , reverse_iterator<iter>::pointer>::value << std::endl; // prints "true"
 }
 
 template<class iter>
@@ -102,6 +102,7 @@ typename reverse_iterator<iter>::reference       reverse_iterator<iter>::operato
 template<class iter>
 typename reverse_iterator<iter>::pointer   reverse_iterator<iter>::operator->() const
 {
+
     iter tmp = this->__iter;
     return &(*--tmp);
 }
