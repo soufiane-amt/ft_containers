@@ -286,7 +286,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         }
         while (_node->color == BLACK)
         {
-            if (is_black_node(node_sibl) && is_black_node (node_sibl->left) &&  is_black_node (node_sibl->right))
+            if (is_black_node(node_sibl) && node_sibl && is_black_node (node_sibl->left) &&  is_black_node (node_sibl->right))
             {
                 if (_node == __tree_root)
                     return;

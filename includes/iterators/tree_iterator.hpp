@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 18:33:10 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 11:02:29 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ class tree_iterator
     
         data_value_type_ptr            operator->()    {    return (&__node->data);}
         const_data_value_type_ptr      operator->() const  {    return (&__node->data);}
+        bool operator==(tree_iterator const & rhs) const {
+            return (__node == rhs.__node);
+        }
+        bool operator!=(tree_iterator const & rhs) const {
+            return (__node != rhs.__node);
+        }
+
 
         template<
         class Key,
