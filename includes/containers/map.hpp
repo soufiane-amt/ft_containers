@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 18:21:17 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 20:48:44 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,19 @@ template<
                             // Operations= :
 /* ************************************************************************** */
 
-    iterator                             find (const key_type& k) { return (iterator (__tree.find(k)));  }
-    const_iterator                       find (const key_type& k) const {   return (const_iterator (__tree.find(k)));};
+    iterator                             find (const key_type& k) 
+    {
+        node_ptr ret = __tree.find(k);
+
+         return (ret == nullptr ? iterator (__tree.end()) : iterator (ret));  
+    }
+    
+    const_iterator                       find (const key_type& k) const 
+    {   
+        node_ptr ret = __tree.find(k);
+
+         return (ret == nullptr ? const_iterator (__tree.end()) : const_iterator (ret));  
+    };
     
     size_type                            count (const key_type& k) const {  return (__tree.find(k) != nullptr); }
         
