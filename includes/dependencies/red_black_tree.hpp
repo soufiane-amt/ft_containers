@@ -386,27 +386,6 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     const_reverse_iterator        rbegin() const { return const_reverse_iterator(end());}
     const_reverse_iterator        rend() const { return const_reverse_iterator(begin());}
 
-    pair<iterator,iterator>             
-    equal_range (const key_type& k)
-    {
-        node_ptr to_find;
-
-        to_find = this->find(k);
-        if (to_find)
-            return make_pair(iterator(to_find), iterator(next_node(to_find)));
-        return (make_pair(iterator(__end), iterator(__end)));
-    }
-    
-    pair<const_iterator,const_iterator>             
-    equal_range (const key_type& k) const
-    {
-        node_ptr to_find;
-
-        to_find = this->find(k);
-        if (to_find)
-            return make_pair(const_iterator(to_find), const_iterator(next_node(to_find)));
-        return (make_pair(const_iterator(__end), const_iterator(__end)));
-    }
     
 
 
@@ -420,10 +399,10 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             if (!__value_cmp(node->data, _value))
             {
                 to_ret = node;
-                node = node->right;
+                node = node->left;
             }
             else
-                node = node->left;
+                node = node->right;
         }
         return (iterator(to_ret));
     }
@@ -450,17 +429,19 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     iterator upper_bound( const value_type& _value )
     {
         node_ptr  node = __tree_root;
+        node_ptr  to_ret = __end;
 
         while (node)
         {
-            if (__value_cmp(node->data, _value))//if __tree->data < value
-                return iterator (node);
-            else if (__value_cmp(_value, node->data))
+            if (__value_cmp(_value, node->data))
+            {
+                to_ret = node;
                 node = node->left;
+            }
             else
                 node = node->right;
         }
-        return (iterator(__end));
+        return (iterator(to_ret));
     }
 
     const_iterator upper_bound( const value_type& _value )const
@@ -479,6 +460,21 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 node = node->right;
         }
         return (const_iterator(to_ret));
+    }
+    pair<iterator,iterator>             
+    equal_range (const key_type& k)
+    {
+        iterator first = lower_bound(make_pair(k, mapped_type()));
+        iterator second = upper_bound(make_pair(k, mapped_type()));
+        return (make_pair(first, second));
+    }
+    
+    pair<const_iterator,const_iterator>             
+    equal_range (const key_type& k) const
+    {
+        const_iterator first = lower_bound(make_pair(k, mapped_type()));
+        const_iterator second = upper_bound(make_pair(k, mapped_type()));
+        return (make_pair(first, second));
     }
 
     //deletion

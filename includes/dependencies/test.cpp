@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 15:14:20 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 15:49:56 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,12 +188,13 @@ void    print_node(Node_ptr node)
 #include <iterator>
 int main ()
 {
-    NAME_SPACE::map <int, int, std::greater<int> > m;
+    NAME_SPACE::map <int, int > m;
     m.insert (NAME_SPACE::pair<int, int >(1, 4));
     m.insert (NAME_SPACE::pair<int, int >(5, 4));
     m.insert (NAME_SPACE::pair<int, int >(9, 4));
     m.insert (NAME_SPACE::pair<int, int >(2, 4));
-    std::cout <<m.lower_bound(-1)->first << std::endl;
+    std::cout <<m.equal_range(-10).first->first << std::endl;
+    std::cout <<m.equal_range(-10).second->first << std::endl;
     // m.insert (ft::pair <int, int > (4, 4));
     // m.insert (ft::pair <int, int > (4, 4));
     // m.insert (ft::pair <int, int > (4, 4));
