@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/25 18:23:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 11:28:11 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <functional>
 #include "pair.hpp"
-
+#include <algorithm>
 namespace ft {
     
 //iterator_traits

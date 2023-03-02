@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 11:25:32 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 11:29:30 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "../iterators/reverse_iterator.hpp"
 #include "../dependencies/red_black_tree.hpp"
 
+#ifndef MAP_HPP
+#define MAP_HPP
 
 namespace ft
 {
@@ -260,3 +262,4 @@ bool operator<=( const map<Key, T, Compare, Alloc>& lhs,
                 
 
 }
+#endif
