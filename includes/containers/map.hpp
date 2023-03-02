@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/01 20:00:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 11:17:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,5 +211,49 @@ map<Key, T, Compare, Allocator>::at (const key_type& k) const
         throw std::out_of_range ("Error: at member function is out of range!");
     return (node->data.second);
 }
+
+
+template< class Key, class T, class Compare, class Alloc >
+bool operator==( const map<Key, T, Compare, Alloc>& lhs,
+                 const map<Key, T, Compare, Alloc>& rhs )
+{
+    return (lhs.size() == rhs.size() && ft::equal (lhs.begin(), lhs.end(), rhs.begin()));
+}
+                 
+template< class Key, class T, class Compare, class Alloc >
+bool operator!=( const map<Key, T, Compare, Alloc>& lhs,
+                 const map<Key, T, Compare, Alloc>& rhs )
+{
+   return (!(lhs == rhs));
+}
+                 
+template< class Key, class T, class Compare, class Alloc >
+bool operator<( const map<Key, T, Compare, Alloc>& lhs,
+                const map<Key, T, Compare, Alloc>& rhs )
+                {
+                    
+                }
+                
+template< class Key, class T, class Compare, class Alloc >
+bool operator<=( const map<Key, T, Compare, Alloc>& lhs,
+                 const map<Key, T, Compare, Alloc>& rhs )
+                 {
+                    
+                 }
+                 
+template< class Key, class T, class Compare, class Alloc >
+bool operator>( const map<Key, T, Compare, Alloc>& lhs,
+                const map<Key, T, Compare, Alloc>& rhs )
+                {
+                    
+                }
+                
+template< class Key, class T, class Compare, class Alloc >
+bool operator>=( const map<Key, T, Compare, Alloc>& lhs,
+                 const map<Key, T, Compare, Alloc>& rhs )
+                 {
+                    
+                 }
+                 
 
 }
