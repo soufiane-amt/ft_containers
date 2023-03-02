@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 11:45:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/02 16:36:15 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ template<
 /* ************************************************************************** */
     size_type                           size() const{   return (__tree.__size);}
     size_type                           max_size() const{   return (__tree.max_size());}
-    bool                                empty() const{  return (__tree.size() != 0);}
+    bool                                empty() const{  return (__tree.size() == 0);}
 
 
 /* ************************************************************************** */
