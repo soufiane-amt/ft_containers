@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 22:02:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 22:22:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ class set
         public:
             value_compar(key_compare c) : comp(c) {}
         public:
-            bool operator()(const pair &a, const pair &b) const
+            bool operator()(value_type &a, value_type &b) const
             {
-                return comp(a.first, b.first);
+                return comp(a, b);
             }
     };
 
 
     typedef     const value_type&                  const_reference;
 
-    typedef     ft::RedBlack_tree<key_type, value_type,  value_compar, allocator_type>  RedBlack_tree;
+    typedef     ft::RedBlack_tree<value_type,  value_compar, allocator_type>  RedBlack_tree;
 
 
     /*Iterators*/

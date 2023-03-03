@@ -753,7 +753,9 @@ RedBlack_tree<T,Compare ,Allocator>::insert_node (node_ptr& start_node, node_ptr
         return (new_node);
     }
     node = find_parent(start_node, new_node->data, left);
-    if (keys_are_equal(node, new_node))
+
+    // if (keys_are_equal(node, new_node))
+    if (!__value_cmp(node->data, new_node->data) && !__value_cmp(new_node->data, node->data ))
         return (node);
     success  = true;
     if(left)
