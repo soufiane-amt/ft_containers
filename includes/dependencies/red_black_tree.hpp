@@ -169,7 +169,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     void            make_node_leaf (node_ptr PosPtr)
     {
         node_ptr next_nod;
-        while (!PosPtr->is_leaf())  
+        while (PosPtr && !PosPtr->is_leaf())  
         {
                 next_nod = next_node(PosPtr);
                 if (next_nod ==  __end && PosPtr ->left)
@@ -293,7 +293,6 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             base_del::delete_leaf (_node, this->__tree_root);
             return;
         }
-        // print_tree_2(__tree_root, size());
         while (_node ->color == BLACK )
         {
             if (_node == __tree_root)
@@ -425,7 +424,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     size_type erase (const key_type& k)
     {
         node_ptr nodeToFind = find(k);
-        erase (iterator (nodeToFind));
+        if (nodeToFind)
+            erase (iterator (nodeToFind));
         return (nodeToFind != nullptr);
     }
     
