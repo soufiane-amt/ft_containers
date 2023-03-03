@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 16:13:10 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 11:12:26 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ template<class iter>
 template< class U >
 reverse_iterator<iter>::reverse_iterator( const reverse_iterator<U>& other ):__iter(other.base())
 {
-    std::cout << std::is_same< ft::Node<ft::pair<const int, int> >::data_value_type_point  , reverse_iterator<iter>::pointer>::value << std::endl; // prints "true"
 }
 
 template<class iter>
