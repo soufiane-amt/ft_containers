@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 23:00:46 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 23:02:48 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class set
        public:
     
     typedef     T                                            key_type;
-    typedef 	key_type                                     value_type;
+    typedef 	const key_type                                     value_type;
     typedef     Compare                                      key_compare;/////set has non_cpmleted memebers 
     typedef     Compare                                      value_compare;
     typedef     Alloc                                    allocator_type;
