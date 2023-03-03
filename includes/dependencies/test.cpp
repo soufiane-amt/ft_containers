@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 16:16:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 16:22:23 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,9 @@ int main ()
     m.insert_test (ft::make_pair(100, 0), RED);
     m.print_tree ();
     m.erase(50);
-    m.print_tree ();
     m.erase(20);
+    m.erase(100);
+    m.erase(90);
     m.print_tree ();
     // bst a;
     // bool s;

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 16:04:28 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 16:26:58 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -376,6 +376,52 @@ bool children_are_black (const Node<T>* node )
     return (is_black_node(node->left) && is_black_node(node->right));
 }
 
+        //     bool    node_is_left;
+        //     node_ptr node_far_sibl_child;
+        //     if (node_sibl && is_black_node(node_sibl))
+        //     {
+        //         node_is_left = is_left_child(_node);
+        //         node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
+        //         node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
+        //         if ( is_black_node (node_far_sibl_child) && !is_black_node (node_near_sibl_child))
+        //         {
+        //             ft::swap (node_near_sibl_child->color, node_sibl->color);
+        //             if (node_is_left)
+        //                 rotate_right (node_sibl);
+        //             else
+        //                 rotate_left (node_sibl);
+        //             node_sibl = node_sibling (_node);
+        //         }
+        //     }
+        //     if (node_sibl && is_black_node(node_sibl))
+        //     {
+        //         node_is_left = is_left_child(_node);
+        //         node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
+        //         if ( !is_black_node(node_far_sibl_child))
+        //         {
+        //             ft::swap (_node->parent->color, node_sibl->color);
+        //             if (is_left_child(_node))
+        //                 rotate_left (_node->parent);
+        //             else
+        //                 rotate_right (_node->parent);
+        //             ReColor(node_far_sibl_child);
+        //             node_sibl = node_sibling (_node);
+
+template <class T>
+Node<T>* near_nephew ( Node<T>* node )
+{
+    if (is_left_child (node))
+        return (sibling(node)->left);
+    return (sibling(node)->right);
+}
+
+template <class T>
+Node<T>* far_nephew ( Node<T>* node )
+{
+    if (is_left_child (node))
+        return (sibling(node)->right);
+    return (sibling(node)->left);
+}
 
 template <class T>
 int node_forms_triangle ( Node<T>* node )
