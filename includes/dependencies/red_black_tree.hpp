@@ -328,17 +328,17 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     else
                         rotate_left (db_node_sibling);
                     db_node_sibling = sibling (_node);
-
                 }
+
             if (is_black_node(db_node_sibling) && !is_black_node(far_nephew(_node)))
             {
                     std::swap (_node->parent->color, db_node_sibling->color);
+                    ReColor(far_nephew(_node));
                     if (is_left_child (_node))
                         rotate_left (_node->parent);
                     else
                         rotate_right (_node->parent);
                     db_node_sibling = sibling (_node);
-                    ReColor(far_nephew(_node));
                     break;
             }
         }
