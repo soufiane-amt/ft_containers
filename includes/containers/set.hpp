@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 18:59:25 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 20:17:14 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class set
     typedef     ptrdiff_t                                    difference_type;
     typedef     ft::Node<value_type>                             Node;
     typedef     Node*                                        node_ptr;
+    typedef 	pair<const key_type,value_type>             pair;
     
     class value_compar
     {
@@ -44,7 +45,7 @@ class set
         public:
             value_compar(key_compare c) : comp(c) {}
         public:
-            bool operator()(const value_type &a, const value_type &b) const
+            bool operator()(const pair &a, const pair &b) const
             {
                 return comp(a.first, b.first);
             }
@@ -82,7 +83,10 @@ class set
     template< class InputIt >
     set( InputIt first, InputIt last,
          const key_compare& key_comp = key_compare(),
-         const allocator_type& alloc = allocator_type() ):__tree(key_comp, alloc){   insert (first, last);}
+         const allocator_type& alloc = allocator_type() ):__tree(key_comp, alloc)
+         {   
+            insert (first, last);
+         }
          
     
     set( const set& other ) :__tree(other.__tree){   }
@@ -102,8 +106,8 @@ class set
 // /* ************************************************************************** */
 //                             // Capacity= :
 // /* ************************************************************************** */
-//     size_type                           size() const{   return (__tree.__size);}
-//     size_type                           max_size() const{   return (__tree.max_size());}
+    size_type                           size() const{   return (__tree.__size);}
+    size_type                           max_size() const{   return (__tree.max_size());}
 //     bool                                empty() const{  return (__tree.size() == 0);}
 
 
@@ -111,11 +115,20 @@ class set
 //                             // Modifiers= :
 // /* ************************************************************************** */
 
-    pair<iterator,bool>                 insert (const value_type& val){    return (__tree.insert(val));}
-    iterator                            insert (iterator position, const_reference val){    return (__tree.insert(position, val)); }
+    void             insert (const value_type& val)
+                                {    
+                                    __tree.insert(make_pair(val, value_type()));
+                                }
+    // iterator                            insert (iterator position, const_reference val){    return (__tree.insert(position, val)->first); }
     
     template <class InputIterator> 
-    void                                insert (InputIterator first, InputIterator last){   __tree.insert(first, last);}
+    void                                insert (InputIterator first, InputIterator last){ 
+        while (first != last)
+        {
+            insert(*first);
+            first++;
+        }
+    }
     
     
 //     iterator                            erase (iterator position) { return (__tree.erase(position));}
@@ -127,11 +140,12 @@ class set
 
 // /* ************************************************************************** */
 //                             // iterators= :
+
 // /* ************************************************************************** */
-//     iterator                            begin(){    return (__tree.begin());}
-//     const_iterator                      begin() const{      return (__tree.begin());};
-//     iterator                            end(){return (__tree.end());}
-//     const_iterator                      end() const{return (__tree.end());}
+    iterator                            begin(){    return (__tree.begin());}
+    const_iterator                      begin() const{      return (__tree.begin());};
+    iterator                            end(){return (__tree.end());}
+    const_iterator                      end() const{return (__tree.end());}
     
 //     // reverse iterators
 //     reverse_iterator                    rbegin(){    return (__tree.rbegin());}
@@ -166,11 +180,11 @@ class set
     
 //     size_type                            count (const key_type& k) const {  return (__tree.find(k) != nullptr); }
         
-//     iterator                             lower_bound (const key_type& k) {  return (__tree.lower_bound (make_pair(k, value_type())));    }
-//     const_iterator                       lower_bound (const key_type& k) const{  return (__tree.lower_bound (make_pair(k, value_type())));    };
+    iterator                             lower_bound (const key_type& k) {  return (__tree.lower_bound (make_pair(k, value_type())));    }
+    const_iterator                       lower_bound (const key_type& k) const{  return (__tree.lower_bound (make_pair(k, value_type())));    };
         
-//     iterator                             upper_bound (const key_type& k) {  return (__tree.upper_bound(make_pair(k, value_type())));}
-//     const_iterator                       upper_bound (const key_type& k) const{  return (__tree.upper_bound(make_pair(k, value_type())));}
+    iterator                             upper_bound (const key_type& k) {  return (__tree.upper_bound(make_pair(k, value_type())));}
+    const_iterator                       upper_bound (const key_type& k) const{  return (__tree.upper_bound(make_pair(k, value_type())));}
 
 //     pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (__tree.equal_range(k)); }
 //     pair<iterator,iterator>             equal_range (const key_type& k) {   return (__tree.equal_range(k)); }
