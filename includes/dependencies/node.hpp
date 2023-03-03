@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 15:40:53 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 16:04:28 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,6 +369,13 @@ Node<T>* sibling (const Node<T>* node )
         return (node_parent->right);
     return (node_parent->left);
 }
+
+template <class T>
+bool children_are_black (const Node<T>* node )
+{ 
+    return (is_black_node(node->left) && is_black_node(node->right));
+}
+
 
 template <class T>
 int node_forms_triangle ( Node<T>* node )
