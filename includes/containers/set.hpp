@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 22:43:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 22:45:15 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ class set
 // /* ************************************************************************** */
     size_type                           size() const{   return (__tree.__size);}
     size_type                           max_size() const{   return (__tree.max_size());}
-//     bool                                empty() const{  return (__tree.size() == 0);}
+    bool                                empty() const{  return (__tree.size() == 0);}
 
 
 // /* ************************************************************************** */
@@ -108,7 +108,7 @@ class set
                                 {    
                                     __tree.insert(val);
                                 }
-    // iterator                            insert (iterator position, const_reference val){    return (__tree.insert(position, val)->first); }
+    iterator                            insert (iterator position, const_reference val){    return (__tree.insert(position, val)->first); }
     
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last){ 
@@ -120,12 +120,12 @@ class set
     }
     
     
-//     iterator                            erase (iterator position) { return (__tree.erase(position));}
-//     iterator                            erase (iterator first, iterator last){  return (__tree.erase(first,  last));    }
-//     size_type                           erase (const key_type& k){  return (__tree.erase(k));    }
+    iterator                            erase (iterator position) { return (__tree.erase(position));}
+    iterator                            erase (iterator first, iterator last){  return (__tree.erase(first,  last));    }
+    size_type                           erase (const key_type& k){  return (__tree.erase(k));    }
     
-//     void                                swap (set& x) { __tree.swap (x.__tree);}
-//     void                                clear() {   __tree.clear(); }
+    void                                swap (set& x) { __tree.swap (x.__tree);}
+    void                                clear() {   __tree.clear(); }
 
 // /* ************************************************************************** */
 //                             // iterators= :
@@ -137,37 +137,37 @@ class set
     const_iterator                      end() const{return (__tree.end());}
     
 //     // reverse iterators
-//     reverse_iterator                    rbegin(){    return (__tree.rbegin());}
-//     const_reverse_iterator              rbegin() const{      return (__tree.rbegin());};
-//     reverse_iterator                    rend(){return (__tree.rend());}
-//     const_reverse_iterator              rend()  const{return (__tree.rend());}
+    reverse_iterator                    rbegin(){    return (__tree.rbegin());}
+    const_reverse_iterator              rbegin() const{      return (__tree.rbegin());};
+    reverse_iterator                    rend(){return (__tree.rend());}
+    const_reverse_iterator              rend()  const{return (__tree.rend());}
 
 // /* ************************************************************************** */
 //                             // Observers= :
 // /* ************************************************************************** */
 
-//     key_compare                          key_comp() const {    return (key_compare());}
-//     value_compare                        value_comp() const{        return (value_compare(key_compare()));};
+    key_compare                          key_comp() const {    return (key_compare());}
+    value_compare                        value_comp() const{        return (value_compare(key_compare()));};
 
 // /* ************************************************************************** */
 //                             // Operations= :
 // /* ************************************************************************** */
 
-//     iterator                             find (const key_type& k) 
-//     {
-//         node_ptr ret = __tree.find(k);
+    iterator                             find (const key_type& k) 
+    {
+        node_ptr ret = __tree.find(k);
 
-//          return (ret == nullptr ? iterator (__tree.end()) : iterator (ret));  
-//     }
+         return (ret == nullptr ? iterator (__tree.end()) : iterator (ret));  
+    }
     
-//     const_iterator                       find (const key_type& k) const 
-//     {   
-//         node_ptr ret = __tree.find(k);
+    const_iterator                       find (const key_type& k) const 
+    {   
+        node_ptr ret = __tree.find(k);
 
-//          return (ret == nullptr ? const_iterator (__tree.end()) : const_iterator (ret));  
-//     };
+         return (ret == nullptr ? const_iterator (__tree.end()) : const_iterator (ret));  
+    };
     
-//     size_type                            count (const key_type& k) const {  return (__tree.find(k) != nullptr); }
+    size_type                            count (const key_type& k) const {  return (__tree.find(k) != nullptr); }
         
     iterator                             lower_bound (const value_type& v) {  return (__tree.lower_bound (v));    }
     const_iterator                       lower_bound (const value_type& v) const{  return (__tree.lower_bound (v));    };
@@ -181,13 +181,13 @@ class set
     ft::pair<const_iterator, const_iterator> equal_range (const value_type& v) const { return (__tree.equal_range(v));
      }
 
-//     allocator_type                      get_allocator() const{      return (allocator_type());  };
+    allocator_type                      get_allocator() const{      return (allocator_type());  };
     
 //     void        print_tree () { print_tree_2(__tree.__tree_root, size()); }
 // /* ************************************************************************** */
 //                             // Destructor= :
 // /* ************************************************************************** */
-//     ~set(){}
+    ~set(){}
 
 };
 
@@ -198,57 +198,57 @@ class set
 
 
 
-// template< class Key, class Compare, class Alloc >
-// bool operator==( const set<Key, Compare, Alloc>& lhs,
-//                  const set<Key, Compare, Alloc>& rhs )
-// {
-//     return (lhs.size() == rhs.size() && ft::equal (lhs.begin(), lhs.end(), rhs.begin()));
-// }
+template< class Key, class Compare, class Alloc >
+bool operator==( const set<Key, Compare, Alloc>& lhs,
+                 const set<Key, Compare, Alloc>& rhs )
+{
+    return (lhs.size() == rhs.size() && ft::equal (lhs.begin(), lhs.end(), rhs.begin()));
+}
                  
-// template< class Key, class Compare, class Alloc >
-// bool operator!=( const set<Key, Compare, Alloc>& lhs,
-//                  const set<Key, Compare, Alloc>& rhs )
-// {
-//    return (!(lhs == rhs));
-// }
+template< class Key, class Compare, class Alloc >
+bool operator!=( const set<Key, Compare, Alloc>& lhs,
+                 const set<Key, Compare, Alloc>& rhs )
+{
+   return (!(lhs == rhs));
+}
                  
-// template< class Key, class Compare, class Alloc >
-// bool operator<( const set<Key, Compare, Alloc>& lhs,
-//                 const set<Key, Compare, Alloc>& rhs )
-// {
-//     return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
-// }
+template< class Key, class Compare, class Alloc >
+bool operator<( const set<Key, Compare, Alloc>& lhs,
+                const set<Key, Compare, Alloc>& rhs )
+{
+    return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+}
 
-// template< class Key, class Compare, class Alloc >
-// bool operator>=( const set<Key, Compare, Alloc>& lhs,
-//                  const set<Key, Compare, Alloc>& rhs )
-// {
-//    return (!(lhs < rhs));
-// }
+template< class Key, class Compare, class Alloc >
+bool operator>=( const set<Key, Compare, Alloc>& lhs,
+                 const set<Key, Compare, Alloc>& rhs )
+{
+   return (!(lhs < rhs));
+}
                  
 
-// template< class Key, class Compare, class Alloc >
-// bool operator>( const set<Key, Compare, Alloc>& lhs,
-//                 const set<Key, Compare, Alloc>& rhs )
-// {
-//     return (!(lhs < rhs) && lhs != rhs);
+template< class Key, class Compare, class Alloc >
+bool operator>( const set<Key, Compare, Alloc>& lhs,
+                const set<Key, Compare, Alloc>& rhs )
+{
+    return (!(lhs < rhs) && lhs != rhs);
 
-// }
+}
             
-// template< class Key, class Compare, class Alloc >
-// bool operator<=( const set<Key, Compare, Alloc>& lhs,
-//                  const set<Key, Compare, Alloc>& rhs )
-// {
-//    return (!(lhs > rhs));
-// }
+template< class Key, class Compare, class Alloc >
+bool operator<=( const set<Key, Compare, Alloc>& lhs,
+                 const set<Key, Compare, Alloc>& rhs )
+{
+   return (!(lhs > rhs));
+}
 
 
-// template< class Key, class Compare, class Alloc >
-// void swap( set<Key, Compare, Alloc>& lhs ,
-//             set<Key, Compare, Alloc>& rhs)
-// {
-//     lhs.swap (rhs);
-// }
+template< class Key, class Compare, class Alloc >
+void swap( set<Key, Compare, Alloc>& lhs ,
+            set<Key, Compare, Alloc>& rhs)
+{
+    lhs.swap (rhs);
+}
  
 }
 
