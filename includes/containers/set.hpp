@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 22:22:12 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 22:43:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,11 @@ class set
     typedef     Node*                                        node_ptr;
     typedef 	pair<const key_type,value_type>             pair;
     
-    class value_compar
-    {
-        key_compare comp;
-        public:
-            value_compar(key_compare c) : comp(c) {}
-        public:
-            bool operator()(value_type &a, value_type &b) const
-            {
-                return comp(a, b);
-            }
-    };
 
 
     typedef     const value_type&                  const_reference;
 
-    typedef     ft::RedBlack_tree<value_type,  value_compar, allocator_type>  RedBlack_tree;
+    typedef     ft::RedBlack_tree<value_type,  value_compare, allocator_type>  RedBlack_tree;
 
 
     /*Iterators*/
@@ -180,14 +169,17 @@ class set
     
 //     size_type                            count (const key_type& k) const {  return (__tree.find(k) != nullptr); }
         
-    iterator                             lower_bound (const key_type& k) {  return (__tree.lower_bound (make_pair(k, value_type())));    }
-    const_iterator                       lower_bound (const key_type& k) const{  return (__tree.lower_bound (make_pair(k, value_type())));    };
+    iterator                             lower_bound (const value_type& v) {  return (__tree.lower_bound (v));    }
+    const_iterator                       lower_bound (const value_type& v) const{  return (__tree.lower_bound (v));    };
         
-    iterator                             upper_bound (const key_type& k) {  return (__tree.upper_bound(make_pair(k, value_type())));}
-    const_iterator                       upper_bound (const key_type& k) const{  return (__tree.upper_bound(make_pair(k, value_type())));}
+    iterator                             upper_bound (const value_type& v) {  return (__tree.upper_bound(v));}
+    const_iterator                       upper_bound (const value_type& v) const{  return (__tree.upper_bound(v));}
 
-//     pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (__tree.equal_range(k)); }
-//     pair<iterator,iterator>             equal_range (const key_type& k) {   return (__tree.equal_range(k)); }
+    ft::pair<iterator, iterator>             equal_range (const value_type& v) {   
+        return (__tree.equal_range(v)); }
+        
+    ft::pair<const_iterator, const_iterator> equal_range (const value_type& v) const { return (__tree.equal_range(v));
+     }
 
 //     allocator_type                      get_allocator() const{      return (allocator_type());  };
     
