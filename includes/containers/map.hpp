@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 20:48:44 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 15:34:04 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ template<
          
     
     map( const map& other ) :__tree(other.__tree){   }
+
+    void        insert_test (const value_type& val, bool color)
+    {
+        __tree.insert_test (val, color);
+    }
 
 /* ************************************************************************** */
                             // operator= :

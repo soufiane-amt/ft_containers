@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 16:25:30 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 15:40:53 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,7 +361,7 @@ Node<T>* node_uncle (const Node<T>* node )
 
 
 template <class T>
-Node<T>* node_sibling (const Node<T>* node )
+Node<T>* sibling (const Node<T>* node )
 { 
     const Node<T>* node_parent = node->parent;
 

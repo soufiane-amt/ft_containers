@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 19:58:33 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 15:50:34 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class value_compare
 };
 
 
-typedef ft::RedBlack_tree <int, std::string, value_compare ,std::allocator<int> > bst;
+typedef ft::RedBlack_tree <int, int, value_compare ,std::allocator<int> > bst;
 
 typedef ft::Node<ft::pair <const int, int> >*  NodePtr;
 
@@ -120,16 +120,20 @@ int main ()
 {
     ft::map <int, int > m;
 
-    m.insert (ft::make_pair(42, 0));
-    m.insert (ft::make_pair(42, 0));
-    m.insert (ft::make_pair(50, 0));
-    m.insert (ft::make_pair(35, 0));
-    m.insert (ft::make_pair(45, 0));
-    m.insert (ft::make_pair(21, 0));
-    m.insert (ft::make_pair(38, 0));
-    m.insert (m.begin(), ft::make_pair(55, 0));
+    m.insert_test (ft::make_pair(40, 0), BLACK);
+    m.insert_test (ft::make_pair(20, 0), BLACK);
+    m.insert_test (ft::make_pair(60, 0), BLACK);
+    m.insert_test (ft::make_pair(10, 0), BLACK);
+    m.insert_test (ft::make_pair(30, 0), BLACK);
+    m.insert_test (ft::make_pair(50, 0), BLACK);
+    m.insert_test (ft::make_pair(80, 0), RED);
+    m.insert_test (ft::make_pair(90, 0), BLACK);
+    m.insert_test (ft::make_pair(70, 0), BLACK);
+    m.insert_test (ft::make_pair(100, 0), RED);
     m.print_tree ();
-    //  bst a;
+    m.erase(50);
+    m.print_tree ();
+    // bst a;
     // bool s;
     // a.insert(ft::make_pair(42, "lol"));
 	// a.insert(ft::make_pair(42, "mdr"));
@@ -141,18 +145,18 @@ int main ()
 	// a.insert(ft::make_pair(21, "fizz"));
 	// a.insert(ft::make_pair(38, "buzz"));
 
-        // a.insert(ft::make_pair(10, 3) );
-        // a.insert(ft::make_pair(5, 3) );
-        // a.insert(ft::make_pair(30, 3) );
-        // a.insert(ft::make_pair(40, 3) );
-        // a.insert(ft::make_pair(25, 3) );
-        // a.insert(ft::make_pair(2, 3) );
-        // a.insert(ft::make_pair(35, 3) );
-        // a.insert(ft::make_pair(38, 3) );
-        // a.insert(ft::make_pair(50, 3) );
-        // a.insert(ft::make_pair(36, 3) );
-        // a.insert(ft::make_pair(37, 3) );
-        // a.insert(ft::make_pair(38, 3) );
+    //     a.insert(ft::make_pair(10, 3) );
+    //     a.insert(ft::make_pair(5, 3) );
+    //     a.insert(ft::make_pair(30, 3) );
+    //     a.insert(ft::make_pair(40, 3) );
+    //     a.insert(ft::make_pair(25, 3) );
+    //     a.insert(ft::make_pair(2, 3) );
+    //     a.insert(ft::make_pair(35, 3) );
+    //     a.insert(ft::make_pair(38, 3) );
+    //     a.insert(ft::make_pair(50, 3) );
+    //     a.insert(ft::make_pair(36, 3) );
+    //     a.insert(ft::make_pair(37, 3) );
+    //     a.insert(ft::make_pair(38, 3) );
     }
     
     

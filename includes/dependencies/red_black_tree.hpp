@@ -178,7 +178,16 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         }
     }
     public:
-    
+        void        insert_test (const value_type& val, bool color)
+    {
+        bool l;
+        node_ptr    new_node = create_node (val);
+        new_node->color = color;
+        insert_node (__tree_root, new_node, l);
+        __size++;
+
+    }
+
 /* ************************************************************************** */
                             // Costructors :
 /* ************************************************************************** */
@@ -264,15 +273,6 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                             // erase :
 /* ************************************************************************** */
 
-    void        insert_test (const value_type& val, bool color)
-    {
-        bool l;
-        node_ptr    new_node = create_node (val);
-        new_node->color = color;
-        insert_node (__tree_root, new_node, l);
-        __size++;
-
-    }
     iterator erase (iterator position)
     {
         node_ptr PosPtr = position.base();
@@ -285,78 +285,105 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     
     void    RebalanceRedBlackTreeDelete (node_ptr _node)
     {
-        if (_node == __end)
-            return;
-        node_ptr node_sibl = node_sibling (_node);
+        node_ptr db_node_sibling = sibling(_node);
+        node_ptr node_to_delete = _node;
 
-        node_ptr to_delete_node = _node;
-        
         if (_node->is_leaf () && _node->color == RED)
         {
             base_del::delete_leaf (_node, this->__tree_root);
             return;
         }
-        while (_node->color == BLACK )
+        while (_node ->color == BLACK)
         {
-            if (_node == __tree_root)
-                return;
-
-            if (is_black_node(node_sibl) && is_black_node (node_sibl->left) &&  is_black_node (node_sibl->right))
+            if (_node ->color == BLACK && db_node_sibling->color == RED)
             {
-                if (_node == __tree_root)
-                    return;
-                node_ptr node_parent = _node->parent;
-                if (_node ==  to_delete_node)
-                    base_del::delete_leaf (_node, this->__tree_root);
-
-                ReColor (node_sibl);
-                if (node_parent->color == RED)
-                {
-                    ReColor(node_parent) ;//if node_parent is black you have now DB
-                    return;
-                }
-                _node = node_parent;
-                node_sibl = node_sibling (_node);
-                continue;
-
-            }
-
-            if (node_sibl && node_sibl->color == RED)
-            {
-                ft::swap (_node->parent->color, node_sibl->color);
+                std::swap (_node->parent->color, db_node_sibling->color);
                 if (is_left_child(_node))
                     rotate_left (_node->parent);
                 else
                     rotate_right (_node->parent);
-                
-                node_sibl = node_sibling (_node);
-            }
-            
-            bool    node_is_left = is_left_child(_node);
-            node_ptr node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
-            node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
-            if (is_black_node(node_sibl) && is_black_node (node_far_sibl_child) && !is_black_node (node_near_sibl_child) )
-            {
-                ft::swap (node_near_sibl_child->color, node_sibl->color);
-                if (node_is_left)
-                    rotate_right (node_sibl);
-                else
-                    rotate_left (node_sibl);
-                node_sibl = node_sibling (_node);
-            }
-            node_is_left = is_left_child(_node);
-            node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
-            if (is_black_node(node_sibl) && !is_black_node(node_far_sibl_child))
-            {
-                ft::swap (_node->parent->color, node_sibl->color);
-                if (is_left_child(_node))
-                    rotate_left (_node->parent);
-                else
-                    rotate_right (_node->parent);
-                ReColor(node_far_sibl_child);
-                return;
+                _node = _node->parent;
+                db_node_sibling = sibling(_node);
             }
         }
+        base_del::delete_leaf (node_to_delete, this->__tree_root);
+
+
+        // node_ptr node_sibl = node_sibling (_node);
+
+        
+        // if (_node->is_leaf () && _node->color == RED)
+        // {
+        //     base_del::delete_leaf (_node, this->__tree_root);
+        //     return;
+        // }
+        // node_ptr p = _node->parent;
+        //     base_del::delete_leaf (_node, this->__tree_root);
+        // _node = p;
+
+        // while (_node->color == BLACK )
+        // {
+        //     if (_node == __tree_root)
+        //         break;
+
+        //     if (is_black_node(node_sibl) && node_sibl && is_black_node (node_sibl->left) &&  is_black_node (node_sibl->right))
+        //     {
+        //         node_ptr node_parent = _node->parent;
+        //         ReColor (node_sibl);
+        //         if (node_parent->color == RED)
+        //         {
+        //             ReColor(node_parent) ;//if node_parent is black you have now DB
+        //             break;
+        //         }
+        //         _node = node_parent;
+        //         node_sibl = node_sibling (_node);
+        //         continue;
+        //     }
+        //     if (!is_black_node(node_sibl))
+        //     {
+        //         ft::swap (_node->parent->color, node_sibl->color);
+        //         if (is_left_child(_node))
+        //             rotate_left (_node->parent);
+        //         else
+        //             rotate_right (_node->parent);
+        //         node_sibl = node_sibling (_node);
+        //     }
+
+
+        //     bool    node_is_left;
+        //     node_ptr node_far_sibl_child;
+        //     if (node_sibl && is_black_node(node_sibl))
+        //     {
+        //         node_is_left = is_left_child(_node);
+        //         node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
+        //         node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
+        //         if ( is_black_node (node_far_sibl_child) && !is_black_node (node_near_sibl_child))
+        //         {
+        //             ft::swap (node_near_sibl_child->color, node_sibl->color);
+        //             if (node_is_left)
+        //                 rotate_right (node_sibl);
+        //             else
+        //                 rotate_left (node_sibl);
+        //             node_sibl = node_sibling (_node);
+        //         }
+        //     }
+        //     if (node_sibl && is_black_node(node_sibl))
+        //     {
+        //         node_is_left = is_left_child(_node);
+        //         node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
+        //         if ( !is_black_node(node_far_sibl_child))
+        //         {
+        //             ft::swap (_node->parent->color, node_sibl->color);
+        //             if (is_left_child(_node))
+        //                 rotate_left (_node->parent);
+        //             else
+        //                 rotate_right (_node->parent);
+        //             ReColor(node_far_sibl_child);
+        //             node_sibl = node_sibling (_node);
+
+        //         }
+        //     }
+        // }
     }
 
     size_type erase (const key_type& k)
