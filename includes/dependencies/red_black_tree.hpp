@@ -639,6 +639,11 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         class A 
         >
         friend  class map;
+        
+        template < class t,
+        class Co,
+        class Al> 
+        friend class set;
 
     private:
     
