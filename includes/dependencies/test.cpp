@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 16:59:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 17:41:08 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <map>
 #include "../containers/map.hpp"
 #include "../containers/vector.hpp"
+#include "../containers/stack.hpp"
 
 #include <math.h>
 
@@ -116,78 +117,78 @@ void    print_node(Node_ptr node)
 //             (void)arr;
 //         }
 
-int main ()
-{
-    ft::map <int, int > m;
+// int main ()
+// {
+//     ft::map <int, int > m;
 
-    m.insert_test (ft::make_pair(40, 0), BLACK);
-    // m.insert_test (ft::make_pair(20, 0), BLACK);
-    // m.insert_test (ft::make_pair(60, 0), BLACK);
-    // m.insert_test (ft::make_pair(10, 0), BLACK);
-    // m.insert_test (ft::make_pair(30, 0), BLACK);
-    // m.insert_test (ft::make_pair(50, 0), BLACK);
-    // m.insert_test (ft::make_pair(80, 0), RED);
-    // m.insert_test (ft::make_pair(90, 0), BLACK);
-    // m.insert_test (ft::make_pair(70, 0), BLACK);
-    // m.insert_test (ft::make_pair(100, 0), RED);
-    // m.print_tree ();
-    // std::cout << "m.erase(50);\n";
-    // m.erase(50);
-    // std::cout << "m.erase(50);\n";
+//     m.insert_test (ft::make_pair(40, 0), BLACK);
+//     // m.insert_test (ft::make_pair(20, 0), BLACK);
+//     // m.insert_test (ft::make_pair(60, 0), BLACK);
+//     // m.insert_test (ft::make_pair(10, 0), BLACK);
+//     // m.insert_test (ft::make_pair(30, 0), BLACK);
+//     // m.insert_test (ft::make_pair(50, 0), BLACK);
+//     // m.insert_test (ft::make_pair(80, 0), RED);
+//     // m.insert_test (ft::make_pair(90, 0), BLACK);
+//     // m.insert_test (ft::make_pair(70, 0), BLACK);
+//     // m.insert_test (ft::make_pair(100, 0), RED);
+//     // m.print_tree ();
+//     // std::cout << "m.erase(50);\n";
+//     // m.erase(50);
+//     // std::cout << "m.erase(50);\n";
 
-    // m.erase(20);
-    // std::cout << "m.erase(20);\n";
+//     // m.erase(20);
+//     // std::cout << "m.erase(20);\n";
 
-    // m.erase(100);
-    // std::cout << "m.erase(100);\n";
+//     // m.erase(100);
+//     // std::cout << "m.erase(100);\n";
 
-    // m.erase(90);
-    // std::cout << "m.erase(90);\n";
+//     // m.erase(90);
+//     // std::cout << "m.erase(90);\n";
     
-    for (ft::map <int, int >::iterator i = m.begin(); i != m.end(); i++)
-    {
-        std::cout << i->first << std::endl;
-    }
-    m.erase(40);
-    std::cout << "m.erase(90);\n";
+//     for (ft::map <int, int >::iterator i = m.begin(); i != m.end(); i++)
+//     {
+//         std::cout << i->first << std::endl;
+//     }
+//     m.erase(40);
+//     std::cout << "m.erase(90);\n";
     
-    // m.erase(60);
-    // std::cout << "m.erase(90);\n";
-    // m.erase(30);
-    // std::cout << "m.erase(90);\n";
-    // m.erase(10);
-    // std::cout << "m.erase(90);\n";
-    // m.erase(70);
-    // std::cout << "m.erase(90);\n";
-    // m.erase(80);
-    // std::cout << "m.erase(90);\n";
+//     // m.erase(60);
+//     // std::cout << "m.erase(90);\n";
+//     // m.erase(30);
+//     // std::cout << "m.erase(90);\n";
+//     // m.erase(10);
+//     // std::cout << "m.erase(90);\n";
+//     // m.erase(70);
+//     // std::cout << "m.erase(90);\n";
+//     // m.erase(80);
+//     // std::cout << "m.erase(90);\n";
 
-    // m.print_tree ();
-    // bst a;
-    // bool s;
-    // a.insert(ft::make_pair(42, "lol"));
-	// a.insert(ft::make_pair(42, "mdr"));
+//     // m.print_tree ();
+//     // bst a;
+//     // bool s;
+//     // a.insert(ft::make_pair(42, "lol"));
+// 	// a.insert(ft::make_pair(42, "mdr"));
 
-	// a.insert(ft::make_pair(50, "mdr"));
-	// a.insert(ft::make_pair(35, "funny"));
+// 	// a.insert(ft::make_pair(50, "mdr"));
+// 	// a.insert(ft::make_pair(35, "funny"));
 
-	// a.insert(ft::make_pair(45, "bunny"));
-	// a.insert(ft::make_pair(21, "fizz"));
-	// a.insert(ft::make_pair(38, "buzz"));
+// 	// a.insert(ft::make_pair(45, "bunny"));
+// 	// a.insert(ft::make_pair(21, "fizz"));
+// 	// a.insert(ft::make_pair(38, "buzz"));
 
-    //     a.insert(ft::make_pair(10, 3) );
-    //     a.insert(ft::make_pair(5, 3) );
-    //     a.insert(ft::make_pair(30, 3) );
-    //     a.insert(ft::make_pair(40, 3) );
-    //     a.insert(ft::make_pair(25, 3) );
-    //     a.insert(ft::make_pair(2, 3) );
-    //     a.insert(ft::make_pair(35, 3) );
-    //     a.insert(ft::make_pair(38, 3) );
-    //     a.insert(ft::make_pair(50, 3) );
-    //     a.insert(ft::make_pair(36, 3) );
-    //     a.insert(ft::make_pair(37, 3) );
-    //     a.insert(ft::make_pair(38, 3) );
-    }
+//     //     a.insert(ft::make_pair(10, 3) );
+//     //     a.insert(ft::make_pair(5, 3) );
+//     //     a.insert(ft::make_pair(30, 3) );
+//     //     a.insert(ft::make_pair(40, 3) );
+//     //     a.insert(ft::make_pair(25, 3) );
+//     //     a.insert(ft::make_pair(2, 3) );
+//     //     a.insert(ft::make_pair(35, 3) );
+//     //     a.insert(ft::make_pair(38, 3) );
+//     //     a.insert(ft::make_pair(50, 3) );
+//     //     a.insert(ft::make_pair(36, 3) );
+//     //     a.insert(ft::make_pair(37, 3) );
+//     //     a.insert(ft::make_pair(38, 3) );
+//     }
     
     
 //     print_tree_2 (a.__tree_root, a.size());
@@ -211,19 +212,18 @@ int main ()
 
 // // typedef int bla;
 // #define NAME_SPACE ft
-// #include <iterator>
-// int main ()
-// {
-//     NAME_SPACE::map <int, int > m;
-//     m.insert (NAME_SPACE::pair<int, int >(1, 4));
-//     m.insert (NAME_SPACE::pair<int, int >(5, 4));
-//     m.insert (NAME_SPACE::pair<int, int >(9, 4));
-//     m.insert (NAME_SPACE::pair<int, int >(2, 4));
-//     std::cout <<m.equal_range(-10).first->first << std::endl;
-//     std::cout <<m.equal_range(-10).second->first << std::endl;
-//     // m.insert (ft::pair <int, int > (4, 4));
-//     // m.insert (ft::pair <int, int > (4, 4));
-//     // m.insert (ft::pair <int, int > (4, 4));
-//     // for ( ft::map <int, int, std::greater<int> >::iterator i = m.begin(); i != m.end(); i++)
-//     //     std::cout << i->first << std::endl;
-// }
+#include <stack>
+int main ()
+{
+    ft::stack<int> s;
+    s.push (54);
+    s.push (5);
+    s.push (4);
+    while (!s.empty())
+    {
+        std::cout << s.top () << std::endl;
+        s.pop();
+    }
+    
+
+}
