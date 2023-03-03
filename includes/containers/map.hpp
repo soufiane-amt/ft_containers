@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 21:55:58 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 22:16:50 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ template<
     typedef     const value_type&                  const_reference;
     typedef     const pointer                      const_pointer;
 
-    typedef     RedBlack_tree<key_type, mapped_type, value_compare, allocator_type>  RedBlack_tree;
+    typedef     RedBlack_tree<value_type, value_compare, allocator_type>  RedBlack_tree;
 
     /*Iterators*/
     typedef typename              RedBlack_tree::iterator                iterator;

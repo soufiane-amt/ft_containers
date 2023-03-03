@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 20:17:14 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 22:02:04 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,16 @@ class set
          const key_compare& key_comp = key_compare(),
          const allocator_type& alloc = allocator_type() ):__tree(key_comp, alloc)
          {   
-            insert (first, last);
+            __tree.insert (first, last);
          }
          
     
     set( const set& other ) :__tree(other.__tree){   }
 
-    void        insert_test (const value_type& val, bool color)
-    {
-        __tree.insert_test (val, color);
-    }
+    // void        insert_test (const value_type& val, bool color)
+    // {
+    //     __tree.insert_test (val, color);
+    // }
 
 // /* ************************************************************************** */
 //                             // operator= :
@@ -117,7 +117,7 @@ class set
 
     void             insert (const value_type& val)
                                 {    
-                                    __tree.insert(make_pair(val, value_type()));
+                                    __tree.insert(val);
                                 }
     // iterator                            insert (iterator position, const_reference val){    return (__tree.insert(position, val)->first); }
     

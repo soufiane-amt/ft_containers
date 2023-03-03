@@ -76,7 +76,6 @@ class const_tree_iterator
         }
 
         template<
-        class Key,
         class T,
         class Compare,
         class Allocator 

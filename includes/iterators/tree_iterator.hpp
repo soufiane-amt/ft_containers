@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 15:57:40 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 22:19:13 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ class tree_iterator
 
 
         template<
-        class Key,
         class T,
         class Compare,
         class Allocator 
