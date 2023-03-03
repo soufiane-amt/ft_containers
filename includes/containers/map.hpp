@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 15:34:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 21:55:58 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ template<
     
     iterator                            erase (iterator position) { return (__tree.erase(position));}
     iterator                            erase (iterator first, iterator last){  return (__tree.erase(first,  last));    }
-    size_type                           erase (const key_type& k){  return (__tree.erase(k));    }
+    size_type                           erase (const key_type& k){  return (__tree.erase(ft::make_pair(k, mapped_type())));    }
     
     void                                swap (map& x) { __tree.swap (x.__tree);}
     void                                clear() {   __tree.clear(); }
@@ -164,19 +164,19 @@ template<
 
     iterator                             find (const key_type& k) 
     {
-        node_ptr ret = __tree.find(k);
+        node_ptr ret = __tree.find(ft::make_pair(k, mapped_type()) );
 
          return (ret == nullptr ? iterator (__tree.end()) : iterator (ret));  
     }
     
     const_iterator                       find (const key_type& k) const 
     {   
-        node_ptr ret = __tree.find(k);
+        node_ptr ret = __tree.find(ft::make_pair(k, mapped_type()));
 
          return (ret == nullptr ? const_iterator (__tree.end()) : const_iterator (ret));  
     };
     
-    size_type                            count (const key_type& k) const {  return (__tree.find(k) != nullptr); }
+    size_type                            count (const key_type& k) const {  return (__tree.find(ft::make_pair(k, mapped_type())) != nullptr); }
         
     iterator                             lower_bound (const key_type& k) {  return (__tree.lower_bound (make_pair(k, mapped_type())));    }
     const_iterator                       lower_bound (const key_type& k) const{  return (__tree.lower_bound (make_pair(k, mapped_type())));    };
@@ -184,8 +184,8 @@ template<
     iterator                             upper_bound (const key_type& k) {  return (__tree.upper_bound(make_pair(k, mapped_type())));}
     const_iterator                       upper_bound (const key_type& k) const{  return (__tree.upper_bound(make_pair(k, mapped_type())));}
 
-    pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (__tree.equal_range(k)); }
-    pair<iterator,iterator>             equal_range (const key_type& k) {   return (__tree.equal_range(k)); }
+    pair<const_iterator,const_iterator> equal_range (const key_type& k) const { return (__tree.equal_range(make_pair(k, mapped_type() ) )); }
+    pair<iterator,iterator>             equal_range (const key_type& k) {   return (__tree.equal_range(make_pair(k, mapped_type() ) )); }
 
     allocator_type                      get_allocator() const{      return (allocator_type());  };
     
@@ -204,7 +204,7 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 {
-    node_ptr   node = __tree.find(k);
+    node_ptr   node = __tree.find(ft::make_pair(k, mapped_type()));
     if (!node)
         return (__tree.insert (value_type(k, mapped_type())).first->second);
     return (node->data.second);
@@ -215,7 +215,7 @@ template< class Key, class T, class Compare , class Allocator  >
 typename map<Key, T, Compare, Allocator>::mapped_type&    
 map<Key, T, Compare, Allocator>::at (const key_type& k)
 {
-    node_ptr   node = __tree.find(k);
+    node_ptr   node = __tree.find(make_pair(k, mapped_type()));
     if (!node)
         throw std::out_of_range ("Error: at member function is out of range!");
     return (node->data.second);
@@ -290,5 +290,5 @@ void swap( map<Key, T, Compare, Alloc>& lhs ,
        
                 
 
-}
+};
 #endif

@@ -259,7 +259,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                             // Searching :
 /* ************************************************************************** */
 
-    node_ptr  find( key_type to_search) const;
+    node_ptr  find( value_type to_search) const;
     
 /* ************************************************************************** */
                             // Capacity :
@@ -344,7 +344,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         base_del::delete_leaf (node_to_delete, this->__tree_root);
     }
 
-    size_type erase (const key_type& k)
+    size_type erase (const value_type& k)
     {
         node_ptr nodeToFind = find(k);
         if (nodeToFind)
@@ -461,18 +461,18 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         return (const_iterator(to_ret));
     }
     pair<iterator,iterator>             
-    equal_range (const key_type& k)
+    equal_range (const value_type& v)
     {
-        iterator first = lower_bound(make_pair(k, mapped_type()));
-        iterator second = upper_bound(make_pair(k, mapped_type()));
+        iterator first = lower_bound(v);
+        iterator second = upper_bound(v);
         return (make_pair(first, second));
     }
     
     pair<const_iterator,const_iterator>             
-    equal_range (const key_type& k) const
+    equal_range (const value_type& v) const
     {
-        const_iterator first = lower_bound(make_pair(k, mapped_type()));
-        const_iterator second = upper_bound(make_pair(k, mapped_type()));
+        const_iterator first = lower_bound(v);
+        const_iterator second = upper_bound(v);
         return (make_pair(first, second));
     }
 
@@ -784,16 +784,15 @@ template<
     class Allocator 
     >
 typename RedBlack_tree<Key,T,Compare ,Allocator>::node_ptr   ///$$$$$$$$$$$$$$ find seg falt when it is given non existing element
-RedBlack_tree<Key,T,Compare ,Allocator>::find( key_type to_search) const
+RedBlack_tree<Key,T,Compare ,Allocator>::find( value_type to_search) const
 {
     node_ptr  node = __tree_root;
-    value_type to_search_value  = ft::make_pair(to_search, mapped_type());
 
     while (node)
     {
-        if (__value_cmp(node->data, to_search_value))//if __tree->data < value
+        if (__value_cmp(node->data, to_search))//if __tree->data < value
             node = node->right;
-        else if (__value_cmp(to_search_value, node->data))
+        else if (__value_cmp(to_search, node->data))
             node = node->left;
         else
             return node;
