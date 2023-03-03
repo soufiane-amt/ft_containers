@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 15:57:35 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 18:31:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -468,7 +468,7 @@ void vector<T, Allocator>::push_back (const_reference val)
         this->elements = temp;
         this->_v_capacity = this->_v_capacity > 0 ? (this->_v_capacity * 2) : 1;
     }
-    this->elements[new_element_index] = val;
+    allocator.construct (this->elements + new_element_index, val);
     this->_v_size++;
 }
 

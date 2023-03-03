@@ -6,27 +6,34 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:24:33 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 18:00:52 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 18:29:44 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STACK_HPP
 #define STACK_HPP
+#include "vector.hpp"
 #include <vector>
 
 
 namespace ft
 {
-template <class T, class Container = std::vector<T> > 
+template <class T, class Container = ft::vector<T> > 
 class stack
 {
     public:
     typedef T               value_type;
     typedef Container       container_type;
     typedef size_t          size_type;
+
+    
     explicit stack (const container_type& ctnr = container_type()) : c(ctnr){}
     
-    stack& operator=( const stack& other ){ this->c = other.c;}
+    stack& operator=( const stack& other )
+    { 
+        this->c = other.c;
+        return (*this);
+    }
     
     bool empty() const {    return (c.empty()); }
 
