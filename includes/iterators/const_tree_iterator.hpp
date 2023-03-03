@@ -89,6 +89,14 @@ class const_tree_iterator
         class Allocator 
         >
         friend  class map;
+
+        template<
+        class T,
+        class Compare,
+        class Allocator 
+        >
+        friend  class set;
+
     private:
         iterator_type   __node;
 

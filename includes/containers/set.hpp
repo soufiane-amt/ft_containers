@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 22:45:15 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 23:00:46 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ class set
 //                             // operator= :
 // /* ************************************************************************** */
 
-//     set&                                operator=( const set& other ){      this->__tree = other.__tree;    return (*this);}
+    set&                                operator=( const set& other ){      this->__tree = other.__tree;    return (*this);}
 
 
 // /* ************************************************************************** */
@@ -104,19 +104,13 @@ class set
 //                             // Modifiers= :
 // /* ************************************************************************** */
 
-    void             insert (const value_type& val)
-                                {    
-                                    __tree.insert(val);
-                                }
-    iterator                            insert (iterator position, const_reference val){    return (__tree.insert(position, val)->first); }
+    ft::pair<iterator,bool>                 insert (const value_type& val){    return (__tree.insert(val));}
+    iterator                            insert (iterator position, const_reference val){    return (__tree.insert(position, val)); }
     
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last){ 
-        while (first != last)
-        {
-            insert(*first);
-            first++;
-        }
+            __tree.insert(first, last);
+        
     }
     
     
