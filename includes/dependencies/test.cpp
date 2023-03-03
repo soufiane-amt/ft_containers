@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 16:42:13 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 16:59:31 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,30 +121,48 @@ int main ()
     ft::map <int, int > m;
 
     m.insert_test (ft::make_pair(40, 0), BLACK);
-    m.insert_test (ft::make_pair(20, 0), BLACK);
-    m.insert_test (ft::make_pair(60, 0), BLACK);
-    m.insert_test (ft::make_pair(10, 0), BLACK);
-    m.insert_test (ft::make_pair(30, 0), BLACK);
-    m.insert_test (ft::make_pair(50, 0), BLACK);
-    m.insert_test (ft::make_pair(80, 0), RED);
-    m.insert_test (ft::make_pair(90, 0), BLACK);
-    m.insert_test (ft::make_pair(70, 0), BLACK);
-    m.insert_test (ft::make_pair(100, 0), RED);
-    m.print_tree ();
-    std::cout << "m.erase(50);\n";
-    m.erase(50);
-    std::cout << "m.erase(50);\n";
+    // m.insert_test (ft::make_pair(20, 0), BLACK);
+    // m.insert_test (ft::make_pair(60, 0), BLACK);
+    // m.insert_test (ft::make_pair(10, 0), BLACK);
+    // m.insert_test (ft::make_pair(30, 0), BLACK);
+    // m.insert_test (ft::make_pair(50, 0), BLACK);
+    // m.insert_test (ft::make_pair(80, 0), RED);
+    // m.insert_test (ft::make_pair(90, 0), BLACK);
+    // m.insert_test (ft::make_pair(70, 0), BLACK);
+    // m.insert_test (ft::make_pair(100, 0), RED);
+    // m.print_tree ();
+    // std::cout << "m.erase(50);\n";
+    // m.erase(50);
+    // std::cout << "m.erase(50);\n";
 
-    m.erase(20);
-    std::cout << "m.erase(20);\n";
+    // m.erase(20);
+    // std::cout << "m.erase(20);\n";
 
-    m.erase(100);
-    std::cout << "m.erase(100);\n";
+    // m.erase(100);
+    // std::cout << "m.erase(100);\n";
 
-    m.erase(90);
+    // m.erase(90);
+    // std::cout << "m.erase(90);\n";
+    
+    for (ft::map <int, int >::iterator i = m.begin(); i != m.end(); i++)
+    {
+        std::cout << i->first << std::endl;
+    }
+    m.erase(40);
     std::cout << "m.erase(90);\n";
+    
+    // m.erase(60);
+    // std::cout << "m.erase(90);\n";
+    // m.erase(30);
+    // std::cout << "m.erase(90);\n";
+    // m.erase(10);
+    // std::cout << "m.erase(90);\n";
+    // m.erase(70);
+    // std::cout << "m.erase(90);\n";
+    // m.erase(80);
+    // std::cout << "m.erase(90);\n";
 
-    m.print_tree ();
+    // m.print_tree ();
     // bst a;
     // bool s;
     // a.insert(ft::make_pair(42, "lol"));

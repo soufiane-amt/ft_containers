@@ -294,7 +294,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
             return;
         }
         // print_tree_2(__tree_root, size());
-        while (_node ->color == BLACK)
+        while (_node ->color == BLACK )
         {
             if (_node == __tree_root)
                 break;
