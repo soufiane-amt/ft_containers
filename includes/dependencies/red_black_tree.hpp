@@ -285,17 +285,23 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     
     void    RebalanceRedBlackTreeDelete (node_ptr _node)
     {
+        if (_node == __end)
+            return;
         node_ptr node_sibl = node_sibling (_node);
 
         node_ptr to_delete_node = _node;
+        
         if (_node->is_leaf () && _node->color == RED)
         {
             base_del::delete_leaf (_node, this->__tree_root);
             return;
         }
-        while (_node->color == BLACK)
+        while (_node->color == BLACK )
         {
-            if (is_black_node(node_sibl) && node_sibl && is_black_node (node_sibl->left) &&  is_black_node (node_sibl->right))
+            if (_node == __tree_root)
+                return;
+
+            if (is_black_node(node_sibl) && is_black_node (node_sibl->left) &&  is_black_node (node_sibl->right))
             {
                 if (_node == __tree_root)
                     return;
@@ -309,14 +315,12 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     ReColor(node_parent) ;//if node_parent is black you have now DB
                     return;
                 }
-                else
-                {
-                    _node = node_parent;
-                    node_sibl = node_sibling (_node);
-                }
+                _node = node_parent;
+                node_sibl = node_sibling (_node);
+                continue;
+
             }
-            if (_node == __tree_root)
-                return;
+
             if (node_sibl && node_sibl->color == RED)
             {
                 ft::swap (_node->parent->color, node_sibl->color);
@@ -324,8 +328,10 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                     rotate_left (_node->parent);
                 else
                     rotate_right (_node->parent);
+                
                 node_sibl = node_sibling (_node);
             }
+            
             bool    node_is_left = is_left_child(_node);
             node_ptr node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
             node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
@@ -362,14 +368,14 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
     
     iterator erase (iterator first, iterator last)
     {
-        iterator next_element ;
+        iterator to_erase ;
         while (first != last)
         {
-            next_element = first++;
-            erase (next_element);
+            to_erase = first++;
+            erase (to_erase);
         }
         if (!__size){     __tree_root = nullptr;}
-        return (next_element);
+        return (to_erase);
     }
 
 
