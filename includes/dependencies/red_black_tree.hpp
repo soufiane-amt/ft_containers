@@ -218,14 +218,13 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
         bool        success;
         node_ptr pos = position.base();
         iterator    it;
-        if (pos != __end && !find(position->first))
-            pos = __end;
+
+        node_ptr    new_node = create_node (val);
         if (pos == __end)
             pos--;
         if (pos !=__end && __value_cmp((*position), val))
             pos = __tree_root;
 
-        node_ptr    new_node = create_node (val);
         if (__size)
             it = insert_node(pos, new_node, success);
         else

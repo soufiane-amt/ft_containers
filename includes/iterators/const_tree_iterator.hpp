@@ -29,7 +29,7 @@ class const_tree_iterator
         typedef typename iterator_traits<iterator_type>::value_type        value_type;
         typedef typename iterator_traits<iterator_type>::difference_type   difference_type;
         typedef const typename value_type::const_data_value_type_point     pointer;
-        typedef typename value_type::data_value_type                       data_value_type;
+        typedef const typename value_type::data_value_type                       data_value_type;
         typedef  const data_value_type&                                  reference;
         
         typedef data_value_type*                                           data_value_type_ptr;
@@ -52,9 +52,9 @@ class const_tree_iterator
         const_tree_iterator(const non_const_iterator &other):__node ( other.base()){}
         
         
-        iterator_type                  base() const    {   return (this->__node);}
+        iterator_type                        base() const    {   return (this->__node);}
         
-        data_value_type_ref            operator*() const {    return (__node->data);}
+        data_value_type_ref                  operator*() const {    return (__node->data);}
         
         const_tree_iterator&                 operator++(){      this->__node = next_node(__node);   return (*this);}
         const_tree_iterator                  operator++(int);
@@ -62,13 +62,10 @@ class const_tree_iterator
         const_tree_iterator&                 operator--(){      this->__node = prev_node(__node);   return (*this);}
         const_tree_iterator                  operator--(int);
                 
-        const_tree_iterator                  operator+(difference_type) const;
-        const_tree_iterator                  operator-(difference_type) const;
                     
         // template <class it>
         // const_tree_iterator&                 operator=(const it&)  {    this->__node = it.base(); return (*this);};
     
-        const_data_value_type_ptr            operator->()    {    return (&__node->data);}
         const_data_value_type_ptr            operator->() const  {    return (&__node->data);}
 
         bool operator==(const_tree_iterator const & rhs) const {
@@ -128,8 +125,6 @@ const_tree_iterator<T>        const_tree_iterator<T>::operator--(int)
 
 
 
-
-//non members
 
 
 
