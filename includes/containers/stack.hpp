@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:24:33 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 17:34:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/03 17:36:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,44 @@ class stack
     private:
     container_type  under_container;
     
+};
+
+
+template <class T, class Container>  
+bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+{
+    return (lhs == rhs);
 }
+
+template <class T, class Container>  
+bool operator!= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+{
+    return (lhs != rhs);
+}
+
+template <class T, class Container>  
+bool operator<  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+{
+    return (lhs < rhs);
+}
+
+template <class T, class Container>  
+bool operator<= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+{
+    return (lhs <= rhs);
+}
+
+template <class T, class Container>  
+bool operator>  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+{
+    return (lhs > rhs);
+}
+
+template <class T, class Container>  
+bool operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+{
+    return (lhs >= rhs);
+}
+
 
 #endif
