@@ -319,17 +319,28 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<Key, T, Allocator> >
                 db_node_sibling = sibling(_node);
                 continue;
             }
-            if (is_black_node(db_node_sibling) && is_black_node(far_nephew(db_node_sibling)) && 
-                                                    !is_black_node(near_nephew (db_node_sibling)))
+            if (is_black_node(db_node_sibling) && is_black_node(far_nephew(_node)) && 
+                                                    !is_black_node(near_nephew (_node)))
                 {
-                    ft::swap (near_nephew (db_node_sibling)->color, db_node_sibling->color);
+                    std::swap (near_nephew (_node)->color, db_node_sibling->color);
                     if (is_left_child (_node))
                         rotate_right (db_node_sibling);
                     else
                         rotate_left (db_node_sibling);
-                    db_node_sibling = node_sibling (_node);
+                    db_node_sibling = sibling (_node);
 
                 }
+            if (is_black_node(db_node_sibling) && !is_black_node(far_nephew(_node)))
+            {
+                    std::swap (_node->parent->color, db_node_sibling->color);
+                    if (is_left_child (_node))
+                        rotate_left (_node->parent);
+                    else
+                        rotate_right (_node->parent);
+                    db_node_sibling = sibling (_node);
+                    ReColor(far_nephew(_node));
+                    break;
+            }
         }
         base_del::delete_leaf (node_to_delete, this->__tree_root);
 
