@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 10:42:09 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 10:59:51 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,11 @@ class set
 //                             // Modifiers= :
 // /* ************************************************************************** */
 
-    ft::pair<iterator,bool>                 insert (const value_type& val){    return (__tree.insert(val));}
+    ft::pair<iterator,bool>                 insert (const value_type& val)
+    {
+        ft::pair <node_ptr, bool> ret = __tree.insert(val);
+        return (ft::make_pair(iterator(ret.first) , ret.second));
+    }
     iterator                            insert (iterator position, const_reference val){    return iterator(__tree.insert(position.__node, val)); }
     
     template <class InputIterator> 
