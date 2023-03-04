@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 20:59:27 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 21:34:11 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -512,11 +512,18 @@ void                    vector<T, Allocator>::insert (iterator position, size_ty
     iterator    _dup_position = position;
     size_t       pos_index = 0;
 
+        std::cout << new_elements << std::endl;
+
     _v_size += n;
     if (_v_size > _v_capacity)
     {
 
         new_elements = this->allocator.allocate(_v_size);
+        for (size_t i = 0; i < _v_size; i++)        
+            allocator.destroy(this->elements + i);
+        if (this->elements)
+            allocator.deallocate(this->elements, _v_capacity);
+
         for (size_t i = 0; _begin != _dup_position; _begin++)
         {
             allocator.construct(new_elements + (i++), *_begin);
@@ -563,14 +570,11 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
     ++_v_size;
     if (_v_size > _v_capacity)
     {
-        // std::cout << _v_capacity << std::endl;
-        // new_elements = this->_alloc_double_capacity(this->_v_capacity);
-        new_elements = allocator.allocate ( 1);
+        new_elements = this->_alloc_double_capacity(this->_v_capacity);
         for (size_t i = 0; i < _v_size; i++)        
             allocator.destroy(this->elements + i);
         if (this->elements)
             allocator.deallocate(this->elements, _v_capacity);
-
         for (size_t i = 0; _begin != _dup_position; _begin++)
         {
             allocator.construct(new_elements + (i++), *_begin);
@@ -586,7 +590,6 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
         _end--;
         for ( pos_index++; _end != _dup_position ; _end--)
         {
-            // std::cout << "-----\n";
             allocator.destroy(_end.__value);
             allocator.construct(_end.__value, *(_end.__value - 1));
         }
