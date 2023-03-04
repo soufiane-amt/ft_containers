@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 23:07:32 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 10:12:39 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ class set
 
 
     /*Iterators*/
-    typedef typename              RedBlack_tree::iterator                iterator;
+    typedef typename              RedBlack_tree::const_iterator                iterator;
     typedef typename              RedBlack_tree::const_iterator         const_iterator;
     
     
     
     /*reverse_iterator*/
-    typedef typename              ft::reverse_iterator<iterator >            reverse_iterator;
+    typedef typename              ft::reverse_iterator<const_iterator >            reverse_iterator;
     typedef typename              ft::reverse_iterator<const_iterator >      const_reverse_iterator;
 
 
