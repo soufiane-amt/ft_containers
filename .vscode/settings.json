@@ -89,6 +89,7 @@
         "numeric": "cpp",
         "random": "cpp",
         "scoped_allocator": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "*.ipp": "cpp"
     }
 }

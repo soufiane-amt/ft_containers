@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 18:31:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 12:52:03 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ void vector<T, Allocator>::resize (size_type n, value_type val)
     for (size_t i = 0; i < this->_v_size; i++)
         allocator.construct(this->elements + i, tmp[i]);
     this->_v_size = n;
+    delete []tmp;
 }
 
 
@@ -458,14 +459,13 @@ void vector<T, Allocator>::push_back (const_reference val)
         pointer temp;
         temp = this->_alloc_double_capacity(this->_v_capacity);
         this->_copy_elements(temp, this->elements,this->_v_size);
-        if (this->_v_size)
-        {
-            for (size_t i = 0; i < _v_size; i++)        
-                allocator.destroy(this->elements + i);
-            if (this->elements)
-                allocator.deallocate(this->elements, _v_capacity);
-        }
+        
+        for (size_t i = 0; i < _v_size; i++)        
+            allocator.destroy(this->elements + i);
+        if (this->elements)
+            allocator.deallocate(this->elements, _v_capacity);
         this->elements = temp;
+
         this->_v_capacity = this->_v_capacity > 0 ? (this->_v_capacity * 2) : 1;
     }
     allocator.construct (this->elements + new_element_index, val);
