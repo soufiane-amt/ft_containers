@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 10:15:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 10:42:09 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,17 +105,30 @@ class set
 // /* ************************************************************************** */
 
     ft::pair<iterator,bool>                 insert (const value_type& val){    return (__tree.insert(val));}
-    iterator                            insert (iterator position, const_reference val){    return (__tree.insert(position, val)); }
+    iterator                            insert (iterator position, const_reference val){    return iterator(__tree.insert(position.__node, val)); }
     
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last){ 
-            __tree.insert(first, last);
-        
+        while (first != last)
+        {
+            insert(*first);
+            first++;
+        }
     }
     
     
     iterator                            erase (iterator position) { return iterator(__tree.erase(position.base()));}
-    iterator                            erase (iterator first, iterator last){  return iterator(__tree.erase(first,  last));    }
+    iterator                            erase (iterator first, iterator last)
+    {        
+        iterator to_erase ;
+        while (first != last)
+        {
+            to_erase = first++;
+            __tree.erase (to_erase.__node);
+        }
+        if (!__tree.__size){     __tree.__tree_root = nullptr;}
+        return (to_erase);
+    }
     size_type                           erase (const key_type& k){  return (__tree.erase(k));    }
     
     void                                swap (set& x) { __tree.swap (x.__tree);}

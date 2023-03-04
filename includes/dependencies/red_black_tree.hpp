@@ -216,25 +216,24 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<T, Allocator> >
             RebalanceRedBlackTreeInsert (new_node);
         return (ft::make_pair(it, success));
     }
-    iterator                            insert (iterator position, const value_type&  val)
+    node_ptr                            insert (node_ptr pos, const value_type&  val)
     {
         bool        success;
-        node_ptr pos = position.base();
-        iterator    it;
+        node_ptr    ret;
 
         node_ptr    new_node = create_node (val);
         if (pos == __end)
             pos--;
-        if (pos !=__end && __value_cmp((*position), val))
+        if (pos !=__end && __value_cmp((pos->data), val))
             pos = __tree_root;
 
         if (__size)
-            it = insert_node(pos, new_node, success);
+            ret = insert_node(pos, new_node, success);
         else
-            it = insert_node(__tree_root, new_node, success);
+            ret = insert_node(__tree_root, new_node, success);
         if (success)
             RebalanceRedBlackTreeInsert (new_node);
-        return (it);
+        return (ret);
     }
 
 
@@ -341,7 +340,7 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<T, Allocator> >
     {
         node_ptr nodeToFind = find(k);
         if (nodeToFind)
-            erase (iterator (nodeToFind));
+            erase (nodeToFind);
         return (nodeToFind != nullptr);
     }
     
