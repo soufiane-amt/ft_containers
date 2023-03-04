@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 20:23:00 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 20:59:27 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ namespace ft
         size_type               _v_size;
         allocator_type          allocator;
 
+        void    destroy_and_deallocate();
+        void    destroy (iterator first, iterator last);
         //utils
         value_type              *_alloc_double_capacity(size_type    acctual_capacity);
         void                    _copy_elements  (pointer dst, pointer src, size_t n);
@@ -595,52 +597,72 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
     return (this->elements + pos_index);
 }
 
+template <typename T, typename Allocator>
+void vector<T, Allocator>::destroy (iterator first, iterator last)
+{
+    iterator to_erase ;
+    while (first != last)
+    {
+        to_erase = first++;
+        allocator.destroy(to_erase.__value);
+    }
+}
+
+template <typename T, typename Allocator>
+void vector<T, Allocator>::destroy_and_deallocate() {
+
+    if (elements)
+    {
+        destroy(begin(), end());
+        allocator.deallocate(elements, capacity());
+    }
+}
+
 template <class T, class Allocator> 
 template <class InputIterator>
 typename enable_if<!is_integral<InputIterator>::value, void>::type
 vector<T, Allocator>::insert (iterator position, InputIterator first, InputIterator last)
 {
-    // size_t requiredCapacity = this->_v_size + std::distance(first, last);
-    // if (requiredCapacity > this->_v_capacity) {
-    //     // int index = std::distance(objects, position);
-    //     reserve(requiredCapacity);
-    //     // position = objects + index;
+    // size_t num_elements = std::distance(first, last);
+    // if (size() + num_elements > capacity()) {
+    //   size_t new_capacity = std::max(size() + num_elements, 2 * capacity());
+    //   T* new_data = allocator.allocate(new_capacity);
+    //   std::copy(begin(), position, new_data);
+    //   std::copy(first, last, new_data + (position - begin()));
+    //   std::copy(position, end(), new_data + (position - begin() + num_elements));
+    // //   std::cout << new_data << std::endl;
+    //   destroy_and_deallocate();
+    //   this->elements = new_data;
+    //   _v_capacity = new_capacity;
     // }
-
-    // iterator    _end = end() - 1 ;
-    // iterator    _dup_position = position;
-    // size_t       pos_index = 0;
-    // for (; first != last; ++first) 
-    // {
-    //     ++_v_size;
-    //     for ( pos_index++; _end != _dup_position ; _end--)
-    //     {
-    //         allocator.destroy(_end.__value);
-    //         allocator.construct(_end.__value, *(_end.__value - 1));
-    //     }
-    //     allocator.destroy(position.__value);
-    //     *position = *first;
+    // else {
+    //   std::move_backward(position, end(), end() + num_elements);
+    //   std::copy(first, last, position);
     // }
-    size_t num_elements = std::distance(first, last);
-    if (size() + num_elements > capacity()) {
-      size_t new_capacity = std::max(size() + num_elements, 2 * capacity());
-      T* new_data = allocator.allocate(new_capacity);
-    //   std::uninitialized_copy(begin(), position, new_data);
-    //   std::uninitialized_copy(first, last, new_data + (position - begin()));
-    //   std::uninitialized_copy(position, end(), new_data + (position - begin() + num_elements));
-    //   for (size_t i = 0; i < _v_size; i++)        
-    //       allocator.destroy(this->elements + i);
-    //   if (this->elements)
-    //       allocator.deallocate(this->elements, _v_capacity);
-    
+    // _v_size += num_elements;
+  size_t num_elements = std::distance(first, last);
+  if (size() + num_elements > capacity()) {
+    size_t new_capacity = std::max(size() + num_elements, 2 * capacity());
+    T* new_data = allocator.allocate(new_capacity);
+    T* new_data_ptr = new_data;
+    try {
+      new_data_ptr = std::uninitialized_copy(begin(), position, new_data);
+      new_data_ptr = std::uninitialized_copy(first, last, new_data_ptr);
+      std::uninitialized_copy(position, end(), new_data_ptr);
+      destroy_and_deallocate();
       this->elements = new_data;
+      _v_size += num_elements;
       _v_capacity = new_capacity;
+    } catch (...) {
+      destroy(new_data, new_data_ptr);
+      allocator.deallocate(new_data, new_capacity);
+      throw;
     }
-    else {
-      std::move_backward(position, end(), end() + num_elements);
-      std::copy(first, last, position);
-    }
+  } else {
+    std::move_backward(position, end(), end() + num_elements);
+    std::copy(first, last, position);
     _v_size += num_elements;
+  }
 
 }
 
