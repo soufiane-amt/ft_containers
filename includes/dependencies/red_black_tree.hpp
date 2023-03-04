@@ -267,12 +267,11 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<T, Allocator> >
                             // erase :
 /* ************************************************************************** */
 
-    iterator erase (iterator position)
+    node_ptr erase (node_ptr position)
     {
-        node_ptr PosPtr = position.base();
-        iterator    successor = next_node(PosPtr);
-        make_node_leaf (PosPtr);
-        RebalanceRedBlackTreeDelete (PosPtr);
+        node_ptr    successor = next_node(position);
+        make_node_leaf (position);
+        RebalanceRedBlackTreeDelete (position);
         __size--;
         return (successor);
     }

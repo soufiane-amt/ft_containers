@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 10:12:39 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 10:15:47 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ class set
     }
     
     
-    iterator                            erase (iterator position) { return (__tree.erase(position));}
-    iterator                            erase (iterator first, iterator last){  return (__tree.erase(first,  last));    }
+    iterator                            erase (iterator position) { return iterator(__tree.erase(position.base()));}
+    iterator                            erase (iterator first, iterator last){  return iterator(__tree.erase(first,  last));    }
     size_type                           erase (const key_type& k){  return (__tree.erase(k));    }
     
     void                                swap (set& x) { __tree.swap (x.__tree);}
