@@ -6,12 +6,12 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/02 11:38:48 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 13:18:51 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_HPP
-#define UTILS_HPP
+#ifndef UTILITY_HPP
+#define UTILITY_HPP
 
 #include <functional>
 #include "pair.hpp"

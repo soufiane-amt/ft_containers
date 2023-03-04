@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 12:52:03 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 14:39:01 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,6 +315,7 @@ void      vector<T, Allocator>::reserve (size_type n)
     for (size_t i = 0; i < this->_v_size; i++)
         allocator.construct(this->elements + i, temp[i]);
     this->_v_capacity = n;
+    delete []temp;
 }
 
 
@@ -507,7 +508,12 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
     ++_v_size;
     if (_v_size > _v_capacity)
     {
-        new_elements = this->allocator.allocate(_v_size);
+        new_elements = this->_alloc_double_capacity(this->_v_capacity);
+        for (size_t i = 0; i < _v_size; i++)        
+            allocator.destroy(this->elements + i);
+        if (this->elements)
+            allocator.deallocate(this->elements, _v_capacity);
+
         for (size_t i = 0; _begin != _dup_position; _begin++)
         {
             allocator.construct(new_elements + (i++), *_begin);
@@ -516,6 +522,7 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
         allocator.construct(new_elements + pos_index, val);
         for (size_t i = pos_index + 1 ; _dup_position != _end; _dup_position++)
             allocator.construct(new_elements + (i++), *_dup_position);
+        this->_v_capacity = this->_v_capacity > 0 ? (this->_v_capacity * 2) : 1;
     }
     else
     {
@@ -527,7 +534,6 @@ vector<T, Allocator>::insert (iterator position, const_reference val)
         allocator.destroy(position.base());
         *position = val;
     }
-    _v_capacity = _v_size;
     this->elements = new_elements;
     return (this->elements + pos_index);
 }
@@ -689,7 +695,7 @@ bool operator!= (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 template <class T, class Alloc>
 bool operator<  (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    return (lexicographical_compare(v1.begin(), v1.end(), v2.begin(), v2.end()));
+    return (ft::lexicographical_compare(v1.begin(), v1.end(), v2.begin(), v2.end()));
 }
 
 template <class T, class Alloc>
