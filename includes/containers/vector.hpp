@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 22:38:44 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 22:42:25 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -723,7 +723,7 @@ vector<T, Allocator>::get_allocator() const
 template <class T, class Alloc>
 bool operator== (const vector<T,Alloc>& v1, const vector<T,Alloc>& v2)
 {
-    return (v1.size() == v2.size() && equal(v1.begin(), v1.end(), v2.begin()));
+    return (v1.size() == v2.size() && ft::equal(v1.begin(), v1.end(), v2.begin()));
 }
 
 template <class T, class Alloc>
