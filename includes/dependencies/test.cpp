@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 20:05:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 22:29:56 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,8 +218,9 @@ int main ()
 {
     NAME_SPACE::vector<int> vector;
     NAME_SPACE::vector<int> tmp;
-    tmp.assign(2600 * _ratio, 1);
-    vector.assign(4200 * _ratio, 1);
-    vector.insert(vector.end() - 1000 * _ratio, tmp.begin(), tmp.end());
-    
+    tmp.assign(5, 1);
+    vector.assign(5, 1337);
+    std::swap (vector, tmp);       
+    std::cout << vector[0] << std::endl;
+    std::cout << tmp[0] << std::endl;
 }

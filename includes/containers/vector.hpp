@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 22:16:34 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 22:38:44 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -624,45 +624,29 @@ template <class InputIterator>
 typename enable_if<!is_integral<InputIterator>::value, void>::type
 vector<T, Allocator>::insert (iterator position, InputIterator first, InputIterator last)
 {
-    // size_t num_elements = std::distance(first, last);
-    // if (size() + num_elements > capacity()) {
-    //   size_t new_capacity = std::max(size() + num_elements, 2 * capacity());
-    //   T* new_data = allocator.allocate(new_capacity);
-    //   std::copy(begin(), position, new_data);
-    //   std::copy(first, last, new_data + (position - begin()));
-    //   std::copy(position, end(), new_data + (position - begin() + num_elements));
-    // //   std::cout << new_data << std::endl;
-    //   destroy_and_deallocate();
-    //   this->elements = new_data;
-    //   _v_capacity = new_capacity;
-    // }
-    // else {
-    //   std::move_backward(position, end(), end() + num_elements);
-    //   std::copy(first, last, position);
-    // }
-    // _v_size += num_elements;
   size_t num_elements = std::distance(first, last);
   if (size() + num_elements > capacity()) {
-    size_t new_capacity = std::max(size() + num_elements, 2 * capacity());
-    T* new_data = allocator.allocate(new_capacity);
-    T* new_data_ptr = new_data;
-    try {
-      new_data_ptr = std::uninitialized_copy(begin(), position, new_data);
-      new_data_ptr = std::uninitialized_copy(first, last, new_data_ptr);
-      std::uninitialized_copy(position, end(), new_data_ptr);
-      destroy_and_deallocate();
-      this->elements = new_data;
-      _v_size += num_elements;
-      _v_capacity = new_capacity;
-    } catch (...) {
-      destroy(new_data, new_data_ptr);
-      allocator.deallocate(new_data, new_capacity);
-      throw;
-    }
-  } else {
-    std::move_backward(position, end(), end() + num_elements);
-    std::copy(first, last, position);
-    _v_size += num_elements;
+        size_t new_capacity = std::max(size() + num_elements, 2 * capacity());
+        T* new_data = allocator.allocate(new_capacity);
+        T* new_data_ptr = new_data;
+        try {
+            new_data_ptr = std::uninitialized_copy(begin(), position, new_data);
+            new_data_ptr = std::uninitialized_copy(first, last, new_data_ptr);
+            std::uninitialized_copy(position, end(), new_data_ptr);
+            destroy_and_deallocate();
+            this->elements = new_data;
+            _v_size += num_elements;
+            _v_capacity = new_capacity;
+        } catch (...) {
+          destroy(new_data, new_data_ptr);
+          allocator.deallocate(new_data, new_capacity);
+          throw;
+        }
+  } 
+  else {
+        std::move_backward(position, end(), end() + num_elements);
+        std::copy(first, last, position);
+        _v_size += num_elements;
   }
 
 }
@@ -783,15 +767,6 @@ void vector<T, Allocator>::swap (vector& x)
 }
 
 
-        //*swap*//
-template <class T, class Alloc>
-void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
-{
-    vector<T,Alloc> tmp (x);
-
-    x = y;
-    y = tmp;
-}
 
 
 
@@ -911,7 +886,20 @@ vector<T, Allocator>::distance (InputIterator first, InputIterator  last)
     return (distance);
 }
 
+template <class T, class Allocator>
+void swap(vector<T, Allocator> &_lhs, vector<T, Allocator> &_rhs)
+{
+   _lhs.swap(_rhs);
+}
 
 
+}
+namespace std
+{
+    template <class T, class Allocator>
+    void swap(ft::vector<T, Allocator> &_lhs, ft::vector<T, Allocator> &_rhs)
+    {
+       ft::swap(_lhs, _rhs);
+    }
 }
 #endif
