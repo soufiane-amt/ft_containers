@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 13:18:51 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 22:50:58 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,15 +206,6 @@ bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, Input
       ++first1; ++first2;
     }
     return (first2!=last2);
-}
-
-template <class T>
-void swap( T& a,   T& b)
-{
-    T tmp(a);
-
-    a = b;
-    b = tmp;
 }
 
 }

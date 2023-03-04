@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 16:26:58 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 22:46:54 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,8 @@ struct swap_deletion_arsenal
     void 
     define_new_childer_for_NodeA_and_NodeB(node_ptr NodeA, node_ptr NodeB)
     {
-        ft::swap(NodeA->left, NodeB->left);
-        ft::swap(NodeA->right, NodeB->right);
+        std::swap(NodeA->left, NodeB->left);
+        std::swap(NodeA->right, NodeB->right);
         
         if (NodeA->left)
             NodeA->left ->parent = NodeA;
@@ -385,7 +385,7 @@ bool children_are_black (const Node<T>* node )
         //         node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
         //         if ( is_black_node (node_far_sibl_child) && !is_black_node (node_near_sibl_child))
         //         {
-        //             ft::swap (node_near_sibl_child->color, node_sibl->color);
+        //             std::swap (node_near_sibl_child->color, node_sibl->color);
         //             if (node_is_left)
         //                 rotate_right (node_sibl);
         //             else
@@ -399,7 +399,7 @@ bool children_are_black (const Node<T>* node )
         //         node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
         //         if ( !is_black_node(node_far_sibl_child))
         //         {
-        //             ft::swap (_node->parent->color, node_sibl->color);
+        //             std::swap (_node->parent->color, node_sibl->color);
         //             if (is_left_child(_node))
         //                 rotate_left (_node->parent);
         //             else

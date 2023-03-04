@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 22:42:25 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 22:52:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -886,14 +886,15 @@ vector<T, Allocator>::distance (InputIterator first, InputIterator  last)
     return (distance);
 }
 
-template <class T, class Allocator>
-void swap(vector<T, Allocator> &_lhs, vector<T, Allocator> &_rhs)
-{
-   _lhs.swap(_rhs);
-}
+    template <class T, class Allocator>
+    void swap(ft::vector<T, Allocator> &_lhs, ft::vector<T, Allocator> &_rhs)
+    {
+       _lhs.swap(_rhs);
+    }
 
 
 }
+
 namespace std
 {
     template <class T, class Allocator>

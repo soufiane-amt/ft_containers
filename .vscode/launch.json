@@ -8,7 +8,7 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/ft_containers-unit-test/sources/vector_tests/a.out",
+            "program": "${workspaceFolder}/tests/containers_test/srcs/vector/a.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
