@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 21:58:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 22:16:34 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -685,17 +685,22 @@ template <class T, class Allocator>
 typename vector<T, Allocator>::iterator    
 vector<T, Allocator>::erase (iterator first, iterator last)
 {
-    size_t  follow_element = distance(begin(), first);
+    size_t  index_of_first = distance(begin(), first);
     size_t  range = distance(first, last);
-    while (first != end())
-    {
-        *first = *(first + range);
-        first++;
+
+    if (last == end()) {
+        while (_v_size > index_of_first) 
+            allocator.destroy(this->elements + --_v_size);
+    } else {
+        iterator dest = first;
+        for (iterator src = last; src != end(); ++src, ++dest)
+            *dest = std::move(*src);
+        for (size_t i = _v_size - range; i < _v_size; ++i)
+            allocator.destroy(this->elements + i);
+        _v_size -= range;
     }
-    for (size_t i = _v_size - 1; i >= range; i--)
-        allocator.destroy(this->elements + i);
-    _v_size -= range;
-    return (this->elements + follow_element);
+    return (this->elements + index_of_first);
+
 }
 
 
