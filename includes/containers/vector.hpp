@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 21:34:11 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 21:58:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -512,8 +512,6 @@ void                    vector<T, Allocator>::insert (iterator position, size_ty
     iterator    _dup_position = position;
     size_t       pos_index = 0;
 
-        std::cout << new_elements << std::endl;
-
     _v_size += n;
     if (_v_size > _v_capacity)
     {
@@ -675,13 +673,12 @@ template <class T, class Allocator>
 typename vector<T, Allocator>::iterator    
 vector<T, Allocator>::erase (iterator position)
 {
-    size_t    follow_element = distance(begin(), position);
-
-    for (iterator it = position; it < end() - 1; it++)
-        *it = *(it + 1);
+    pointer last = end().__value - 1;
+    pointer pos = position.__value;
+    std::move(pos + 1, last + 1, pos);
     allocator.destroy(this->elements + _v_size - 1);
-    _v_size--;
-    return (this->elements +  follow_element);
+    --_v_size;
+    return position;
 }
 
 template <class T, class Allocator>
