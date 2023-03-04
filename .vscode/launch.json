@@ -8,7 +8,7 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/tests/containers_test/srcs/set/a.out",
+            "program": "${workspaceFolder}/includes/dependencies/a.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

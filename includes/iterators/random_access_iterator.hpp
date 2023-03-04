@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/02/20 15:57:20 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/04 19:54:14 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ class random_access_iterator
     
         pointer         operator->();
         const_pointer   operator->() const;
+
+    template <class T, 
+    class Allocator >
+    friend class vector;
 
     private:
         iterator_type   __value;
