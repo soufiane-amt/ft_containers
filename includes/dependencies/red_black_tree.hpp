@@ -708,19 +708,19 @@ RedBlack_tree<T,Compare ,Allocator>::find_parent(node_ptr  __tree, value_type& v
         return (nullptr);
     while (true)
     {
-        if (__value_cmp(__tree->data, value))//if __tree->data < value
-        {
-            node_is_left = false;
-            if (!__tree->right)
-                return (__tree);
-            __tree = __tree->right;
-        }
-        else if (__value_cmp(value, __tree->data))
+        if (__value_cmp(value, __tree->data))
         {
             node_is_left = true;
             if (!__tree->left)
                 return (__tree);
             __tree = __tree->left;
+        }
+        else  if (__value_cmp(__tree->data, value))//if __tree->data < value
+        {
+            node_is_left = false;
+            if (!__tree->right)
+                return (__tree);
+            __tree = __tree->right;
         }
         else
             break;
@@ -752,7 +752,6 @@ RedBlack_tree<T,Compare ,Allocator>::insert_node (node_ptr& start_node, node_ptr
     }
     node = find_parent(start_node, new_node->data, left);
 
-    // if (keys_are_equal(node, new_node))
     if (!__value_cmp(node->data, new_node->data) && !__value_cmp(new_node->data, node->data ))
         return (node);
     success  = true;
