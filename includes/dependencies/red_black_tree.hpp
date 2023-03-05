@@ -216,26 +216,69 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<T, Allocator> >
             RebalanceRedBlackTreeInsert (new_node);
         return (ft::make_pair (node, success));
     }
+    /*
+    Start at the root of the tree.
+    Compare the value you want to insert to the value of the hint node.
+    If the value is less than the hint node value, move to the left child of the hint node.
+    If the value is greater than the hint node value, move to the right child of the hint node.
+    Continue this process until you reach a node that has no child in the direction you need to go (i.e., you reach a leaf node or a null pointer).
+    The parent of the null pointer or leaf node is the node you want to insert the new value under.
+*/
     node_ptr                            insert (node_ptr pos, const value_type&  val)
     {
         bool        success;
         node_ptr    ret;
-
         node_ptr    new_node = create_node (val);
-        if (pos == __end)
-            pos--;
-        if (pos !=__end && __value_cmp((pos->data), val))
-            pos = __tree_root;
+        node_ptr    parent;
 
-        if (__size)
-            ret = insert_node(pos, new_node, success);
-        else
-            ret = insert_node(__tree_root, new_node, success);
+
+        parent = pos;
+        if (__value_cmp(val, pos->data))
+        {
+            if (__value_cmp(pos->data, val))
+                parent = max_left (pos->right);
+        }
+        //passing a pos as a reference will change pos not the value that refers to
+        ret = insert_node(pos, new_node, success);
         if (success)
             RebalanceRedBlackTreeInsert (new_node);
         return (ret);
     }
-
+/*        bool _find_parent(node_ptr _hint, node_ptr &_parent_pos, const value_type &_val, bool &_is_left)
+        {
+            if (!_parent_pos)
+                return(_parent_pos = _end_node, true);
+                
+            if (_hint != _end_node && value_comp()(_hint->_value, _val))
+            {
+                node_ptr _next = _tree_next(_hint);
+                if (_next == _end_node || value_comp()(_val, _next->_value))
+                {
+                    if (_hint->_right)
+                    {
+                        _parent_pos = _tree_min(_hint->_right);
+                        return (true);
+                    }
+                    else
+                    {
+                        _parent_pos = _hint;
+                        return (_is_left = false, true);
+                    }
+                }
+                else if (!value_comp()(_next->_value, _val))
+                {
+                    _parent_pos = _next;
+                    return (false);
+                }
+            }
+            else if (_hint != _end_node && !value_comp()(_val, _hint->_value))
+            {
+                _parent_pos = _hint;
+                return (false);
+            }
+            return (_find_parent(_parent_pos, _val, _is_left));
+        }
+*/
 
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last)
@@ -485,68 +528,156 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<T, Allocator> >
     }
     ~RedBlack_tree() {       this->clear();  delete_node (__end); };
     
+
+void    RebalanceRedBlackTreeInsert (node_ptr node)
+{
+    while (node->parent != __end && node->parent->color == RED) {
+        if (node->parent == node->parent->parent->left) {
+            node_ptr uncle = node->parent->parent->right;
+            if (uncle != nullptr && uncle->color == RED) {
+                // Case 1: Uncle is red
+                node->parent->color = BLACK;
+                uncle->color = BLACK;
+                node->parent->parent->color = RED;
+                node = node->parent->parent;
+            } else {
+                if (node == node->parent->right) {
+                    // Case 2: Uncle is black and node is a right child
+                    node = node->parent;
+                    rotate_left(node);
+                }
+                // Case 3: Uncle is black and node is a left child
+                node->parent->color = BLACK;
+                node->parent->parent->color = RED;
+                rotate_right(node->parent->parent);
+            }
+        } else {
+            node_ptr uncle = node->parent->parent->left;
+            if (uncle != nullptr && uncle->color == RED) {
+                // Case 1: Uncle is red
+                node->parent->color = BLACK;
+                uncle->color = BLACK;
+                node->parent->parent->color = RED;
+                node = node->parent->parent;
+            } else {
+                if (node == node->parent->left) {
+                    // Case 2: Uncle is black and node is a left child
+                    node = node->parent;
+                    rotate_right(node);
+                }
+                // Case 3: Uncle is black and node is a right child
+                node->parent->color = BLACK;
+                node->parent->parent->color = RED;
+                rotate_left(node->parent->parent);
+            }
+        }
+    }
+    __tree_root->color = BLACK;
+}
+
     // void    RebalanceRedBlackTreeInsert (node_ptr new_node)
     // {
+    //     while (new_node != __tree_root)
+    //     {
+    //         if ( is_black_node(new_node ->parent))
+    //             return;
+            
+    //         if (node_uncle(new_node) && node_uncle(new_node)->color == RED)
+    //         {
+    //             if(node_forms_triangle (new_node) == LEFT)
+    //             {
+    //                 ReColor (new_node->parent);
+    //                 ReColor (node_uncle(new_node));
+    //             }
+    //             else if (node_forms_line (new_node))
+    //             {
+    //                 ReColor(node_uncle(new_node));
+    //                 ReColor(new_node->parent);
+    //                 ReColor(new_node->parent->parent);
+    //             }
+    //             new_node = new_node->parent->parent;
+    //             continue;
+    //         }
+    //         if (is_black_node(node_uncle(new_node)))
+    //         {
+    //             if (node_forms_triangle (new_node) == RIGHT)
+    //             {
+    //                 node_ptr grand_parent = new_node->parent->parent; 
+    //                 rotate_left(new_node->parent);
+    //                 rotate_right(grand_parent);
+    //                 ReColor (grand_parent);
+    //                 ReColor (new_node);
+    //             }
+    //             else if(node_forms_triangle (new_node) == LEFT)
+    //             {
+    //                 node_ptr grand_parent = new_node->parent->parent; 
+    //                 rotate_right(grand_parent);
+    //                 rotate_left(new_node->parent);
+    //                 ReColor (new_node->parent);
+    //                 ReColor (node_uncle(new_node)); 
+    //             }
 
+    //         }
+    //     }
     // }
 
-    void    RebalanceRedBlackTreeInsert (node_ptr new_node)
-    {
-        node_ptr nd_uncle;
-        int      nds_form;
+    // void    RebalanceRedBlackTreeInsert (node_ptr new_node)
+    // {
+    //     node_ptr nd_uncle;
+    //     int      nds_form;
 
-    while (new_node != __tree_root )
-    {
-        if ( is_black_node(new_node ->parent))
-            return;
-        nd_uncle = node_uncle(new_node);
-        if (is_black_node(nd_uncle))
-        {
-            nds_form = node_forms_triangle (new_node);// new node is not a leaf if the prev cond checked
-            if (nds_form == LEFT)
-            {
-                rotate_right(new_node->parent);
-                rotate_left(new_node->parent); 
-                ReColor (new_node);
-                ReColor (new_node->left);
-                break;
-            }
-            else if (nds_form == RIGHT)
-            {
-                rotate_left(new_node->parent);
-                rotate_right(new_node->parent);
-                ReColor (new_node);
-                ReColor (new_node->right);
-                break;
-            }
-            else
-            {
-                nds_form = node_forms_line (new_node);
-                if (nds_form == LEFT)
-                {
-                    rotate_right(new_node->parent->parent);
-                    ReColor (new_node->parent);
-                    ReColor (new_node->parent->right);
+    // while (new_node != __tree_root )
+    // {
+    //     if ( is_black_node(new_node ->parent))
+    //         return;
+    //     nd_uncle = node_uncle(new_node);
+    //     if (is_black_node(nd_uncle))
+    //     {
+    //         nds_form = node_forms_triangle (new_node);// new node is not a leaf if the prev cond checked
+    //         if (nds_form == LEFT)
+    //         {
+    //             rotate_right(new_node->parent);
+    //             rotate_left(new_node->parent); 
+    //             ReColor (new_node);
+    //             ReColor (new_node->left);
+    //             break;
+    //         }
+    //         else if (nds_form == RIGHT)
+    //         {
+    //             rotate_left(new_node->parent);
+    //             rotate_right(new_node->parent);
+    //             ReColor (new_node);
+    //             ReColor (new_node->right);
+    //             break;
+    //         }
+    //         else
+    //         {
+    //             nds_form = node_forms_line (new_node);
+    //             if (nds_form == LEFT)
+    //             {
+    //                 rotate_right(new_node->parent->parent);
+    //                 ReColor (new_node->parent);
+    //                 ReColor (new_node->parent->right);
 
-                }
-                else if (nds_form == RIGHT)
-                {
-                    rotate_left(new_node->parent->parent);
-                    ReColor (new_node->parent);
-                    ReColor (new_node->parent->left);
-                }
-            }
-        }
-        else if (nd_uncle && nd_uncle->color == RED )
-        {
-            if (__tree_root != new_node->parent->parent)
-                ReColor (new_node->parent->parent);
-            ReColor (new_node->parent);
-            ReColor (nd_uncle);
-            new_node = nd_uncle->parent;
-        }
-        }
-}
+    //             }
+    //             else if (nds_form == RIGHT)
+    //             {
+    //                 rotate_left(new_node->parent->parent);
+    //                 ReColor (new_node->parent);
+    //                 ReColor (new_node->parent->left);
+    //             }
+    //         }
+    //     }
+    //     else if (nd_uncle && nd_uncle->color == RED )
+    //     {
+    //         if (__tree_root != new_node->parent->parent)
+    //             ReColor (new_node->parent->parent);
+    //         ReColor (new_node->parent);
+    //         ReColor (nd_uncle);
+    //         new_node = nd_uncle->parent;
+    //     }
+    //     }
+// }
 
 
 /* ************************************************************************** */
@@ -715,7 +846,7 @@ RedBlack_tree<T,Compare ,Allocator>::find_parent(node_ptr  __tree, value_type& v
                 return (__tree);
             __tree = __tree->left;
         }
-        else  if (__value_cmp(__tree->data, value))//if __tree->data < value
+        else if (__value_cmp(__tree->data, value))//if __tree->data < value
         {
             node_is_left = false;
             if (!__tree->right)
@@ -750,7 +881,8 @@ RedBlack_tree<T,Compare ,Allocator>::insert_node (node_ptr& start_node, node_ptr
         success  = true;
         return (new_node);
     }
-    node = find_parent(start_node, new_node->data, left);
+    node_ptr tree = start_node;
+    node = find_parent(tree, new_node->data, left);
 
     if (!__value_cmp(node->data, new_node->data) && !__value_cmp(new_node->data, node->data ))
         return (node);

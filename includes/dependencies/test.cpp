@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 22:29:56 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/05 17:53:04 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,85 +116,102 @@ void    print_node(Node_ptr node)
 //             (void)arr;
 //         }
 
-// int main ()
-// {
-//     ft::map <int, int > m;
+int main ()
+{
+    ft::map <int, int > m;
 
-//     m.insert_test (ft::make_pair(40, 0), BLACK);
-//     // m.insert_test (ft::make_pair(20, 0), BLACK);
-//     // m.insert_test (ft::make_pair(60, 0), BLACK);
-//     // m.insert_test (ft::make_pair(10, 0), BLACK);
-//     // m.insert_test (ft::make_pair(30, 0), BLACK);
-//     // m.insert_test (ft::make_pair(50, 0), BLACK);
-//     // m.insert_test (ft::make_pair(80, 0), RED);
-//     // m.insert_test (ft::make_pair(90, 0), BLACK);
-//     // m.insert_test (ft::make_pair(70, 0), BLACK);
-//     // m.insert_test (ft::make_pair(100, 0), RED);
-//     // m.print_tree ();
-//     // std::cout << "m.erase(50);\n";
-//     // m.erase(50);
-//     // std::cout << "m.erase(50);\n";
+    ft::map <int, int >::iterator it = m.end();
+    // for (int i = 0, j = 0; i < 50 * 10000; ++i, ++j) {
+        m.insert(it, ft::make_pair(0, 1));
+        m.insert(it, ft::make_pair(0, 1));
+        m.insert(it, ft::make_pair(0, 1));
+        m.insert(it, ft::make_pair(0, 1));
+        m.insert(it, ft::make_pair(0, 1));
+    // }
 
-//     // m.erase(20);
-//     // std::cout << "m.erase(20);\n";
+    // m.insert (ft::make_pair(12, 0));
+    // m.insert (ft::make_pair(20, 0));
+    // m.insert (ft::make_pair(9, 0));
+    // m.insert (ft::make_pair(17, 0));
+    // m.insert (ft::make_pair(18, 0));
+    // m.insert (ft::make_pair(32, 0));
+    // m.insert (ft::make_pair(27, 0));
+    // m.print_tree ();
+    // m.insert_test (ft::make_pair(40, 0), BLACK);
+    // m.insert_test (ft::make_pair(20, 0), BLACK);
+    // m.insert_test (ft::make_pair(60, 0), BLACK);
+    // m.insert_test (ft::make_pair(10, 0), BLACK);
+    // m.insert_test (ft::make_pair(30, 0), BLACK);
+    // m.insert_test (ft::make_pair(50, 0), BLACK);
+    // m.insert_test (ft::make_pair(80, 0), RED);
+    // m.insert_test (ft::make_pair(90, 0), BLACK);
+    // m.insert_test (ft::make_pair(70, 0), BLACK);
+    // m.insert_test (ft::make_pair(100, 0), RED);
+    // m.print_tree ();
+    // std::cout << "m.erase(50);\n";
+    // m.erase(50);
+    // std::cout << "m.erase(50);\n";
 
-//     // m.erase(100);
-//     // std::cout << "m.erase(100);\n";
+    // m.erase(20);
+    // std::cout << "m.erase(20);\n";
 
-//     // m.erase(90);
-//     // std::cout << "m.erase(90);\n";
+    // m.erase(100);
+    // std::cout << "m.erase(100);\n";
+
+    // m.erase(90);
+    // std::cout << "m.erase(90);\n";
     
-//     for (ft::map <int, int >::iterator i = m.begin(); i != m.end(); i++)
-//     {
-//         std::cout << i->first << std::endl;
-//     }
-//     m.erase(40);
-//     std::cout << "m.erase(90);\n";
+    // for (ft::map <int, int >::iterator i = m.begin(); i != m.end(); i++)
+    // {
+    //     std::cout << i->first << std::endl;
+    // }
+    // m.erase(40);
+    // std::cout << "m.erase(90);\n";
     
-//     // m.erase(60);
-//     // std::cout << "m.erase(90);\n";
-//     // m.erase(30);
-//     // std::cout << "m.erase(90);\n";
-//     // m.erase(10);
-//     // std::cout << "m.erase(90);\n";
-//     // m.erase(70);
-//     // std::cout << "m.erase(90);\n";
-//     // m.erase(80);
-//     // std::cout << "m.erase(90);\n";
+    // m.erase(60);
+    // std::cout << "m.erase(90);\n";
+    // m.erase(30);
+    // std::cout << "m.erase(90);\n";
+    // m.erase(10);
+    // std::cout << "m.erase(90);\n";
+    // m.erase(70);
+    // std::cout << "m.erase(90);\n";
+    // m.erase(80);
+    // std::cout << "m.erase(90);\n";
 
-//     // m.print_tree ();
-//     // bst a;
-//     // bool s;
-//     // a.insert(ft::make_pair(42, "lol"));
-// 	// a.insert(ft::make_pair(42, "mdr"));
+    // m.print_tree ();
+    // bst a;
+    // bool s;
+    // a.insert(ft::make_pair(42, "lol"));
+	// a.insert(ft::make_pair(42, "mdr"));
 
-// 	// a.insert(ft::make_pair(50, "mdr"));
-// 	// a.insert(ft::make_pair(35, "funny"));
+	// a.insert(ft::make_pair(50, "mdr"));
+	// a.insert(ft::make_pair(35, "funny"));
 
-// 	// a.insert(ft::make_pair(45, "bunny"));
-// 	// a.insert(ft::make_pair(21, "fizz"));
-// 	// a.insert(ft::make_pair(38, "buzz"));
+	// a.insert(ft::make_pair(45, "bunny"));
+	// a.insert(ft::make_pair(21, "fizz"));
+	// a.insert(ft::make_pair(38, "buzz"));
 
-//     //     a.insert(ft::make_pair(10, 3) );
-//     //     a.insert(ft::make_pair(5, 3) );
-//     //     a.insert(ft::make_pair(30, 3) );
-//     //     a.insert(ft::make_pair(40, 3) );
-//     //     a.insert(ft::make_pair(25, 3) );
-//     //     a.insert(ft::make_pair(2, 3) );
-//     //     a.insert(ft::make_pair(35, 3) );
-//     //     a.insert(ft::make_pair(38, 3) );
-//     //     a.insert(ft::make_pair(50, 3) );
-//     //     a.insert(ft::make_pair(36, 3) );
-//     //     a.insert(ft::make_pair(37, 3) );
-//     //     a.insert(ft::make_pair(38, 3) );
-//     }
+    //     a.insert(ft::make_pair(10, 3) );
+    //     a.insert(ft::make_pair(5, 3) );
+    //     a.insert(ft::make_pair(30, 3) );
+    //     a.insert(ft::make_pair(40, 3) );
+    //     a.insert(ft::make_pair(25, 3) );
+    //     a.insert(ft::make_pair(2, 3) );
+    //     a.insert(ft::make_pair(35, 3) );
+    //     a.insert(ft::make_pair(38, 3) );
+    //     a.insert(ft::make_pair(50, 3) );
+    //     a.insert(ft::make_pair(36, 3) );
+    //     a.insert(ft::make_pair(37, 3) );
+    //     a.insert(ft::make_pair(38, 3) );
+    // }
     
     
-//     print_tree_2 (a.__tree_root, a.size());
-//     a.erase (30);
-//     print_tree_2 (a.__tree_root, a.size());
+    // print_tree_2 (a.__tree_root, a.size());
+    // a.erase (30);
+    // print_tree_2 (a.__tree_root, a.size());
 
-// }
+}
 
 // int    func (bool & b)
 // {
@@ -210,17 +227,17 @@ void    print_node(Node_ptr node)
 // }
 
 // // typedef int bla;
-#define NAME_SPACE ft
-int _ratio = 10000;
+// #define NAME_SPACE ft
+// int _ratio = 10000;
 
-#include <vector>
-int main ()
-{
-    NAME_SPACE::vector<int> vector;
-    NAME_SPACE::vector<int> tmp;
-    tmp.assign(5, 1);
-    vector.assign(5, 1337);
-    std::swap (vector, tmp);       
-    std::cout << vector[0] << std::endl;
-    std::cout << tmp[0] << std::endl;
-}
+// #include <vector>
+// int main ()
+// {
+//     NAME_SPACE::vector<int> vector;
+//     NAME_SPACE::vector<int> tmp;
+//     tmp.assign(5, 1);
+//     vector.assign(5, 1337);
+//     std::swap (vector, tmp);       
+//     std::cout << vector[0] << std::endl;
+//     std::cout << tmp[0] << std::endl;
+// }
