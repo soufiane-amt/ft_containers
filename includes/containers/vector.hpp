@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/05 13:30:32 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/05 13:56:40 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,11 +264,11 @@ typename vector<T, Allocator>::size_type vector<T, Allocator>::  max_size() cons
 template <class T, class Allocator >
 void vector<T, Allocator>::resize (size_type n, value_type val)
 {
-    pointer tmp = new value_type[_v_size];
+    pointer tmp = allocator.allocate(_v_size);
     std::copy(this->elements, this->elements + _v_size, tmp);
     if (n > this->_v_capacity)
     {
-        if (this->elements)
+        if (this->_v_size)
         {
             for (size_t i = 0; i < _v_size; i++)
                 allocator.destroy(this->elements + i);
@@ -286,8 +286,10 @@ void vector<T, Allocator>::resize (size_type n, value_type val)
             allocator.construct(this->elements + i, val);
     for (size_t i = 0; i < this->_v_size; i++)
         allocator.construct(this->elements + i, tmp[i]);
+    allocator.deallocate(tmp, _v_size);
+
     this->_v_size = n;
-    delete []tmp;
+    
 }
 
 
@@ -507,7 +509,6 @@ typename vector<T, Allocator>::iterator vector<T, Allocator>::insert(iterator po
 {
     if (_v_size == _v_capacity ) {
         size_type index = position - begin();
-        std::cout << "-----\n";
         _v_capacity = _v_capacity == 0 ? 1 : _v_capacity * 2;
         pointer new_elements = allocator.allocate(_v_capacity);
         if (_v_size)
