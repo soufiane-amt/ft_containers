@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 22:52:12 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/05 12:08:17 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -502,101 +502,80 @@ void vector<T, Allocator>::pop_back()
     //     allocator.construct(this->elements + index, val);
     // }    
 
-
-template <class T, class Allocator> 
-void                    vector<T, Allocator>::insert (iterator position, size_type n, const_reference val)
+template <typename T, typename Allocator>
+typename vector<T, Allocator>::iterator vector<T, Allocator>::insert(iterator position, const T& val)
 {
-    pointer new_elements = this->elements;
-    iterator    _begin = begin();
-    iterator    _end = end() ;
-    iterator    _dup_position = position;
-    size_t       pos_index = 0;
-
-    _v_size += n;
-    if (_v_size > _v_capacity)
-    {
-
-        new_elements = this->allocator.allocate(_v_size);
-        for (size_t i = 0; i < _v_size; i++)        
-            allocator.destroy(this->elements + i);
-        if (this->elements)
-            allocator.deallocate(this->elements, _v_capacity);
-
-        for (size_t i = 0; _begin != _dup_position; _begin++)
-        {
-            allocator.construct(new_elements + (i++), *_begin);
-            pos_index = i;
-        }
-        n += pos_index;
-        while( pos_index <  n)
-            allocator.construct(new_elements + (pos_index++), val);
-        for (size_t i = pos_index ; _dup_position != _end; _dup_position++)
-        {
-            allocator.construct(new_elements + (i++), *_dup_position);
-        }
-    }
-    else
-    {
-        for ( ; _end != _dup_position ; _end--)
-        {
-            allocator.destroy(_end.base());
-            std::cout << *(_end.base()) << std::endl;
-            allocator.construct(_end.base(), *(_end.base() - 1));
-        }
-        for (size_t i = 0; i < n; i++)
-        {
-            allocator.destroy(position.base() + i);
-            position[i] = val;
-        }
         
-    }
-    _v_capacity = _v_size;
-    this->elements = new_elements;
-}   
-
-
-template <class T, class Allocator> 
-typename vector<T, Allocator>::iterator    
-vector<T, Allocator>::insert (iterator position, const_reference val)
-{
-    pointer new_elements = this->elements;
-    iterator    _begin = begin();
-    iterator    _end = end() ;
-    iterator    _dup_position = position;
-    size_t       pos_index = 0;
-
-    ++_v_size;
-    if (_v_size > _v_capacity)
-    {
-        new_elements = this->_alloc_double_capacity(this->_v_capacity);
-        for (size_t i = 0; i < _v_size; i++)        
-            allocator.destroy(this->elements + i);
-        if (this->elements)
-            allocator.deallocate(this->elements, _v_capacity);
-        for (size_t i = 0; _begin != _dup_position; _begin++)
+    if (_v_size == _v_capacity ) {
+        size_type index = position - begin();
+        _v_capacity = _v_capacity == 0 ? 1 : _v_capacity * 2;
+        pointer new_elements = allocator.allocate(_v_capacity);
+        if (_v_size)
         {
-            allocator.construct(new_elements + (i++), *_begin);
-            pos_index = i;
+            for (size_type i = 0; i < index; ++i)
+                allocator.construct(new_elements + i, elements[i]);
         }
-        allocator.construct(new_elements + pos_index, val);
-        for (size_t i = pos_index + 1 ; _dup_position != _end; _dup_position++)
-            allocator.construct(new_elements + (i++), *_dup_position);
-        this->_v_capacity = this->_v_capacity > 0 ? (this->_v_capacity * 2) : 1;
-    }
-    else
-    {
-        _end--;
-        for ( pos_index++; _end != _dup_position ; _end--)
-        {
-            allocator.destroy(_end.__value);
-            allocator.construct(_end.__value, *(_end.__value - 1));
-        }
-        allocator.destroy(position.__value);
+        allocator.construct(new_elements + index, val);
+        for (size_type i = index; i < _v_size; ++i)
+            allocator.construct(new_elements + i + 1, elements[i]);
+        for (size_type i = 0; i < _v_size; ++i)
+            allocator.destroy(elements + i);
+        if (elements)
+            allocator.deallocate(elements, _v_size);
+        elements = new_elements;
+    } else {
+        allocator.construct(elements + _v_size, elements[_v_size - 1]);
+        if (position == end())
+            position = end() - 1;
+        for (iterator it = end() - 1; it != position; --it)
+            *it = *(it - 1);
         *position = val;
     }
-    this->elements = new_elements;
-    return (this->elements + pos_index);
+    ++_v_size;
+    return position;
 }
+
+
+
+template <typename T, typename Allocator>
+void vector<T, Allocator>::insert(iterator position, size_type n, const T& val)
+{
+    size_type index = position - begin();
+    size_type newSize = _v_size + n;
+
+    if (newSize > _v_capacity) {
+        size_type newCapacity = _v_capacity == 0 ? 1 : _v_capacity * 2;
+        while (newSize > newCapacity) newCapacity *= 2;
+        pointer newElements = allocator.allocate(newCapacity);
+        for (size_type i = 0; i < index; ++i) {
+            allocator.construct(newElements + i, elements[i]);
+        }
+        for (size_type i = 0; i < n; ++i) {
+            allocator.construct(newElements + index + i, val);
+        }
+        for (size_type i = index; i < _v_size ; ++i) {
+            allocator.construct(newElements + index + n + i, elements[i]);
+        }
+        for (size_type i = 0; i < _v_size; ++i) {
+            allocator.destroy(elements + i);
+        }
+        if (elements) {
+            allocator.deallocate(elements, _v_capacity);
+        }
+        elements = newElements;
+        _v_capacity = newCapacity;
+    } else {
+        if (n > 0)
+            std::copy_backward(elements + index, elements + _v_size, elements + _v_size + n);
+        for (size_type i = 0; i < n; ++i) {
+            allocator.construct(elements + index + i, val);
+        }
+    }
+
+    _v_size = newSize;
+        
+}
+
 
 template <typename T, typename Allocator>
 void vector<T, Allocator>::destroy (iterator first, iterator last)
@@ -700,7 +679,8 @@ void vector<T, Allocator>::clear()
 {
     for (size_t i = 0; i < _v_size; i++)
         allocator.destroy(this->elements + i);
-    this->_v_size = 0;       
+    this->_v_size = 0;
+    this->elements = nullptr;
 }
 
 
