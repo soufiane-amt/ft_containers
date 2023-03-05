@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/05 12:08:17 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/05 13:05:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -524,12 +524,15 @@ typename vector<T, Allocator>::iterator vector<T, Allocator>::insert(iterator po
             allocator.deallocate(elements, _v_size);
         elements = new_elements;
     } else {
-        allocator.construct(elements + _v_size, elements[_v_size - 1]);
-        if (position == end())
-            position = end() - 1;
-        for (iterator it = end() - 1; it != position; --it)
-            *it = *(it - 1);
-        *position = val;
+        if (position == end()) {
+            allocator.construct(elements + _v_size, val);
+        } else {
+            allocator.construct(elements + _v_size, elements[_v_size - 1]);
+            for (iterator it = end() - 1; it != position; --it)
+                *it = *(it - 1);
+            *position = val;
+        }
+
     }
     ++_v_size;
     return position;
