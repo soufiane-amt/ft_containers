@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 10:58:25 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/05 15:11:10 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ template<
     
     class value_compare
     {
-        key_compare comp;
+
         public:
+            key_compare comp;
             value_compare(key_compare c) : comp(c) {}
         public:
             bool operator()(const value_type &a, const value_type &b) const
@@ -128,7 +129,8 @@ template<
         ft::pair <node_ptr, bool> ret = __tree.insert(val);
         return (ft::make_pair(iterator(ret.first) , ret.second));
     }
-    iterator                            insert (iterator position, const_reference val){    return iterator(__tree.insert(position.__node, val)); }
+    iterator                            insert (iterator position, const_reference val){    
+        return iterator(__tree.insert(position.__node, val)); }
     
     template <class InputIterator> 
     void                                insert (InputIterator first, InputIterator last){   __tree.insert(first, last);}
