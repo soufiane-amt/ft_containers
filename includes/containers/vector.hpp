@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/05 13:05:07 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/05 13:30:32 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -505,9 +505,9 @@ void vector<T, Allocator>::pop_back()
 template <typename T, typename Allocator>
 typename vector<T, Allocator>::iterator vector<T, Allocator>::insert(iterator position, const T& val)
 {
-        
     if (_v_size == _v_capacity ) {
         size_type index = position - begin();
+        std::cout << "-----\n";
         _v_capacity = _v_capacity == 0 ? 1 : _v_capacity * 2;
         pointer new_elements = allocator.allocate(_v_capacity);
         if (_v_size)
@@ -516,6 +516,7 @@ typename vector<T, Allocator>::iterator vector<T, Allocator>::insert(iterator po
                 allocator.construct(new_elements + i, elements[i]);
         }
         allocator.construct(new_elements + index, val);
+        position = iterator(new_elements + index);
         for (size_type i = index; i < _v_size; ++i)
             allocator.construct(new_elements + i + 1, elements[i]);
         for (size_type i = 0; i < _v_size; ++i)
