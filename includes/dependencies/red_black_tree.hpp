@@ -214,6 +214,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<T, Allocator> >
         node_ptr    node =  insert_node (__tree_root, new_node, success);
         if (success)
             RebalanceRedBlackTreeInsert (new_node);
+        else
+            delete_node (new_node);
         return (ft::make_pair (node, success));
     }
     /*
@@ -291,32 +293,25 @@ until it finds an element whose key is greater than or equal to the new element'
     node_ptr                            insert (node_ptr hint, const value_type&  val)
     {
         // If the hint is pointing to the end of the map, just insert the value
-        if (hint == end().__node) {
+        if (hint == end().__node)
             return insert(val).first;
-        }
-        // Otherwise, check if the hint is greater or less than the value
-        else if (__value_cmp (hint->data,  val ) ) {
             // If the hint is less than the value, search forward for the insertion point
+        else if (__value_cmp (hint->data,  val ) ) {
             node_ptr nextHint = hint;
             nextHint = next_node(nextHint);
-            while (nextHint != end().__node &&  __value_cmp (nextHint->data,  val )) {
+            while (nextHint != end().__node &&  __value_cmp (nextHint->data,  val ))
                 nextHint = next_node(nextHint);
-            }
             return insert(nextHint, val);
         }
         else if (__value_cmp (val,  hint->data )) {
             // If the hint is greater than the value, search backward for the insertion point
             node_ptr prevHint = hint;
-            while (prevHint != begin().__node && __value_cmp (val,  prevHint->data )) {
-                --prevHint;
-            }
+            while (prevHint != begin().__node && __value_cmp (val,  prevHint->data ))
+                prevHint = prev_node (prevHint);
             return insert(prevHint, val);
         }
-        else {
             // If the hint is equal to the value, just return the hint iterator
             return hint;
-        }
-        // return (ret);
     }
 /*        bool _find_parent(node_ptr _hint, node_ptr &_parent_pos, const value_type &_val, bool &_is_left)
         {
