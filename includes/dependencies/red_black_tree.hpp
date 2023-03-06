@@ -224,22 +224,63 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<T, Allocator> >
     Continue this process until you reach a node that has no child in the direction you need to go (i.e., you reach a leaf node or a null pointer).
     The parent of the null pointer or leaf node is the node you want to insert the new value under.
 */
+
+/*If the hint iterator points to a valid element in the map, the function compares the key of the new element to the key of the element pointed to by the hint iterator. 
+If the new element's key is less than the hint element's key, the function moves backwards through the map (towards the beginning) 
+until it finds an element whose key is less than the new element's key or it reaches the beginning of the map. 
+If the new element's key is greater than or equal to the hint element's key, the function moves forwards through the map (towards the end) 
+until it finds an element whose key is greater than or equal to the new element's key or it reaches the end of the map.
+
+*/
+void    insert_hint (iterator __hint, value_type val, bool & success)
+{
+    success = true;
+        while (1)
+        {
+            if  (__value_cmp(pos->data, val))
+            {
+                pos = next_node (pos);
+                if (!pos->has_2_child())
+                {
+                    side = accurate_side_of_child (pos, val);
+                    if (side == LEFT)
+                        pos = pos->set_node_to_left(create_node (val));
+                    else if (side == RIGHT)
+                        pos = pos->set_node_to_right(create_node (val));
+                    return (pos);
+                }
+
+            }
+            else if (__value_cmp(val, pos->data))
+            {
+                pos = prev_node(pos);                
+                if (!pos->has_2_child())
+                {
+                    side = accurate_side_of_child (pos, val);
+                    if (side == LEFT)
+                        pos = pos->set_node_to_left(create_node (val));
+                    else if (side == RIGHT)
+                        pos = pos->set_node_to_right(create_node (val));
+                    return (pos);
+                }
+            }
+        }
+        success = false;
+        return (pos);
+}
+
     node_ptr                            insert (node_ptr pos, const value_type&  val)
     {
+        bool        side;
         bool        success;
         node_ptr    ret;
         node_ptr    new_node = create_node (val);
         node_ptr    parent;
 
 
-        parent = pos;
-        if (__value_cmp(val, pos->data))
-        {
-            if (__value_cmp(pos->data, val))
-                parent = max_left (pos->right);
-        }
-        //passing a pos as a reference will change pos not the value that refers to
-        ret = insert_node(pos, new_node, success);
+        if (!__size || (pos == end() && __size) || __tree_root == pos)
+            return (insert (val));
+        ret = insert_hint (pos, val, success);
         if (success)
             RebalanceRedBlackTreeInsert (new_node);
         return (ret);

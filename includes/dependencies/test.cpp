@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/05 17:53:04 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 12:30:12 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,17 +118,12 @@ void    print_node(Node_ptr node)
 
 int main ()
 {
-    ft::map <int, int > m;
+    std::map <int, int > m;
 
-    ft::map <int, int >::iterator it = m.end();
-    // for (int i = 0, j = 0; i < 50 * 10000; ++i, ++j) {
-        m.insert(it, ft::make_pair(0, 1));
-        m.insert(it, ft::make_pair(0, 1));
-        m.insert(it, ft::make_pair(0, 1));
-        m.insert(it, ft::make_pair(0, 1));
-        m.insert(it, ft::make_pair(0, 1));
-    // }
-
+    std::map <int, int >::iterator it = --m.begin();
+    m.insert(it, std::make_pair(0, 1));
+    m.insert(it, std::make_pair(0, 1));
+    
     // m.insert (ft::make_pair(12, 0));
     // m.insert (ft::make_pair(20, 0));
     // m.insert (ft::make_pair(9, 0));
