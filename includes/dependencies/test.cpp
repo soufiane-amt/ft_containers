@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/06 20:48:59 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 22:21:03 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,17 +118,17 @@ void    print_node(Node_ptr node)
 
 int main ()
 {
-    ft::vector<int> vectorFt;
-    vectorFt.assign(2, 1);
-    vectorFt.insert(vectorFt.end() - 1, 1  , 2);
-    std::vector<int> vectorStd;
-    vectorStd.assign(2, 1);
-    vectorStd.insert(vectorStd.end() - 1, 1  , 2);
-    for (size_t i = 0; i < vectorStd.size(); i++)
-    {
-            std::cout << "std :" << vectorStd[i] << std::endl;
-            std::cout << "ft :" << vectorFt[i] << std::endl<< std::endl;
-    }
+    // ft::vector<int> vectorFt;
+    // vectorFt.assign(2, 1);
+    // vectorFt.insert(vectorFt.end() - 1, 1  , 2);
+    // std::vector<int> vectorStd;
+    // vectorStd.assign(2, 1);
+    // vectorStd.insert(vectorStd.end() - 1, 1  , 2);
+    // for (size_t i = 0; i < vectorStd.size(); i++)
+    // {
+    //         std::cout << "std :" << vectorStd[i] << std::endl;
+    //         std::cout << "ft :" << vectorFt[i] << std::endl<< std::endl;
+    // }
 }
 
 // int    func (bool & b)

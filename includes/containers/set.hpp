@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:32:37 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/06 22:09:19 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 22:33:23 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,6 @@ class set
          
     
     set( const set& other ) :__tree(other.__tree){   }
-
-    // void        insert_test (const value_type& val, bool color)
-    // {
-    //     __tree.insert_test (val, color);
-    // }
 
 // /* ************************************************************************** */
 //                             // operator= :

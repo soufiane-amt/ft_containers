@@ -171,6 +171,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<T, Allocator> >
                 PosPtr->swap_for_deletion (next_nod, __tree_root);
         }
     }
+
+    
     public:
         void        insert_test (const value_type& val, bool color)
     {

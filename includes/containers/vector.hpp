@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/06 21:23:43 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 22:31:43 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ namespace ft
         
         
         
-        explicit vector (const allocator_type& alloc = allocator_type());
+        explicit vector (const allocator_type& alloc = allocator_type()):_v_capacity(0), _v_size(0), allocator(alloc){    this->elements = NULL;}
         explicit vector (size_type n, const_reference val = value_type(), const allocator_type& alloc = allocator_type());
         
         template <class InputIterator>         
@@ -59,11 +59,12 @@ namespace ft
         vector& operator= (const vector& x);
         
         //Capacity
-        size_type size() const;
-        size_type capacity() const;
-        size_type max_size() const;
+        size_type size() const{ return (this->_v_size); }
+        
+        size_type capacity() const{ return  (this->_v_capacity);}
+        size_type max_size() const{    return (allocator.max_size());}
         void      resize(size_type n, value_type val = value_type());
-        bool      empty() const;
+        bool      empty() const{        return (_v_size == 0);}
         void      reserve (size_type n);
 
         //Function overloading
@@ -75,11 +76,11 @@ namespace ft
         reference               at (size_type n);
         const_reference         at (size_type n) const;
         
-        reference               front();
-        const_reference         front() const;
+        reference               front() {    return (this->elements[0]);}
+        const_reference         front() const {    return (this->elements[0]);}
         
-        reference               back();
-        const_reference         back() const;
+        reference               back() {    return (this->elements[this->size() - 1]);}
+        const_reference         back() const {  return (this->elements[this->size() - 1]);}
         
         //Modifiers
         void                    assign (size_type n, const_reference val);
@@ -89,7 +90,7 @@ namespace ft
         assign (InputIterator first, InputIterator last);
         
         void                    push_back (const_reference val);
-        void                    pop_back();
+        void                    pop_back(){    allocator.destroy   (this->elements + _v_size - 1); this->_v_size--;}
 
         iterator                insert (iterator position, const_reference val);
         void                    insert (iterator position, size_type n, const_reference val);    
@@ -105,7 +106,7 @@ namespace ft
  
         void                    clear();
 
-        allocator_type          get_allocator() const;
+        allocator_type          get_allocator() const{      return (this->allocator);}
 
         //iterators
         iterator                begin();
@@ -162,13 +163,6 @@ typename vector <T, Allocator>::pointer vector <T, Allocator>::_arrayCopy(pointe
 /*/////////////////////////////////////////////////////////////////*/
 //                   /*constructors*/                              //
 /*/////////////////////////////////////////////////////////////////*/
-
-template <class T, class Allocator  >
-vector <T, Allocator>::vector (const allocator_type& MyAllocator):_v_capacity(0), _v_size(0), allocator(MyAllocator)
-{
-    this->elements = NULL;
-}
-
 
 
 template <class T, class Allocator  >
@@ -242,26 +236,6 @@ vector<T, Allocator>& vector<T, Allocator>::operator=(const vector& x)
 
 
 template <class T, class Allocator >
-typename vector<T, Allocator>::size_type vector<T, Allocator>::size() const
-{
-    return (this->_v_size);
-}
-
-template <class T, class Allocator >
-typename vector<T, Allocator>::size_type vector<T, Allocator>:: capacity() const
-{
-    return  (this->_v_capacity);
-}
-
-template <class T, class Allocator >
-typename vector<T, Allocator>::size_type vector<T, Allocator>::  max_size() const
-{
-    return (allocator.max_size());
-}
-
-
-
-template <class T, class Allocator >
 void vector<T, Allocator>::resize (size_type n, value_type val)
 {
     pointer tmp = allocator.allocate(_v_size);
@@ -293,12 +267,6 @@ void vector<T, Allocator>::resize (size_type n, value_type val)
     
 }
 
-
-template <class T, class Allocator >
-bool vector<T, Allocator>::empty() const
-{
-    return (_v_size == 0);
-}
 
 /*If n is greater than the current vector capacity, the function causes the container to reallocate its storage increasing its capacity to n (or greater).
 
@@ -368,37 +336,6 @@ vector<T, Allocator>::at (size_type n) const
     if (this->_v_size <= n)
         throw std::out_of_range ("Out of range please provide a valid index!");
     return (this->elements[n]);
-}
-
-
-// I don't need that these following methods need to be protected as calling them on an empty vector causes an undefined behavior
-template <class T, class Allocator >
-typename vector<T, Allocator>::reference    
-vector<T, Allocator>::front()
-{
-    return (this->elements[0]);
-}
-
-template <class T, class Allocator >
-typename vector<T, Allocator>::const_reference
-vector<T, Allocator>::front() const
-{
-    return (this->elements[0]);
-}
-
-
-template <class T, class Allocator >
-typename vector<T, Allocator>::reference    
-vector<T, Allocator>::back()
-{
-    return (this->elements[this->size() - 1]);
-}
-
-template <class T, class Allocator >
-typename vector<T, Allocator>::const_reference
-vector<T, Allocator>::back() const
-{
-    return (this->elements[this->size() - 1]);
 }
 
 
@@ -481,29 +418,6 @@ void vector<T, Allocator>::push_back (const_reference val)
     allocator.construct (this->elements + new_element_index, val);
     this->_v_size++;
 }
-
-
-
-
-template <class T, class Allocator> 
-void vector<T, Allocator>::pop_back()
-{
-    allocator.destroy   (this->elements + _v_size - 1);
-    this->_v_size--;
-}
-
-
-
-    // size_type  index = distance (position ,  begin());
-
-    // this->push_back(val);
-    // for (iterator it = end() ; it > position ; --it)
-    //     *it = *(it - 1);
-    // if (this->_v_size)
-    // {
-    //     allocator.destroy(this->elements + index);
-    //     allocator.construct(this->elements + index, val);
-    // }    
 
 template <typename T, typename Allocator>
 typename vector<T, Allocator>::iterator vector<T, Allocator>::insert(iterator position, const T& val)
@@ -672,12 +586,6 @@ vector<T, Allocator>::erase (iterator first, iterator last)
 }
 
 
-//*-*//
-
-
-
-
-
 
 template <class T, class Allocator> 
 void vector<T, Allocator>::clear()
@@ -687,16 +595,6 @@ void vector<T, Allocator>::clear()
     this->_v_size = 0;
     this->elements = nullptr;
 }
-
-
-
-template <class T, class Allocator> 
-typename vector<T, Allocator>::allocator_type 
-vector<T, Allocator>::get_allocator() const
-{
-    return (this->allocator);
-}
-
 
 
 

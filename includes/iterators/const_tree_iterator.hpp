@@ -63,8 +63,6 @@ class const_tree_iterator
         const_tree_iterator                  operator--(int);
                 
                     
-        // template <class it>
-        // const_tree_iterator&                 operator=(const it&)  {    this->__node = it.base(); return (*this);};
     
         const_data_value_type_ptr            operator->() const  {    return (&__node->data);}
 
@@ -74,6 +72,8 @@ class const_tree_iterator
         bool operator!=(const_tree_iterator const & rhs) const {
             return (__node != rhs.__node);
         }
+
+
 
         template<
         class T,
