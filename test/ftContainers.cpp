@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:04:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/06 23:48:32 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 23:51:51 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include "../includes/containers/stack.hpp"
 #include "../includes/containers/vector.hpp"
 
-
-int main() 
+static void    test_vector()
 {
   // Create an empty vector
   ft::vector<int> ftVect;
@@ -154,6 +153,12 @@ ft::vector<int>::reverse_iterator rItEnd = ftVect .rend();
 // Get const reverse iterators to the beginning and end of the vector
 ft::vector<int>::const_reverse_iterator constRItBegin = ftVect .rbegin();
 ft::vector<int>::const_reverse_iterator constRItEnd = ftVect .rend();
+
+}
+
+int main() 
+{
+test_vector ();
 
 return 0;
 }
