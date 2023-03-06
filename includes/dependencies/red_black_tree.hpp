@@ -232,59 +232,91 @@ If the new element's key is greater than or equal to the hint element's key, the
 until it finds an element whose key is greater than or equal to the new element's key or it reaches the end of the map.
 
 */
-node_ptr    insert_hint (node_ptr __hint, node_ptr new_node, bool & success)
-{
-    int side;
-    success = true;
-        while (1)
-        {
-            if  (__value_cmp(__hint->data, new_node->data))
-            {
-                __hint = next_node (__hint);
-                if (__hint->is_leaf())
-                {
-                    side = accurate_side_of_child (__hint, new_node->data, __value_cmp);
-                    if (side == LEFT)
-                        __hint->set_node_to_left(new_node);
-                    else if (side == RIGHT)
-                        __hint->set_node_to_right(new_node);
-                    return (new_node);
-                }
-            }
-            else if (__value_cmp(new_node->data, __hint->data))
-            {
-                __hint = prev_node(__hint);                
-                if (__hint->is_leaf())
-                {
-                    side = accurate_side_of_child (__hint, new_node->data, __value_cmp);
-                    if (side == LEFT)
-                        __hint->set_node_to_left(new_node);
-                    else if (side == RIGHT)
-                        __hint->set_node_to_right(new_node);
-                    return (new_node);
-                }
-            }
-            else
-                break;
-        }
-        success = false;
-        return (__hint);
-}
+// node_ptr    insert_hint (node_ptr __hint, node_ptr new_node, bool & success)
+// {
+//     int side;
+//     success = true;
+//     node_ptr _begin = begin().__node;
+//     node_ptr _end = end().__node;
 
-    node_ptr                            insert (node_ptr pos, const value_type&  val)
-    {
-        bool        success;
-        node_ptr    ret;
-
-
-        if (!__size || (pos == end().__node ) || __tree_root == pos)
-            return (insert (val).first);
-        node_ptr    new_node = create_node (val);
-        ret = insert_hint (pos, new_node, success);
+//     while (__hint != _end.__node && __value_cmp(__hint->data, new_node->data))
+//     {
+//             __next_hint = next_node (__hint);
+//             if (__next_hint)
+//                 __hint = __next_hint;
+//     }
+//     while (__hint != _begin.__node && __value_cmp(new_node->data, __hint->data))
+//     {
+//             __next_hint = prev_node (__hint);
+//             if (__next_hint)
+//                 __hint = __next_hint;
+//     }
+//     if (__hint == _end)
         
-        if (success)
-            RebalanceRedBlackTreeInsert (new_node);
-        return (ret);
+// }
+        // while (__hint != end().__node)
+        // {
+        //     if  (__value_cmp(__hint->data, new_node->data) )
+        //     {
+        //         __hint = next_node (__hint);
+        //         if (__hint->is_leaf())
+        //         {
+        //             side = accurate_side_of_child (__hint, new_node->data, __value_cmp);
+        //             if (side == LEFT)
+        //                 __hint->set_node_to_left(new_node);
+        //             else if (side == RIGHT)
+        //                 __hint->set_node_to_right(new_node);
+        //             return (new_node);
+        //         }
+        //     }
+        //     else if (__value_cmp(new_node->data, __hint->data))
+        //     {
+        //         __hint = prev_node(__hint);                
+        //         if (__hint->is_leaf())
+        //         {
+        //             side = accurate_side_of_child (__hint, new_node->data, __value_cmp);
+        //             if (side == LEFT)
+        //                 __hint->set_node_to_left(new_node);
+        //             else if (side == RIGHT)
+        //                 __hint->set_node_to_right(new_node);
+        //             return (new_node);
+        //         }
+        //     }
+        //     else
+        //         break;
+        // }
+        // success = false;
+        // return (__hint);
+
+    node_ptr                            insert (node_ptr hint, const value_type&  val)
+    {
+        // If the hint is pointing to the end of the map, just insert the value
+        if (hint == end().__node) {
+            return insert(val).first;
+        }
+        // Otherwise, check if the hint is greater or less than the value
+        else if (__value_cmp (hint->data,  val ) ) {
+            // If the hint is less than the value, search forward for the insertion point
+            node_ptr nextHint = hint;
+            nextHint = next_node(nextHint);
+            while (nextHint != end().__node &&  __value_cmp (nextHint->data,  val )) {
+                nextHint = next_node(nextHint);
+            }
+            return insert(nextHint, val);
+        }
+        else if (__value_cmp (val,  hint->data )) {
+            // If the hint is greater than the value, search backward for the insertion point
+            node_ptr prevHint = hint;
+            while (prevHint != begin().__node && __value_cmp (val,  prevHint->data )) {
+                --prevHint;
+            }
+            return insert(prevHint, val);
+        }
+        else {
+            // If the hint is equal to the value, just return the hint iterator
+            return hint;
+        }
+        // return (ret);
     }
 /*        bool _find_parent(node_ptr _hint, node_ptr &_parent_pos, const value_type &_val, bool &_is_left)
         {
