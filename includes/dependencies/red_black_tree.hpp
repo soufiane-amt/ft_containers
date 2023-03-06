@@ -234,44 +234,44 @@ until it finds an element whose key is greater than or equal to the new element'
 */
 void    insert_hint (iterator __hint, value_type val, bool & success)
 {
+    int side;
     success = true;
         while (1)
         {
-            if  (__value_cmp(pos->data, val))
+            if  (__value_cmp(__hint->data, val))
             {
-                pos = next_node (pos);
-                if (!pos->has_2_child())
+                __hint = next_node (__hint);
+                if (!__hint->has_2_child())
                 {
-                    side = accurate_side_of_child (pos, val);
+                    side = accurate_side_of_child (__hint, val);
                     if (side == LEFT)
-                        pos = pos->set_node_to_left(create_node (val));
+                        __hint->set_node_to_left(create_node (val));
                     else if (side == RIGHT)
-                        pos = pos->set_node_to_right(create_node (val));
-                    return (pos);
+                        __hint->set_node_to_right(create_node (val));
+                    return (side == LEFT ? __hint->left : __hint->right);
                 }
 
             }
-            else if (__value_cmp(val, pos->data))
+            else if (__value_cmp(val, __hint->data))
             {
-                pos = prev_node(pos);                
-                if (!pos->has_2_child())
+                __hint = prev_node(__hint);                
+                if (!__hint->has_2_child())
                 {
-                    side = accurate_side_of_child (pos, val);
+                    side = accurate_side_of_child (__hint, val);
                     if (side == LEFT)
-                        pos = pos->set_node_to_left(create_node (val));
+                        __hint = __hint->set_node_to_left(create_node (val));
                     else if (side == RIGHT)
-                        pos = pos->set_node_to_right(create_node (val));
-                    return (pos);
+                        __hint = __hint->set_node_to_right(create_node (val));
+                    return (side == LEFT ? __hint->left : __hint->right);
                 }
             }
         }
         success = false;
-        return (pos);
+        return (__hint);
 }
 
     node_ptr                            insert (node_ptr pos, const value_type&  val)
     {
-        bool        side;
         bool        success;
         node_ptr    ret;
         node_ptr    new_node = create_node (val);

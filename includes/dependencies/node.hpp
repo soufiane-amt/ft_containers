@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/05 16:19:41 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 12:53:28 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ struct Node : public swap_deletion_arsenal<Node<T> >
     
     void    swap_for_deletion(Node* x, Node*& root)
     {
-        swap(x->color, this->color);
+        std::swap(x->color, this->color);
         if (nodes_are_relatives (this, x))
             this->swap_relatives (this, x);
         else
@@ -375,38 +375,6 @@ bool children_are_black (const Node<T>* node )
 { 
     return (is_black_node(node->left) && is_black_node(node->right));
 }
-
-        //     bool    node_is_left;
-        //     node_ptr node_far_sibl_child;
-        //     if (node_sibl && is_black_node(node_sibl))
-        //     {
-        //         node_is_left = is_left_child(_node);
-        //         node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
-        //         node_ptr node_near_sibl_child = node_is_left ? node_sibl->left : node_sibl->right;
-        //         if ( is_black_node (node_far_sibl_child) && !is_black_node (node_near_sibl_child))
-        //         {
-        //             std::swap (node_near_sibl_child->color, node_sibl->color);
-        //             if (node_is_left)
-        //                 rotate_right (node_sibl);
-        //             else
-        //                 rotate_left (node_sibl);
-        //             node_sibl = node_sibling (_node);
-        //         }
-        //     }
-        //     if (node_sibl && is_black_node(node_sibl))
-        //     {
-        //         node_is_left = is_left_child(_node);
-        //         node_far_sibl_child = node_is_left ? node_sibl->right : node_sibl->left;
-        //         if ( !is_black_node(node_far_sibl_child))
-        //         {
-        //             std::swap (_node->parent->color, node_sibl->color);
-        //             if (is_left_child(_node))
-        //                 rotate_left (_node->parent);
-        //             else
-        //                 rotate_right (_node->parent);
-        //             ReColor(node_far_sibl_child);
-        //             node_sibl = node_sibling (_node);
-
 template <class T>
 Node<T>* near_nephew ( Node<T>* node )
 {
@@ -454,7 +422,13 @@ int node_forms_line ( Node<T>* node )
     return (false);
 }
 
-
+template <typename  T, typename  compare_type>
+bool    accurate_side_of_child (Node<T>* pos, T val, compare_type __value_cmp)
+{
+    if  (__value_cmp(pos->data, val))
+        return (RIGHT);
+    return (LEFT);
+}
 
 
 };
