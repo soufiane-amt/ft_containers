@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/05 15:11:10 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 22:14:40 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ template<
                             // Costructors :
 /* ************************************************************************** */
     public:
+    
     explicit 
     map( const key_compare& key_comp =  key_compare(),
                   const allocator_type& alloc = allocator_type() ):__tree(value_compare(key_comp), alloc){}
@@ -206,7 +207,6 @@ template<
 
     allocator_type                      get_allocator() const{      return (allocator_type());  };
     
-    void        print_tree () { print_tree_2(__tree.__tree_root, size()); }
 /* ************************************************************************** */
                             // Destructor= :
 /* ************************************************************************** */

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:26:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 19:54:14 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 22:16:09 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,17 @@ class random_access_iterator
         typedef const reference                                            const_reference;
         typedef const pointer                                              const_pointer;
 
+    private:
+        random_access_iterator(pointer ptr);
+        
+        
+    public:                                       
+
         random_access_iterator();
         
         template <class it>
         random_access_iterator(const it &other);
         
-        random_access_iterator(pointer ptr);
 
         iterator_type      base() const;
         
