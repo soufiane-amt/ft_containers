@@ -6,14 +6,13 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:24:33 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 18:29:44 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 22:09:25 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STACK_HPP
 #define STACK_HPP
 #include "vector.hpp"
-#include <vector>
 
 
 namespace ft

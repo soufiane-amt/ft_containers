@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:33:42 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 11:12:26 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 22:10:58 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 #ifndef REVERSE_ITERATOR_HPP
 #define REVERSE_ITERATOR_HPP
 
-#include <iostream>
 
 #include <cstddef>
-#include <iterator>
 #include "../dependencies/utility.hpp"
 #include "../dependencies/node.hpp"
 namespace ft
@@ -29,10 +27,12 @@ class reverse_iterator
 {
 
     public:                                       
-        typedef iter                                            iterator_type;
-        typedef typename iterator_traits<iter>::difference_type difference_type;
-        typedef typename iterator_traits<iter>::reference       reference;
-        typedef typename iterator_traits<iter>::pointer         pointer;
+        typedef iter                                              iterator_type;
+        typedef typename iterator_traits<iter>::difference_type   difference_type;
+        typedef typename iterator_traits<iter>::reference         reference;
+        typedef typename iterator_traits<iter>::pointer           pointer;
+        typedef typename iterator_traits<iter>::iterator_category iterator_category;
+        typedef typename iterator_traits<iter>::value_type             value_type;
 
         reverse_iterator();
         explicit reverse_iterator(iter x );

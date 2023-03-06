@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:38:53 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/03 22:47:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 22:11:14 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,28 +126,6 @@ tree_iterator<T>        tree_iterator<T>::operator--(int)
     
     return (tmp);
 }
-
-
-
-
-
-//non members
-
-
-// template< class Iterator1, class Iterator2 >
-// bool operator==( const ft::tree_iterator<Iterator1>& iter1,
-//                  const ft::tree_iterator<Iterator2>& iter2 )
-// {
-//     return (iter1.base() == iter2.base());
-// }
-
-// template< class Iterator1, class Iterator2 >
-// bool operator!=( const ft::tree_iterator<Iterator1>& iter1,
-//                  const ft::tree_iterator<Iterator2>& iter2 )
-// {
-//     return (iter1.base() != iter2.base());
-// }
-
 
 }
 

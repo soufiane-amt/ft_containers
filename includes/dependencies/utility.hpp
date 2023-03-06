@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/06 21:46:39 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 22:12:22 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@
 #include <functional>
 #include "pair.hpp"
 #include <algorithm>
+
+
 namespace ft {
-    
-//iterator_traits
+
+/* ************************************************************************** */
+                            // iterator_traits :
+/* ************************************************************************** */
 
 
 template<class Iterator>
@@ -52,7 +56,10 @@ template<class T>
 };
 
 
-//is_integral  .////Inherited from integral_constant:
+
+/* ************************************************************************** */
+                            // is_integral :
+/* ************************************************************************** */
 
 template <typename T>
 struct is_integral {
@@ -136,7 +143,10 @@ struct is_integral<unsigned long long> {
 
 
 
-//enable_if
+
+/* ************************************************************************** */
+                            // enable_if :
+/* ************************************************************************** */
 
 template<bool Condition, typename T = void>
 struct enable_if
