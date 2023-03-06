@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:45:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/06 12:53:28 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 14:03:11 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -423,9 +423,9 @@ int node_forms_line ( Node<T>* node )
 }
 
 template <typename  T, typename  compare_type>
-bool    accurate_side_of_child (Node<T>* pos, T val, compare_type __value_cmp)
+int    accurate_side_of_child (Node<T>* pos, T val, compare_type __value_cmp)
 {
-    if  (__value_cmp(pos->data, val))
+    if  ( __value_cmp(pos->data, val))
         return (RIGHT);
     return (LEFT);
 }
