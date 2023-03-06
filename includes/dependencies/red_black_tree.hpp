@@ -232,7 +232,7 @@ If the new element's key is greater than or equal to the hint element's key, the
 until it finds an element whose key is greater than or equal to the new element's key or it reaches the end of the map.
 
 */
-void    insert_hint (iterator __hint, value_type val, bool & success)
+node_ptr    insert_hint (node_ptr __hint, value_type val, bool & success)
 {
     int side;
     success = true;
@@ -243,7 +243,7 @@ void    insert_hint (iterator __hint, value_type val, bool & success)
                 __hint = next_node (__hint);
                 if (!__hint->has_2_child())
                 {
-                    side = accurate_side_of_child (__hint, val);
+                    side = accurate_side_of_child (__hint, val, __value_cmp);
                     if (side == LEFT)
                         __hint->set_node_to_left(create_node (val));
                     else if (side == RIGHT)
@@ -257,11 +257,11 @@ void    insert_hint (iterator __hint, value_type val, bool & success)
                 __hint = prev_node(__hint);                
                 if (!__hint->has_2_child())
                 {
-                    side = accurate_side_of_child (__hint, val);
+                    side = accurate_side_of_child (__hint, val, __value_cmp);
                     if (side == LEFT)
-                        __hint = __hint->set_node_to_left(create_node (val));
+                        __hint->set_node_to_left(create_node (val));
                     else if (side == RIGHT)
-                        __hint = __hint->set_node_to_right(create_node (val));
+                        __hint->set_node_to_right(create_node (val));
                     return (side == LEFT ? __hint->left : __hint->right);
                 }
             }
@@ -275,11 +275,10 @@ void    insert_hint (iterator __hint, value_type val, bool & success)
         bool        success;
         node_ptr    ret;
         node_ptr    new_node = create_node (val);
-        node_ptr    parent;
 
 
-        if (!__size || (pos == end() && __size) || __tree_root == pos)
-            return (insert (val));
+        if (!__size || (pos == end().__node && __size) || __tree_root == pos)
+            return (insert (val).first);
         ret = insert_hint (pos, val, success);
         if (success)
             RebalanceRedBlackTreeInsert (new_node);
