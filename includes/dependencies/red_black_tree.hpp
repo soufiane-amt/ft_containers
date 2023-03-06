@@ -172,18 +172,8 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<T, Allocator> >
         }
     }
 
-    
+
     public:
-        void        insert_test (const value_type& val, bool color)
-    {
-        bool l;
-        node_ptr    new_node = create_node (val);
-        new_node->color = color;
-        insert_node (__tree_root, new_node, l);
-        __size++;
-
-    }
-
 /* ************************************************************************** */
                             // Costructors :
 /* ************************************************************************** */

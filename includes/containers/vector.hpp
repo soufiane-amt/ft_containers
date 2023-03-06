@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/06 22:31:43 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 22:37:31 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ namespace ft
     class vector
     {
     public:
-            typedef T                                        value_type;
-            typedef Allocator                                allocator_type;
-            typedef value_type&                              reference;
-            typedef const value_type&                        const_reference;
-            typedef value_type*                              pointer;
-            typedef value_type const *                        const_pointer;
-            typedef size_t                                   size_type;   
-            typedef typename allocator_type::difference_type difference_type;
+        typedef T                                        value_type;
+        typedef Allocator                                allocator_type;
+        typedef value_type&                              reference;
+        typedef const value_type&                        const_reference;
+        typedef value_type*                              pointer;
+        typedef value_type const *                        const_pointer;
+        typedef size_t                                   size_type;   
+        typedef typename allocator_type::difference_type difference_type;
 
         /*Iterators*/
         typedef typename              ft::random_access_iterator<pointer>                iterator;
@@ -46,7 +46,10 @@ namespace ft
         typedef typename              ft::reverse_iterator<const_iterator >      const_reverse_iterator;
         
         
-        
+/* ************************************************************************** */
+                            // Costructors :
+/* ************************************************************************** */
+
         explicit vector (const allocator_type& alloc = allocator_type()):_v_capacity(0), _v_size(0), allocator(alloc){    this->elements = NULL;}
         explicit vector (size_type n, const_reference val = value_type(), const allocator_type& alloc = allocator_type());
         
@@ -55,24 +58,37 @@ namespace ft
                 typename ft::enable_if<!ft::is_integral<InputIterator>::value , InputIterator>::type* = nullptr);
         
         vector (const vector& x);
+
+//----------------------
         ~vector();
+/* ************************************************************************** */
+                            // operator= :
+/* ************************************************************************** */
+
         vector& operator= (const vector& x);
         
-        //Capacity
-        size_type size() const{ return (this->_v_size); }
-        
-        size_type capacity() const{ return  (this->_v_capacity);}
-        size_type max_size() const{    return (allocator.max_size());}
-        void      resize(size_type n, value_type val = value_type());
-        bool      empty() const{        return (_v_size == 0);}
-        void      reserve (size_type n);
+/* ************************************************************************** */
+                            // Capacity= :
+/* ************************************************************************** */
+        size_type       size() const{ return (this->_v_size); }
+        size_type       capacity() const{ return  (this->_v_capacity);}
+        size_type       max_size() const{    return (allocator.max_size());}
+        void            resize(size_type n, value_type val = value_type());
+        bool            empty() const{        return (_v_size == 0);}
+        void            reserve (size_type n);
 
+
+
+/* ************************************************************************** */
+                            // Subscript operator :
+/* ************************************************************************** */
         //Function overloading
         reference       operator[] (size_type n);
         const_reference operator[] (size_type n) const;
 
-        //Element access:
-
+/* ************************************************************************** */
+                            // Element access :
+/* ************************************************************************** */
         reference               at (size_type n);
         const_reference         at (size_type n) const;
         
@@ -82,7 +98,9 @@ namespace ft
         reference               back() {    return (this->elements[this->size() - 1]);}
         const_reference         back() const {  return (this->elements[this->size() - 1]);}
         
-        //Modifiers
+/* ************************************************************************** */
+                            // Modifiers= :
+/* ************************************************************************** */
         void                    assign (size_type n, const_reference val);
         
         template <class InputIterator>  
@@ -107,6 +125,11 @@ namespace ft
         void                    clear();
 
         allocator_type          get_allocator() const{      return (this->allocator);}
+
+
+/* ************************************************************************** */
+                            // iterators= :
+/* ************************************************************************** */
 
         //iterators
         iterator                begin();
@@ -134,7 +157,9 @@ namespace ft
 
         void    destroy_and_deallocate();
         void    destroy (iterator first, iterator last);
-        //utils
+/* ************************************************************************** */
+                            // utils :
+/* ************************************************************************** */
         value_type              *_alloc_double_capacity(size_type    acctual_capacity);
         void                    _copy_elements  (pointer dst, pointer src, size_t n);
         pointer                 _arrayCopy(pointer    arr, size_t    size);

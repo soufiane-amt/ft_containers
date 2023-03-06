@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:13:44 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/06 22:33:13 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 22:36:57 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,6 @@ template<
     mapped_type&                        at (const key_type& k);
     const mapped_type&                  at (const key_type& k) const;
 
-/* ************************************************************************** */
-                            // Modifiers= :
-/* ************************************************************************** */
 
     pair<iterator,bool>                 insert (const value_type& val)
     {
