@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:22:18 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/04 22:50:58 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 21:46:39 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,11 @@ bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, Input
     return (first2!=last2);
 }
 
+}
+
+template <typename T>
+bool operator==(const ft::is_integral<T>& lhs, const std::is_integral<T>& rhs) {
+    return lhs.value == rhs.value;
 }
 
 

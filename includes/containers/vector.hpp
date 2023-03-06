@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/05 13:56:40 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/06 21:23:43 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,7 +276,6 @@ void vector<T, Allocator>::resize (size_type n, value_type val)
         }
         this->_v_capacity = this->_v_capacity > 0 ? (this->_v_capacity * 2) : 1;
         this->elements = this->allocator.allocate(_v_capacity);
-
     }
     if (n < this->_v_size)
         for (size_t i = n; i < this->_v_size; i++)
@@ -286,6 +285,8 @@ void vector<T, Allocator>::resize (size_type n, value_type val)
             allocator.construct(this->elements + i, val);
     for (size_t i = 0; i < this->_v_size; i++)
         allocator.construct(this->elements + i, tmp[i]);
+    for (size_t i = 0; i < _v_size; i++)
+        allocator.destroy(tmp + i);
     allocator.deallocate(tmp, _v_size);
 
     this->_v_size = n;
@@ -549,8 +550,7 @@ void vector<T, Allocator>::insert(iterator position, size_type n, const T& val)
     size_type newSize = _v_size + n;
 
     if (newSize > _v_capacity) {
-        size_type newCapacity = _v_capacity == 0 ? 1 : _v_capacity * 2;
-        while (newSize > newCapacity) newCapacity *= 2;
+        size_type newCapacity = _v_capacity + n;
         pointer newElements = allocator.allocate(newCapacity);
         for (size_type i = 0; i < index; ++i) {
             allocator.construct(newElements + i, elements[i]);
@@ -559,17 +559,17 @@ void vector<T, Allocator>::insert(iterator position, size_type n, const T& val)
             allocator.construct(newElements + index + i, val);
         }
         for (size_type i = index; i < _v_size ; ++i) {
-            allocator.construct(newElements + index + n + i, elements[i]);
+            allocator.construct(newElements + i + n, elements[i]);
         }
         for (size_type i = 0; i < _v_size; ++i) {
             allocator.destroy(elements + i);
         }
-        if (elements) {
+        if (elements) 
             allocator.deallocate(elements, _v_capacity);
-        }
         elements = newElements;
         _v_capacity = newCapacity;
     } else {
+
         if (n > 0)
             std::copy_backward(elements + index, elements + _v_size, elements + _v_size + n);
         for (size_type i = 0; i < n; ++i) {
