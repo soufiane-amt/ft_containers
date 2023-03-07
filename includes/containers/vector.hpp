@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/07 13:11:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/07 15:50:59 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -619,7 +619,6 @@ void vector<T, Allocator>::clear()
     for (size_t i = 0; i < _v_size; i++)
         allocator.destroy(this->elements + i);
     this->_v_size = 0;
-    this->elements = nullptr;
 }
 
 
