@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:04:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/07 09:55:26 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/07 10:37:08 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,18 +292,22 @@ std::cout << "Type of the allocator used by Vect : " << typeid(myAllocator).name
 // Get iterators to the beginning and end of the vector
 ft::vector<int>::iterator itBegin = Vect .begin();
 ft::vector<int>::iterator itEnd = Vect .end();
+    (void)itBegin;(void)itEnd;
 
 // Get const iterators to the beginning and end of the vector
 ft::vector<int>::const_iterator constItBegin = Vect .begin();
 ft::vector<int>::const_iterator constItEnd = Vect .end();
+    (void)constItBegin;(void)constItEnd;
 
 // Get reverse iterators to the beginning and end of the vector
 ft::vector<int>::reverse_iterator rItBegin = Vect .rbegin();
 ft::vector<int>::reverse_iterator rItEnd = Vect .rend();
+    (void)rItBegin;(void)rItEnd;
 
 // Get const reverse iterators to the beginning and end of the vector
 ft::vector<int>::const_reverse_iterator constRItBegin = Vect .rbegin();
 ft::vector<int>::const_reverse_iterator constRItEnd = Vect .rend();
+    (void)constRItBegin;(void)constRItEnd;
 
 }
 

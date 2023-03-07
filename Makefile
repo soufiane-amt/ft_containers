@@ -6,7 +6,7 @@
 #    By: samajat <samajat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:05:55 by samajat           #+#    #+#              #
-#    Updated: 2023/03/07 10:25:41 by samajat          ###   ########.fr        #
+#    Updated: 2023/03/07 10:36:07 by samajat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,19 @@ SRV_M = map.hpp
 SRV_ST = stack.hpp
 SRV_SE = set.hpp
 
-SRC_PATH = $(SRV_V) $(SRV_M) $(SRV_ST) $(SRV_SE) 
+SRC_INC = $(SRV_V) $(SRV_M) $(SRV_ST) $(SRV_SE) 
 
 CFLAGS =  -Wall -Wextra -Werror -std=c++98
 
-STD_TEST = test/ftContainers.cpp
-STL_TEST = test/stdContainers.cpp
+STD_TEST = test/ftContainers
+STL_TEST = test/stdContainers
 
 STD_OBJ = $(STD_TEST:=.o)
 STL_OBJ = $(STL_TEST:=.o)
 
-HEADERS = $(addprefix ./includes/containers/,  $(SRC_PATH))
+HEADERS = $(addprefix ./includes/containers/,  $(SRC_INC))
 
+	
 all : $(STL_NAME) $(STD_NAME)
 
 $(STL_NAME) : $(STL_OBJ) 
@@ -42,12 +43,18 @@ $(STL_NAME) : $(STL_OBJ)
 $(STD_NAME) : $(STD_OBJ) 
 	@$(CC) $(FLAGS)  $(STD_OBJ) -o $(STD_NAME) 
 
-	
+
+%.o::%.cpp  $(HEADERS) 
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+%.o::%.cpp $(HEADERS) 
+	$(CC) $(CFLAGS) -o $@ -c $<
+
 clean :
-	@$(RM) $(OBJ)
+	@$(RM) $(STD_OBJ) $(STL_OBJ)
 
 fclean : clean
-	@$(RM) $(NAME)
+	@$(RM) $(STL_NAME) $(STD_NAME)
 
 re : fclean all
 

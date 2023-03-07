@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:04:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/07 09:59:45 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/07 10:36:52 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,6 @@ static void test_map() {
 }
 
 
-static void maint_tests ()
-{
-
-}
-
 static void    test_vector ()
 {
       // Create an empty vector
@@ -290,19 +285,20 @@ static void    test_vector ()
     // Get iterators to the beginning and end of the vector
     std::vector<int>::iterator itBegin = Vect .begin();
     std::vector<int>::iterator itEnd = Vect .end();
-    
+    (void)itBegin;(void)itEnd;
+
     // Get const iterators to the beginning and end of the vector
     std::vector<int>::const_iterator constItBegin = Vect .begin();
     std::vector<int>::const_iterator constItEnd = Vect .end();
-    
+    (void)constItBegin;(void)constItEnd;
     // Get reverse iterators to the beginning and end of the vector
     std::vector<int>::reverse_iterator rItBegin = Vect .rbegin();
     std::vector<int>::reverse_iterator rItEnd = Vect .rend();
-    
+    (void)rItBegin;(void)rItEnd;
     // Get const reverse iterators to the beginning and end of the vector
     std::vector<int>::const_reverse_iterator constRItBegin = Vect .rbegin();
     std::vector<int>::const_reverse_iterator constRItEnd = Vect .rend();
-
+    (void)constRItBegin;(void)constRItEnd;
 }
 
 
