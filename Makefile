@@ -6,7 +6,7 @@
 #    By: samajat <samajat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:05:55 by samajat           #+#    #+#              #
-#    Updated: 2023/03/07 10:36:07 by samajat          ###   ########.fr        #
+#    Updated: 2023/03/07 10:39:28 by samajat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,9 +43,6 @@ $(STL_NAME) : $(STL_OBJ)
 $(STD_NAME) : $(STD_OBJ) 
 	@$(CC) $(FLAGS)  $(STD_OBJ) -o $(STD_NAME) 
 
-
-%.o::%.cpp  $(HEADERS) 
-	$(CC) $(CFLAGS) -o $@ -c $<
 
 %.o::%.cpp $(HEADERS) 
 	$(CC) $(CFLAGS) -o $@ -c $<
