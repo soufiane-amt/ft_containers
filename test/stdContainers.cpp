@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:04:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/07 10:36:52 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/07 10:45:06 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,7 +277,6 @@ static void    test_vector ()
     std::cout << *it << " ";
     }
     std::cout << std::endl;
-    
     // Check the type of the allocator used by the vector
     std::vector<int>::allocator_type myAllocator = Vect .get_allocator();
     std::cout << "Type of the allocator used by Vect : " << typeid(myAllocator).name() << std::endl;

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:24:33 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/07 10:41:02 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/07 10:42:36 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ template <class T, class Container = ft::vector<T> >
 class stack
 { 
     public:
-    int     a
     typedef T               value_type;
     typedef Container       container_type;
     typedef size_t          size_type;

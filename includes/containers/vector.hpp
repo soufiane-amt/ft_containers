@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:05:29 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/06 22:37:31 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/07 13:11:47 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ namespace ft
         explicit vector (const allocator_type& alloc = allocator_type()):_v_capacity(0), _v_size(0), allocator(alloc){    this->elements = NULL;}
         explicit vector (size_type n, const_reference val = value_type(), const allocator_type& alloc = allocator_type());
         
-        template <class InputIterator>         
+        template <class InputIterator>
         vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
                 typename ft::enable_if<!ft::is_integral<InputIterator>::value , InputIterator>::type* = nullptr);
         
@@ -264,16 +264,17 @@ template <class T, class Allocator >
 void vector<T, Allocator>::resize (size_type n, value_type val)
 {
     pointer tmp = allocator.allocate(_v_size);
-    std::copy(this->elements, this->elements + _v_size, tmp);
+    std::uninitialized_copy(this->elements, this->elements + _v_size, tmp);
     if (n > this->_v_capacity)
     {
-        if (this->_v_size)
-        {
+        if (this->elements)
+        {   
             for (size_t i = 0; i < _v_size; i++)
                 allocator.destroy(this->elements + i);
             allocator.deallocate(this->elements, _v_capacity);
         }
-        this->_v_capacity = this->_v_capacity > 0 ? (this->_v_capacity * 2) : 1;
+        while (_v_capacity < n)
+            this->_v_capacity = this->_v_capacity > 0 ? (this->_v_capacity * 2) : 1;
         this->elements = this->allocator.allocate(_v_capacity);
     }
     if (n < this->_v_size)
@@ -284,6 +285,7 @@ void vector<T, Allocator>::resize (size_type n, value_type val)
             allocator.construct(this->elements + i, val);
     for (size_t i = 0; i < this->_v_size; i++)
         allocator.construct(this->elements + i, tmp[i]);
+
     for (size_t i = 0; i < _v_size; i++)
         allocator.destroy(tmp + i);
     allocator.deallocate(tmp, _v_size);
@@ -305,9 +307,9 @@ void      vector<T, Allocator>::reserve (size_type n)
 {
     pointer              temp = new T[this->_v_size];
 
-    // std::copy(this->elements, this->elements + _v_size, tmp);
+    // std::uninitialized_copy(this->elements, this->elements + _v_size, tmp);
     if (n <= _v_capacity)  return; 
-    std::copy(this->elements, this->elements + _v_size, temp);
+    std::uninitialized_copy(this->elements, this->elements + _v_size, temp);
     // temp = _arrayCopy(this->elements, this->_v_size);
     for (size_t i = 0; i < this->_v_size; i++)        
         allocator.destroy(this->elements + i);
@@ -568,7 +570,7 @@ vector<T, Allocator>::insert (iterator position, InputIterator first, InputItera
   } 
   else {
         std::move_backward(position, end(), end() + num_elements);
-        std::copy(first, last, position);
+        std::uninitialized_copy(first, last, position);
         _v_size += num_elements;
   }
 
@@ -601,13 +603,12 @@ vector<T, Allocator>::erase (iterator first, iterator last)
     } else {
         iterator dest = first;
         for (iterator src = last; src != end(); ++src, ++dest)
-            *dest = std::move(*src);
+            *dest = *src;
         for (size_t i = _v_size - range; i < _v_size; ++i)
             allocator.destroy(this->elements + i);
         _v_size -= range;
     }
     return (this->elements + index_of_first);
-
 }
 
 

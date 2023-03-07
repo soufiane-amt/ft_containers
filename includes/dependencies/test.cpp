@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:55:57 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/06 22:21:03 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/07 12:58:39 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ void    print_node(Node_ptr node)
 //             (void)arr;
 //         }
 
-int main ()
-{
+// int main ()
+// {
     // ft::vector<int> vectorFt;
     // vectorFt.assign(2, 1);
     // vectorFt.insert(vectorFt.end() - 1, 1  , 2);
@@ -129,7 +129,7 @@ int main ()
     //         std::cout << "std :" << vectorStd[i] << std::endl;
     //         std::cout << "ft :" << vectorFt[i] << std::endl<< std::endl;
     // }
-}
+// }
 
 // int    func (bool & b)
 // {
@@ -145,17 +145,15 @@ int main ()
 // }
 
 // // typedef int bla;
-// #define NAME_SPACE ft
-// int _ratio = 10000;
 
-// #include <vector>
-// int main ()
-// {
-//     NAME_SPACE::vector<int> vector;
-//     NAME_SPACE::vector<int> tmp;
-//     tmp.assign(5, 1);
-//     vector.assign(5, 1337);
-//     std::swap (vector, tmp);       
-//     std::cout << vector[0] << std::endl;
-//     std::cout << tmp[0] << std::endl;
-// }
+
+#define NAME_SPACE ft
+// // int _ratio = 10000;
+
+
+#include <vector>
+int main ()
+{
+    NAME_SPACE::vector<int> vector (4 , 5);
+        
+}
