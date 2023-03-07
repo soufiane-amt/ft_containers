@@ -213,26 +213,38 @@ class RedBlack_tree : public deletion_arsenal<traits_tree<T, Allocator> >
 
     node_ptr                            insert (node_ptr hint, const value_type&  val)
     {
-        // If the hint is pointing to the end of the map, just insert the value
-        if (hint == end().__node)
+        iterator best_pos = lower_bound(val);
+        if (best_pos != end() && !__value_cmp (*best_pos,  val ) && !__value_cmp (val , *best_pos))
+            return (best_pos.__node);
+        if (hint == end().__node || best_pos.__node == end().__node || !__size)
             return insert(val).first;
-            // If the hint is less than the value, search forward for the insertion point
-        else if (__value_cmp (hint->data,  val ) ) {
+        else if (__value_cmp (hint->data,  val ) ) 
+        {
             node_ptr nextHint = hint;
             nextHint = next_node(nextHint);
             while (nextHint != end().__node &&  __value_cmp (nextHint->data,  val ))
                 nextHint = next_node(nextHint);
+            if (nextHint == best_pos.__node)
+            {
+                node_ptr new_node = create_node (val);
+                nextHint->set_node_to_left(new_node);
+                return new_node;
+            }
             return insert(nextHint, val);
         }
         else if (__value_cmp (val,  hint->data )) {
-            // If the hint is greater than the value, search backward for the insertion point
             node_ptr prevHint = hint;
             while (prevHint != begin().__node && __value_cmp (val,  prevHint->data ))
                 prevHint = prev_node (prevHint);
+            if (prevHint == best_pos.__node)
+            {
+                node_ptr new_node = create_node (val);
+                prevHint->set_node_to_left(new_node);
+                return new_node;
+            }
             return insert(prevHint, val);
         }
-            // If the hint is equal to the value, just return the hint iterator
-            return hint;
+        return hint;
     }
 
     template <class InputIterator> 
@@ -769,14 +781,14 @@ template<
     class Compare ,
     class Allocator 
     >
-typename RedBlack_tree<T,Compare ,Allocator>::node_ptr   ///$$$$$$$$$$$$$$ find seg falt when it is given non existing element
+typename RedBlack_tree<T,Compare ,Allocator>::node_ptr  
 RedBlack_tree<T,Compare ,Allocator>::find( value_type to_search) const
 {
     node_ptr  node = __tree_root;
 
     while (node)
     {
-        if (__value_cmp(node->data, to_search))//if __tree->data < value
+        if (__value_cmp(node->data, to_search))
             node = node->right;
         else if (__value_cmp(to_search, node->data))
             node = node->left;

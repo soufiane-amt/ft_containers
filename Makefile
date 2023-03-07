@@ -6,12 +6,13 @@
 #    By: samajat <samajat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:05:55 by samajat           #+#    #+#              #
-#    Updated: 2023/03/07 10:39:28 by samajat          ###   ########.fr        #
+#    Updated: 2023/03/07 15:26:12 by samajat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 STL_NAME = stdContainer
 STD_NAME = ftContainer
+MAIN_NAME = mainContainer
 
 CC = c++
 
@@ -31,17 +32,20 @@ STL_TEST = test/stdContainers
 
 STD_OBJ = $(STD_TEST:=.o)
 STL_OBJ = $(STL_TEST:=.o)
+MAIN_OBJ = $(MAIN_TEST:=.o)
 
 HEADERS = $(addprefix ./includes/containers/,  $(SRC_INC))
 
 	
-all : $(STL_NAME) $(STD_NAME)
+all : $(STL_NAME) $(STD_NAME) $(MAIN_NAME)
 
 $(STL_NAME) : $(STL_OBJ) 
 	@$(CC) $(FLAGS)  $(STL_OBJ) -o $(STL_NAME) 
 	
 $(STD_NAME) : $(STD_OBJ) 
 	@$(CC) $(FLAGS)  $(STD_OBJ) -o $(STD_NAME) 
+$(MAIN_NAME) : $(MAIN_OBJ) 
+	@$(CC) $(FLAGS)  $(MAIN_OBJ) -o $(MAIN_NAME) 
 
 
 %.o::%.cpp $(HEADERS) 
