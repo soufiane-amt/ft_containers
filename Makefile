@@ -6,48 +6,42 @@
 #    By: samajat <samajat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:05:55 by samajat           #+#    #+#              #
-#    Updated: 2023/03/06 22:07:47 by samajat          ###   ########.fr        #
+#    Updated: 2023/03/07 10:25:41 by samajat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3D
+STL_NAME = stdContainer
+STD_NAME = ftContainer
 
-CC = cc
-
-inc = -I includes/
-
-CFLAGS =  -Wall -Wextra -Werror -std=c++98
-
-MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
+CC = c++
 
 RM =  rm -rf
 
-DEFAULTSRC = $(addprefix settings/, set_player_to_default ray_settings)
+SRV_V = vector.hpp
+SRV_M = map.hpp
+SRV_ST = stack.hpp
+SRV_SE = set.hpp
 
-GRSRC = $(addprefix graphic/events/, movesListener eventsListener  rotationsListener buttons)\
-	$(addprefix graphic/image/, drawings_image)\
-	$(addprefix texture/, texture texture_2)\
-	$(addprefix graphic/3d/, project3dReality)\
-	$(addprefix parsing/, extract_line fill_data layers map_handling map_utils utils)\
-	$(addprefix utils/, ft_atoi get_next_line ft_strjoin ft_split ft_strcmp ft_strlcpy \
-					ft_strncmp ft_strtrim ft_isdigit ft_strchr  ft_strdup  ft_strlen  ft_strnstr ft_substr ft_free_data)\
+SRC_PATH = $(SRV_V) $(SRV_M) $(SRV_ST) $(SRV_SE) 
 
-MSRC = $(addprefix math/, math math2 point_of_intersection projectionPlane)
+CFLAGS =  -Wall -Wextra -Werror -std=c++98
 
-SRC = cub3d $(MSRC) $(DEFAULTSRC) $(GRSRC) 
+STD_TEST = test/ftContainers.cpp
+STL_TEST = test/stdContainers.cpp
 
-HEADERS = includes/cub3d.h
+STD_OBJ = $(STD_TEST:=.o)
+STL_OBJ = $(STL_TEST:=.o)
 
+HEADERS = $(addprefix ./includes/containers/,  $(SRC_PATH))
 
-OBJ = $(addprefix src/,  $(SRC:=.o))
+all : $(STL_NAME) $(STD_NAME)
 
-$(NAME) : $(OBJ)
-	@$(CC) $(FLAGS)  $(MLXFLAGS) $(OBJ) -o $(NAME) -g
+$(STL_NAME) : $(STL_OBJ) 
+	@$(CC) $(FLAGS)  $(STL_OBJ) -o $(STL_NAME) 
+	
+$(STD_NAME) : $(STD_OBJ) 
+	@$(CC) $(FLAGS)  $(STD_OBJ) -o $(STD_NAME) 
 
-all : $(NAME)
-
-%.o:%.c $(HEADERS)
-	@$(CC) -c $< -o $@ $(CFLAGS) $(inc) 
 	
 clean :
 	@$(RM) $(OBJ)

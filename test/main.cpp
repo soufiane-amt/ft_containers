@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 22:40:22 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/06 22:41:47 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/07 10:00:07 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 	#include <vector>
 	namespace ft = std;
 #else
-	#include <../includes/containers/map.hpp>
-	#include <../includes/containers/stack.hpp>
-	#include <../includes/containers/vector.hpp>
+	#include <map.hpp>
+	#include <stack.hpp>
+	#include <vector.hpp>
 #endif
 
 #include <stdlib.h>

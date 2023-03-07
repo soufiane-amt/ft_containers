@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:04:19 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/07 09:50:36 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/07 09:59:45 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,10 @@ static void test_map() {
 }
 
 
+static void maint_tests ()
+{
+
+}
 
 static void    test_vector ()
 {

@@ -6,7 +6,7 @@
 /*   By: samajat <samajat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:04:17 by samajat           #+#    #+#             */
-/*   Updated: 2023/03/07 09:48:26 by samajat          ###   ########.fr       */
+/*   Updated: 2023/03/07 09:55:26 by samajat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 #include "../includes/containers/vector.hpp"
 #include "../includes/containers/set.hpp"
 
+#define MAX_RAM 4294967296
+#define BUFFER_SIZE 4096
+struct Buffer
+{
+	int idx;
+	char buff[BUFFER_SIZE];
+};
+
+
+#define COUNT (MAX_RAM / (int)sizeof(Buffer))
 
 
 static void printSeparation(std::string container)
